@@ -7,6 +7,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes =[
   {
@@ -19,9 +20,14 @@ const routes: Routes =[
     //pathMatch: 'full',
   }, {
     path: 'registro',component: RegistroComponent,
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  }, //{
+   // redirectTo: 'registro',
+    //pathMatch: 'full',
+  }, {
+    path: 'dashboard',component:DashboardComponent,
+   // redirectTo: 'registro',
+    //pathMatch: 'full',
+  }, 
+  //{
    // path: '',
     //component: AdminLayoutComponent,
     //children: [{
