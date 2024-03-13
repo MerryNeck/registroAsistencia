@@ -14,21 +14,20 @@ const routes: Routes =[
    // redirectTo: 'l',
     //pathMatch: 'full',
   }, {
-    path: '/login',component: LoginComponent,
-    redirectTo: '',
-    pathMatch: 'full',
+    path: 'login',component: LoginComponent,
+    //redirectTo: '',
+    //pathMatch: 'full',
   }, {
     path: 'registro',component: RegistroComponent,
     redirectTo: 'dashboard',
     pathMatch: 'full',
-  }, {
-    path: '',
-    component: AdminLayoutComponent,
-    children: [{
-      path: '',
-      loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
-    }]
-  }
+  }, //{
+   // path: '',
+    //component: AdminLayoutComponent,
+    //children: [{
+    //  path: '',
+      //loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
+    //}]}
 ];
 
 @NgModule({
@@ -36,7 +35,7 @@ const routes: Routes =[
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes,{
-       useHash: true
+       //useHash: true
     })
   ],
   providers: [],
