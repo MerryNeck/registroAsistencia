@@ -1,0 +1,33 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Registro Area</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-md-6 " id="form">
+                                    <mat-form-field class="example-full-width">
+                                        <input class="form-control" placeholder="Identificacion(deshabilitado)"
+                                            disabled>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="form-group col-md-6" id="form">
+                                    <mat-form-field class="example-full-width">
+                                        <label for="excel"> SUBA O ARRASTRE EL ARCHIVO AQUI</label>
+                                        <input class="form-control" placeholder="Suba Aqui" type="file" name="excel">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>

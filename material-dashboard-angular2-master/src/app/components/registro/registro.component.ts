@@ -5,13 +5,14 @@ import { Area }from "models/area.model";
 import { Rol } from 'models/rol.model';
 import {FormGroup, FormsModule,FormControl} from "@angular/forms"
 import { RegistroService } from 'services/registro.service';
+
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
-  imports: [FormsModule],
+  
 })
-export class RegistroComponent implements OnInit {
+export class RegistroComponent implements OnInit{
 
   usuarioForm: FormGroup;
   areas: Area[] = [];
@@ -19,18 +20,18 @@ export class RegistroComponent implements OnInit {
   error: string;
   selectedArea: Area; 
   selectedRol: Rol;
-
   constructor(private registroService: RegistroService) {}
 
-  ngOnInit() {
-    this.usuarioForm = new FormGroup({
+ ngOnInit() {
+  //const modalRef = this.modalService.open(this.modalMensaje);
+    /*this.usuarioForm = new FormGroup({
       nombre: new FormControl(''),
       apellido_paterno: new FormControl(''),
       apellido_materno: new FormControl(''),
       ci: new FormControl(''),
       idArea: new FormControl(null),
       idRol: new FormControl(null)
-    });
+    })*/
 
     this.registroService.getAreas().subscribe(areas => {
       this.areas = areas;

@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { LoginComponent } from './components/login/login.component';
+import { RutaexcelComponent } from './components/rutaexcel/rutaexcel.component';
 
 @NgModule({
   imports: [
@@ -19,11 +19,17 @@ import { LoginComponent } from './components/login/login.component';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+
   ],
   declarations: [
     //LoginComponent,
     AppComponent,
-    AdminLayoutComponent,  
+    AdminLayoutComponent,
+   // RutaexcelComponent,
+    //AsistenciaComponent,
+    //RegistroExcelComponent,
+    //AreaComponent,  
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
