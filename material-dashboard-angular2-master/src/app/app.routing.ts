@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AreaComponent } from './components/area/area.component';
 import { RutaexcelComponent } from './components/rutaexcel/rutaexcel.component';
+import { AsistenciaComponent } from './components/asistencia/asistencia.component';
 
 const routes: Routes =[
   {
@@ -33,7 +34,11 @@ const routes: Routes =[
     path: 'excel',component: RutaexcelComponent,
      /*redirectTo: '',
      pathMatch: 'full',*/
-   }, 
+   }, {
+    path: 'asistencia',component: AsistenciaComponent,
+     /*redirectTo: '',
+     pathMatch: 'full',*/
+   },
     {
     //path: 'dashboard',component:DashboardComponent,
    // redirectTo: 'registro',

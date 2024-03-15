@@ -46,7 +46,7 @@ interface RegistroResponse {
         );
     }
 
-    // ... (agregue otras funciones para obtener, actualizar y eliminar usuarios)
+   
 
     private handleError(error: any) {
         let errorMessage = '';
@@ -61,9 +61,9 @@ interface RegistroResponse {
     }
 
 
-    getUsuario(id_usuario: any): Observable<any> {//verificar en el backen si necesita parametro
+    getUsuario(idUsuario: any): Observable<any> {//verificar en el backen si necesita parametro
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.get(this.url + "/usuario/" + id_usuario, { headers: headers });
+        return this._http.get(this.url + "/usuario/" + idUsuario, { headers: headers });
 
     }
 
@@ -81,12 +81,13 @@ interface RegistroResponse {
         fd.append('idArea', data.idArea);
 
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.put(this.url + '/registro/editar/' + data.id_usuario, fd);
+        return this._http.put(this.url + '/usuario/editar/' + data.id_usuario, fd);
     }
 
-    delete_usuario(id_usuario: any): Observable<any> {
-        let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.delete(this.url + 'usuario/eliminar/' + id_usuario, { headers: headers });
-    }
-
+ // Eliminar (desactivar y activar)
+ desactivarArea(idUsuario: number, nuevoEstado: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const body = JSON.stringify({ estado: nuevoEstado});
+    return this._http.put(this.url+"/usuario/"+idUsuario,body,{headers:headers});
+  }
 }

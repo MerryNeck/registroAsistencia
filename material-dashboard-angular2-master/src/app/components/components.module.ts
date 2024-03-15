@@ -10,6 +10,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AreaComponent } from './area/area.component';
 import { RutaexcelComponent } from './rutaexcel/rutaexcel.component';
+import { AsistenciaComponent } from './asistencia/asistencia.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,6 +25,7 @@ import { RutaexcelComponent } from './rutaexcel/rutaexcel.component';
     RegistroComponent,
     AreaComponent,
     RutaexcelComponent,
+    AsistenciaComponent
   ],
   exports: [
     FooterComponent,

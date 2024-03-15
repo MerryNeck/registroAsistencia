@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import { EnvironmentInjector, Injectable } from '@angular/core';
 import { Observable, throwError } from "rxjs";//
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from "@angular/common/http";//
 //import { GLOBAL } from './GLOBAL';
+import { environment } from '../environments/environment';
+
 interface LoginResponse {
     token: string;
   }
@@ -11,10 +13,10 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class LoginService {
-  public url: any;
-  
+  public url:string = environment.backend.login;
   constructor(
     private _http: HttpClient,
+    
   ) { }
 
 login(email:string, password:string): Observable<LoginResponse>{
