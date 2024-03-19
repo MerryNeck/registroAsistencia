@@ -19,7 +19,7 @@ const routes: Routes =[
     //pathMatch: 'full',
   }, {
     path: 'login',component: LoginComponent,
-    //redirectTo: '',
+    //redirectTo: 'login',
     //pathMatch: 'full',
   }, {
    path: 'registro',component: RegistroComponent,
@@ -44,8 +44,8 @@ const routes: Routes =[
    // redirectTo: 'registro',
     //pathMatch: 'full',
   }, 
-  /*{
-    path: '',
+ /* {
+    path: 'admin',
     component: AdminLayoutComponent,
     children: [{
      path: '',
@@ -63,7 +63,7 @@ const routes: Routes =[
   ],
   providers: [],
   bootstrap:[AppComponent],
-  exports: [
+  exports: [ RouterModule
   ],
 })
 export class AppRoutingModule { }

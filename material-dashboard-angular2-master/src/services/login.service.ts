@@ -20,7 +20,7 @@ export class LoginService {
   ) { }
 
 login(email:string, password:string): Observable<LoginResponse>{
-    const url = this.url+'/login'; 
+    const url = this.url; 
     const body = { email, password }; 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -29,15 +29,16 @@ login(email:string, password:string): Observable<LoginResponse>{
         catchError(this.handleError) 
       );
 }
-private handleError(error: any) {
+private handleError(error: any):Observable<never> {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       
       errorMessage = 'An error occurred: ' + error.error.message;
     } else {
       
-      errorMessage = `Backend returned code ${error.status}: ${error.body.error}`;
+      errorMessage = `Backend returned code ${error.status}: ${error.error.message}`;
     }
+    console.error(errorMessage);
     return throwError(errorMessage); 
   }
 }

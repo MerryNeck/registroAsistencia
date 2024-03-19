@@ -6,8 +6,8 @@
 export const environment = {
   production: false,
    backend: {
-    api: 'http://localhost:3000/api',
-    login: '/api/personas'
+    api: 'http://localhost:5052/api',
+    login: '/api/login'
   }
   
 };

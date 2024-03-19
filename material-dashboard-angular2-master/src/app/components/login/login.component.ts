@@ -16,19 +16,18 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService,
     private _router : Router
     ) {
-    this.login = new Login(0, '', '', '', '', '', 0);
+    
   }
   
   ngOnInit(): void {
   }
   login1() {
-
     this.loginService.login( 
       this.email,
       this.password
     ).subscribe(response => {
       console.log('Ingreso Exitoso: ', response);
-      this._router.navigate(['dashboard'])
+      this._router.navigate(['rolArea'])
     }, error => {
       console.error('Ingreso Fallido: ', error);
     });
