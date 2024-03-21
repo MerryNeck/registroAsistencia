@@ -11,6 +11,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AreaComponent } from './area/area.component';
 import { RutaexcelComponent } from './rutaexcel/rutaexcel.component';
 import { AsistenciaComponent } from './asistencia/asistencia.component';
+import { DescuentoComponent } from './descuento/descuento.component';
+import { PagoComponent } from './pago/pago.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,7 +27,9 @@ import { AsistenciaComponent } from './asistencia/asistencia.component';
     RegistroComponent,
     AreaComponent,
     RutaexcelComponent,
-    AsistenciaComponent
+    AsistenciaComponent,
+    DescuentoComponent,
+    PagoComponent
   ],
   exports: [
     FooterComponent,
