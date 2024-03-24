@@ -27,7 +27,7 @@ const routes: Routes =[
     pathMatch: 'full',*/
   },
   {
-    path: 'rolArea',component: AreaComponent,
+    path: 'areaRol',component: AreaComponent,
      /*redirectTo: '',
      pathMatch: 'full',*/
    },{

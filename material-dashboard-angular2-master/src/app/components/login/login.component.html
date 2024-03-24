@@ -8,22 +8,21 @@
           </div>
           <div class="card-body">
             <!--<form #loginForm="ngForm" (ngSubmit)="login(loginForm)">-->
-            <form (ngSubmit)="login1()">
+            <form (ngSubmit)="login()">
               <div class="row">
                 <div class="form-group col-md-12 " id="form">
-                  <mat-form-field class="example-full-width">
+                  <div class="example-full-width">
                     <input class="form-control form-control-lg" type="email"
-                      placeholder="Ingrese su correo electrónico " name="email" />
-                  </mat-form-field>
+                      placeholder="Ingrese su correo electrónico " name="email"  [(ngModel)]="email" />
+                  </div>
                 </div>
                 
               </div>
               <div class="row">
-                
                 <div class="form-group col-md-12 " id="form">
-                  <mat-form-field class="example-full-width">
-                    <input type="password" name="password" placeholder="Password">
-                  </mat-form-field>
+                  <div class="example-full-width">
+                    <input type="password" name="password" placeholder="Password" [(ngModel)]="password">
+                  </div>
                 </div>
               </div>
               <button mat-raised-button type="submit" class="btn btn-danger pull-right">INGRESAR</button>

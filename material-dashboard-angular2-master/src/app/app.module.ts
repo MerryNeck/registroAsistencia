@@ -19,6 +19,7 @@ import { RutaexcelComponent } from './components/rutaexcel/rutaexcel.component';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+   // FormsModule,
 
   ],
   declarations: [

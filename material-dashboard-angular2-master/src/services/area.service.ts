@@ -1,53 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from "rxjs";//
-import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from "@angular/common/http";//
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Area } from 'models/area.model';  
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AreaService {
-  public url: any;
-  
-  constructor(
-    private _http: HttpClient,
-  ) { }
+  private url = 'http://ejemplo.com/api/area'; // Reemplazar con la URL real de tu API
 
-  //registrar
-  insert_area(data: any):Observable<any>{
-    const fd = new FormData();
-    fd.append('idArea',data.id_area);
-    fd.append('tipoArea',data.tipo_area);
-    fd.append('fechaCreacion',data.fecha_creacion);
-    fd.append('fechaModificacion',data.fecha_modificacion);
-    fd.append('Estado',data.estado);
-    
-    return this._http.post(this.url + '/area/registrar',fd);
+  constructor(private http: HttpClient) { }
+
+  // token
+  getHeaders() {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
   }
 
-  get_idArea(idArea: any):Observable<any>{//verificar en el backen si necesita parametro
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.get(this.url+"/area/"+idArea,{headers:headers});
-
-  }
-  //editar 
-  update_area(data: any):Observable<any>{
-    const fd = new FormData();
-    fd.append('idArea',data.id_area);
-    fd.append('tipoArea',data.tipo_area);
-    fd.append('fechaCreacion',data.fecha_creacion);
-    fd.append('fechaModificacion',data.fecha_modificacion);
-    fd.append('Estado',data.estado);
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.put(this.url + '/area/editar/'+data.idArea+'/',fd);
-  }
-  
-  // Eliminar (desactivar y activar)
-  desactivarArea(idArea: number, nuevoEstado: string): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const body = JSON.stringify({ estado: nuevoEstado});
-    return this._http.put(this.url+"/area/"+idArea,body,{headers:headers});
+  // registrar  área
+  registrarArea(area: Area): Observable<any> {
+    return this.http.post(`${this.url}/registrar`, area, { headers: this.getHeaders() });
   }
 
-  
+  // listar todas las áreas
+  listarAreas(): Observable<Area[]> {
+    return this.http.get<Area[]>(`${this.url}/listar`, { headers: this.getHeaders() });
+  }
+
+//actualizar un área
+  actualizarArea(area: Area): Observable<any> {
+    return this.http.put(`${this.url}/actualizar/${area.id_area}`, area, { headers: this.getHeaders() });
+  }
+
+  //  estado de un área 
+  cambiarEstadoArea(idArea: number, estado: string): Observable<any> {
+    return this.http.patch(`${this.url}/cambiarEstado/${idArea}`, { estado }, { headers: this.getHeaders() });
+  }
 }

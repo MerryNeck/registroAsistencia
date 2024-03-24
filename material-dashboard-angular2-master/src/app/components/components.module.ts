@@ -1,7 +1,9 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import { AppRoutingModule } from 'app/app.routing'; 
+import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -13,11 +15,20 @@ import { RutaexcelComponent } from './rutaexcel/rutaexcel.component';
 import { AsistenciaComponent } from './asistencia/asistencia.component';
 import { DescuentoComponent } from './descuento/descuento.component';
 import { PagoComponent } from './pago/pago.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    
+    HttpClientModule,
+    
+    AppRoutingModule,
   ],
   declarations: [
     FooterComponent,

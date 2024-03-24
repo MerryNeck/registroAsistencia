@@ -1,23 +1,52 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
+import { Asistencia } from 'models/asistencia.model';
+import { AsistenciaService } from 'services/asistencia.service';
 
-import { AsistenciaComponent } from './asistencia.component';
+@Component({
+  selector: 'app-asistencia',
+  templateUrl: './asistencia.component.html',
+  styleUrls: ['./asistencia.component.css']
+})
+export class AsistenciaComponent implements OnInit {
+  asistencias: Asistencia[] = [];
+  nombreUsuario = '';
+  fecha = '';
 
-describe('AsistenciaComponent', () => {
-  let component: AsistenciaComponent;
-  let fixture: ComponentFixture<AsistenciaComponent>;
+  constructor(private asistenciaService: AsistenciaService) { }
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ AsistenciaComponent ]
-    })
-    .compileComponents();
+  ngOnInit(): void {
+    this.listarAsistencias();
+  }
 
-    fixture = TestBed.createComponent(AsistenciaComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  listarAsistencias() {
+    if (this.nombreUsuario || this.fecha) {
+      // Obtener asistencias filtradas si hay valores en los campos de búsqueda
+      this.asistenciaService.obtenerAsistenciasFiltradas(this.nombreUsuario, this.fecha).subscribe(
+        asistencias => this.asistencias = asistencias,
+        error => console.error('Error al obtener asistencias:', error)
+      );
+    } else {
+      // Obtener todas las asistencias si no hay valores en los campos de búsqueda
+      this.asistenciaService.obtenerAsistencias().subscribe(
+        asistencias => this.asistencias = asistencias,
+        error => console.error('Error al obtener asistencias:', error)
+      );
+    }
+  }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  imprimirAsistencia() {
+    // Llamar al método de impresión del servicio
+    this.asistenciaService.imprimirAsistencia(this.nombreUsuario, this.fecha);
+  }
+
+  // Método para cambiar el estado de una asistencia
+  cambiarEstadoAsistencia(id: number, estado: string) {
+    this.asistenciaService.cambiarEstadoAsistencia(id, estado).subscribe(
+      () => {
+        console.log('Estado de la asistencia cambiado correctamente.');
+        this.listarAsistencias(); // Recargar la lista de asistencias después de cambiar el estado
+      },
+      error => console.error('Error al cambiar estado de la asistencia:', error)
+    );
+  }
+}

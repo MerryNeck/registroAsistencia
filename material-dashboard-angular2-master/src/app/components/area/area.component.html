@@ -8,29 +8,29 @@
                     </div>
                     <div class="card-body">
                         <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
-                        <form>
+                        <form (ngSubmit)="guardarArea()">
                             <div class="row">
                                 <div class="form-group col-md-6 " id="form">
-                                    <mat-form-field class="example-full-width">
+                                    <div class="example-full-width">
                                         <input class="form-control" placeholder="Identificacion(deshabilitado)"
                                             disabled>
-                                    </mat-form-field>
+                                    </div>
                                 </div>
 
                                 <div class="form-group col-md-6" id="form">
-                                    <mat-form-field class="example-full-width">
+                                    <div class="example-full-width">
 
-                                        <input class="form-control" placeholder="Estado" type="text" name="estado">
-                                    </mat-form-field>
+                                        <input class="form-control" placeholder="Estado" type="text" name="estado"  [(ngModel)]="estado">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
 
                                 <div class="form-group col-md-12" id="form">
-                                    <mat-form-field class="example-full-width">
+                                    <div class="example-full-width">
 
-                                        <input class="form-control" placeholder="Area" type="text" name="area">
-                                    </mat-form-field>
+                                        <input class="form-control" placeholder="Area" type="text" name="area"  [(ngModel)]="area">
+                                    </div>
                                 </div>
 
                             </div>
@@ -41,18 +41,20 @@
                 </div>
                 <div class="main-content">
                     <div class="container-fluid">
-                        
+
                         <div class="row">
                             <div class="col-md-12">
-                                
+
                                 <div class="card">
                                     <div class="card-header card-header-danger">
-                                        <h4 class="card-title ">AREA</h4>
-                                        <form class="col-md-5">
-                                            <p class="card-category"> Busque  el registro de area</p>
+                                        <h4 class="card-title "> LISTADO AREA</h4>
+                                        <form class="col-md-5" >
+                                            <p class="card-category"> Busque el registro de area</p>
                                             <div class="input-group no-border">
-                                                <input type="text" value="" class="form-control" placeholder="Buscar...">
-                                                <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                                  <input type="text" value="" class="form-control"
+                                                    placeholder="Buscar...">
+                                                <button mat-raised-button type="submit"
+                                                    class="btn btn-white btn-round btn-just-icon">
                                                     <i class="material-icons">search</i>
                                                     <div class="ripple-container"></div>
                                                 </button>
@@ -64,9 +66,9 @@
                                             <table class="table">
                                                 <thead class=" text-primary">
                                                     <tr>
-                                                    <th></th>
-                                                    <!-- <th *ngFor="let columna of columnas">{{ columna }}</th>-->
-                                                      </tr>
+                                                        <th></th>
+                                                        <!-- <th *ngFor="let columna of columnas">{{ columna }}</th>-->
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
@@ -85,15 +87,15 @@
                                                         <td>
                                                             FECHA MODIFICACION
                                                         </td>
-                                                            
+
                                                         <td>
                                                             MODIFICAR
                                                         </td>
                                                         <td>
-                                                            ELIMINAR 
+                                                            ELIMINAR
                                                         </td>
-                                                        
-                
+
+
                                                     </tr>
                                                     <tr>
                                                         <!--<tr *ngFor="let dato of datos">
@@ -104,20 +106,24 @@
                                                         <td>SDF</td>
                                                         <td>hola</td>
                                                         <td>SD</td>
-                                                        <td><button mat-raised-button type="submit" class="btn btn-blue  " onclick="modificarRegistro(1)">Modificar</button></td>
-                                                        <td><button mat-raised-button type="submit" class="btn btn-white " onclick="eliminarRegistro(1)">Eliminar</button></td>
-                                                      </tr>
-                                                    
+                                                        <td><button mat-raised-button type="submit"
+                                                                class="btn btn-blue  "
+                                                                onclick="modificarRegistro(1)">Modificar</button></td>
+                                                        <td><button mat-raised-button type="submit"
+                                                                class="btn btn-white "
+                                                                onclick="eliminarRegistro(1)">Eliminar</button></td>
+                                                    </tr>
+
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
-                  </div>
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
@@ -126,29 +132,29 @@
                     </div>
                     <div class="card-body">
                         <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
-                        <form>
+                        <form (ngSubmit)="guardarRol()">
                             <div class="row">
                                 <div class="form-group col-md-6 " id="form">
-                                    <mat-form-field class="example-full-width">
+                                    <div class="example-full-width">
                                         <input class="form-control" placeholder="Identificacion(deshabilitado)"
                                             disabled>
-                                    </mat-form-field>
+                                    </div>
                                 </div>
 
                                 <div class="form-group col-md-6" id="form">
-                                    <mat-form-field class="example-full-width">
+                                    <div class="example-full-width">
 
-                                        <input class="form-control" placeholder="Estado" type="text" name="estado">
-                                    </mat-form-field>
+                                        <input class="form-control" placeholder="Estado" type="text" name="estado" [(ngModel)]="estado">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
 
                                 <div class="form-group col-md-12" id="form">
-                                    <mat-form-field class="example-full-width">
+                                    <div class="example-full-width">
 
-                                        <input class="form-control" placeholder="Rol" type="text" name="area">
-                                    </mat-form-field>
+                                        <input class="form-control" placeholder="Rol" type="text" name="rol" [(ngModel)]="rol">
+                                    </div>
                                 </div>
 
                             </div>
@@ -159,18 +165,20 @@
                 </div>
                 <div class="main-content">
                     <div class="container-fluid">
-                        
+
                         <div class="row">
                             <div class="col-md-12">
-                                
+
                                 <div class="card">
                                     <div class="card-header card-header-danger">
                                         <h4 class="card-title ">ROL</h4>
                                         <form class="col-md-5">
-                                            <p class="card-category"> Busque  el registro del rol</p>
+                                            <p class="card-category"> Busque el registro del rol</p>
                                             <div class="input-group no-border">
-                                                <input type="text" value="" class="form-control" placeholder="Buscar...">
-                                                <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
+                                                <input type="text" value="" class="form-control"
+                                                    placeholder="Buscar...">
+                                                <button mat-raised-button type="submit"
+                                                    class="btn btn-white btn-round btn-just-icon">
                                                     <i class="material-icons">search</i>
                                                     <div class="ripple-container"></div>
                                                 </button>
@@ -182,9 +190,9 @@
                                             <table class="table">
                                                 <thead class=" text-primary">
                                                     <tr>
-                                                    <th></th>
-                                                    <!-- <th *ngFor="let columna of columnas">{{ columna }}</th>-->
-                                                      </tr>
+                                                        <th></th>
+                                                        <!-- <th *ngFor="let columna of columnas">{{ columna }}</th>-->
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
@@ -203,15 +211,15 @@
                                                         <td>
                                                             FECHA MODIFICACION
                                                         </td>
-                                                            
+
                                                         <td>
                                                             MODIFICAR
                                                         </td>
                                                         <td>
-                                                            ELIMINAR 
+                                                            ELIMINAR
                                                         </td>
-                                                        
-                
+
+
                                                     </tr>
                                                     <tr>
                                                         <!--<tr *ngFor="let dato of datos">
@@ -222,24 +230,24 @@
                                                         <td>SDF</td>
                                                         <td>hola</td>
                                                         <td>SD</td>
-                                                        <td><button mat-raised-button type="submit" class="btn btn-blue  " onclick="modificarRegistro(1)">Modificar</button></td>
-                                                        <td><button mat-raised-button type="submit" class="btn btn-white  " onclick="eliminarRegistro(1)">Eliminar</button></td>
-                                                      </tr>
-                                                    
+                                                        <td><button mat-raised-button type="submit"
+                                                                class="btn btn-blue  "
+                                                                onclick="modificarRegistro(1)">Modificar</button></td>
+                                                        <td><button mat-raised-button type="submit"
+                                                                class="btn btn-white  "
+                                                                onclick="eliminarRegistro(1)">Eliminar</button></td>
+                                                    </tr>
+
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
-                  </div>
+                </div>
             </div>
-
         </div>
     </div>
 </div>
-
-  

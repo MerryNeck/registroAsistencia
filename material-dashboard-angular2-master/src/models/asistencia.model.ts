@@ -1,7 +1,6 @@
 export class Asistencia{
     constructor(
         public id_asistencia:number,
-        public departamento:string,
         public fecha: string,
         public id_excel: number,
         public tprano_ingreso:string,
@@ -15,8 +14,9 @@ export class Asistencia{
         public fecha_creacion: string,
         public fecha_modificacion: string,
         public estado: string,
-        public pago: number,
         public id_usuario:number,
+        public min_extra:string,
+        public min_permiso:string,
     ){
 
     }

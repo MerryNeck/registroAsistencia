@@ -1,103 +1,51 @@
 <div class="main-content">
     <div class="container-fluid">
-        
-        <div class="row">
-            <div class="col-md-12">
-                
-                <div class="card">
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title ">ASISTENCIA</h4>
-                        <form class="col-md-5">
-                            <p class="card-category"> Busque  el registro de asistencia</p>
-                            <div class="input-group no-border">
-                                <input type="text" value="" class="form-control" placeholder="Buscar...">
-                                <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                    <i class="material-icons">search</i>
-                                    <div class="ripple-container"></div>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                    <tr>
-                                    <th></th>
-                                    <!-- <th *ngFor="let columna of columnas">{{ columna }}</th>-->
-                                      </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            ID ASISTENCIA
-                                        </td>
-                                        <td>
-                                            DEPARTAMENTO
-                                        </td>
-                                        <td>
-                                            NOMBRE
-                                        </td>
-                                        <td>
-                                            APELLIDO
-                                        </td>
-                                        <td>
-                                            FECHA
-                                        </td>
-                                        <td>
-                                            PRIMER INGRESO
-                                        </td>
-                                        <td>
-                                            PRIMERA SALIDA
-                                        </td>
-                                        <td>
-                                            SEGUNDA ENTRADA
-                                        </td>
-                                        <td>
-                                            SEGUNDA SALIDA
-                                        </td>
-                                        <td>
-                                            ATRASOS(MIN)
-                                        </td>
-                                        <td>
-                                            EXTRAS(MIN)
-                                        </td>
-                                        <td>
-                                            FALTAS
-                                        </td>
-                                        <td>
-                                            TOTAL(MIN)
-                                        </td>
-                                        <td>
-                                            PAGO(MIN)
-                                        </td>
-                                        <td>
-                                            
-                                        </td>
-                                        <td>
-                                            
-                                        </td>
-                                        <td>
-                                            
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <!--<tr *ngFor="let dato of datos">
-                                        <td>{{ dato.columna1 }}</td>
-                                        <td>{{ dato.columna2 }}</td>-->
-                                        <td>...</td>
-                                        <td>hola</td>
-                                      </tr>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">ASISTENCIA</h4>
+              <form class="col-md-5">
+                <p class="card-category">Busque el registro de asistencia</p>
+                <div class="input-group no-border">
+                  <input type="text" [(ngModel)]="nombreUsuario" class="form-control" placeholder="Buscar por nombre de usuario...">
+                  <input type="text" [(ngModel)]="fecha" class="form-control" placeholder="Buscar por fecha...">
+                  <button mat-raised-button type="button" class="btn btn-white btn-round btn-just-icon" (click)="buscarAsistencias()">
+                    <i class="material-icons">search</i>
+                    <div class="ripple-container"></div>
+                  </button>
                 </div>
+              </form>
+              <button mat-raised-button class="btn btn-success btn-round" (click)="imprimirAsistencia()">Imprimir</button>
             </div>
-            
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="text-primary">
+                    <tr>
+                      <th>ID</th>
+                      <th>Fecha</th>
+                      <!-- Agregar más encabezados según tu modelo -->
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let asistencia of asistencias">
+                      <td>{{ asistencia.id_asistencia }}</td>
+                      <td>{{ asistencia.fecha }}</td>
+                      <!-- Agregar más columnas según tu modelo -->
+                      <td>
+                        <button mat-raised-button class="btn btn-warning btn-round" (click)="editarAsistencia(asistencia)">Editar</button>
+                        <button mat-raised-button class="btn btn-danger btn-round" (click)="eliminarAsistencia(asistencia.id_asistencia)">Eliminar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
   </div>
   

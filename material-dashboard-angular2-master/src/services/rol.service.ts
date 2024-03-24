@@ -1,53 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from "rxjs";//
-import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from "@angular/common/http";//
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Rol } from 'models/rol.model';  
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class RolService {
-  public url: any;
-  
-  constructor(
-    private _http: HttpClient,
-  ) { }
+  private url = 'http://ejemplo.com/api/area'; // Reemplazar con la URL real de tu API
 
-  //registrar
-  insert_rol(data: any):Observable<any>{
-    const fd = new FormData();
-    fd.append('idArea',data.id_rol);
-    fd.append('tipoArea',data.tipo);
-    fd.append('fechaCreacion',data.fecha_creacion);
-    fd.append('fechaModificacion',data.fecha_modificacion);
-    fd.append('Estado',data.estado);
-    
-    return this._http.post(this.url + '/area/registrar',fd);
+  constructor(private http: HttpClient) { }
+
+  // tocken
+  getHeaders() {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
   }
 
-  get_idRol(idRol: any):Observable<any>{//verificar en el backen si necesita parametro
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.get(this.url+"/area/"+idRol,{headers:headers});
-
-  }
-  //editar 
-  update_rol(data: any):Observable<any>{
-    const fd = new FormData();
-    fd.append('idArea',data.id_area);
-    fd.append('tipoArea',data.tipo);
-    fd.append('fechaCreacion',data.fecha_creacion);
-    fd.append('fechaModificacion',data.fecha_modificacion);
-    fd.append('Estado',data.estado);
-    let headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.put(this.url + '/area/editar/'+data.idArea+'/',fd);
-  }
-  
-  // Eliminar (desactivar y activar)
-  desactivarRol(idRol: number, nuevoEstado: string): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const body = JSON.stringify({ estado: nuevoEstado});
-    return this._http.put(this.url+"/area/"+idRol,body,{headers:headers});
+  // registrar rol
+  registrarRol(rol: Rol): Observable<any> {
+    return this.http.post(`${this.url}/registrar`, rol, { headers: this.getHeaders() });
   }
 
-  
+  // listar todas las roles
+  listarRol(): Observable<Rol[]> {
+    return this.http.get<Rol[]>(`${this.url}/listar`, { headers: this.getHeaders() });
+  }
+
+//actualizar un rol
+  actualizarRol(rol: Rol): Observable<any> {
+    return this.http.put(`${this.url}/actualizar/${rol.id_rol}`, rol, { headers: this.getHeaders() });
+  }
+
+  //  estado de un rol
+  cambiarEstadoRol(idRol: number, estado: string): Observable<any> {
+    return this.http.patch(`${this.url}/cambiarEstado/${idRol}`, { estado }, { headers: this.getHeaders() });
+  }
 }
