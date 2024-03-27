@@ -11,6 +11,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AreaComponent } from './components/area/area.component';
 import { RutaexcelComponent } from './components/rutaexcel/rutaexcel.component';
 import { AsistenciaComponent } from './components/asistencia/asistencia.component';
+import { AnticipoComponent } from './components/anticipo/anticipo.component';
+import { PagoComponent } from './components/pago/pago.component';
+import { BoletaComponent } from './components/boleta/boleta.component';
 
 const routes: Routes =[
   {
@@ -36,6 +39,19 @@ const routes: Routes =[
      pathMatch: 'full',*/
    }, {
     path: 'asistencia',component: AsistenciaComponent,
+     /*redirectTo: '',
+     pathMatch: 'full',*/
+   },{
+    path: 'anticipo',component: AnticipoComponent,
+     /*redirectTo: '',
+     pathMatch: 'full',*/
+   }, {
+    path: 'pago',component: PagoComponent,
+     /*redirectTo: '',
+     pathMatch: 'full',*/
+   },
+   {
+    path: 'boleta',component: BoletaComponent,
      /*redirectTo: '',
      pathMatch: 'full',*/
    },

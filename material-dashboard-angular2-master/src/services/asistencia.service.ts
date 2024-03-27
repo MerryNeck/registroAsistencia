@@ -41,16 +41,21 @@ export class AsistenciaService {
     return this.http.patch<void>(url, body);
   }
 
+  // Método para modificar una asistencia
+  modificarAsistencia(id: number, asistencia: Asistencia): Observable<Asistencia> {
+    return this.http.put<Asistencia>(`${this.apiUrl}/${id}`, asistencia);
+  }
+  
   // Imprimir asistencia
-  imprimirAsistencia(ci: string, fecha: string) {
-    const params = new HttpParams()
-      .set('cedulaIdentidad', ci)
-      .set('fecha', fecha);
-    const options = { params, responseType: 'blob' as 'json' }; 
-    this.http.get(`${this.apiUrl}/print`, options).subscribe(response => {
-      const blob = new Blob([response], { type: 'application/pdf' }); 
-      const url = window.URL.createObjectURL(blob); 
-      window.open(url); 
-    });
+  imprimirAsistencia(ci: string, fecha: string): Observable<Blob> {
+    let params = new HttpParams();
+    params = params.append('ci', ci);
+    if (fecha) {
+      params = params.append('fecha', fecha);
+    }
+
+    // Ajusta el URL según el endpoint específico para generar/imprimir el PDF
+    const url = `${this.apiUrl}/imprimir`;
+    return this.http.get(url, { params: params, responseType: 'blob' });
   }
 }

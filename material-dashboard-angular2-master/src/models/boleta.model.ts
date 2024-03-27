@@ -1,8 +1,8 @@
 export class Boleta {
     constructor(
       public nro_boleta: number,
-      public liquido_pagable: number,
-      public id_asistencia: number,
+      public pago_total: number,
+      public id_sueldo: number,
       public observacion: string,
       public fecha_creacion: string,
       public fecha_modificacion: string,

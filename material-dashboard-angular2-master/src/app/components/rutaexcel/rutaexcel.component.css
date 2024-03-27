@@ -1,0 +1,206 @@
+.container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  
+  /* Card styling */
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #e5e5e5;
+    border-radius: .25rem;
+    margin-bottom: 20px;
+  }
+  
+  .card-header {
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, .03);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+  }
+  
+  .card-header-danger {
+    background-color: #e12d2d;
+    color: white;
+  }
+  
+  .card-title {
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Form and input styling */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-control {
+   display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: black;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .5rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+   
+  }
+  .example-full-width-input{
+    display: grid; 
+    grid-template-columns: 100% 100% 100%;
+    align-items: center;
+   justify-content: center;
+   height: 100%;
+   padding-top: 70%;
+   background-color: #ffff;
+   border: 3px dotted red ;
+
+   border-radius: 4px;
+  }
+  .idexcel {
+    /* Posicionamiento y tamaño */
+    position: relative;
+    display: block;
+    width: 200px; /* Ajusta el ancho según tu diseño */
+    height: 40px; /* Ajusta la altura según tu diseño */
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+  
+    /* Estilo del placeholder */
+    color: #999;
+    font-size: 15px;
+  
+    /* Ocultar el input original */
+    opacity: 0;
+  }
+  
+  .example-full-width-input::before {
+    /* Contenedor del texto del placeholder */
+    content: "Suba Aqui";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  
+  .example-full-width-input:hover {
+    /* Efecto al pasar el mouse */
+    border-color: #ccc;
+  }
+  
+  .example-full-width-input:active {
+    /* Efecto al presionar el botón */
+    background-color: #ffff;
+  }
+  
+  /* Animación para el archivo al arrastrarse */
+  .example-full-width-input.drag-over {
+    border: 3px dotted black ;
+    background-color: #ffff;
+    animation: drag-over 0.2s ease-in-out;
+  }
+  
+  @keyframes drag-over {
+    0% {
+      background-color: #ffff;
+    }
+    100% {
+      background-color: #ffff;
+    }
+  }
+  
+  /* Button styling */
+  .btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  
+  .btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .btn-danger:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+  
+  .pull-right {
+    float: right !important;
+  }
+  
+  /* Utility classes */
+  .clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .form-group input[type=file] {
+    opacity: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  
+    cursor: pointer;
+    padding: 8px 10px;
+   
+    background-color: #f5f5f5;
+  }
+  
+  .form-group input[type=file]::placeholder {
+    color: #999;
+    font-size: 15px;
+  }
+  
+  .form-group input[type=file]:hover {
+    border-color: #80bdff;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .row {
+      flex-direction: column;
+    }
+  }

@@ -17,6 +17,8 @@ export class Asistencia{
         public id_usuario:number,
         public min_extra:string,
         public min_permiso:string,
+        public hrs_no_recuperadas:string,
+        public descuento:string,
     ){
 
     }

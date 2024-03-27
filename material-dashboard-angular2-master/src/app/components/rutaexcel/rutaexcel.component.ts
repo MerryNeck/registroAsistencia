@@ -46,4 +46,12 @@ export class RutaexcelComponent implements OnInit {
       error => console.error('Error al procesar el archivo Excel:', error)
     );
   }
+  cargarExcel(event: any) {
+    const archivoSeleccionado = event.target.files[0];
+    if (archivoSeleccionado) {
+      this.procesarExcel(archivoSeleccionado);
+    } else {
+      console.error('No se seleccionó ningún archivo.');
+    }
+  }
 }

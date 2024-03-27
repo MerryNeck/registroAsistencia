@@ -8,35 +8,68 @@
               <form class="col-md-5">
                 <p class="card-category">Busque el registro de asistencia</p>
                 <div class="input-group no-border">
-                  <input type="text" [(ngModel)]="nombreUsuario" class="form-control" placeholder="Buscar por nombre de usuario...">
-                  <input type="text" [(ngModel)]="fecha" class="form-control" placeholder="Buscar por fecha...">
-                  <button mat-raised-button type="button" class="btn btn-white btn-round btn-just-icon" (click)="buscarAsistencias()">
-                    <i class="material-icons">search</i>
+                  <div class="col-md-4">
+                    <input type="text" [(ngModel)]="ci" class="form-control" placeholder="Buscar por cedula de identidad...">
                     <div class="ripple-container"></div>
-                  </button>
+                  </div>
+                  <div class="col-md-4">
+                    <input type="text" [(ngModel)]="fecha" class="form-control" placeholder="Buscar por fecha...">
+                    
+                  </div>
+                  
+                  <button mat-raised-button type="button" class="btn btn-white btn-round " (click)="listarAsistencias()">Buscar</button>
                 </div>
               </form>
-              <button mat-raised-button class="btn btn-success btn-round" (click)="imprimirAsistencia()">Imprimir</button>
+              
             </div>
             <div class="card-body">
+              <button mat-raised-button class="btn btn-success btn-round" (click)="imprimirAsistencia()">Imprimir</button>
               <div class="table-responsive">
                 <table class="table">
                   <thead class="text-primary">
                     <tr>
                       <th>ID</th>
-                      <th>Fecha</th>
-                      <!-- Agregar más encabezados según tu modelo -->
-                      <th>Acciones</th>
+                      <th>FECHA</th>
+                      <th>NOMBRE</th>
+                      <th>APELLIDO</th>
+                      <th>PRIMERA ENTRADA</th>
+                      <th>PRIMERA SALIDA</th>
+                      <th>SEGUNDA ENTRADA</th>
+                      <th>SEGUNDA SALIDA</th>
+                      <th>MINUTOS RETRAZADO</th>
+                      <th>MINUTOS EXTRA</th>
+                      <th>FALTAS</th>
+                      <th>TOTAL HORAS</th>
+                      <th>MINUTOS DE PERMISO</th>
+                      <th>HORAS NO RECUPERADAS</th>
+                      <th>DESCUENTO</th>
+                      <th>ESTADO</th>
+                      <th>FECHA CREACION</th>
+                      <th>FECHA MODIFICACION</th>
+                      <th>MODIFICAR</th>
+                      <th>ELIMINAR</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let asistencia of asistencias">
                       <td>{{ asistencia.id_asistencia }}</td>
                       <td>{{ asistencia.fecha }}</td>
-                      <!-- Agregar más columnas según tu modelo -->
+                      <td>{{ usuario.nombre }}</td>
+                      <td>{{ usuario.apellido_paterno }}</td>
+                      <td>{{ asistencia.tprano_ingreso}}</td>
+                      <td>{{ asistencia.tprano_salida }}</td>
+                      <td>{{ asistencia.tde_ingreso}}</td>
+                      <td>{{ asistencia.tde_salida }}</td>
+                      <td>{{ asistencia.min_retardos}}</td>
+                      <td>{{ asistencia.min_extra }}</td>
+                      <td>{{ asistencia.faltas}}</td>
+                      <td>{{ asistencia.total_horas }}</td>
+                      <td>{{ asistencia.min_permiso}}</td>
+                      <td>{{ asistencia.hrs_no_recuperadas}}</td>
+                      <td>{{ asistencia.descuento}}</td>
+                      <td><button mat-raised-button class="btn btn-warning btn-round" (click)="editarAsistencia(asistencia.id_asistencia)">MODIFICAR</button></td>
                       <td>
-                        <button mat-raised-button class="btn btn-warning btn-round" (click)="editarAsistencia(asistencia)">Editar</button>
-                        <button mat-raised-button class="btn btn-danger btn-round" (click)="eliminarAsistencia(asistencia.id_asistencia)">Eliminar</button>
+                        <button mat-raised-button class="btn btn-danger btn-round" (click)="eliminarAsistencia(asistencia.id_asistencia)">ELIMINAR</button>
                       </td>
                     </tr>
                   </tbody>

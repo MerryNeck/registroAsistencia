@@ -13,9 +13,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AreaComponent } from './area/area.component';
 import { RutaexcelComponent } from './rutaexcel/rutaexcel.component';
 import { AsistenciaComponent } from './asistencia/asistencia.component';
-import { DescuentoComponent } from './descuento/descuento.component';
 import { PagoComponent } from './pago/pago.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BoletaComponent } from './boleta/boleta.component';
+import { AnticipoComponent } from './anticipo/anticipo.component';
 
 @NgModule({
   imports: [
@@ -39,8 +40,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AreaComponent,
     RutaexcelComponent,
     AsistenciaComponent,
-    DescuentoComponent,
-    PagoComponent
+   
+    PagoComponent,
+    BoletaComponent,
+    AnticipoComponent,
   ],
   exports: [
     FooterComponent,

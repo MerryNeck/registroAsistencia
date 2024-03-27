@@ -1,0 +1,115 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Registro Anticipo</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-md-6 " id="form">
+                                    <div class="example-full-width">
+                                        <input class="form-control" placeholder="Identificacion(deshabilitado)"
+                                            disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <input class="form-control" placeholder="ci" type="text" name="ci">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <input class="form-control" placeholder="Anticipo" type="text" name="anticipo">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="card">
+                                <div class="card-header card-header-danger">
+                                    <h4 class="card-title "> LISTA ANTICIPOS</h4>
+
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <tr>
+                                                    <th></th>
+                                                    <!-- <th *ngFor="let columna of columnas">{{ columna }}</th>-->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        ID DESCUENTO
+                                                    </td>
+                                                    <td>
+                                                        CEDULA DE IDENTIDAD
+                                                    </td>
+                                                    <td>
+                                                        ANTICIPO
+                                                    </td>
+                                                    <td>
+                                                        ESTADO
+                                                    </td>
+                                                    <td>
+                                                        FECHA CREACION
+                                                    </td>
+                                                    <td>
+                                                        FECHA MODIFICACION
+                                                    </td>
+
+                                                    <td>
+                                                        MODIFICAR
+                                                    </td>
+                                                    <td>
+                                                        ELIMINAR
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <!--<tr *ngFor="let dato of datos">
+                                                        <td>{{ dato.columna1 }}</td>
+                                                        <td>{{ dato.columna2 }}</td>-->
+                                                    <td>112315</td>
+                                                    <td>hola</td>
+                                                    <td>SDF</td>
+                                                    <td>hola</td>
+                                                    <td>SD</td>
+                                                    <td>SD</td>
+                                                    <td><button mat-raised-button type="submit" class="btn btn-blue  "
+                                                            onclick="modificarRegistro(1)">Modificar</button></td>
+                                                    <td><button mat-raised-button type="submit" class="btn btn-white "
+                                                            onclick="eliminarRegistro(1)">Eliminar</button></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
