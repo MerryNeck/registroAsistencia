@@ -67,10 +67,10 @@
     grid-template-columns: 100% 100% 100%;
     align-items: center;
    justify-content: center;
-   height: 100%;
+   height: 80%;
    padding-top: 70%;
-   background-color: #ffff;
-   border: 3px dotted red ;
+   background-color: #ffffff;
+   border: 5px dotted rgb(0, 51, 255) ;
 
    border-radius: 4px;
   }
@@ -119,7 +119,15 @@
     background-color: #ffff;
     animation: drag-over 0.2s ease-in-out;
   }
-  
+  .card .card-header-danger .card-icon, .card .card-header-danger .card-text, .card .card-header-danger:not(.card-header-icon):not(.card-header-text), .card.bg-danger, .card.card-rotate.bg-danger .front, .card.card-rotate.bg-danger .back {
+    background: linear-gradient(60deg, #072578, #4b568e);
+    padding-bottom:30px ;
+    padding-top:20px ;
+  }
+  .card {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  }
   @keyframes drag-over {
     0% {
       background-color: #ffff;
@@ -151,14 +159,14 @@
   
   .btn-danger {
     color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
+    background-color: #0c2a95;
+    border-color: #3559dc;
   }
   
   .btn-danger:hover {
     color: #fff;
-    background-color: #c82333;
-    border-color: #bd2130;
+    background-color: #739ce3;
+    border-color: #96b1da;
   }
   
   .pull-right {

@@ -4,11 +4,11 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">Registro Descuento</h4>
+                        <h4 class="card-title">DESCUENTO</h4>
                     </div>
                     <div class="card-body">
                         <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
-                        <form >
+                        <form>
                             <div class="row">
                                 <div class="form-group col-md-6 " id="form">
                                     <div class="example-full-width">
@@ -18,135 +18,128 @@
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
+                                        <input class="form-control" placeholder="ci" type="text" name="ci">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
                                         <input class="form-control" placeholder="Sueldo" type="text" name="sueldo">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <input class="form-control" placeholder="DiasTrabajo" type="text" name="trabajo" >
+                                        <input class="form-control" placeholder="DiasTrabajo" type="text"
+                                            name="trabajo">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <input class="form-control" placeholder="retencion" type="text" name="retencion" >
+                                        <input class="form-control" placeholder="retencion" type="text"
+                                            name="retencion">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <input class="form-control" placeholder="SueldoBruto" type="text" name="sueldobruto" >
-                                    </div>
-                                </div>-->
-                                <div class="form-group col-md-6" id="form">
-                                    <div class="example-full-width">
-                                        <input class="form-control" placeholder="ci" type="text" name="ci"  >
+                                        <input class="form-control" placeholder="SueldoBruto" type="text"
+                                            name="sueldobruto">
                                     </div>
                                 </div>
-                              
+
+
                             </div>
-                            
+
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
                 </div>
-                <div class="main-content">
-                    <div class="container-fluid">
+            </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
+            <div class="main-content">
+                <div class="container-fluid">
 
-                                <div class="card">
-                                    <div class="card-header card-header-danger">
-                                        <h4 class="card-title "> LISTADO AREA</h4>
-                                        <form class="col-md-5" >
-                                            <p class="card-category"> Busque el registro de area</p>
-                                            <div class="input-group no-border">
-                                                  <input type="text" value="" class="form-control"
-                                                    placeholder="Buscar...">
-                                                <button mat-raised-button type="submit"
-                                                    class="btn btn-white btn-round btn-just-icon">
-                                                    <i class="material-icons">search</i>
-                                                    <div class="ripple-container"></div>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table">
-                                                <thead class=" text-primary">
-                                                    <tr>
-                                                        <th></th>
-                                                        <!-- <th *ngFor="let columna of columnas">{{ columna }}</th>-->
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            ID SUELDO
-                                                        </td>
-                                                        <td>
-                                                            CI
-                                                        </td>
-                                                        <td>
-                                                            DIAS TRABAJADOS
-                                                        </td>
-                                                        <td>
-                                                            RETENCION
-                                                        </td>
-                                                        <td>
-                                                            SUELDO BRUTO
-                                                        </td>
-                                                        <td>
-                                                            FECHA CREACION
-                                                        </td>
-                                                        <td>
-                                                            FECHA MODIFICACION
-                                                        </td>
-                                                        <td>
-                                                            ESTADO
-                                                        </td>
-                                                        <td>
-                                                            MODIFICAR
-                                                        </td>
-                                                        <td>
-                                                            ELIMINAR
-                                                        </td>
+                    <div class="row">
+                        <div class="col-md-12">
 
-
-                                                    </tr>
-                                                    <tr>
-                                                        <!--<tr *ngFor="let dato of datos">
+                            <div class="card">
+                                <div class="card-header card-header-danger">
+                                    <h4 class="card-title "> REGISTRO DESCUENTO</h4>
+                                    <form class="col-md-5">
+                                        <p class="card-category"> Busque el registro de area</p>
+                                        <div class="input-group no-border">
+                                            <input type="text" value="" class="form-control" placeholder="Buscar...">
+                                            <button mat-raised-button type="submit"
+                                                class="btn btn-white btn-round btn-just-icon">
+                                                <i class="material-icons">search</i>
+                                                <div class="ripple-container"></div>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>CI</th>
+                                                    <th>DIAS TRABAJADOS</th>
+                                                    <th>RETENCION</th>
+                                                    <th>SUELDO BRUTO</th>
+                                                    <th>FECHA CREACION</th>
+                                                    <th>FECHA MODIFICACION</th>
+                                                    <th>ESTADO</th>
+                                                    <th>MODIFICAR</th>
+                                                    <th>ELIMINAR</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                                <tr>
+                                                    <!--<tr *ngFor="let dato of datos">
                                                         <td>{{ dato.columna1 }}</td>
                                                         <td>{{ dato.columna2 }}</td>-->
-                                                        <td>112315</td>
-                                                        <td>hola</td>
-                                                        <td>SDF</td>
-                                                        <td>hola</td>
-                                                        <td>SD</td>
-                                                        <td>SDF</td>
-                                                        <td>hola</td>
-                                                        <td>SD</td>
-                                                        <td><button mat-raised-button type="submit"
-                                                                class="btn btn-blue  "
-                                                                >Modificar</button></td>
-                                                        <td><button mat-raised-button type="submit"
-                                                                class="btn btn-white "
-                                                                >Eliminar</button></td>
-                                                    </tr>
+                                                    <td>112315</td>
+                                                    <td>hola</td>
+                                                    <td>SDF</td>
+                                                    <td>hola</td>
+                                                    <td>SD</td>
+                                                    <td>SDF</td>
+                                                    <td>hola</td>
+                                                    <td>SD</td>
+                                                    <td><button mat-raised-button type="submit"
+                                                            class="btn btn-blue btn-round ">Modificar</button></td>
+                                                    <td><button mat-raised-button type="submit"
+                                                            class="btn btn-white  btn-round">Eliminar</button></td>
+                                                </tr>
+                                                <tr>
+                                                    <!--<tr *ngFor="let dato of datos">
+                                                        <td>{{ dato.columna1 }}</td>
+                                                        <td>{{ dato.columna2 }}</td>-->
+                                                    <td>112315</td>
+                                                    <td>hola</td>
+                                                    <td>SDF</td>
+                                                    <td>hola</td>
+                                                    <td>SD</td>
+                                                    <td>SDF</td>
+                                                    <td>hola</td>
+                                                    <td>SD</td>
+                                                    <td><button mat-raised-button type="submit"
+                                                            class="btn btn-blue btn-round ">Modificar</button></td>
+                                                    <td><button mat-raised-button type="submit"
+                                                            class="btn btn-white  btn-round">Eliminar</button></td>
+                                                </tr>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-            

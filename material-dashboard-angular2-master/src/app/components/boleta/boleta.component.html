@@ -1,1 +1,67 @@
-<p>boleta works!</p>
+<div class="contener">
+<div class="receipt-container">
+  <div class="header">
+    <div class="empre">Bispace SRL</div>
+    <div class="nro">#001</div>
+    <h1>BOLETA DE PAGO</h1>
+    
+    <div class="company-info">
+      <div class="bis">Nombre: <label for="" class="label">Miriam Sonia Justo Mamani</label> </div>
+      <div class="bis">Ocupacion: <label for="" class="label"> Pasante</label> </div>
+      <div class="bis">Dias Trabajados: <label for="" class="label"> 10 </label></div>
+      <div class="bis">Periodo de Pago: <label for="" class="label"> 30</label></div>
+      <div class="bis">Fecha de Pago: <label for="" class="label"> 01/04/2024</label></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class=" text-primary">
+
+          <tr>
+            <th rowspan="2">PAGO</th>
+            <th colspan="4">DESCUENTO</th>
+          </tr>
+          <tr>
+            <!-- PAGO no tiene subtítulos, así que se deja vacío debajo de él -->
+
+            <th>DESCUENTO AFP'S</th>
+            <th>ATRASOS</th>
+            <th>FALTAS</th>
+            <th>MINUTOS NO TRABAJADOS</th>
+
+          </tr>
+
+        </thead>
+        <tbody>
+          <tr>
+
+            <td>$1000</td> <!-- PAGO -->
+            <td>2</td> <!-- ATRASOS -->
+            <td>1</td> <!-- FALTAS -->
+            <td>30</td> <!-- MINUTOS NO TRABAJADOS -->
+            <td>$200</td> <!-- DESCUENTO (calculado basado en atrasos, faltas, etc.) -->
+          </tr>
+          <!-- Más filas según sea necesario -->
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="total">
+    <p>LIQUIDO PAGABLE Bs.-  <label for="" class="labell"> 30</label></p>
+  </div>
+  <div class="signature">
+    <div class="signature-line row col-md-9"></div>
+    <p>Firma de Conformidad:</p>
+    
+    
+  </div>
+  
+</div>
+<button mat-raised-button type="submit" class="btn btn-blue btn-round "
+  onclick="modificarRegistro(1)">Modificar</button>
+<button mat-raised-button type="submit" class="btn btn-white btn-round  "
+  onclick="eliminarRegistro(1)">Imprimir</button>
+</div>

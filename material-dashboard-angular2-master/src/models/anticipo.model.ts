@@ -5,7 +5,7 @@ export class Anticipo{
       public fecha_modificacion: string,
       public estado: string,
       public anticipos: number,
-      public id_asistencia: number,
+      public id_usuario: number,
     ) {
     }
   }
