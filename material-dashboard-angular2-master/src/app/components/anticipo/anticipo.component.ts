@@ -1,6 +1,9 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Anticipo } from 'models/anticipo.model';
 import { AnticipoService } from 'services/anticipo.service';
+
 
 @Component({
   selector: 'app-anticipo',
@@ -9,49 +12,53 @@ import { AnticipoService } from 'services/anticipo.service';
 })
 export class AnticipoComponent implements OnInit {
  anticipos:Anticipo[] =[];
+ nuevoAnticipo: Anticipo = new Anticipo(0, '', '', '', 0, 0);
+ editandoAnticipo: Anticipo | null = null;
+
  constructor(private anticipoService: AnticipoService) { }
 
   ngOnInit(): void {
-    this.cargarAnticipos();
+    this.obtenerAnticipos();
 
   }
-  cargarAnticipos(): void {
-    this.anticipoService.obtenerAnticipo().subscribe({
-      next: (data) => {
-        this.anticipos = data;
-      },
-      error: (e) => console.error(e)
-    });
+
+  obtenerAnticipos(): void {
+    this.anticipoService.obtenerAnticipo()
+      .subscribe(anticipos => this.anticipos = anticipos);
+  }
+  registrarNuevoAnticipo(form:NgForm): void {
+    if (form.valid) {
+      const { ci, anticipo } = form.value;
+      this.nuevoAnticipo.id_usuario = ci;
+      this.nuevoAnticipo.anticipos = anticipo;
+      this.anticipoService.registrarAnticipo(this.nuevoAnticipo)
+        .subscribe(anticipo => {
+          this.anticipos.push(anticipo);
+          this.nuevoAnticipo = new Anticipo(0, '', '', '', 0, 0);
+          form.reset();
+        });
+    }
+  }
+  editarAnticipo(anticipo: Anticipo): void {
+    this.editandoAnticipo = { ...anticipo };
   }
 
-  registrarNuevoAnticipo(anticipo: Anticipo): void {
-    this.anticipoService.registrarAnticipo(anticipo).subscribe({
-      next: () => {
-        console.log('Anticipo registrado con éxito');
-        this.cargarAnticipos(); // Recargar la lista para mostrar el nuevo anticipo
-      },
-      error: (e) => console.error(e)
-    });
+  actualizarAnticipo(): void {
+    if (this.editandoAnticipo) {
+      this.anticipoService.actualizarAnticipo(this.editandoAnticipo)
+        .subscribe(anticipo => {
+          const index = this.anticipos.findIndex(a => a.id_anticipo === anticipo.id_anticipo);
+          this.anticipos[index] = anticipo;
+          this.editandoAnticipo = null;
+        });
+    }
   }
 
-  actualizarAnticipo(anticipo: Anticipo): void {
-    this.anticipoService.actualizarAnticipo(anticipo).subscribe({
-      next: () => {
-        console.log('Anticipo actualizado con éxito');
-        this.cargarAnticipos(); // Recargar para mostrar los cambios
-      },
-      error: (e) => console.error(e)
-    });
-  }
-
-  cambiarEstado(idArea: number, nuevoEstado: string): void {
-    this.anticipoService.cambiarEstadoAnticipo(idArea, nuevoEstado).subscribe({
-      next: () => {
-        console.log('Estado cambiado con éxito');
-        this.cargarAnticipos(); // Opcionalmente recargar o ajustar la vista según necesites
-      },
-      error: (e) => console.error(e)
-    });
+  cambiarEstadoAnticipo(idAnticipo: number, estado: string): void {
+    this.anticipoService.cambiarEstadoAnticipo(idAnticipo, estado)
+      .subscribe(() => {
+        this.anticipos = this.anticipos.filter(a => a.id_anticipo !== idAnticipo);
+      });
   }
 
 }

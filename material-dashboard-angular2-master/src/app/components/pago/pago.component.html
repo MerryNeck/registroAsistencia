@@ -4,11 +4,11 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">DESCUENTO</h4>
+                        <h4 class="card-title">PAGO</h4>
                     </div>
                     <div class="card-body">
                         <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
-                        <form>
+                        <form #pagoForm="ngForm" (ngSubmit)="registrarNuevoPago(pagoForm)">
                             <div class="row">
                                 <div class="form-group col-md-6 " id="form">
                                     <div class="example-full-width">
@@ -18,30 +18,30 @@
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <input class="form-control" placeholder="ci" type="text" name="ci">
+                                        <input class="form-control" placeholder="ci" type="text" name="ci" ngModel>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <input class="form-control" placeholder="Sueldo" type="text" name="sueldo">
+                                        <input class="form-control" placeholder="Sueldo" type="text" name="sueldo" ngModel>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
                                         <input class="form-control" placeholder="DiasTrabajo" type="text"
-                                            name="trabajo">
+                                            name="trabajo" ngModel>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
                                         <input class="form-control" placeholder="retencion" type="text"
-                                            name="retencion">
+                                            name="retencion" ngModel>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
                                         <input class="form-control" placeholder="SueldoBruto" type="text"
-                                            name="sueldobruto">
+                                            name="sueldobruto" ngModel>
                                     </div>
                                 </div>
 

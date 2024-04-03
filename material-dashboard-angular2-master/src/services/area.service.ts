@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Area } from 'models/area.model';  
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,14 @@ import { Area } from 'models/area.model';
 export class AreaService {
   private url = 'http://ejemplo.com/api/area'; // Reemplazar con la URL real de tu API
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService:AuthService) { }
 
   // token
   getHeaders() {
+    const token = this.authService.getToken();
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
+      'Authorization': `Bearer ${token}`
     });
   }
 

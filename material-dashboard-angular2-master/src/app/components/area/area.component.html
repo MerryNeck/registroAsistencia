@@ -8,7 +8,7 @@
                     </div>
                     <div class="card-body">
                         <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
-                        <form (ngSubmit)="guardarArea()">
+                        <form #areaForm="ngForm" (ngSubmit)="registrarNuevaArea(areaForm)">
                             <div class="row">
                                 <div class="form-group col-md-6 " id="form">
                                     <div class="example-full-width">
@@ -20,8 +20,7 @@
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
 
-                                        <input class="form-control" placeholder="Estado" type="text" name="estado"
-                                            [(ngModel)]="estado">
+                                        <input class="form-control" placeholder="Estado" type="text" name="estado" ngModel>
                                     </div>
                                 </div>
                             </div>
@@ -30,13 +29,12 @@
                                 <div class="form-group col-md-12" id="form">
                                     <div class="example-full-width">
 
-                                        <input class="form-control" placeholder="Area" type="text" name="area"
-                                            [(ngModel)]="area">
+                                        <input class="form-control" placeholder="Area" type="text" name="area" ngModel>
                                     </div>
                                 </div>
 
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"  [disabled]="!areaForm.valid">REGISTRAR</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -124,7 +122,7 @@
                     </div>
                     <div class="card-body">
                         <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
-                        <form (ngSubmit)="guardarRol()">
+                        <form #rolForm="ngForm" (ngSubmit)="registrarNuevoRol(rolForm)">
                             <div class="row">
                                 <div class="form-group col-md-6 " id="form">
                                     <div class="example-full-width">
@@ -136,8 +134,7 @@
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
 
-                                        <input class="form-control" placeholder="Estado" type="text" name="estado"
-                                            [(ngModel)]="estado">
+                                        <input class="form-control" placeholder="Estado" type="text" name="estado" ngModel>
                                     </div>
                                 </div>
                             </div>
@@ -147,12 +144,12 @@
                                     <div class="example-full-width">
 
                                         <input class="form-control" placeholder="Rol" type="text" name="rol"
-                                            [(ngModel)]="rol">
+                                        ngModel>
                                     </div>
                                 </div>
 
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"  [disabled]="!rolForm.valid">REGISTRAR</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
