@@ -12,23 +12,22 @@ export class LoginComponent implements OnInit {
 
   email = '';
   password = '';
-  public login :any;
+
   constructor(private loginService: LoginService,
     private _router : Router
     ) {
-    this.login = new Login(0, '', '', '', '', '', 0);
+    
   }
   
-  ngOnInit(): void {
-  }
-  login1() {
-
+  ngOnInit(): void {}
+  login() {
     this.loginService.login( 
       this.email,
       this.password
-    ).subscribe(response => {
+    ).subscribe((response:any )=> {
       console.log('Ingreso Exitoso: ', response);
-      this._router.navigate(['dashboard'])
+      //localStorage.setItem('token', response.token);
+      this._router.navigate(['rolArea'])
     }, error => {
       console.error('Ingreso Fallido: ', error);
     });

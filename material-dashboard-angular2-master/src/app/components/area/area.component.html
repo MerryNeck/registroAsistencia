@@ -1,0 +1,235 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">AREA</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
+                        <form #areaForm="ngForm" (ngSubmit)="registrarNuevaArea(areaForm)">
+                            <div class="row">
+                                <div class="form-group col-md-6 " id="form">
+                                    <div class="example-full-width">
+                                        <input class="form-control" placeholder="Identificacion(deshabilitado)"
+                                            disabled>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+
+                                        <input class="form-control" placeholder="Estado" type="text" name="estado" ngModel>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group col-md-12" id="form">
+                                    <div class="example-full-width">
+
+                                        <input class="form-control" placeholder="Area" type="text" name="area" ngModel>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"  [disabled]="!areaForm.valid">REGISTRAR</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-danger">
+                                    <h4 class="card-title "> REGISTRO AREA</h4>
+                                    <form class="col-md-5">
+                                        <p class="card-category"> Busque el registro de area</p>
+                                        <div class="input-group no-border">
+                                            <input type="text" value="" class="form-control" placeholder="Buscar...">
+                                            <button mat-raised-button type="submit"
+                                                class="btn btn-white btn-round btn-just-icon">
+                                                <i class="material-icons">search</i>
+                                                <div class="ripple-container"></div>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <tr>
+                                                    <th>
+                                                        ID AREA
+                                                    </th>
+                                                    <th>
+                                                        TIPO AREA
+                                                    </th>
+                                                    <th>
+                                                        ESTADO
+                                                    </th>
+                                                    <th>
+                                                        FECHA CREACION
+                                                    </th>
+                                                    <th>
+                                                        FECHA MODIFICACION
+                                                    </th>
+                                                    <th>
+                                                        MODIFICAR
+                                                    </th>
+                                                    <th>
+                                                        ELIMINAR
+                                                    </th>
+                                                    <!-- <th *ngFor="let columna of columnas">{{ columna }}</th>-->
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <!--<tr *ngFor="let dato of datos">
+                                                        <td>{{ dato.columna1 }}</td>
+                                                        <td>{{ dato.columna2 }}</td>-->
+                                                    <td>112315</td>
+                                                    <td>hola</td>
+                                                    <td>SDF</td>
+                                                    <td>hola</td>
+                                                    <td>SD</td>
+                                                    <td><button mat-raised-button type="submit" class="btn btn-blue  btn-round"
+                                                            onclick="modificarRegistro(1)">Modificar</button></td>
+                                                    <td><button mat-raised-button type="submit" class="btn btn-white btn-round"
+                                                            onclick="eliminarRegistro(1)">Eliminar</button></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Registro Rol</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
+                        <form #rolForm="ngForm" (ngSubmit)="registrarNuevoRol(rolForm)">
+                            <div class="row">
+                                <div class="form-group col-md-6 " id="form">
+                                    <div class="example-full-width">
+                                        <input class="form-control" placeholder="Identificacion(deshabilitado)"
+                                            disabled>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+
+                                        <input class="form-control" placeholder="Estado" type="text" name="estado" ngModel>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group col-md-12" id="form">
+                                    <div class="example-full-width">
+
+                                        <input class="form-control" placeholder="Rol" type="text" name="rol"
+                                        ngModel>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"  [disabled]="!rolForm.valid">REGISTRAR</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="card">
+                                <div class="card-header card-header-danger">
+                                    <h4 class="card-title ">ROL</h4>
+                                    <form class="col-md-5">
+                                        <p class="card-category"> Busque el registro del rol</p>
+                                        <div class="input-group no-border">
+                                            <input type="text" value="" class="form-control" placeholder="Buscar...">
+                                            <button mat-raised-button type="submit"
+                                                class="btn btn-white btn-round btn-just-icon">
+                                                <i class="material-icons">search</i>
+                                                <div class="ripple-container"></div>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <tr>
+                                                    <th>
+                                                        ID ROL
+                                                    </th>
+                                                    <th>
+                                                        TIPO ROL
+                                                    </th>
+                                                    <th>
+                                                        ESTADO
+                                                    </th>
+                                                    <th>
+                                                        FECHA CREACION
+                                                    </th>
+                                                    <th>
+                                                        FECHA MODIFICACION
+                                                    </th>
+                                                    <th>
+                                                        MODIFICAR
+                                                    </th>
+                                                    <th>
+                                                        ELIMINAR
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                                <tr>
+                                                    <!--<tr *ngFor="let dato of datos">
+                                                        <td>{{ dato.columna1 }}</td>
+                                                        <td>{{ dato.columna2 }}</td>-->
+                                                    <td>112315</td>
+                                                    <td>hola</td>
+                                                    <td>SDF</td>
+                                                    <td>hola</td>
+                                                    <td>SD</td>
+                                                    <td><button mat-raised-button type="submit" class="btn btn-blue btn-round "
+                                                            onclick="modificarRegistro(1)">Modificar</button></td>
+                                                    <td><button mat-raised-button type="submit" class="btn btn-white btn-round  "
+                                                            onclick="eliminarRegistro(1)">Eliminar</button></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

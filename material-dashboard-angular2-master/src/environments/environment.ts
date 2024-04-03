@@ -4,5 +4,11 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+   backend: {
+    api: 'http://localhost:5052/api',
+    login: '/api/login',
+    areaRol: '/api/areaRol'
+  }
+  
 };

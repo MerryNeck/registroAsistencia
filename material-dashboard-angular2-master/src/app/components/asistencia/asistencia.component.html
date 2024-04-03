@@ -1,0 +1,141 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">ASISTENCIA</h4>
+            <form class="col-md-5">
+              <p class="card-category">Busque el registro de asistencia</p>
+              <div class="input-group no-border">
+                <div class="col-md-6">
+                  <input type="text" [(ngModel)]="ci" class="form-control"
+                    placeholder="Buscar por cedula de identidad...">
+                  <input type="text" [(ngModel)]="fecha" class="form-control" placeholder="Buscar por fecha...">
+                  <div class="ripple-container"></div>
+                </div>
+                <button mat-raised-button type="button" class="btn btn-white btn-round "
+                  (click)="listarAsistencias()">Buscar</button>
+              </div>
+            </form>
+
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <button mat-raised-button class="btn btn-success btn-round"
+                (click)="imprimirAsistencia()">Imprimir Asistencia</button>
+                <button mat-raised-button class="btn btn-success btn-round l"
+                ><a href="boleta"></a>Ver Boleta</button>
+              <div class="div-table">
+                <table class="table">
+                  <thead class="text-primary">
+                    <tr class="table-row" >
+                      <th class="table-header">ID</th>
+                      <th class="table-header">FECHA</th>
+                      <th class="table-header">NOMBRE</th>
+                      <th class="table-header">APELLIDO</th>
+                      <th class="table-header">PRIMERA ENTRADA</th>
+                      <th class="table-header">PRIMERA SALIDA</th>
+                      <th class="table-header">SEGUNDA ENTRADA</th>
+                      <th class="table-header">SEGUNDA SALIDA</th>
+                      <th class="table-header">MINUTOS RETRAZADO</th>
+                      <th class="table-header">MINUTOS EXTRA</th>
+                      <th class="table-header">FALTAS</th>
+                      <th class="table-header">TOTAL HORAS</th>
+                      <th class="table-header">MINUTOS DE PERMISO</th>
+                      <th class="table-header">HORAS NO RECUPERADAS</th>
+                      <th class="table-header">DESCUENTO</th>
+                      <th class="table-header">ESTADO</th>
+                      <th class="table-header">FECHA CREACION</th>
+                      <th class="table-header">FECHA MODIFICACION</th>
+                      <th class="table-header">MODIFICAR</th>
+                      <th class="table-header">ELIMINAR</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   <!-- <tr *ngFor="let asistencia of asistencias">
+                      <td>{{ asistencia.id_asistencia }}</td>
+                      <td>{{ asistencia.fecha }}</td>
+                      <td>{{ usuario.nombre }}</td>
+                      <td>{{ usuario.apellido_paterno }}</td>
+                      <td>{{ asistencia.tprano_ingreso}}</td>
+                      <td>{{ asistencia.tprano_salida }}</td>
+                      <td>{{ asistencia.tde_ingreso}}</td>
+                      <td>{{ asistencia.tde_salida }}</td>
+                      <td>{{ asistencia.min_retardos}}</td>
+                      <td>{{ asistencia.min_extra }}</td>
+                      <td>{{ asistencia.faltas}}</td>
+                      <td>{{ asistencia.total_horas }}</td>
+                      <td>{{ asistencia.min_permiso}}</td>
+                      <td>{{ asistencia.hrs_no_recuperadas}}</td>
+                      <td>{{ asistencia.descuento}}</td>
+                      <td><button mat-raised-button class="btn btn-warning btn-round"
+                          (click)="editarAsistencia(asistencia.id_asistencia)">MODIFICAR</button></td>
+                      <td>
+                        <button mat-raised-button class="btn btn-danger btn-round"
+                          (click)="eliminarAsistencia(asistencia.id_asistencia)">ELIMINAR</button>
+                      </td>
+                    </tr>
+                    <tr *ngFor="asistencia">-->
+                      <tr >
+                        <td>hhola</td>
+                        <td>ffdsf</td>
+                        <td>dfsdf</td>
+                        <td>dsfsdgfsfdfssssssssssssfsdf</td>
+                        <td>dgfgf</td>
+                        <td>sdgfgghj</td>
+                        <td>dggfhg</td>
+                        <td>ghgfhf</td>
+                        <td>nghhgghhg</td>
+                        <td>gfhdhgf</td>
+                        <td>fdgdhg</td>
+                        <td>24435</td>
+                        <td>53545</td>
+                        <td>554w4t</td>
+                        <td>tetdfgfd</td>
+                        <td>53545</td>
+                        <td>554w4t</td>
+                        <td>tetdfgfd</td>
+                        <td><button mat-raised-button class="btn btn-warning btn-round"
+                            >MODIFICAR</button></td>
+                        <td>
+                          <button mat-raised-button class="btn btn-danger btn-round"
+                            >ELIMINAR</button>
+                        </td>
+                      </tr>
+                      <tr >
+                      <td>hhola</td>
+                      <td>ffdsf</td>
+                      <td>dfsdf</td>
+                      <td>dsfsdgf</td>
+                      <td>dgfgf</td>
+                      <td>sdgfgghj</td>
+                      <td>dggfhg</td>
+                      <td>ghgfhf</td>
+                      <td>nghhgghhg</td>
+                      <td>gfhdhgf</td>
+                      <td>fdgdhg</td>
+                      <td>24435</td>
+                      <td>53545</td>
+                      <td>554w4t</td>
+                      <td>tetdfgfd</td>
+                      <td>53545</td>
+                      <td>554w4t</td>
+                      <td>tetdfgfd</td>
+                      <td><button mat-raised-button class="btn btn-warning btn-round"
+                          >MODIFICAR</button></td>
+                      <td>
+                        <button mat-raised-button class="btn btn-danger btn-round"
+                          >ELIMINAR</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

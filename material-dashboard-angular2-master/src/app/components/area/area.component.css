@@ -1,0 +1,79 @@
+.card .card-header-danger .card-icon, .card .card-header-danger .card-text, .card .card-header-danger:not(.card-header-icon):not(.card-header-text), .card.bg-danger, .card.card-rotate.bg-danger .front, .card.card-rotate.bg-danger .back {
+    background: linear-gradient(60deg, #072578, #4b568e);
+    padding-bottom:30px ;
+    padding-top:20px ;
+  }
+  .card {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  }
+  .row{
+    justify-content: center;
+  }
+  .btn.btn-danger.pull-right{
+    background-color: #e67e22;
+  }
+  .btn.btn-blue{
+    background-color: #ff9800;
+    color: white;
+  }
+  .btn.btn-white{
+    background-color: red;
+    color: white;
+  }
+  table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    justify-content: center;
+    top: -10px;
+  }
+
+  table tr:first-child {
+    background-color: #000000; 
+    color: white; 
+  }
+  
+  /* Estilo para las filas impares */
+  table tr:nth-child(odd) {
+    background-color: #0A2779; /* Gris claro */
+    color: #ffff;
+    border: 1px solid white ;
+  }
+  
+  /* Estilo para las filas pares */
+  table tr:nth-child(even) {
+    background-color: #7A9AE3; /* Blanco */
+    color: black;
+    border: 1px solid white ;
+  }
+  td{
+    border: 1px solid white;
+  }
+  .text-primary{
+    border: 1px solid white;
+    background-color: #000000;
+  }
+
+  th{
+    border: 1px solid white;
+    justify-content: center;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+
+  }
+
+  .table thead tr th {
+    font-size: 12px;
+}
+  tr{
+    font-size: 10px;
+    border: 1px solid white;
+  }
+  .main-content{
+    display: flex;
+    background-color: rgb(225, 229, 249);
+    height: 100%;
+    padding: 5%;
+  }

@@ -1,9 +1,22 @@
-<div class="login">
-  <!--<form #loginForm="ngForm" (ngSubmit)="login(loginForm)">-->
-    <form (ngSubmit)="login1()">
-    <h1>INICIO DE SESION</h1>
-    <input class="form-control form-control-lg" type="email" placeholder="Ingrese su correo electrónico "  name="email" />
-    <input type="password" name="password"  placeholder="Password" >
-    <button type="submit" >INGRESAR</button>
-  </form>
+<div class="login-container">
+  <div class="login-box">
+    <div class="user-icon">
+      <i class="fa fa-user"></i>
+    </div>
+    <form >
+      <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input type="email" placeholder="Email ID" required>
+      </div>
+      <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" placeholder="Password" required>
+      </div>
+      <div class="checkbox">
+        <input type="checkbox" id="remember-me">
+        <label for="remember-me">Recuerdame</label>
+      </div>
+      <button type="submit" class="login-btn">LOGIN</button>
+    </form>
+  </div>
 </div>

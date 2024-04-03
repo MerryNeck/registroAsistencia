@@ -1,44 +1,95 @@
-.login {
-  width: 300px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+.body {
+ font-family: Arial, sans-serif;
+ background-image: url('../../../assets/img/fondo.jpg');
+ background-size: cover;
+ background-position: center;
 }
 
-.login h1 {
+/* Estilos del contenedor de inicio de sesión */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  
+}
+
+.login-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(139, 175, 216, 0.955);
+  
+}
+
+/* Estilos del icono de usuario */
+.user-icon {
   text-align: center;
-  margin-top: 0;
+  margin-bottom: 20px;
 }
 
-.login form {
-  margin-top: 20px;
+.user-icon i {
+  font-size: 50px;
+  color: #16589a;
 }
 
-.login input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+/* Estilos de los campos de entrada */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
 }
 
-.login input:focus {
-  outline: none;
-  border-color: #999;
+.input-group i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #050606;
 }
 
-.login button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background-color: #337ab7;
-  color: #fff;
+.input-group input {
+  padding: 10px 10px 10px 30px;
+  width: 250px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  background-color: #a5c9e6;
+}
+
+/* Estilos de la casilla de verificación y el enlace de contraseña olvidada */
+.checkbox {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.checkbox label, .radio label, label {
+  font-size: 0.875rem;
+  margin-top: 10px;
+}
+
+.checkbox input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.checkbox a {
+  color: #0a4886;
+  text-decoration: none;
+  left: -10px;
+}
+
+/* Estilos del botón de inicio de sesión */
+.login-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #043d76;
+  color: #fff;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.login button:hover {
-  background-color: #286090;
+.login-btn:hover {
+  background-color: #a0bfde;
 }
