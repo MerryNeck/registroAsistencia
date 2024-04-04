@@ -9,9 +9,9 @@
               <p class="card-category">Busque el registro de asistencia</p>
               <div class="input-group no-border">
                 <div class="col-md-6">
-                  <input type="text" [(ngModel)]="ci" class="form-control"
+                  <input type="text" ngModel class="form-control"
                     placeholder="Buscar por cedula de identidad...">
-                  <input type="text" [(ngModel)]="fecha" class="form-control" placeholder="Buscar por fecha...">
+                  <input type="text" ngModel class="form-control" placeholder="Buscar por fecha...">
                   <div class="ripple-container"></div>
                 </div>
                 <button mat-raised-button type="button" class="btn btn-white btn-round "
@@ -69,11 +69,11 @@
                       <td>{{ asistencia.min_permiso}}</td>
                       <td>{{ asistencia.hrs_no_recuperadas}}</td>
                       <td>{{ asistencia.descuento}}</td>
-                      <td><button mat-raised-button class="btn btn-warning btn-round"
-                          (click)="editarAsistencia(asistencia.id_asistencia)">MODIFICAR</button></td>
+                      <td><button mat-raised-button class="btn btn-warning btn-round" onclick="actualizarAsistencia()"
+                          >MODIFICAR</button></td>
                       <td>
-                        <button mat-raised-button class="btn btn-danger btn-round"
-                          (click)="eliminarAsistencia(asistencia.id_asistencia)">ELIMINAR</button>
+                        <button mat-raised-button class="btn btn-danger btn-round" onclick="cambiarEstado(1, 'n')"
+                          >ELIMINAR</button>
                       </td>
                     </tr>
                     <tr *ngFor="asistencia">-->
@@ -96,12 +96,12 @@
                         <td>53545</td>
                         <td>554w4t</td>
                         <td>tetdfgfd</td>
-                        <td><button mat-raised-button class="btn btn-warning btn-round"
-                            >MODIFICAR</button></td>
-                        <td>
-                          <button mat-raised-button class="btn btn-danger btn-round"
-                            >ELIMINAR</button>
-                        </td>
+                        <td><button mat-raised-button class="btn btn-warning btn-round" onclick="actualizarAsistencia()"
+                          >MODIFICAR</button></td>
+                      <td>
+                        <button mat-raised-button class="btn btn-danger btn-round" onclick="cambiarEstado(1, 'n')"
+                          >ELIMINAR</button>
+                      </td>
                       </tr>
                       <tr >
                       <td>hhola</td>
@@ -122,10 +122,10 @@
                       <td>53545</td>
                       <td>554w4t</td>
                       <td>tetdfgfd</td>
-                      <td><button mat-raised-button class="btn btn-warning btn-round"
+                      <td><button mat-raised-button class="btn btn-warning btn-round" onclick="actualizarAsistencia()"
                           >MODIFICAR</button></td>
                       <td>
-                        <button mat-raised-button class="btn btn-danger btn-round"
+                        <button mat-raised-button class="btn btn-danger btn-round" onclick="cambiarEstado(1, 'n')"
                           >ELIMINAR</button>
                       </td>
                     </tr>

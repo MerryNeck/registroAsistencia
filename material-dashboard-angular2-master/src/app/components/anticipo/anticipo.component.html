@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <form #anticipoForm="ngForm" (ngSubmit)="registrarNuevoAnticipo(anticipoForm.value)">
                             <div class="row">
-                                <div   class="form-group col-md-6 " id="form">
+                                <div class="form-group col-md-6 " id="form">
                                     <div class="example-full-width">
                                         <input class="form-control" placeholder="Identificacion(deshabilitado)"
                                             disabled>
@@ -24,12 +24,14 @@
 
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <input class="form-control" placeholder="Anticipo" type="text" name="anticipo" ngModel>
+                                        <input class="form-control" placeholder="Anticipo" type="text" name="anticipo"
+                                            ngModel>
                                     </div>
                                 </div>
 
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="!anticipoForm.valid">REGISTRAR</button>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                [disabled]="!anticipoForm.valid">REGISTRAR</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -105,16 +107,16 @@
                                                             class="btn btn-white btn-round"
                                                             onclick="cambiarEstado(1, 'n')">Eliminar</button></td>
                                                 </tr>
-                                                <tr>
-                                                    <!--<tr *ngFor="let dato of datos">
-                                                        <td>{{ dato.columna1 }}</td>
-                                                        <td>{{ dato.columna2 }}</td>-->
-                                                    <td>112315</td>
+
+                                                <tr *ngFor="let anticipos of anticipo">
+                                                    <td>{{ anticipos.id_anticipo }}</td>
+                                                    <td>{{ anticipos.anticipo }}</td>
+                                                    <!-- <td>112315</td>
                                                     <td>hola</td>
                                                     <td>SDF</td>
                                                     <td>hola</td>
                                                     <td>SD</td>
-                                                    <td>SD</td>
+                                                    <td>SD</td>-->
                                                     <td><button mat-raised-button type="submit"
                                                             class="btn btn-blue btn-round "
                                                             onclick="modificarRegistro(1)">Modificar</button></td>
@@ -122,6 +124,7 @@
                                                             class="btn btn-white btn-round"
                                                             onclick="eliminarRegistro(1,'n')">Eliminar</button></td>
                                                 </tr>
+
 
                                             </tbody>
                                         </table>

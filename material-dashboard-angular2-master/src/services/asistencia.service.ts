@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import {  HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Asistencia } from '../models/asistencia.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,53 +11,35 @@ import { Asistencia } from '../models/asistencia.model';
 export class AsistenciaService {
   private apiUrl = 'http://localhost:3000/asistencia'; // Cambiar la URL según tu configuración
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
-  // Obtener todas las asistencias
-  obtenerAsistencias(): Observable<Asistencia[]> {
-    return this.http.get<Asistencia[]>(this.apiUrl);
+  getAsistencias(): Observable<Asistencia[]> {
+    const headers = this.getHeaders();
+    return this.http.get<Asistencia[]>(this.apiUrl, { headers: this.getHeaders()});
   }
 
-  // Obtener asistencias con filtros de nombre de usuario y fecha
-  obtenerAsistenciasFiltradas(ci: string, fecha: string): Observable<Asistencia[]> {
-    let params = new HttpParams();
-    if (ci) {
-      params = params.set('nombreUsuario', ci);
-    }
-    if (fecha) {
-      params = params.set('fecha', fecha);
-    }
-    return this.http.get<Asistencia[]>(this.apiUrl, { params });
-  }
-
-  // Actualizar una asistencia existente
-  actualizarAsistencia(id: number, asistencia: Asistencia): Observable<Asistencia> {
+  getAsistencia(id: number): Observable<Asistencia> {
+    const headers = this.getHeaders();
     const url = `${this.apiUrl}/${id}`;
-    return this.http.put<Asistencia>(url, asistencia);
+    return this.http.get<Asistencia>(url, { headers : this.getHeaders()});
+  }
+  updateAsistencia(asistencia: Asistencia): Observable<any> {
+    
+    const url = `${this.apiUrl}/${asistencia.id_asistencia}`;
+    return this.http.put<Asistencia>(url, asistencia, { headers: this.getHeaders() });
+  }
+
+  // token
+  getHeaders() {
+    const token = this.authService.getToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
   }
 
   // estado
-  cambiarEstadoAsistencia(id: number, estado: string): Observable<void> {
-    const url = `${this.apiUrl}/${id}`;
-    const body = { estado };
-    return this.http.patch<void>(url, body);
-  }
-
-  // Método para modificar una asistencia
-  modificarAsistencia(id: number, asistencia: Asistencia): Observable<Asistencia> {
-    return this.http.put<Asistencia>(`${this.apiUrl}/${id}`, asistencia);
-  }
-  
-  // Imprimir asistencia
-  imprimirAsistencia(ci: string, fecha: string): Observable<Blob> {
-    let params = new HttpParams();
-    params = params.append('ci', ci);
-    if (fecha) {
-      params = params.append('fecha', fecha);
-    }
-
-    // Ajusta el URL según el endpoint específico para generar/imprimir el PDF
-    const url = `${this.apiUrl}/imprimir`;
-    return this.http.get(url, { params: params, responseType: 'blob' });
+  cambiarEstadoAsistencia(id: number, estado: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/cambiarEstado/${id}`, { estado }, { headers: this.getHeaders() });
   }
 }
