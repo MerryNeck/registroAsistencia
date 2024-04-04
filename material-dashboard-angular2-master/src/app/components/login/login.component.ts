@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { LoginService } from 'services/login.service';
 import { Login } from 'models/login.model';
 import { Router } from '@angular/router';
+import { Usuario } from 'models/usuario.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,15 +13,25 @@ export class LoginComponent implements OnInit {
 
   email = '';
   password = '';
+  public usuario : any
+
+
 
   constructor(private loginService: LoginService,
     private _router : Router
     ) {
-    
+      this.usuario= new Usuario(0,'','','','','','')
   }
   
   ngOnInit(): void {}
-  login() {
+   
+  login(lognForm:any) {
+    console.log(this.usuario);
+    console.log(this.email);
+    
+    
+    console.log("ël boton funciona");
+    
     this.loginService.login( 
       this.email,
       this.password

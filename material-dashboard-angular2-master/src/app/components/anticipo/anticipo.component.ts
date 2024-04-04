@@ -15,6 +15,27 @@ export class AnticipoComponent implements OnInit {
  nuevoAnticipo: Anticipo = new Anticipo(0, '', '', '', 0, 0);
  editandoAnticipo: Anticipo | null = null;
 
+ anticipo=[{
+      id_anticipo : 1,
+      id_usuario: 2,
+      anticipo: 100,
+      estado : 's',
+      fecha_creacion: '20240301' ,
+ },{
+  id_anticipo : 2,
+  id_usuario: 2,
+  anticipo: 100,
+  estado : 's',
+  fecha_creacion: '20240301' ,
+},{
+  id_anticipo : 3,
+  id_usuario: 2,
+  anticipo: 100,
+  estado : 's',
+  fecha_creacion: '20240301' ,
+}]
+
+
  constructor(private anticipoService: AnticipoService) { }
 
   ngOnInit(): void {

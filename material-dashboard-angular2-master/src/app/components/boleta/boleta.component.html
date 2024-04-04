@@ -6,11 +6,11 @@
     <h1>BOLETA DE PAGO</h1>
     
     <div class="company-info">
-      <div class="bis">Nombre: <label for="" class="label">Miriam Sonia Justo Mamani</label> </div>
-      <div class="bis">Ocupacion: <label for="" class="label"> Pasante</label> </div>
-      <div class="bis">Dias Trabajados: <label for="" class="label"> 10 </label></div>
-      <div class="bis">Periodo de Pago: <label for="" class="label"> 30</label></div>
-      <div class="bis">Fecha de Pago: <label for="" class="label"> 01/04/2024</label></div>
+      <div class="bis">Nombre: <label for="nombre" class="label" ngModel>Miriam Sonia Justo Mamani</label> </div>
+      <div class="bis">Ocupacion: <label for="ocupacion" class="label" ngModel> Pasante</label> </div>
+      <div class="bis">Dias Trabajados: <label for="dias" class="label" ngModel> 10 </label></div>
+      <div class="bis">Periodo de Pago: <label for="mes" class="label" ngModel> 30</label></div>
+      <div class="bis">Fecha de Pago: <label for="fecha" class="label" ngModel> 01/04/2024</label></div>
     </div>
   </div>
   <div class="card-body">
@@ -61,7 +61,7 @@
   
 </div>
 <button mat-raised-button type="submit" class="btn btn-blue btn-round "
-  onclick="modificarRegistro(1)">Modificar</button>
+  onclick="actualizarBoleta(1)">Modificar</button>
 <button mat-raised-button type="submit" class="btn btn-white btn-round  "
-  onclick="eliminarRegistro(1)">Imprimir</button>
+  (click)="imprimir()">Imprimir</button>
 </div>
