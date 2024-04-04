@@ -63,7 +63,12 @@
     font-weight: bold;
 
   }
+
+  .table thead tr th {
+    font-size: 12px;
+}
   tr{
+    font-size: 10px;
     border: 1px solid white;
   }
   .main-content{
@@ -72,6 +77,3 @@
     height: 100%;
     padding: 5%;
   }
-  .table thead tr th {
-    font-size: 12px;
-}

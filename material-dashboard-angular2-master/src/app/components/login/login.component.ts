@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService,
     private _router : Router
     ) {
-      this.usuario= new Usuario(0,'','','','','','')
+      this.usuario= new Usuario(0,'','','','','','','',0,0)
   }
   
   ngOnInit(): void {}

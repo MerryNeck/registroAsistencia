@@ -81,33 +81,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        ID DESCUENTO
-                                                    </td>
-                                                    <td>
-                                                        CEDULA DE IDENTIDAD
-                                                    </td>
-                                                    <td>
-                                                        ANTICIPO
-                                                    </td>
-                                                    <td>
-                                                        ESTADO
-                                                    </td>
-                                                    <td>
-                                                        FECHA CREACION
-                                                    </td>
-                                                    <td>
-                                                        FECHA MODIFICACION
-                                                    </td>
-                                                    <td><button mat-raised-button type="submit"
-                                                            class="btn btn-blue btn-round "
-                                                            onclick="actualizaAnticipo(1)">Modificar</button></td>
-                                                    <td><button mat-raised-button type="submit"
-                                                            class="btn btn-white btn-round"
-                                                            onclick="cambiarEstado(1, 'n')">Eliminar</button></td>
-                                                </tr>
-
                                                 <tr *ngFor="let anticipos of anticipo">
                                                     <td>{{ anticipos.id_anticipo }}</td>
                                                     <td>{{ anticipos.anticipo }}</td>

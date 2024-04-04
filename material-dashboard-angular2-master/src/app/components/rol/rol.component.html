@@ -4,11 +4,11 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">AREA</h4>
+                        <h4 class="card-title">Registro Rol</h4>
                     </div>
                     <div class="card-body">
                         <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
-                        <form #areaForm="ngForm" (ngSubmit)="registrarNuevaArea(areaForm)">
+                        <form #rolForm="ngForm" (ngSubmit)="registrarNuevoRol(rolForm)">
                             <div class="row">
                                 <div class="form-group col-md-6 " id="form">
                                     <div class="example-full-width">
@@ -29,12 +29,13 @@
                                 <div class="form-group col-md-12" id="form">
                                     <div class="example-full-width">
 
-                                        <input class="form-control" placeholder="Area" type="text" name="area" ngModel>
+                                        <input class="form-control" placeholder="Rol" type="text" name="rol"
+                                        ngModel>
                                     </div>
                                 </div>
 
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"  [disabled]="!areaForm.valid">REGISTRAR</button>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"  [disabled]="!rolForm.valid">REGISTRAR</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -42,13 +43,15 @@
             </div>
             <div class="main-content">
                 <div class="container-fluid">
+
                     <div class="row">
                         <div class="col-md-12">
+
                             <div class="card">
                                 <div class="card-header card-header-danger">
-                                    <h4 class="card-title "> REGISTRO AREA</h4>
+                                    <h4 class="card-title ">ROL</h4>
                                     <form class="col-md-5">
-                                        <p class="card-category"> Busque el registro de area</p>
+                                        <p class="card-category"> Busque el registro del rol</p>
                                         <div class="input-group no-border">
                                             <input type="text" value="" class="form-control" placeholder="Buscar...">
                                             <button mat-raised-button type="submit"
@@ -65,10 +68,10 @@
                                             <thead class=" text-primary">
                                                 <tr>
                                                     <th>
-                                                        ID AREA
+                                                        ID ROL
                                                     </th>
                                                     <th>
-                                                        TIPO AREA
+                                                        TIPO ROL
                                                     </th>
                                                     <th>
                                                         ESTADO
@@ -85,10 +88,10 @@
                                                     <th>
                                                         ELIMINAR
                                                     </th>
-                                                    <!-- <th *ngFor="let columna of columnas">{{ columna }}</th>-->
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                
                                                 <tr>
                                                     <!--<tr *ngFor="let dato of datos">
                                                         <td>{{ dato.columna1 }}</td>
@@ -98,9 +101,9 @@
                                                     <td>SDF</td>
                                                     <td>hola</td>
                                                     <td>SD</td>
-                                                    <td><button mat-raised-button type="submit" class="btn btn-blue  btn-round"
+                                                    <td><button mat-raised-button type="submit" class="btn btn-blue btn-round "
                                                             onclick="modificarRegistro(1)">Modificar</button></td>
-                                                    <td><button mat-raised-button type="submit" class="btn btn-white btn-round"
+                                                    <td><button mat-raised-button type="submit" class="btn btn-white btn-round  "
                                                             onclick="eliminarRegistro(1)">Eliminar</button></td>
                                                 </tr>
 
@@ -110,12 +113,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-
-           
         </div>
     </div>
 </div>

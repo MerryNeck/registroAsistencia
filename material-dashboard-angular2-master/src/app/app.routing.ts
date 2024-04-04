@@ -11,6 +11,7 @@ import { AsistenciaComponent } from './components/asistencia/asistencia.componen
 import { AnticipoComponent } from './components/anticipo/anticipo.component';
 import { PagoComponent } from './components/pago/pago.component';
 import { BoletaComponent } from './components/boleta/boleta.component';
+import { RolComponent } from './components/rol/rol.component';
 
 const routes: Routes =[
   {
@@ -27,7 +28,7 @@ const routes: Routes =[
     pathMatch: 'full',*/
   },
   {
-    path: 'areaRol',component: AreaComponent,
+    path: 'area',component: AreaComponent,
      /*redirectTo: '',
      pathMatch: 'full',*/
    },{
@@ -49,6 +50,11 @@ const routes: Routes =[
    },
    {
     path: 'boleta',component: BoletaComponent,
+     /*redirectTo: '',
+     pathMatch: 'full',*/
+   },
+   {
+    path: 'roles',component: RolComponent,
      /*redirectTo: '',
      pathMatch: 'full',*/
    },

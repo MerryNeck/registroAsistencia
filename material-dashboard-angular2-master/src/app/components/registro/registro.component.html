@@ -7,8 +7,8 @@
                         <h4 class="card-title">Registro</h4>
                     </div>
                     <div class="card-body">
-                        <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
-                        <form>
+                         <form [formGroup]="usuarioForm" (ngSubmit)="insertarUsuario()">
+                        <!--<form>-->
                             <div class="row">
                                 <div class="form-group col-md-3 " id="form">
                                     <mat-form-field class="example-full-width">
@@ -20,14 +20,14 @@
                                     <mat-form-field class="example-full-width">
 
                                         <input class="form-control" placeholder="Cedula de Identidad" type="text"
-                                            name="ci">
+                                            name="ci"  formControlName="ci">
                                     </mat-form-field>
                                 </div>
                                 <div class="form-group col-md-5" id="form">
                                     <mat-form-field class="example-full-width">
 
                                         <input class="form-control" placeholder="Email address" type="email"
-                                            name="email">
+                                            name="email"  > 
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -35,40 +35,40 @@
                                 <div class="form-group col-md-4" id="form">
                                     <mat-form-field class="example-full-width">
 
-                                        <input class="form-control" placeholder="Nombre" type="text" name="nombre">
+                                        <input class="form-control" placeholder="Nombre" type="text" name="nombre"  formControlName="nombre">
                                     </mat-form-field>
                                 </div>
                                 <div class="form-group col-md-4" id="form">
                                     <mat-form-field class="example-full-width">
 
                                         <input class="form-control" placeholder="Apellido Pateno" type="text"
-                                            name="apellido_paterno">
+                                            name="apellido_paterno"  formControlName="apellido_paterno">
                                     </mat-form-field>
                                 </div>
                                 <div class="form-group col-md-4" id="form">
                                     <mat-form-field class="example-full-width">
                                         <input class="form-control" placeholder="Apellido Materno" type="text"
-                                            name="apellido_materno">
+                                            name="apellido_materno"  formControlName="apellido_materno">
                                     </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-4 " id="form">
                                     <mat-form-field class="example-full-width">
-                                        <select name="idArea">
+                                        <select name="idArea"  formControlName="idArea">
                                             <option value="">SELECCIONE AREA</option>
-                                            <ng-container *ngFor="let area of areas">
-                                                <option value="{{area.id_area}}">{{area.tipo_area}}</option>
+                                            <ng-container>
+                                                <option *ngFor="let area of areas" [value]="area.id_area">{{ area.tipo_area }}</option>
                                             </ng-container>
                                         </select>
                                     </mat-form-field>
                                 </div>
                                 <div class="form-group col-md-4" id="form">
                                     <mat-form-field class="example-full-width">
-                                        <select name="idRol">
+                                        <select name="idRol"  formControlName="idRol">
                                             <option value="">SELECCIONE ROL</option>
-                                            <ng-container *ngFor="let rol of roles">
-                                                <option value="{{rol.id_rol}}">{{rol.tipo}}</option>
+                                            <ng-container>
+                                                <option *ngFor="let rol of roles" [value]="rol.id_rol">{{ rol.tipo }}</option>
                                             </ng-container>
                                         </select>
                                     </mat-form-field>
