@@ -17,6 +17,8 @@ import { PagoComponent } from './pago/pago.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BoletaComponent } from './boleta/boleta.component';
 import { AnticipoComponent } from './anticipo/anticipo.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { RolComponent } from './rol/rol.component';
 
 @NgModule({
   imports: [
@@ -44,6 +46,8 @@ import { AnticipoComponent } from './anticipo/anticipo.component';
     PagoComponent,
     BoletaComponent,
     AnticipoComponent,
+    PerfilComponent,
+    RolComponent,
   ],
   exports: [
     FooterComponent,

@@ -1,52 +1,41 @@
-<!--antipo.html-->
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title">ANTICIPOS</h4>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <label>AUTENTIFICACION</label>
+                        <img class="img" src="./assets/img/faces/LOGO.jpg" />
+                        </a>
                     </div>
-                    <div class="card-body">
-                        <form #anticipoForm="ngForm" (ngSubmit)="registrarNuevoAnticipo(anticipoForm.value)">
-                            <div class="row">
-                                <div class="form-group col-md-6 " id="form">
-                                    <div class="example-full-width">
-                                        <input class="form-control" placeholder="Identificacion(deshabilitado)"
-                                            disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6" id="form">
-                                    <div class="example-full-width">
-                                        <input class="form-control" placeholder="ci" type="text" name="ci" ngModel>
-                                    </div>
-                                </div>
+                    <form>
+                        <div class="card-body">
+                            <div class="form-group col-md-12" id="form">
+                                <mat-form-field class="example-full-width">
 
-                                <div class="form-group col-md-6" id="form">
-                                    <div class="example-full-width">
-                                        <input class="form-control" placeholder="Anticipo" type="text" name="anticipo"
-                                            ngModel>
-                                    </div>
-                                </div>
-
+                                    <input class="form-control" placeholder="Correo Corporativo" type="text"
+                                        name="email">
+                                </mat-form-field>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                [disabled]="!anticipoForm.valid">REGISTRAR</button>
-                            <div class="clearfix"></div>
-                        </form>
-                    </div>
+                            <div class="form-group col-md-12" id="form">
+                                <mat-form-field class="example-full-width">
+                                    <input class="form-control" placeholder="Password" type="text" name="password">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
+                        <div class="clearfix"></div>
+                    </form>
+
                 </div>
             </div>
             <div class="main-content">
                 <div class="container-fluid">
-
                     <div class="row">
                         <div class="col-md-12">
-
                             <div class="card">
                                 <div class="card-header card-header-danger">
-                                    <h4 class="card-title "> REGISTRO ANTICIPOS</h4>
-
+                                    <h4 class="card-title "> REGISTRO AUTENTIFICACION</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -54,13 +43,10 @@
                                             <thead class=" text-primary">
                                                 <tr>
                                                     <th>
-                                                        ID DESCUENTO
+                                                        ID AREA
                                                     </th>
                                                     <th>
-                                                        CEDULA DE IDENTIDAD
-                                                    </th>
-                                                    <th>
-                                                        ANTICIPO
+                                                        TIPO AREA
                                                     </th>
                                                     <th>
                                                         ESTADO
@@ -77,27 +63,25 @@
                                                     <th>
                                                         ELIMINAR
                                                     </th>
-
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let anticipos of anticipo">
-                                                    <td>{{ anticipos.id_anticipo }}</td>
-                                                    <td>{{ anticipos.anticipo }}</td>
-                                                    <!-- <td>112315</td>
+                                                <tr>
+                                                <tr *ngFor="let dato of datos">
+                                                    <td>{{ dato.columna1 }}</td>
+                                                    <td>{{ dato.columna2 }}</td>
+                                                    <td>112315</td>
                                                     <td>hola</td>
                                                     <td>SDF</td>
                                                     <td>hola</td>
                                                     <td>SD</td>
-                                                    <td>SD</td>-->
                                                     <td><button mat-raised-button type="submit"
-                                                            class="btn btn-blue btn-round "
+                                                            class="btn btn-blue  btn-round"
                                                             onclick="modificarRegistro(1)">Modificar</button></td>
                                                     <td><button mat-raised-button type="submit"
                                                             class="btn btn-white btn-round"
-                                                            onclick="eliminarRegistro(1,'n')">Eliminar</button></td>
+                                                            onclick="eliminarRegistro(1)">Eliminar</button></td>
                                                 </tr>
-
 
                                             </tbody>
                                         </table>
@@ -110,6 +94,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

@@ -6,17 +6,18 @@
     <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
       <div class="input-group">
         <i class="fa fa-envelope"></i>
-        <input type="email" placeholder="Email ID" required name="email"  #email= "ngModel" [(ngModel)]="usuario.email">
+        <input type="email" placeholder="Email ID" required name="email" #email="ngModel" [(ngModel)]="usuario.email">
       </div>
       <div class="input-group">
         <i class="fa fa-lock"></i>
-        <input type="password" placeholder="Password" required name="password" #password="ngModel" [(ngModel)]="usuario.password">
+        <input type="password" placeholder="Password" required name="password" #password="ngModel"
+          [(ngModel)]="usuario.password">
       </div>
       <div class="checkbox">
         <input type="checkbox" id="remember-me">
         <label for="remember-me">Recuerdame</label>
       </div>
-      <button type="submit" class="login-btn" >LOGIN</button>
+      <button type="submit" class="login-btn">LOGIN</button>
     </form>
   </div>
 </div>

@@ -4,6 +4,8 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from "@angular/common/http";//
 import { Area } from "models/area.model";
 import { Rol } from 'models/rol.model';
+import { Usuario } from 'models/usuario.model';
+import { AuthService } from './auth.service';
 //import { GLOBAL } from './GLOBAL';
 interface RegistroResponse {
     token: string;
@@ -14,7 +16,7 @@ interface RegistroResponse {
 }) export class RegistroService {
     private url: any; // Reemplace con la URL de su API
 
-    constructor(private _http: HttpClient) { }
+    constructor(private _http: HttpClient, private authService:AuthService) { }
 
     getAreas(): Observable<Area[]> {
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -25,41 +27,25 @@ interface RegistroResponse {
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.get<Rol[]>(this.url + '/rol/', { headers });
     }
+    getHeaders() {
+        const token = this.authService.getToken(); // Obtener el token JWT
+        return new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        });
+      }
 
-    insertUsuario(data: any): Observable<any> {
-        const fd = new FormData();
-        fd.append('id_usuario', data.id_usuario);
-        fd.append('nombre', data.nombre);
-        fd.append('aperllido_paterno', data.apellido_paterno);
-        fd.append('apellido_materno', data.apellido_materno);
-        fd.append('ci', data.ci);
-        fd.append('estado', data.estado);
-        fd.append('fecha_creacion', data.fecha_creacion);
-        fd.append('idRol', data.idRol);
-        fd.append('idArea', data.idArea);
+       // Método para obtener todos los anticipos
+  obtenerUsuario(): Observable<Usuario[]> {
+    return this._http.get<Usuario[]>(this.url,{ headers: this.getHeaders() });
+  }
 
-
-        return this._http.post<any>(this.url + '/registrar', fd, {
-            observe: 'response' // Observe the full response, including status code
-        }).pipe(
-            catchError(this.handleError)
-        );
-    }
+    // Método para registrar un Usuario
+  registrarUsuario(usuario: Usuario): Observable<any> {
+    return this._http.post<any>(this.url, usuario,{ headers: this.getHeaders() });
+  }
 
    
-
-    private handleError(error: any) {
-        let errorMessage = '';
-        if (error.error instanceof ErrorEvent) {
-
-            errorMessage = 'An error occurred: ' + error.error.message;
-        } else {
-
-            errorMessage = `Backend returned code ${error.status}: ${error.body.error}`;
-        }
-        return throwError(errorMessage);
-    }
-
 
     getUsuario(idUsuario: any): Observable<any> {//verificar en el backen si necesita parametro
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -67,27 +53,15 @@ interface RegistroResponse {
 
     }
 
-    updateUsuario(data: any): Observable<any> {
+     // Método para actualizar un registro de usuario
+  actualizarUsuario(usuario: Usuario): Observable<any> {
+    const url = `${this.url}/${usuario.id_usuario}`;
+    return this._http.put<any>(url, usuario,{ headers: this.getHeaders() });
+  }
 
-        const fd = new FormData();
-        fd.append('id_usuario', data.id_usuario)
-        fd.append('nombre', data.nombre);
-        fd.append('aperllido_paterno', data.aperllido_paterno);
-        fd.append('apellido_materno', data.apellido_materno);
-        fd.append('ci', data.ci);
-        fd.append('estado', data.estado);
-        fd.append('fecha_creacion', data.fecha_creacion);
-        fd.append('idRol', data.idRol);
-        fd.append('idArea', data.idArea);
-
-        let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.put(this.url + '/usuario/editar/' + data.id_usuario, fd);
-    }
 
  // Eliminar (desactivar y activar)
- desactivarArea(idUsuario: number, nuevoEstado: string): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const body = JSON.stringify({ estado: nuevoEstado});
-    return this._http.put(this.url+"/usuario/"+idUsuario,body,{headers:headers});
+ cambiarEstadoUsuario(idUsuario: number, estado: string): Observable<any> {
+    return this._http.patch(`${this.url}/cambiarEstado/${idUsuario}`, { estado }, { headers: this.getHeaders() });
   }
 }

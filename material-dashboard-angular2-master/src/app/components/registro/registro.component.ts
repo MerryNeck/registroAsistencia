@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Area }from "models/area.model";
-import { Rol } from 'models/rol.model';
 import { Usuario } from 'models/usuario.model';
-import {FormGroup, FormsModule,FormControl, Validators, NgForm} from "@angular/forms"
+import { NgForm} from "@angular/forms"
 import {  RegistroService } from 'services/registro.service';
 
 @Component({
@@ -12,72 +10,108 @@ import {  RegistroService } from 'services/registro.service';
   
 })
 export class RegistroComponent implements OnInit{
- /* usuarioForm: FormGroup;
-  areas: Area[] = [];
-  roles: Rol[] = [];
-  error: string;
-  selectedArea: Area; 
-  selectedRol: Rol;
+  
+
   usuarios:Usuario[] =[];
- nuevoUsuario: Usuario= new Usuario(0, '', '', '','', '', '');
- editandoUsuario: Usuario| null = null;
-
-  usuario=[{
-    id_area: 1,
-    tipo_area: 'admin',
+ nuevoUsuario: Usuario = new Usuario(0, '', '', '', '','','','',0,0);
+ editandoUsuario: Usuario | null = null;
+ areas: any[] = []; 
+ roles: any[] =[];
+ usuarios1=[{
+  id_usuario : 1,
+  ci:'13276634',
+  nombre: 'miriam',
+  apellido_paterno: 'justo',
+  apellido_materno : 'mamani',
+  fecha_creacion: '20240301' ,
+  fecha_modificacion: '',
+  estado:'s',
+  
 },{
-  id_area: 2,
-  tipo_area: 'admin',
+  id_usuario : 2,
+  ci:'13276634',
+  nombre: 'miriam',
+  apellido_paterno: 'justo',
+  apellido_materno : 'mamani',
+  fecha_creacion: '20240301' ,
+  fecha_modificacion: '',
+  estado:'s',
 },{
-  id_area: 3,
-  tipo_area: 'administracion',
+  id_usuario : 3,
+  ci:'13276634',
+  nombre: 'miriam',
+  apellido_paterno: 'justo',
+  apellido_materno : 'mamani',
+  fecha_creacion: '20240301' ,
+  fecha_modificacion: '',
+  estado:'s',
 }]
-  constructor(private usuarioService: RegistroService) {}
+constructor(private usuarioService: RegistroService) { }
 
- ngOnInit():void {}
-   /* RegistrarNuevoUsuario(form:NgForm):void{
-      if (form.valid) {
-        const { ci, anticipo } = form.value;
-        this.nuevoUsuario.id_usuario = ci;
-        this.nuevoUsuario.anticipos = anticipo;
-        this.usuarioService.registra(this.nuevoAnticipo)
-          .subscribe(anticipo => {
-            this.anticipos.push(anticipo);
-            this.nuevoAnticipo = new Anticipo(0, '', '', '', 0, 0);
-            this.usuarioService.getAreas().subscribe({
-              next: (areas) => {
-                this.areas = areas;
-              },
-              error: (error) => {
-                console.error('Error al cargar las áreas', error);
-                
-              }
-            });
-            this.usuarioService.getRoles().subscribe({
-              next: (roles) => {
-                this.roles = roles;
-              },
-              error: (error) => {
-                console.error('Error al cargar los roles', error);
-        
-                }
-               
-            });
-            form.reset();
-          });
-      }
+  ngOnInit(): void {
+    this.obtenerUsuarios();
+
+  }
+  obtenerUsuarios(): void {
+    this.usuarioService.obtenerUsuario()
+      .subscribe(usuarios => this.usuarios = this.usuarios);
+  }
+  registrarNuevoUsuario(form:NgForm): void {
+    if (form.valid) {
+      const { ci,nombre, apellido_materno,apellido_paterno,estado } = form.value;
+      this.nuevoUsuario.ci = ci;
+      this.nuevoUsuario.nombre = nombre;
+      this.nuevoUsuario.apellido_paterno = apellido_paterno;
+      this.nuevoUsuario.apellido_materno = apellido_materno;
+      this.nuevoUsuario.estado = estado;
+      this.usuarioService.getAreas().subscribe({
+        next: (areas) => {
+          this.areas = areas;
+        },
+        error: (error) => {
+          console.error('Error al cargar las áreas', error);
+          // Aquí podrías mostrar un mensaje al usuario o intentar la solicitud nuevamente.
+        }
+      });
+      
+      this.usuarioService.getRoles().subscribe({
+        next: (roles) => {
+          this.roles = roles;
+        },
+        error: (error) => {
+          console.error('Error al cargar los roles', error);
+          // Manejo de errores similar al anterior.
+        }
+      });
+      
+      this.usuarioService.registrarUsuario(this.nuevoUsuario)
+        .subscribe(usuario => {
+          this.usuarios.push(usuario);
+          this.nuevoUsuario = new Usuario(0, '', '', '', '','','','',0,0);
+          form.reset();
+        });
     }
-    
+  }
+  editarUsuario(usuario: Usuario): void {
+    this.editandoUsuario = { ...usuario };
+  }
 
+  actualizarAnticipo(): void {
+    if (this.editandoUsuario) {
+      this.usuarioService.actualizarUsuario(this.editandoUsuario)
+        .subscribe(usuario => {
+          const index = this.usuarios.findIndex(a => a.id_usuario === usuario.id_usuario);
+          this.usuarios[index] = usuario;
+          this.editandoUsuario = null;
+        });
+    }
+  }
 
-  insertarUsuario() {
-    const usuario = this.usuarioForm.value;
-    this.usuarioService.insertUsuario(usuario).subscribe(() => {
-      // Usuario registrado correctamente
-      this.usuarioForm.reset();
-      this.error = null;
-    }, error => {
-      this.error = error.message;
-    });
-  }*/
+  cambiarEstadoAnticipo(idUsuario: number, estado: string): void {
+    this.usuarioService.cambiarEstadoUsuario(idUsuario, estado)
+      .subscribe(() => {
+        this.usuarios = this.usuarios.filter(a => a.id_usuario !== idUsuario);
+      });
+  }
+
 }
