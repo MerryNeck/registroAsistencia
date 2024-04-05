@@ -16,26 +16,21 @@
                                             disabled>
                                     </div>
                                 </div>
+                                <div class="row">
 
-                                <div class="form-group col-md-6" id="form">
-                                    <div class="example-full-width">
+                                    <div class="form-group col-md-12" id="form">
+                                        <div class="example-full-width">
 
-                                        <input class="form-control" placeholder="Estado" type="text" name="estado" ngModel>
+                                            <input class="form-control" placeholder="Area" type="text" name="area"
+                                                ngModel #area="ngModel" [(ngModel)]="nuevaArea.tipo_area">
+                                        </div>
                                     </div>
+
                                 </div>
+                                <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                    [disabled]="!areaForm.form.valid">REGISTRAR</button>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="row">
-
-                                <div class="form-group col-md-12" id="form">
-                                    <div class="example-full-width">
-
-                                        <input class="form-control" placeholder="Area" type="text" name="area" ngModel>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"  [disabled]="!areaForm.valid">REGISTRAR</button>
-                            <div class="clearfix"></div>
                         </form>
                     </div>
                 </div>
@@ -88,18 +83,19 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <tr *ngFor="let areas of area">
-                                                        <td>{{ areas.id_area }}</td>
-                                                        <td>{{ areas.tipo_area }}</td>
-                                                        <td>{{ areas.fecha_creacion }}</td>
-                                                        <td>{{ areas.estado }}</td>
-                                                        <td>{{ areas.fecha_modificacion }}</td>
-                                                    
-                                                    <td><button mat-raised-button type="submit" class="btn btn-blue  btn-round"
-                                                            onclick="modificarRegistro(1)">Modificar</button></td>
-                                                    <td><button mat-raised-button type="submit" class="btn btn-white btn-round"
-                                                            onclick="eliminarRegistro(1)">Eliminar</button></td>
+                                                <tr *ngFor="let areas of area">
+                                                    <td>{{ areas.id_area }}</td>
+                                                    <td>{{ areas.tipo_area }}</td>
+                                                    <td>{{ areas.fecha_creacion }}</td>
+                                                    <td>{{ areas.estado }}</td>
+                                                    <td>{{ areas.fecha_modificacion }}</td>
+                                                    <td>{{ areas.id_usuario }}</td>
+                                                    <td><button mat-raised-button type="submit"
+                                                            class="btn btn-blue  btn-round"
+                                                            (click)="actualizarArea()">Modificar</button></td>
+                                                    <td><button mat-raised-button type="submit"
+                                                            class="btn btn-white btn-round"
+                                                            (click)="cambiarEstadoArea(1,'n')">Eliminar</button></td>
                                                 </tr>
 
                                             </tbody>
@@ -113,7 +109,7 @@
                 </div>
             </div>
 
-            
+
         </div>
     </div>
 </div>

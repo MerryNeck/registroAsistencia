@@ -12,6 +12,49 @@ export class AsistenciaComponent implements OnInit {
   asistencias: Asistencia[] = [];
   asistenciaSeleccionada: Asistencia | null = null;
 
+  
+ anticipo=[{
+  id_asistencia : 1,
+  fecha :'20240301',
+  id_excel: 100,
+  tprano_ingreso:'8:30',
+  rde_ingreso: '12:30',
+  min_retardos :'0',
+  min_adelantado:'10',
+  faltas:'',
+  total_horas : '480',
+  tprano_salida :'12:00',
+  tde_salida: '16:30',
+  id_usuario:'miriam',
+  min_extra: '100',
+  id_permiso:null,
+  hrs_no_recuperadas:1,
+  descuento:'',
+  estado : 's',
+  fecha_creacion: '20240301' ,
+  fecha_modificacion: '' ,
+},{
+  id_asistencia : 2,
+  fecha :'20240301',
+  id_excel: 100,
+  tprano_ingreso:'8:30',
+  rde_ingreso: '12:30',
+  min_retardos :'0',
+  min_adelantado:'10',
+  faltas:'',
+  total_horas : '480',
+  tprano_salida :'12:00',
+  tde_salida: '16:30',
+  id_usuario:'1',
+  min_extra: '100',
+  id_permiso:null,
+  hrs_no_recuperadas:1,
+  descuento:'',
+  estado : 's',
+  fecha_creacion: '20240301' ,
+  fecha_modificacion: '' ,
+}]
+
   constructor(private asistenciaService: AsistenciaService, private http: HttpClient) { }
 
   ngOnInit(): void {

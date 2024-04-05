@@ -8,7 +8,7 @@
                         <h4 class="card-title">ANTICIPOS</h4>
                     </div>
                     <div class="card-body">
-                        <form #anticipoForm="ngForm" (ngSubmit)="registrarNuevoAnticipo(anticipoForm.value)">
+                        <form #anticipoForm="ngForm" (ngSubmit)="registrarNuevoAnticipo(anticipoForm)">
                             <div class="row">
                                 <div class="form-group col-md-6 " id="form">
                                     <div class="example-full-width">
@@ -18,20 +18,19 @@
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <input class="form-control" placeholder="ci" type="text" name="ci" ngModel>
+                                        <input class="form-control" placeholder="ci" type="text" name="ci" #ci="ngModel" [(ngModel)]="nuevoAnticipo.id_usuario" placeholder="Cedula de Identidad">
                                     </div>
                                 </div>
 
-                                <div class="form-group col-md-6" id="form">
+                                <div class="form-group col-md-12" id="form">
                                     <div class="example-full-width">
-                                        <input class="form-control" placeholder="Anticipo" type="text" name="anticipo"
-                                            ngModel>
+                                        <input class="form-control" placeholder="Anticipo" type="text" name="anticipo" #anticipo="ngModel" [(ngModel)]="nuevoAnticipo.anticipos" 
+                                           >
                                     </div>
                                 </div>
-
                             </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                [disabled]="!anticipoForm.valid">REGISTRAR</button>
+                                [disabled]="!anticipoForm.form.valid" >REGISTRAR</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -39,14 +38,11 @@
             </div>
             <div class="main-content">
                 <div class="container-fluid">
-
                     <div class="row">
                         <div class="col-md-12">
-
                             <div class="card">
                                 <div class="card-header card-header-danger">
                                     <h4 class="card-title "> REGISTRO ANTICIPOS</h4>
-
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -83,19 +79,16 @@
                                             <tbody>
                                                 <tr *ngFor="let anticipos of anticipo">
                                                     <td>{{ anticipos.id_anticipo }}</td>
-                                                    <td>{{ anticipos.anticipo }}</td>
-                                                    <!-- <td>112315</td>
-                                                    <td>hola</td>
-                                                    <td>SDF</td>
-                                                    <td>hola</td>
-                                                    <td>SD</td>
-                                                    <td>SD</td>-->
+                                                    <td>{{ anticipos.id_usuario }}</td>
+                                                    <td>{{ anticipos.anticipo}}</td>
+                                                    <td>{{ anticipos.estado }}</td>
+                                                    <td>{{ anticipos.fecha_creacion}}</td>
                                                     <td><button mat-raised-button type="submit"
                                                             class="btn btn-blue btn-round "
-                                                            onclick="modificarRegistro(1)">Modificar</button></td>
+                                                            (click)="actualizarAnticipo()">Modificar</button></td>
                                                     <td><button mat-raised-button type="submit"
                                                             class="btn btn-white btn-round"
-                                                            onclick="eliminarRegistro(1,'n')">Eliminar</button></td>
+                                                            (click)="cambiarEstadoAnticipo(1,'n')">Eliminar</button></td>
                                                 </tr>
 
 

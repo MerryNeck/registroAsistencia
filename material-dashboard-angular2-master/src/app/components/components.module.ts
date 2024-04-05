@@ -42,7 +42,7 @@ import { RolComponent } from './rol/rol.component';
     AreaComponent,
     RutaexcelComponent,
     AsistenciaComponent,
-   
+   PerfilComponent,
     PagoComponent,
     BoletaComponent,
     AnticipoComponent,

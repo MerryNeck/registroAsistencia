@@ -6,24 +6,43 @@
                     <div class="card-avatar">
                         <label>AUTENTIFICACION</label>
                         <img class="img" src="./assets/img/faces/LOGO.jpg" />
-                        </a>
-                    </div>
-                    <form>
-                        <div class="card-body">
-                            <div class="form-group col-md-12" id="form">
-                                <mat-form-field class="example-full-width">
 
-                                    <input class="form-control" placeholder="Correo Corporativo" type="text"
-                                        name="email">
-                                </mat-form-field>
+                    </div>
+                    <form #perfilForm="ngForm" (ngSubmit)="registrarNuevoPerfil(perfilForm)">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6" id="form">
+                                    <mat-form-field class="example-full-width">
+                                        <input class="form-control" type="text" name="id"
+                                            placeholder="Identificacion(deshabilitado)" disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-6" id="form">
+                                    <mat-form-field class="example-full-width">
+                                        <input class="form-control" type="text" name="ci" #ci="ngModel"
+                                            [(ngModel)]="nuevoPerfil.id_usuario" placeholder="Cedula de Identidad">
+                                    </mat-form-field>
+                                </div>
                             </div>
-                            <div class="form-group col-md-12" id="form">
-                                <mat-form-field class="example-full-width">
-                                    <input class="form-control" placeholder="Password" type="text" name="password">
-                                </mat-form-field>
+                            <div class="row">
+                                <div class="form-group col-md-8" id="form">
+                                    <mat-form-field class="example-full-width">
+
+                                        <input class="form-control" placeholder="Correo Corporativo" type="email"
+                                            name="email" #email="ngModel" [(ngModel)]="nuevoPerfil.correo_corp">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-group col-md-4" id="form">
+                                    <mat-form-field class="example-full-width">
+                                        <input class="form-control" placeholder="Password" type="password"
+                                            name="password" #password="ngModel" [(ngModel)]="nuevoPerfil.password">
+                                    </mat-form-field>
+                                </div>
                             </div>
                         </div>
-                        <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
+                        <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                            [disabled]="!perfilForm.form.valid">REGISTRAR</button>
                         <div class="clearfix"></div>
                     </form>
 
@@ -43,10 +62,19 @@
                                             <thead class=" text-primary">
                                                 <tr>
                                                     <th>
-                                                        ID AREA
+                                                        ID
                                                     </th>
                                                     <th>
-                                                        TIPO AREA
+                                                        NOMBRE
+                                                    </th>
+                                                    <th>
+                                                        APELLIDO PATERNO
+                                                    </th>
+                                                    <th>
+                                                        CORREO CORPORATIVO
+                                                    </th>
+                                                    <th>
+                                                        PASWORD
                                                     </th>
                                                     <th>
                                                         ESTADO
@@ -66,21 +94,21 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                <tr *ngFor="let dato of datos">
-                                                    <td>{{ dato.columna1 }}</td>
-                                                    <td>{{ dato.columna2 }}</td>
-                                                    <td>112315</td>
-                                                    <td>hola</td>
-                                                    <td>SDF</td>
-                                                    <td>hola</td>
-                                                    <td>SD</td>
+                                                <tr *ngFor="let perfiles of perfil">
+                                                    <td>{{ perfiles.id }}</td>
+                                                    <td>{{ perfiles.nombre }}</td>
+                                                    <td>{{ perfiles.apellido}}</td>
+                                                    <td>{{ perfiles.correo_corp }}</td>
+                                                    <td>{{ perfiles.password}}</td>
+                                                    <td>{{ perfiles.estado}}</td>
+                                                    <td>{{ perfiles.fecha_creacion}}</td>
+                                                    <td>{{ perfiles.fecha_modificacion}}</td>
                                                     <td><button mat-raised-button type="submit"
                                                             class="btn btn-blue  btn-round"
-                                                            onclick="modificarRegistro(1)">Modificar</button></td>
+                                                            (click)="actualizarPerfiles()">Modificar</button></td>
                                                     <td><button mat-raised-button type="submit"
                                                             class="btn btn-white btn-round"
-                                                            onclick="eliminarRegistro(1)">Eliminar</button></td>
+                                                            (click)="cambiarEstadoPerfil(1,'n')">Eliminar</button></td>
                                                 </tr>
 
                                             </tbody>

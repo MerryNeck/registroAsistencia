@@ -19,19 +19,19 @@ export class AreaComponent implements OnInit {
     tipo_area: 'rrhh',
     fecha_creacion:'20240301',
     estado : 's',
-    fecha_modificacion: ''
+    fecha_modificacion: '',
 },{
   id_area : 2,
   tipo_area: 'administracion',
   fecha_creacion:'20240301',
   estado : 's',
-  fecha_modificacion: ''
+  fecha_modificacion: '',
 },{
   id_area : 3,
   tipo_area: 'desarrollo',
   fecha_creacion:'20240301',
   estado : 's',
-  fecha_modificacion: ''
+  fecha_modificacion: '',
 }]
 
   constructor(private areaService: AreaService,  private authService:AuthService) { }

@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Anticipo } from 'models/anticipo.model';
@@ -18,21 +17,24 @@ export class AnticipoComponent implements OnInit {
  anticipo=[{
       id_anticipo : 1,
       id_usuario: 2,
-      anticipo: 100,
+      anticipos: 100,
       estado : 's',
       fecha_creacion: '20240301' ,
+      fecha_modificacion: '' ,
  },{
   id_anticipo : 2,
   id_usuario: 2,
-  anticipo: 100,
+  anticipos: 100,
   estado : 's',
   fecha_creacion: '20240301' ,
+  fecha_modificacion: '',
 },{
   id_anticipo : 3,
   id_usuario: 2,
-  anticipo: 100,
+  anticipos: 100,
   estado : 's',
   fecha_creacion: '20240301' ,
+  fecha_modificacion: '',
 }]
 
 
@@ -46,6 +48,7 @@ export class AnticipoComponent implements OnInit {
   obtenerAnticipos(): void {
     this.anticipoService.obtenerAnticipo()
       .subscribe(anticipos => this.anticipos = anticipos);
+      
   }
   registrarNuevoAnticipo(form:NgForm): void {
     if (form.valid) {
@@ -68,7 +71,7 @@ export class AnticipoComponent implements OnInit {
     if (this.editandoAnticipo) {
       this.anticipoService.actualizarAnticipo(this.editandoAnticipo)
         .subscribe(anticipo => {
-          const index = this.anticipos.findIndex(a => a.id_anticipo === anticipo.id_anticipo);
+          const index = this.anticipos.findIndex(a => a.id_anticipo === anticipo.anticipos);
           this.anticipos[index] = anticipo;
           this.editandoAnticipo = null;
         });

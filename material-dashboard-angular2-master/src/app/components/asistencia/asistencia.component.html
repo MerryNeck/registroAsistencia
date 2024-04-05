@@ -29,7 +29,7 @@
               <div class="div-table">
                 <table class="table">
                   <thead class="text-primary">
-                    <tr class="table-row" >
+                    <tr class="table-row"  >
                       <th class="table-header">ID</th>
                       <th class="table-header">FECHA</th>
                       <th class="table-header">NOMBRE</th>
@@ -53,11 +53,11 @@
                     </tr>
                   </thead>
                   <tbody>
-                   <!-- <tr *ngFor="let asistencia of asistencias">
+                   <tr *ngFor="let asistencia of asistencias">
                       <td>{{ asistencia.id_asistencia }}</td>
                       <td>{{ asistencia.fecha }}</td>
-                      <td>{{ usuario.nombre }}</td>
-                      <td>{{ usuario.apellido_paterno }}</td>
+                      <td>{{ asistencia.id_usuario }}</td>
+                      <td>{{ asistencia.id_usuario }}</td>
                       <td>{{ asistencia.tprano_ingreso}}</td>
                       <td>{{ asistencia.tprano_salida }}</td>
                       <td>{{ asistencia.tde_ingreso}}</td>
@@ -66,68 +66,17 @@
                       <td>{{ asistencia.min_extra }}</td>
                       <td>{{ asistencia.faltas}}</td>
                       <td>{{ asistencia.total_horas }}</td>
-                      <td>{{ asistencia.min_permiso}}</td>
+                      <td>{{ asistencia.id_permiso}}</td>
                       <td>{{ asistencia.hrs_no_recuperadas}}</td>
                       <td>{{ asistencia.descuento}}</td>
-                      <td><button mat-raised-button class="btn btn-warning btn-round" onclick="actualizarAsistencia()"
+                      <td><button mat-raised-button class="btn btn-warning btn-round" (click)="actualizarAsistencia()"
                           >MODIFICAR</button></td>
                       <td>
-                        <button mat-raised-button class="btn btn-danger btn-round" onclick="cambiarEstado(1, 'n')"
+                        <button mat-raised-button class="btn btn-danger btn-round" (click)="cambiarEstadoAsistencia(1,'n')"
                           >ELIMINAR</button>
                       </td>
-                    </tr>
-                    <tr *ngFor="asistencia">-->
-                      <tr >
-                        <td>hhola</td>
-                        <td>ffdsf</td>
-                        <td>dfsdf</td>
-                        <td>dsfsdgfsfdfssssssssssssfsdf</td>
-                        <td>dgfgf</td>
-                        <td>sdgfgghj</td>
-                        <td>dggfhg</td>
-                        <td>ghgfhf</td>
-                        <td>nghhgghhg</td>
-                        <td>gfhdhgf</td>
-                        <td>fdgdhg</td>
-                        <td>24435</td>
-                        <td>53545</td>
-                        <td>554w4t</td>
-                        <td>tetdfgfd</td>
-                        <td>53545</td>
-                        <td>554w4t</td>
-                        <td>tetdfgfd</td>
-                        <td><button mat-raised-button class="btn btn-warning btn-round" onclick="actualizarAsistencia()"
-                          >MODIFICAR</button></td>
-                      <td>
-                        <button mat-raised-button class="btn btn-danger btn-round" onclick="cambiarEstado(1, 'n')"
-                          >ELIMINAR</button>
-                      </td>
-                      </tr>
-                      <tr >
-                      <td>hhola</td>
-                      <td>ffdsf</td>
-                      <td>dfsdf</td>
-                      <td>dsfsdgf</td>
-                      <td>dgfgf</td>
-                      <td>sdgfgghj</td>
-                      <td>dggfhg</td>
-                      <td>ghgfhf</td>
-                      <td>nghhgghhg</td>
-                      <td>gfhdhgf</td>
-                      <td>fdgdhg</td>
-                      <td>24435</td>
-                      <td>53545</td>
-                      <td>554w4t</td>
-                      <td>tetdfgfd</td>
-                      <td>53545</td>
-                      <td>554w4t</td>
-                      <td>tetdfgfd</td>
-                      <td><button mat-raised-button class="btn btn-warning btn-round" onclick="actualizarAsistencia()"
-                          >MODIFICAR</button></td>
-                      <td>
-                        <button mat-raised-button class="btn btn-danger btn-round" onclick="cambiarEstado(1, 'n')"
-                          >ELIMINAR</button>
-                      </td>
+                    
+                    
                     </tr>
                   </tbody>
                 </table>
