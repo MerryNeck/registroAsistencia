@@ -43,6 +43,18 @@
                             <div class="card">
                                 <div class="card-header card-header-danger">
                                     <h4 class="card-title "> REGISTRO ANTICIPOS</h4>
+                                    <form class="col-md-5">
+                                        <p class="card-category">Busque el registro de anticipo</p>
+                                        <div class="input-group no-border">
+                                          <div class="col-md-10">
+                                            <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
+                                              placeholder="Buscar por cedula de identidad...">
+                                            <div class="ripple-container"></div>
+                                          </div>
+                                        </div>
+                                        <button mat-raised-button type="button" class="btn btn-white btn-round "
+                                            (click)="buscarAnticipoPorCi(ciBusqueda)">Buscar</button>
+                                      </form>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -77,12 +89,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let anticipos of anticipo">
+                                                <tr *ngFor="let anticipos of info">
                                                     <td>{{ anticipos.id_anticipo }}</td>
                                                     <td>{{ anticipos.id_usuario }}</td>
                                                     <td>{{ anticipos.anticipo}}</td>
                                                     <td>{{ anticipos.estado }}</td>
                                                     <td>{{ anticipos.fecha_creacion}}</td>
+                                                    <td>{{ anticipos.fecha_modificacion}}</td>
                                                     <td><button mat-raised-button type="submit"
                                                             class="btn btn-blue btn-round "
                                                             (click)="actualizarAnticipo()">Modificar</button></td>

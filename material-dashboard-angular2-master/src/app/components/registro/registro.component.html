@@ -4,7 +4,8 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">Registro</h4>
+                        <h4 class="card-title">REGISTRO USUARIO</h4>
+                        
                     </div>
                     <div class="card-body">
                         <form #usForm="ngForm" (ngSubmit)="registrarNuevoUsuario(usForm.value)">
@@ -86,18 +87,19 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header card-header-danger">
-                                    <h4 class="card-title "> REGISTRO AREA</h4>
+                                    <h4 class="card-title "> REGISTRO USUARIO</h4>
                                     <form class="col-md-5">
-                                        <p class="card-category"> Busque el registro de area</p>
+                                        <p class="card-category">Busque el registro de usuario</p>
                                         <div class="input-group no-border">
-                                            <input type="text" value="" class="form-control" placeholder="Buscar...">
-                                            <button mat-raised-button type="submit"
-                                                class="btn btn-white btn-round btn-just-icon">
-                                                <i class="material-icons">search</i>
-                                                <div class="ripple-container"></div>
-                                            </button>
+                                          <div class="col-md-10">
+                                            <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
+                                              placeholder="Buscar por cedula de identidad...">
+                                            <div class="ripple-container"></div>
+                                          </div>
                                         </div>
-                                    </form>
+                                        <button mat-raised-button type="button" class="btn btn-white btn-round "
+                                            (click)="buscarUsuarioPorCi(ciBusqueda)">Buscar</button>
+                                      </form>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">

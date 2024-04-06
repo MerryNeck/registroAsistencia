@@ -7,7 +7,7 @@
                         <h4 class="card-title">AREA</h4>
                     </div>
                     <div class="card-body">
-                        <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
+                       
                         <form #areaForm="ngForm" (ngSubmit)="registrarNuevaArea(areaForm)">
                             <div class="row">
                                 <div class="form-group col-md-6 " id="form">
@@ -16,21 +16,21 @@
                                             disabled>
                                     </div>
                                 </div>
-                                <div class="row">
 
-                                    <div class="form-group col-md-12" id="form">
-                                        <div class="example-full-width">
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
 
-                                            <input class="form-control" placeholder="Area" type="text" name="area"
-                                                ngModel #area="ngModel" [(ngModel)]="nuevaArea.tipo_area">
-                                        </div>
+                                        <input class="form-control" placeholder="Area" type="text" name="area" ngModel
+                                            #area="ngModel" [(ngModel)]="nuevaArea.tipo_area">
                                     </div>
-
                                 </div>
-                                <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                                    [disabled]="!areaForm.form.valid">REGISTRAR</button>
-                                <div class="clearfix"></div>
+
+
                             </div>
+
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                [disabled]="!areaForm.form.valid">REGISTRAR</button>
+                            <div class="clearfix"></div>
                         </form>
                     </div>
                 </div>
@@ -42,17 +42,7 @@
                             <div class="card">
                                 <div class="card-header card-header-danger">
                                     <h4 class="card-title "> REGISTRO AREA</h4>
-                                    <form class="col-md-5">
-                                        <p class="card-category"> Busque el registro de area</p>
-                                        <div class="input-group no-border">
-                                            <input type="text" value="" class="form-control" placeholder="Buscar...">
-                                            <button mat-raised-button type="submit"
-                                                class="btn btn-white btn-round btn-just-icon">
-                                                <i class="material-icons">search</i>
-                                                <div class="ripple-container"></div>
-                                            </button>
-                                        </div>
-                                    </form>
+                                    
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -83,13 +73,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let areas of area">
-                                                    <td>{{ areas.id_area }}</td>
-                                                    <td>{{ areas.tipo_area }}</td>
-                                                    <td>{{ areas.fecha_creacion }}</td>
-                                                    <td>{{ areas.estado }}</td>
-                                                    <td>{{ areas.fecha_modificacion }}</td>
-                                                    <td>{{ areas.id_usuario }}</td>
+                                                <tr *ngFor="let itemareas of info">
+                                                    <td>{{ itemareas.id_area }}</td>
+                                                    <td>{{ itemareas.tipo_area }}</td>
+                                                    <td>{{ itemareas.estado }}</td>
+                                                    <td>{{ itemareas.fecha_creacion }}</td>
+                                                    <td>{{ itemareas.fecha_modificacion }}</td>
                                                     <td><button mat-raised-button type="submit"
                                                             class="btn btn-blue  btn-round"
                                                             (click)="actualizarArea()">Modificar</button></td>

@@ -12,8 +12,6 @@
   }
   .btn.btn-danger.pull-right{
     background-color: #e67e22;
-    left: -7%;
-    margin-bottom: 4%;
   }
   .btn.btn-blue{
     background-color: #ff9800;
@@ -51,6 +49,8 @@
   }
   td{
     border: 1px solid white;
+    font-size: 12px;
+    text-align: center;
   }
   .text-primary{
     border: 1px solid white;
@@ -65,7 +65,12 @@
     font-weight: bold;
 
   }
+
+  .table thead tr th {
+    font-size: 12px;
+}
   tr{
+    font-size: 10px;
     border: 1px solid white;
   }
   .main-content{
@@ -74,11 +79,3 @@
     height: 100%;
     padding: 5%;
   }
-  .table thead tr th {
-    font-size: 12px;
-}
-img {
-  vertical-align: top;
-    border-style: none;
-    margin-top: -22.5%;
-    padding: 1px;}

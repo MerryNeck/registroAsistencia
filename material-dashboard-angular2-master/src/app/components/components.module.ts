@@ -19,6 +19,7 @@ import { BoletaComponent } from './boleta/boleta.component';
 import { AnticipoComponent } from './anticipo/anticipo.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RolComponent } from './rol/rol.component';
+import { PermisoComponent } from './permiso/permiso.component';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { RolComponent } from './rol/rol.component';
     AnticipoComponent,
     PerfilComponent,
     RolComponent,
+    PermisoComponent,
   ],
   exports: [
     FooterComponent,

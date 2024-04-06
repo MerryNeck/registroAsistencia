@@ -9,11 +9,13 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./asistencia.component.css']
 })
 export class AsistenciaComponent implements OnInit {
+  ciBusqueda: string = '';
+  fechaBusqueda: string = '';
   asistencias: Asistencia[] = [];
   asistenciaSeleccionada: Asistencia | null = null;
 
   
- anticipo=[{
+ info=[{
   id_asistencia : 1,
   fecha :'20240301',
   id_excel: 100,
@@ -26,6 +28,7 @@ export class AsistenciaComponent implements OnInit {
   tprano_salida :'12:00',
   tde_salida: '16:30',
   id_usuario:'miriam',
+  apellido:'justo',
   min_extra: '100',
   id_permiso:null,
   hrs_no_recuperadas:1,
@@ -103,5 +106,14 @@ export class AsistenciaComponent implements OnInit {
       error => console.error('Error al cambiar estado de la asistencia:', error)
     );
   }
+  buscarAsistencia(): void {
+    this.asistenciaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda)
+      .subscribe(asistencias => {
+        this.asistencias = asistencias;
+      }, error => {
+        console.error('Error al buscar asistencias:', error);
+      });
+  }
+  
 }
 

@@ -7,7 +7,6 @@
                         <h4 class="card-title">PAGO</h4>
                     </div>
                     <div class="card-body">
-                        <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
                         <form #pagoForm="ngForm" (ngSubmit)="registrarNuevoPago(pagoForm)">
                             <div class="row">
                                 <div class="form-group col-md-6 " id="form">
@@ -18,37 +17,43 @@
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <input class="form-control" placeholder="ci" type="text" name="ci" ngModel>
+                                        <input class="form-control" placeholder="ci" type="text" name="ci" #ci="ngModel"
+                                        [(ngModel)]="nuevoPago.id_usuario">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <input class="form-control" placeholder="Sueldo" type="text" name="sueldo" ngModel>
+                                        <input class="form-control" placeholder="Sueldo" type="text" name="sueldo" #sueldo="ngModel"
+                                        [(ngModel)]="nuevoPago.sueldo">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
                                         <input class="form-control" placeholder="DiasTrabajo" type="text"
-                                            name="trabajo" ngModel>
+                                            name="trabajo" #trabajo="ngModel"
+                                            [(ngModel)]="nuevoPago.dias_trabajo">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
                                         <input class="form-control" placeholder="retencion" type="text"
-                                            name="retencion" ngModel>
+                                            name="retencion" #ci="ngModel"
+                                            [(ngModel)]="nuevoPago.retencion">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
                                         <input class="form-control" placeholder="SueldoBruto" type="text"
-                                            name="sueldobruto" ngModel>
+                                            name="sueldobruto" #ci="ngModel"
+                                            [(ngModel)]="nuevoPago.sueldo_bruto">
                                     </div>
                                 </div>
 
 
                             </div>
 
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"  
+                            [disabled]="!pagoForm.form.valid">REGISTRAR</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -63,18 +68,19 @@
 
                             <div class="card">
                                 <div class="card-header card-header-danger">
-                                    <h4 class="card-title "> REGISTRO DESCUENTO</h4>
+                                    <h4 class="card-title "> REGISTRO PAGO</h4>
                                     <form class="col-md-5">
-                                        <p class="card-category"> Busque el registro de area</p>
+                                        <p class="card-category">Busque el registro de pago</p>
                                         <div class="input-group no-border">
-                                            <input type="text" value="" class="form-control" placeholder="Buscar...">
-                                            <button mat-raised-button type="submit"
-                                                class="btn btn-white btn-round btn-just-icon">
-                                                <i class="material-icons">search</i>
-                                                <div class="ripple-container"></div>
-                                            </button>
+                                          <div class="col-md-10">
+                                            <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
+                                              placeholder="Buscar por cedula de identidad...">
+                                            <div class="ripple-container"></div>
+                                          </div>
                                         </div>
-                                    </form>
+                                        <button mat-raised-button type="button" class="btn btn-white btn-round "
+                                            (click)="buscarAnticipoPorCi(ciBusqueda)">Buscar</button>
+                                      </form>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -83,6 +89,7 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>CI</th>
+                                                    <th>SUELDO</th>
                                                     <th>DIAS TRABAJADOS</th>
                                                     <th>RETENCION</th>
                                                     <th>SUELDO BRUTO</th>
@@ -96,39 +103,24 @@
                                             <tbody>
                                                 
                                                 <tr>
-                                                    <!--<tr *ngFor="let dato of datos">
-                                                        <td>{{ dato.columna1 }}</td>
-                                                        <td>{{ dato.columna2 }}</td>-->
-                                                    <td>112315</td>
-                                                    <td>hola</td>
-                                                    <td>SDF</td>
-                                                    <td>hola</td>
-                                                    <td>SD</td>
-                                                    <td>SDF</td>
-                                                    <td>hola</td>
-                                                    <td>SD</td>
+                                                    <tr *ngFor="let pagos of info">
+                                                        <td>{{ pagos.id_sueldo }}</td>
+                                                        <td>{{ pagos.ci}}</td>
+                                                        <td>{{ pagos.sueldo }}</td>
+                                                        <td>{{ pagos.dias_trabajo }}</td>
+                                                        <td>{{ pagos.retencion }}</td>
+                                                        <td>{{ pagos.sueldo_bruto }}</td>
+                                                        <td>{{ pagos.estado }}</td>
+                                                        <td>{{ pagos.fecha_creacion}}</td>
+                                                        <td>{{ pagos.fecha_modificacion}}</td>
                                                     <td><button mat-raised-button type="submit"
-                                                            class="btn btn-blue btn-round ">Modificar</button></td>
+                                                            class="btn btn-blue btn-round "
+                                                            (click)="actualizarPago()">Modificar</button></td>
                                                     <td><button mat-raised-button type="submit"
-                                                            class="btn btn-white  btn-round">Eliminar</button></td>
+                                                            class="btn btn-white  btn-round"
+                                                            (click)="cambiarEstadoPago(1,'n')">Eliminar</button></td>
                                                 </tr>
-                                                <tr>
-                                                    <!--<tr *ngFor="let dato of datos">
-                                                        <td>{{ dato.columna1 }}</td>
-                                                        <td>{{ dato.columna2 }}</td>-->
-                                                    <td>112315</td>
-                                                    <td>hola</td>
-                                                    <td>SDF</td>
-                                                    <td>hola</td>
-                                                    <td>SD</td>
-                                                    <td>SDF</td>
-                                                    <td>hola</td>
-                                                    <td>SD</td>
-                                                    <td><button mat-raised-button type="submit"
-                                                            class="btn btn-blue btn-round ">Modificar</button></td>
-                                                    <td><button mat-raised-button type="submit"
-                                                            class="btn btn-white  btn-round">Eliminar</button></td>
-                                                </tr>
+                                                
 
                                             </tbody>
                                         </table>

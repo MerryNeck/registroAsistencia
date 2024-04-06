@@ -10,11 +10,13 @@ import { AnticipoService } from 'services/anticipo.service';
   styleUrls: ['./anticipo.component.css']
 })
 export class AnticipoComponent implements OnInit {
+  ciBusqueda: string = '';
+  fechaBusqueda: string = '';
  anticipos:Anticipo[] =[];
  nuevoAnticipo: Anticipo = new Anticipo(0, '', '', '', 0, 0);
  editandoAnticipo: Anticipo | null = null;
 
- anticipo=[{
+ info=[{
       id_anticipo : 1,
       id_usuario: 2,
       anticipos: 100,
@@ -82,6 +84,17 @@ export class AnticipoComponent implements OnInit {
     this.anticipoService.cambiarEstadoAnticipo(idAnticipo, estado)
       .subscribe(() => {
         this.anticipos = this.anticipos.filter(a => a.id_anticipo !== idAnticipo);
+      });
+  }
+  buscarAnticipoPorCi(ci: string): void {
+    this.anticipoService.buscarPorCi(ci)
+      .subscribe({
+        next: (anticipos) => {
+          this.anticipos = anticipos; 
+        },
+        error: (error) => {
+          console.error('Error al buscar boletas por CI', error);
+        }
       });
   }
 

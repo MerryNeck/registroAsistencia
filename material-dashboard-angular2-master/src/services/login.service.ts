@@ -61,4 +61,7 @@ actualizarPerfil(perfil: Login): Observable<any> {
 cambiarEstadoPerfil(id: number, estado: string): Observable<any> {
   return this._http.patch(`${this.url}/cambiarEstado/${id}`, { estado }, { headers: this.getHeaders() });
 }
+buscarPorCi(ci: string): Observable<Login[]> {
+  return this._http.get<Login[]>(`${this.url}/buscar?ci=${ci}`);
+}
 }

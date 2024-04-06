@@ -9,13 +9,12 @@
               <div class="nro">#001</div>
               <h1>BOLETA DE PAGO</h1>
 
-              <div class="company-info">
-                
-                <div class="bis">NOMBRE:<label for="nombre" class="label" ngModel>{{info[0]?.nombre}}</label></div>
-                <div class="bis">OCUPACION:<label for="ocupacion" class="label" ngModel>{{info[0]?.ocupacion}}</label> </div>
-                <div class="bis">DIAS LABORALES:<label for="dias_laborales" class="label" ngModel>{{info[0]?.dias_laborales}}</label></div>
-                <div class="bis">MES DE PAGO: <label for="mes_pago" class="label" ngModel>{{info[0]?.mes_pago}}</label></div>
-                <div class="bis">FECHA DE PAGO: <label for="fecha" class="label" ngModel>{{info[0]?.fecha}}</label></div>
+              <div class="company-info" *ngFor="let persona of info">
+                <div class="bis">NOMBRE: <span class="label">{{persona.nombre}}</span></div>
+                <div class="bis">OCUPACION: <span class="label">{{persona.ocupacion}}</span></div>
+                <div class="bis">DIAS LABORALES: <span class="label">{{persona.dias_laborales}}</span></div>
+                <div class="bis">MES DE PAGO: <span class="label">{{persona.mes}}</span></div>
+                <div class="bis">FECHA DE PAGO: <span class="label">{{persona.fecha}}</span></div>
               </div>
             </div>
             <div class="card-body">
@@ -37,13 +36,13 @@
 
                   </thead>
                   <tbody>
-                    <tr >
-                      <td></td> 
-                      <td>{{ boleta[0]?.pago }}</td> 
-                      <td>{{ boleta[0]?.afps }}</td> 
-                      <td>{{ boleta[0]?.faltas }}</td> 
-                      <td>{{ boleta[0]?.minutos_no_repuestos }}</td> 
-                      <td>{{ boleta[0]?.descuento }}</td> 
+                    <tr *ngFor="let item of boleta">
+                      <td>{{ item.pago }}</td>
+                      <td>{{ item.afps }}</td>
+                      <td>{{ item.atrasos }}</td>
+                      <td>{{ item.faltas }}</td>
+                      <td>{{ item.mnr }}</td>
+                      <td>{{ item.descuentos }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -51,9 +50,9 @@
               </div>
             </div>
 
-            <div class="total">
-              <p>LIQUIDO PAGABLE Bs.- <label for="pago" class="labell">{{info[0]?.pago}}</label></p>
-            </div>
+            <div class="total" *ngFor="let persona of info">
+              <p>LIQUIDO PAGABLE Bs.-  <span class="label1">{{persona.pagos}}</span></p>
+              </div>
             <div class="signature">
               <div class="signature-line row col-md-9"></div>
               <p>Firma de Conformidad:</p>

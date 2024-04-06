@@ -14,23 +14,23 @@ export class AreaComponent implements OnInit {
   editandoArea: Area | null = null; 
 
 
-  area=[{
+  info=[{
     id_area : 1,
     tipo_area: 'rrhh',
-    fecha_creacion:'20240301',
     estado : 's',
+    fecha_creacion:'20240301',
     fecha_modificacion: '',
 },{
   id_area : 2,
   tipo_area: 'administracion',
-  fecha_creacion:'20240301',
   estado : 's',
+  fecha_creacion:'20240301',
   fecha_modificacion: '',
 },{
   id_area : 3,
   tipo_area: 'desarrollo',
-  fecha_creacion:'20240301',
   estado : 's',
+  fecha_creacion:'20240301',
   fecha_modificacion: '',
 }]
 

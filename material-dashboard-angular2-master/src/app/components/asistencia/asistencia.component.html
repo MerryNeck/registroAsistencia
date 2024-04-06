@@ -8,15 +8,15 @@
             <form class="col-md-5">
               <p class="card-category">Busque el registro de asistencia</p>
               <div class="input-group no-border">
-                <div class="col-md-6">
-                  <input type="text" ngModel class="form-control"
+                <div class="col-md-10">
+                  <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
                     placeholder="Buscar por cedula de identidad...">
-                  <input type="text" ngModel class="form-control" placeholder="Buscar por fecha...">
+                  <input type="text" [(ngModel)]="fechaBusqueda" class="form-control" placeholder="Buscar por fecha...">
                   <div class="ripple-container"></div>
                 </div>
-                <button mat-raised-button type="button" class="btn btn-white btn-round "
-                  (click)="listarAsistencias()">Buscar</button>
               </div>
+              <button mat-raised-button type="button" class="btn btn-white btn-round "
+                  (click)="buscarAsistencia()">Buscar</button>
             </form>
 
           </div>
@@ -53,11 +53,11 @@
                     </tr>
                   </thead>
                   <tbody>
-                   <tr *ngFor="let asistencia of asistencias">
+                   <tr *ngFor="let asistencia of info">
                       <td>{{ asistencia.id_asistencia }}</td>
                       <td>{{ asistencia.fecha }}</td>
                       <td>{{ asistencia.id_usuario }}</td>
-                      <td>{{ asistencia.id_usuario }}</td>
+                      <td>{{ asistencia.apellido }}</td>
                       <td>{{ asistencia.tprano_ingreso}}</td>
                       <td>{{ asistencia.tprano_salida }}</td>
                       <td>{{ asistencia.tde_ingreso}}</td>
@@ -69,6 +69,9 @@
                       <td>{{ asistencia.id_permiso}}</td>
                       <td>{{ asistencia.hrs_no_recuperadas}}</td>
                       <td>{{ asistencia.descuento}}</td>
+                      <td>{{ asistencia.estado}}</td>
+                      <td>{{ asistencia.fecha_creacion}}</td>
+                      <td>{{ asistencia.fecha_modificacion}}</td>
                       <td><button mat-raised-button class="btn btn-warning btn-round" (click)="actualizarAsistencia()"
                           >MODIFICAR</button></td>
                       <td>

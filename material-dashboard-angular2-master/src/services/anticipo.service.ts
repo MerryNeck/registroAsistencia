@@ -29,15 +29,19 @@ export class AnticipoService {
     return this.http.post<any>(this.baseUrl, anticipo,{ headers: this.getHeaders() });
   }
 
-  // Método para actualizar un descuento
+  // Método para actualizar un anticipo
   actualizarAnticipo(anticipo: Anticipo): Observable<any> {
     const url = `${this.baseUrl}/${anticipo.id_anticipo}`;
     return this.http.put<any>(url, anticipo,{ headers: this.getHeaders() });
   }
 
   // Método para eliminar un descuento (cambiar estado a inactivo)
-  //  estado de un área 
   cambiarEstadoAnticipo(idAnticipo: number, estado: string): Observable<any> {
     return this.http.patch(`${this.baseUrl}/cambiarEstado/${idAnticipo}`, { estado }, { headers: this.getHeaders() });
   }
+
+  buscarPorCi(ci: string): Observable<Anticipo[]> {
+    return this.http.get<Anticipo[]>(`${this.baseUrl}/buscar?ci=${ci}`);
+  }
+  
 }

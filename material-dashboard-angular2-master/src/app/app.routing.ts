@@ -13,6 +13,7 @@ import { PagoComponent } from './components/pago/pago.component';
 import { BoletaComponent } from './components/boleta/boleta.component';
 import { RolComponent } from './components/rol/rol.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { PermisoComponent } from './components/permiso/permiso.component';
 
 const routes: Routes =[
   {
@@ -24,7 +25,7 @@ const routes: Routes =[
     //redirectTo: 'login',
     //pathMatch: 'full',
   }, {
-   path: 'registrousuario',component: RegistroComponent,
+   path: 'regisusuario',component: RegistroComponent,
     /*redirectTo: '',
     pathMatch: 'full',*/
   },
@@ -59,6 +60,10 @@ const routes: Routes =[
      pathMatch: 'full',*/
    },{
     path: 'perfil',component: PerfilComponent,
+     /*redirectTo: '',
+     pathMatch: 'full',*/
+   },{
+    path: 'permiso',component: PermisoComponent,
      /*redirectTo: '',
      pathMatch: 'full',*/
    },

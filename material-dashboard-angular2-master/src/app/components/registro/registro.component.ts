@@ -10,8 +10,7 @@ import {  RegistroService } from 'services/registro.service';
   
 })
 export class RegistroComponent implements OnInit{
-  
-
+  ciBusqueda: string = '';
   usuarios:Usuario[] =[];
  nuevoUsuario: Usuario = new Usuario(0, '', '', '', '','','','',0,0);
  editandoUsuario: Usuario | null = null;
@@ -111,6 +110,17 @@ constructor(private usuarioService: RegistroService) { }
     this.usuarioService.cambiarEstadoUsuario(idUsuario, estado)
       .subscribe(() => {
         this.usuarios = this.usuarios.filter(a => a.id_usuario !== idUsuario);
+      });
+  }
+  buscarUsuarioPorCi(ci: string): void {
+    this.usuarioService.buscarPorCi(ci)
+      .subscribe({
+        next: (usuarios) => {
+          this.usuarios = usuarios; 
+        },
+        error: (error) => {
+          console.error('Error al buscar boletas por CI', error);
+        }
       });
   }
 

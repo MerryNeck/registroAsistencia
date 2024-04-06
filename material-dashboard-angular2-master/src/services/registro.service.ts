@@ -64,4 +64,8 @@ interface RegistroResponse {
  cambiarEstadoUsuario(idUsuario: number, estado: string): Observable<any> {
     return this._http.patch(`${this.url}/cambiarEstado/${idUsuario}`, { estado }, { headers: this.getHeaders() });
   }
+
+  buscarPorCi(ci: string): Observable<Usuario[]> {
+    return this._http.get<Usuario[]>(`${this.url}/buscar?ci=${ci}`);
+  }
 }

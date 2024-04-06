@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
+  ciBusqueda: string = '';
   perfiles:Login[] =[];
  nuevoPerfil: Login = new Login(0, '', '', '','', '', 0);
  editandoPerfil: Login | null = null;
@@ -82,6 +83,17 @@ export class PerfilComponent implements OnInit {
     this.loginService.cambiarEstadoPerfil(idPerfil, estado)
       .subscribe(() => {
         this.perfiles = this.perfiles.filter(a => a.id !== idPerfil);
+      });
+  }
+  buscarPerfilPorCi(ci: string): void {
+    this.loginService.buscarPorCi(ci)
+      .subscribe({
+        next: (perfiles) => {
+          this.perfiles = perfiles; 
+        },
+        error: (error) => {
+          console.error('Error al buscar boletas por CI', error);
+        }
       });
   }
 }
