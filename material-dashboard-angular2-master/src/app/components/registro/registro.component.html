@@ -11,37 +11,33 @@
                         <form #usForm="ngForm" (ngSubmit)="registrarNuevoUsuario(usForm.value)">
 
                             <div class="row">
-                                <div class="form-group col-md-4 " id="form">
-                                    <mat-form-field class="example-full-width">
-                                        <input class="form-control" placeholder="Identificacion(deshabilitado)"
-                                            disabled>
-                                    </mat-form-field>
-                                </div>
-                                <div class="form-group col-md-8" id="form">
+                                
+                                <div class="form-group col-md-4" id="form">
                                     <mat-form-field class="example-full-width">
 
                                         <input class="form-control" placeholder="Cedula de Identidad" type="text"
                                             name="ci" #ci="ngModel" [(ngModel)]="nuevoUsuario.ci" >
                                     </mat-form-field>
                                 </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-4" id="form">
+                                <div class="form-group col-md-8" id="form">
                                     <mat-form-field class="example-full-width">
 
                                         <input class="form-control" placeholder="Nombre" type="text" name="nombre" 
                                         #nombre="ngModel" [(ngModel)]="nuevoUsuario.nombre" >
                                     </mat-form-field>
                                 </div>
-                                <div class="form-group col-md-4" id="form">
+
+                            </div>
+                            <div class="row">
+                                
+                                <div class="form-group col-md-6" id="form">
                                     <mat-form-field class="example-full-width">
 
                                         <input class="form-control" placeholder="Apellido Pateno" type="text"
                                             name="apellido_paterno" #apellido_paterno="ngModel" [(ngModel)]="nuevoUsuario.apellido_paterno" >
                                     </mat-form-field>
                                 </div>
-                                <div class="form-group col-md-4" id="form">
+                                <div class="form-group col-md-6" id="form">
                                     <mat-form-field class="example-full-width">
                                         <input class="form-control" placeholder="Apellido Materno" type="text"
                                             name="apellido_materno" #apellido_materno="ngModel" [(ngModel)]="nuevoUsuario.apellido_materno" >
@@ -49,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-4 " id="form">
+                                <div class="form-group col-md-6 " id="form">
                                     <mat-form-field class="example-full-width">
                                         <select name="idArea" #id_area="ngModel" [(ngModel)]="nuevoUsuario.id_area" >
                                             <option value="">SELECCIONE AREA</option>
@@ -59,7 +55,7 @@
                                         </select>
                                     </mat-form-field>
                                 </div>
-                                <div class="form-group col-md-4" id="form">
+                                <div class="form-group col-md-6" id="form">
                                     <mat-form-field class="example-full-width">
                                         <select name="idRol" #id_rol="ngModel" [(ngModel)]="nuevoUsuario.id_rol" >
                                             <option value="">SELECCIONE ROL</option>
@@ -69,11 +65,7 @@
                                         </select>
                                     </mat-form-field>
                                 </div>
-                                <div class="form-group col-md-4" id="form">
-                                    <mat-form-field class="example-full-width">
-                                        <input class="form-control" placeholder="Estado" type="text" name="estado" #estado="ngModel" [(ngModel)]="nuevoUsuario.estado"ngModel>
-                                    </mat-form-field>
-                                </div>
+                                
                             </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
                             <div class="clearfix"></div>
@@ -106,9 +98,6 @@
                                         <table class="table">
                                             <thead class=" text-primary">
                                                 <tr>
-                                                    <th>
-                                                        ID USUARIO
-                                                    </th>
                                                     <th>
                                                         CI
                                                     </th>
@@ -147,7 +136,6 @@
                                             <tbody>
                                                 <tr>
                                                 <tr *ngFor="let user of usuarios1">
-                                                    <td>{{ user.id_usuario }}</td>
                                                     <td>{{ user.ci }}</td>
                                                     <td>{{ user.nombre }}</td>
                                                     <td>{{ user.apellido_paterno }}</td>

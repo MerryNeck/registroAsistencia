@@ -1,3 +1,6 @@
+<br>
+<br>
+<div class="container">
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
@@ -16,21 +19,19 @@
                 </div>
               </div>
               <button mat-raised-button type="button" class="btn btn-white btn-round "
-                  (click)="buscarAsistencia()">Buscar</button>
+                (click)="buscarAsistencia()">Buscar</button>
             </form>
 
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <button mat-raised-button class="btn btn-success btn-round"
-                (click)="imprimirAsistencia()">Imprimir Asistencia</button>
-                <button mat-raised-button class="btn btn-success btn-round l"
-                ><a href="boleta"></a>Ver Boleta</button>
+              <button mat-raised-button class="btn btn-success btn-round" (click)="imprimirAsistencia()">Imprimir
+                Asistencia</button>
+              <button mat-raised-button class="btn btn-success btn-round l"><a href="/boleta">Ver Boleta</a></button>
               <div class="div-table">
-                <table class="table">
+                <table class="table" id="tabla">
                   <thead class="text-primary">
-                    <tr class="table-row"  >
-                      <th class="table-header">ID</th>
+                    <tr class="table-row">
                       <th class="table-header">FECHA</th>
                       <th class="table-header">NOMBRE</th>
                       <th class="table-header">APELLIDO</th>
@@ -53,8 +54,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                   <tr *ngFor="let asistencia of info">
-                      <td>{{ asistencia.id_asistencia }}</td>
+                    <tr *ngFor="let asistencia of info">
                       <td>{{ asistencia.fecha }}</td>
                       <td>{{ asistencia.id_usuario }}</td>
                       <td>{{ asistencia.apellido }}</td>
@@ -72,17 +72,66 @@
                       <td>{{ asistencia.estado}}</td>
                       <td>{{ asistencia.fecha_creacion}}</td>
                       <td>{{ asistencia.fecha_modificacion}}</td>
-                      <td><button mat-raised-button class="btn btn-warning btn-round" (click)="actualizarAsistencia()"
-                          >MODIFICAR</button></td>
+                      <td><button mat-raised-button class="btn btn-warning btn-round"
+                          (click)="actualizarAsistencia()">MODIFICAR</button></td>
                       <td>
-                        <button mat-raised-button class="btn btn-danger btn-round" (click)="cambiarEstadoAsistencia(1,'n')"
-                          >ELIMINAR</button>
+                        <button mat-raised-button class="btn btn-danger btn-round"
+                          (click)="cambiarEstadoAsistencia(1,'n')">ELIMINAR</button>
                       </td>
-                    
-                    
+
+
                     </tr>
                   </tbody>
                 </table>
+              </div>
+            </div>
+          </div>
+          <div class="card-body" style="margin-top: 10% ; display:none;" >
+            <div class="table-responsive">
+              <div class="div-table">
+                
+                <div id="table">
+                  <div class="company-info"  >
+                    <h1>PLANILLA DE ASISTENCIA</h1>
+                    <div class="bis">
+                      NOMBRE: <span class="label">{{info[0]?.id_usuario}} {{info[0]?.apellido}}</span>
+                    </div>
+                    <div class="bis">
+                      FECHA: <span class="label">{{info[0]?.fecha}}</span>
+                    </div>
+                  </div>
+                  <table class="tabla" >
+                    <thead class="text-primary">
+                      
+                      <tr class="table-row">
+                        <th class="table-header">PRIMERA ENTRADA</th>
+                        <th class="table-header">PRIMERA SALIDA</th>
+                        <th class="table-header">SEGUNDA ENTRADA</th>
+                        <th class="table-header">SEGUNDA SALIDA</th>
+                        <th class="table-header">MINUTOS RETRAZADO</th>
+                        <th class="table-header">MINUTOS EXTRA</th>
+                        <th class="table-header">FALTAS</th>
+                        <th class="table-header">TOTAL HORAS</th>
+                        <th class="table-header">MINUTOS DE PERMISO</th>
+                        <th class="table-header">HORAS NO RECUPERADAS</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let asistencia of info">
+                        <td>{{ asistencia.tprano_ingreso}}</td>
+                        <td>{{ asistencia.tprano_salida }}</td>
+                        <td>{{ asistencia.tde_ingreso}}</td>
+                        <td>{{ asistencia.tde_salida }}</td>
+                        <td>{{ asistencia.min_retardos}}</td>
+                        <td>{{ asistencia.min_extra }}</td>
+                        <td>{{ asistencia.faltas}}</td>
+                        <td>{{ asistencia.total_horas }}</td>
+                        <td>{{ asistencia.id_permiso}}</td>
+                        <td>{{ asistencia.hrs_no_recuperadas}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -90,4 +139,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

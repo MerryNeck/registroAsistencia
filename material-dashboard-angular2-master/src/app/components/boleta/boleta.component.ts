@@ -3,6 +3,7 @@ import { Boleta } from 'models/boleta.model';
 import { BoletaService } from 'services/boleta.service';
 import { HttpClient } from '@angular/common/http';
 import * as printJS from 'print-js';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-boleta',
   templateUrl: './boleta.component.html',
@@ -63,8 +64,22 @@ export class BoletaComponent implements OnInit {
       });
   }
 */
-  imprimir() :void{
-    printJS({ printable: 'app-root', type: 'html' });
+imprimirPantalla() {
+  const elemento = document.getElementById('capturar');
 
-  }
+  html2canvas(elemento).then(canvas => {
+    canvas.style.width = '100%';
+    canvas.style.height='100%';
+      canvas.style.transform = 'translate(-20%, -20%)';
+      canvas.style.marginTop = '10%';
+    const imageData = canvas.toDataURL('image/png');
+
+    printJS({
+      printable: imageData,
+      type: 'image',
+      style: '@media print { body { background-color: transparent; } }'
+    });
+  });
+}
+
 }

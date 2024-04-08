@@ -10,14 +10,7 @@
                        
                         <form #areaForm="ngForm" (ngSubmit)="registrarNuevaArea(areaForm)">
                             <div class="row">
-                                <div class="form-group col-md-6 " id="form">
-                                    <div class="example-full-width">
-                                        <input class="form-control" placeholder="Identificacion(deshabilitado)"
-                                            disabled>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-md-6" id="form">
+                                <div class="form-group col-md-12" id="form">
                                     <div class="example-full-width">
 
                                         <input class="form-control" placeholder="Area" type="text" name="area" ngModel
@@ -35,6 +28,7 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="main-content">
                 <div class="container-fluid">
                     <div class="row">
@@ -49,9 +43,7 @@
                                         <table class="table">
                                             <thead class=" text-primary">
                                                 <tr>
-                                                    <th>
-                                                        ID AREA
-                                                    </th>
+                                                    
                                                     <th>
                                                         TIPO AREA
                                                     </th>
@@ -74,7 +66,6 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let itemareas of info">
-                                                    <td>{{ itemareas.id_area }}</td>
                                                     <td>{{ itemareas.tipo_area }}</td>
                                                     <td>{{ itemareas.estado }}</td>
                                                     <td>{{ itemareas.fecha_creacion }}</td>
@@ -101,4 +92,3 @@
 
         </div>
     </div>
-</div>

@@ -27,15 +27,19 @@ export class LoginComponent implements OnInit {
     
     console.log("ël boton funciona");
     
+    
     this.loginService.login( 
       this.email,
       this.password
     ).subscribe((response:any )=> {
+      const [tocken, rol ]=response
+
       console.log('Ingreso Exitoso: ', response);
       //localStorage.setItem('token', response.token);
-      this._router.navigate(['rolArea'])
+      this._router.navigate(['excel'])
     }, error => {
       console.error('Ingreso Fallido: ', error);
+      
     });
   }
 }

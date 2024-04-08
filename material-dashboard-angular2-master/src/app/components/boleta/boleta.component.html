@@ -1,8 +1,10 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
+      <button mat-raised-button type="submit" class="btn btn-blue btn-round bacun"
+         ><a href="/asistencia">VOLVER</a></button>
       <div class="card-header1 card-header-danger">
-        <div class="contener">
+        <div class="contener" id="capturar">
           <div class="receipt-container">
             <div class="header">
               <div class="empre">Bispace SRL</div>
@@ -65,7 +67,7 @@
         </div>
         <button mat-raised-button type="submit" class="btn btn-blue btn-round "
           (click)="actualizarBoleta()">Modificar</button>
-        <button mat-raised-button type="submit" class="btn btn-white btn-round  " (click)="imprimir()">Imprimir</button>
+        <button mat-raised-button type="submit" class="btn btn-white btn-round  " (click)="imprimirPantalla()">Imprimir</button>
       </div>
 
     </div>

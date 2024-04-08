@@ -14,6 +14,8 @@ import { BoletaComponent } from './components/boleta/boleta.component';
 import { RolComponent } from './components/rol/rol.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { PermisoComponent } from './components/permiso/permiso.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+
 
 const routes: Routes =[
   {
@@ -64,6 +66,10 @@ const routes: Routes =[
      pathMatch: 'full',*/
    },{
     path: 'permiso',component: PermisoComponent,
+     /*redirectTo: '',
+     pathMatch: 'full',*/
+   },{
+    path: 'sin',component: SidebarComponent,
      /*redirectTo: '',
      pathMatch: 'full',*/
    },
