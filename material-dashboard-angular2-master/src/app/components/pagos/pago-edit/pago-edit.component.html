@@ -7,21 +7,29 @@
                         <h4 class="card-title"> EDITAR ANTICIPOS</h4>
                     </div>
                     <div class="card-body">
-                        <form #editForm="ngForm" (ngSubmit)="actualizarAnticipo(editForm)">
+                        <form #editForm="ngForm" (ngSubmit)="actualizarPago(editForm)">
                             <div class="row">
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
                                         <label for="id_usuario">Cedula de Identidad:</label>
-                                        <input type="number" class="form-control" id="id_usuario" name="id_usuario" [(ngModel)]="editandoAnticipo.id_usuario" required>
+                                        <input type="number" class="form-control" id="id_usuario" name="id_usuario" [(ngModel)]="editandoPago.id_usuario" required>
                                       </div>
                                 </div>
 
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <label for="anticipos">Anticipo:</label>
-                                        <input type="text" class="form-control" id="anticipos" name="anticipos"
-                                            [(ngModel)]="editandoAnticipo.anticipos" required>
+                                        <label for="sueldos">Sueldo:</label>
+                                        <input type="text" class="form-control" id="sueldo" name="sueldo"
+                                            [(ngModel)]="editandoPago.sueldo" required>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="id_usuario">Dias Trabajados:</label>
+                                        <input type="number" class="form-control" id="id_usuario" name="id_usuario" [(ngModel)]="editandoPago.id_usuario" required>
+                                      </div>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">GUARDAR</button>

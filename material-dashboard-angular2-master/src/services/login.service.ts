@@ -45,23 +45,62 @@ private handleError(error: any):Observable<never> {
     return throwError(errorMessage); 
   }
  // Método para obtener todos los perfiles
- obtenerPerfil(): Observable<Login[]> {
-  return this._http.get<Login[]>(this.url,{ headers: this.getHeaders() });
+ obtenerPerfil(token:string): Observable<Login[]> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  });
+  return this._http.get<Login[]>(this.url,{ headers});
 }
 
 // Método para registrar un perfil
-registrarPerfil(usuario: Login): Observable<any> {
-  return this._http.post<any>(this.url, usuario,{ headers: this.getHeaders() });
+registrarPerfil(usuario: Login,token:string): Observable<any> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  });
+  return this._http.post<any>(this.url, usuario,{ headers});
 }
-// Método para actualizar un perfil
-actualizarPerfil(perfil: Login): Observable<any> {
-  const url = `${this.url}/${perfil.id}`;
-  return this._http.put<any>(url, perfil,{ headers: this.getHeaders() });
+
+cambiarEstadoPerfil(id: number, estado: string,token:string): Observable<any> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  });
+  return this._http.patch(`${this.url}/cambiarEstado/${id}`, { estado }, { headers});
 }
-cambiarEstadoPerfil(id: number, estado: string): Observable<any> {
-  return this._http.patch(`${this.url}/cambiarEstado/${id}`, { estado }, { headers: this.getHeaders() });
+buscarPorCi(ci: string,token:string): Observable<Login[]> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  });
+  return this._http.get<Login[]>(`${this.url}/buscar?ci=${ci}`,{headers});
 }
-buscarPorCi(ci: string): Observable<Login[]> {
-  return this._http.get<Login[]>(`${this.url}/buscar?ci=${ci}`);
+// Método para actualizar un anticipo
+actualizarPerfil(perfil: Login, token: string): Observable<void> {
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+  return this._http.put<void>(`${this.url}/perfil/${perfil.id_usuario}`, perfil, { headers })
+    .pipe(
+      catchError(error => {
+        console.error('Error al actualizar el usuario:', error);
+        return throwError('No se pudo actualizar el usuario');
+      })
+    );
 }
+obtenerPerfilPorId(id: number, token: string): Observable<Login> {
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+  return this._http.get<Login>(`${this.url}/perfil/${id}`, { headers })
+    .pipe(
+      catchError(error => {
+        console.error('Error al obtener el usuario:', error);
+        return throwError('No se pudo obtener el usuario');
+      })
+    );
+}
+
 }

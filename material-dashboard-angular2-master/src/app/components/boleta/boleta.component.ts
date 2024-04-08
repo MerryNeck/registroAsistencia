@@ -52,18 +52,6 @@ export class BoletaComponent implements OnInit {
         .subscribe(() => this.listarBoletas());
     }
   }
-/*  imprimirBoleta(): void {
-    const url = 'http://localhost:3000/api/asistencias/pdf'; // Reemplaza con la URL correcta de tu servidor
-
-    this.http.get(url, { responseType: 'blob' })
-      .subscribe((pdfBlob: Blob) => {
-        const pdfUrl = URL.createObjectURL(pdfBlob);
-        window.open(pdfUrl);
-      }, (error) => {
-        console.error('Error al obtener el PDF de asistencias:', error);
-      });
-  }
-*/
 imprimirPantalla() {
   const elemento = document.getElementById('capturar');
 

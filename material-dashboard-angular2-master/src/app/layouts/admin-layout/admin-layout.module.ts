@@ -11,7 +11,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
-import { RegistroComponent } from 'app/components/registro/registro.component';
+import { RegistroComponent } from 'app/components/registros/registro/registro.component';
 
 @NgModule({
   imports: [

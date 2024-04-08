@@ -1,0 +1,75 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title"> EDITAR USUARIO</h4>
+                    </div>
+                    <div class="card-body">
+                        <form #editForm="ngForm" (ngSubmit)="actualizarAnticipo(editForm)">
+                            <div class="row">
+                                <div class="form-group col-md-4" id="form">
+                                    <div class="example-full-width">
+                                        <label for="id_usuario">Cedula de Identidad:</label>
+                                        <input type="number" class="form-control" id="id_usuario" name="id_usuario" [(ngModel)]="editandoUsuario.id_usuario" required>
+                                      </div>
+                                </div>
+
+                                <div class="form-group col-md-8" id="form">
+                                    <div class="example-full-width">
+                                        <label for="nombre">Nombre:</label>
+                                        <input class="form-control" placeholder="Nombre" type="text" name="nombre" 
+                                        #nombre="ngModel" [(ngModel)]="editandoUsuario.nombre" required>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="id_usuario">Apellido Paterno:</label>
+                                        <input class="form-control" placeholder="Apellido Pateno" type="text"
+                                        name="apellido_paterno" #apellido_paterno="ngModel" [(ngModel)]="editandoUsuario.apellido_paterno" required>
+                                </div>
+                                </div>
+
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="nombre">Apellido Materno:</label>
+                                        <input class="form-control" placeholder="Apellido Materno" type="text"
+                                            name="apellido_materno" #apellido_materno="ngModel" [(ngModel)]="editandoUsuario.apellido_materno"required >
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6 " id="form">
+                                    <mat-form-field class="example-full-width">
+                                        <select name="idArea" #id_area="ngModel" [(ngModel)]="editandoUsuario.id_area" >
+                                            <option value="">SELECCIONE AREA</option>
+                                            <ng-container *ngFor="let area of areas">
+                                                <option value="{{area.id_area}}">{{area.tipo_area}}</option>
+                                            </ng-container>
+                                        </select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-6" id="form">
+                                    <mat-form-field class="example-full-width">
+                                        <select name="idRol" #id_rol="ngModel" [(ngModel)]="editandoUsuario.id_rol" >
+                                            <option value="">SELECCIONE ROL</option>
+                                            <ng-container *ngFor="let rol of roles">
+                                                <option value="{{rol.id_rol}}">{{rol.tipo}}</option>
+                                            </ng-container>
+                                        </select>
+                                    </mat-form-field>
+                                </div>
+                                
+                            </div>
+                            <button type="submit" class="btn btn-primary">GUARDAR</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

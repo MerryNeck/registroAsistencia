@@ -1,0 +1,26 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title"> EDITAR AREA</h4>
+                    </div>
+                    <div class="card-body">
+                        <form #editForm="ngForm" (ngSubmit)="actualizarRol(editForm)">
+                            <div class="row">
+                                <div class="form-group col-md-12" id="form">
+                                    <div class="example-full-width">
+                                        <label for="rol">Rol:</label>
+                                        <input type="text" class="form-control" id="rol" name="rol"
+                                            [(ngModel)]="editandoRol.tipo" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">GUARDAR</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

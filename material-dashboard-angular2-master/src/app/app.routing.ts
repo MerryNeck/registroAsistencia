@@ -3,17 +3,17 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { RegistroComponent } from './components/registro/registro.component';
+import { RegistroComponent } from './components/registros/registro/registro.component';
 import { AppComponent } from './app.component';
-import { AreaComponent } from './components/area/area.component';
+import { AreaComponent } from './components/areas/area/area.component';
 import { RutaexcelComponent } from './components/rutaexcel/rutaexcel.component';
-import { AsistenciaComponent } from './components/asistencia/asistencia.component';
+import { AsistenciaComponent } from './components/asistencias/asistencia/asistencia.component';
 import { AnticipoComponent } from './components/anticipos/anticipo/anticipo.component';
-import { PagoComponent } from './components/pago/pago.component';
+import { PagoComponent } from './components/pagos/pago/pago.component';
 import { BoletaComponent } from './components/boleta/boleta.component';
-import { RolComponent } from './components/rol/rol.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
-import { PermisoComponent } from './components/permiso/permiso.component';
+import { RolComponent } from './components/roles/rol/rol.component';
+import { PerfilComponent } from './components/perfiles/perfil/perfil.component';
+import { PermisoComponent } from './components/permisos/permiso/permiso.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AnticipoEditComponent } from './components/anticipos/anticipo-edit/anticipo-edit.component';
 
@@ -74,6 +74,24 @@ const routes: Routes =[
      pathMatch: 'full',*/
    },{
     path: 'editar-anticipo/:id',component: AnticipoEditComponent,
+     
+   },{
+    path: 'editar-area/:id',component: AnticipoEditComponent,
+     
+   },{
+    path: 'editar-pago/:id',component: AnticipoEditComponent,
+     
+   },{
+    path: 'editar-perfil/:id',component: AnticipoEditComponent,
+     
+   },{
+    path: 'editar-permiso/:id',component: AnticipoEditComponent,
+     
+   },{
+    path: 'editar-registro/:id',component: AnticipoEditComponent,
+     
+   },{
+    path: 'editar-rol/:id',component: AnticipoEditComponent,
      
    },
     {

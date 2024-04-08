@@ -6,12 +6,15 @@
 export const environment = {
   production: false,
    backend: {
-    api: 'http://localhost:5052/api',
+    api: 'http://localhost:5052/',
     login: '/api/login',
     area: '/api/area',
     rol: '/api/rol',
     anticipo: '/api/anticipo',
-    
+    pago: '/api/pago',
+    perfil: '/api/perfil',
+    permiso: '/api/permiso',
+    usuario: 'api/regisusuario'
 
   }
   

@@ -1,7 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Anticipo } from 'models/anticipo.model';
 import { AnticipoService } from 'services/anticipo.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-anticipo-edit',
@@ -9,50 +11,53 @@ import Swal from 'sweetalert2';
   styleUrls: ['./anticipo-edit.component.css']
 })
 export class AnticipoEditComponent {
-  @Input() anticipo: Anticipo | null = null;
-  @Output() actualizacionCompletada = new EventEmitter<void>();
-  token: string = ''; // Inicializa el token vacío
+ 
+  editandoAnticipo: Anticipo | null = null;
+  token: string = '';
 
-  constructor(private anticipoService: AnticipoService) { }
+  constructor(
+    private anticipoService: AnticipoService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.token = localStorage.getItem('token') || ''; // Obtener el token desde el localStorage
+    this.token = localStorage.getItem('token') || '';
+    this.route.params.subscribe(params => {
+      const idAnticipo = +params['id'];
+      this.obtenerAnticipo(idAnticipo);
+    });
   }
 
-  actualizarAnticipo(): void {
-    if (this.anticipo) {
-      this.anticipoService.actualizarAnticipo(this.anticipo, this.token)
+  obtenerAnticipo(idAnticipo: number): void {
+    this.anticipoService.obtenerAnticipoPorId(idAnticipo, this.token)
+      .subscribe(
+        anticipo => {
+          this.editandoAnticipo = anticipo;
+        },
+        error => {
+          console.error('Error al obtener el anticipo:', error);
+          Swal.fire('Error', 'No se pudo obtener el anticipo', 'error');
+        }
+      );
+  }
+
+  actualizarAnticipo(form: NgForm): void {
+    if (form.valid && this.editandoAnticipo) {
+      this.anticipoService.actualizarAnticipo(this.editandoAnticipo, this.token)
         .subscribe(
           () => {
-            this.actualizacionCompletada.emit();
-            Swal.fire('Éxito', 'El anticipo fue actualizado correctamente', 'success');
+            Swal.fire('Éxito', 'El anticipo se actualizó correctamente', 'success');
+            this.router.navigate(['/anticipo']);
           },
-          error => Swal.fire('Error', 'No se pudo actualizar el anticipo', 'error')
+          error => {
+            console.error('Error al actualizar el anticipo:', error);
+            Swal.fire('Error', 'No se pudo actualizar el anticipo', 'error');
+          }
         );
+    } else {
+      Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
     }
   }
 
-  cambiarEstadoAnticipo(idAnticipo: number, estado: string): void {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: `Se cambiará el estado del anticipo con ID ${idAnticipo}`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, cambiar estado',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.anticipoService.cambiarEstadoAnticipo(idAnticipo, estado, this.token)
-          .subscribe(
-            () => {
-              this.actualizacionCompletada.emit();
-              Swal.fire('Éxito', 'El estado del anticipo fue actualizado', 'success');
-            },
-            error => Swal.fire('Error', 'No se pudo actualizar el estado del anticipo', 'error')
-          );
-      }
-    });
-  }
 }

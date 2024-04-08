@@ -1,0 +1,116 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">PAGO</h4>
+                    </div>
+                    <div class="card-body">
+                        <form #pagoForm="ngForm" (ngSubmit)="registrarNuevoPago(pagoForm)">
+                            <div class="row">
+                                
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <input matInput class="form-control" placeholder="Cedula de Identidad" type="text" name="ci" #ci="ngModel"
+                                            [(ngModel)]="nuevoPago.id_usuario">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <input matInput class="form-control " placeholder="Sueldo" type="text" name="sueldo"
+                                            #sueldo="ngModel" [(ngModel)]="nuevoPago.sueldo" ngModel="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <input matInput class="form-control" placeholder="DiasTrabajo" type="text" name="trabajo"
+                                            #trabajo="ngModel" [(ngModel)]="nuevoPago.dias_trabajo" ngModel="">
+                                    </div>
+                                </div>
+                                
+
+
+                            </div>
+
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                [disabled]="!pagoForm.form.valid">REGISTRAR</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title "> REGISTRO PAGO</h4>
+                                <form class="col-md-5">
+                                    <p class="card-category">Busque el registro de pago</p>
+                                    <div class="input-group no-border">
+                                        <div class="col-md-10">
+                                            <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
+                                                placeholder="Buscar por cedula de identidad...">
+                                            <div class="ripple-container"></div>
+                                        </div>
+                                    </div>
+                                    <button mat-raised-button type="button" class="btn btn-white btn-round "
+                                        (click)="buscarAnticipoPorCi(ciBusqueda)">Buscar</button>
+                                </form>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                <th>CI</th>
+                                                <th>SUELDO</th>
+                                                <th>DIAS TRABAJADOS</th>
+                                                <th>RETENCION</th>
+                                                <th>SUELDO BRUTO</th>
+                                                <th>FECHA CREACION</th>
+                                                <th>FECHA MODIFICACION</th>
+                                                <th>ESTADO</th>
+                                                <th>MODIFICAR</th>
+                                                <th>ELIMINAR</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                            <tr *ngFor="let pagos of info">
+                                                <td>{{ pagos.ci}}</td>
+                                                <td>{{ pagos.sueldo }}</td>
+                                                <td>{{ pagos.dias_trabajo }}</td>
+                                                <td>{{ pagos.retencion }}</td>
+                                                <td>{{ pagos.sueldo_bruto }}</td>
+                                                <td>{{ pagos.estado }}</td>
+                                                <td>{{ pagos.fecha_creacion}}</td>
+                                                <td>{{ pagos.fecha_modificacion}}</td>
+                                                <td><button mat-raised-button type="submit"
+                                                        class="btn btn-blue btn-round "
+                                                        (click)="actualizarPago(pagos)">Modificar</button></td>
+                                                <td><button mat-raised-button type="submit"
+                                                        class="btn btn-white  btn-round"
+                                                        (click)="cambiarEstadoPago(1,'n')">Eliminar</button></td>
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
