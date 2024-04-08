@@ -4,6 +4,7 @@ import { LoginService } from 'services/login.service';
 import { Login } from 'models/login.model';
 import { Router } from '@angular/router';
 import { Usuario } from 'models/usuario.model';
+import { AuthService } from 'services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,18 +15,28 @@ export class LoginComponent implements OnInit {
   email = '';
   password = '';
   public usuario : any
-
+  public tokens : any
 
 
   constructor(private loginService: LoginService,
-    private _router : Router
+    private _router : Router,
+    private _authService : AuthService
     ) {
       this.usuario= new Usuario(0,'','','','','','','',0,0)
+      this.tokens = _authService.getIdentity()
   }
   
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.tokens);
+    
+    if(this.tokens){
+        this._router.navigate(['excel']);
+
+    }
+    
+  }
    
-  login(lognForm:any) {
+  login(loginForm:any) {
     console.log(this.usuario);
     console.log(this.email);
     
@@ -33,12 +44,13 @@ export class LoginComponent implements OnInit {
     console.log("ël boton funciona");
     
     this.loginService.login( 
-      this.email,
-      this.password
+      this.usuario.email,
+      this.usuario.password
     ).subscribe((response:any )=> {
       console.log('Ingreso Exitoso: ', response);
-      //localStorage.setItem('token', response.token);
-      this._router.navigate(['rolArea'])
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('rol',response.rol)
+      this._router.navigate(['excel'])
     }, error => {
       console.error('Ingreso Fallido: ', error);
     });

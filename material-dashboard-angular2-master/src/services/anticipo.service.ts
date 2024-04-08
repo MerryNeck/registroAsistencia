@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service'; 
 import { Anticipo } from 'models/anticipo.model';  // Reemplaza 'ruta/del/modelo/descuento' con la ruta correcta
-
+import { environment } from '../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AnticipoService {
-  private baseUrl = 'api/anticipo'; // Reemplaza 'api/descuentos' con la ruta correcta de tu backend
+  private Gurl = environment.backend.api
+  private baseUrl = this.Gurl+'api/anticipo'; // Reemplaza 'api/descuentos' con la ruta correcta de tu backend
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 

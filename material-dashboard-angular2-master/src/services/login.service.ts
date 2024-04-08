@@ -13,11 +13,13 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class LoginService {
-  public url:string = environment.backend.login;
+  public url:string = environment.backend.api+environment.backend.login;
   constructor(private _http: HttpClient) { }
 
 login(email:string, password:string): Observable<LoginResponse>{
-    const body = { email, password }; 
+    const body = { email, password };
+    console.log(body);
+     
     return this._http.post<LoginResponse>(this.url, body)
     .pipe(
         catchError(this.handleError) 

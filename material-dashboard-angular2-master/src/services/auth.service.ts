@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-
+import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private token: string | null = null;
+  private tokens : any 
 
   setToken(token: string) {
     this.token = token;
@@ -13,7 +14,7 @@ export class AuthService {
 
   getToken(): string | null {
     if (!this.token) {
-      this.token = localStorage.getItem('token');
+      this.token = JSON.parse(localStorage.getItem('token')!);
     }
     return this.token;
   }
@@ -25,5 +26,16 @@ export class AuthService {
   logout() {
     this.token = null;
     localStorage.removeItem('token');
+  }
+  getIdentity():Observable<any>{
+    let identity = localStorage.getItem('token');
+    // console.log(identity);
+     if(identity){
+      this.tokens = identity;
+     }else{
+       this.tokens = null;
+     }
+
+     return this.tokens;
   }
 }

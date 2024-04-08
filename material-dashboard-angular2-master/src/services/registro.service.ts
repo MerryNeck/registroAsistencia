@@ -38,7 +38,7 @@ interface RegistroResponse {
   registrarUsuario(usuario: Usuario): Observable<any> {
     return this._http.post<any>(this.url, usuario,{ headers: this.getHeaders() });
   }
-    /*insertUsuario(data: any): Observable<any> {
+    insertUsuario(data: any): Observable<any> {
         const fd = new FormData();
         fd.append('id_usuario', data.id_usuario);
         fd.append('nombre', data.nombre);
@@ -54,9 +54,9 @@ interface RegistroResponse {
         return this._http.post<any>(this.url + '/registrar', fd, {
             observe: 'response' // Observe the full response, including status code
         }).pipe(
-            catchError(this.handleError)
+            //catchError(this.handleError)
         );
-    }*/
+    }
 
 
     getUsuario(idUsuario: any): Observable<any> {//verificar en el backen si necesita parametro
