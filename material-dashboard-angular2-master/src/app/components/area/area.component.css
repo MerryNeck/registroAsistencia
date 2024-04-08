@@ -27,11 +27,13 @@
     border-collapse: collapse;
     justify-content: center;
     top: -10px;
+    border: 1px solid white ;
   }
 
   table tr:first-child {
     background-color: #000000; 
     color: white; 
+    border: 1px solid white ;
   }
   
   /* Estilo para las filas impares */
@@ -49,31 +51,35 @@
   }
   td{
     border: 1px solid white;
+    font-size: 12px;
+    text-align: center;
   }
   .text-primary{
     border: 1px solid white;
     background-color: #000000;
   }
-
+  
   th{
     border: 1px solid white;
     justify-content: center;
     text-align: center;
-    font-size: 10px;
-    font-weight: bold;
-
-  }
-
-  .table thead tr th {
     font-size: 12px;
-}
+    font-weight: bold;
+  
+  }
+  
+  .table thead tr th {
+    font-size: 11px;
+    border: 1px solid white ;
+  }
   tr{
-    font-size: 10px;
+    font-size: 13px;
     border: 1px solid white;
   }
   .main-content{
     display: flex;
     background-color: rgb(225, 229, 249);
-    height: 100%;
+    
     padding: 5%;
+    margin-left: 10%;
   }

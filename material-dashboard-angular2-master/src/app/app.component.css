@@ -1,0 +1,7 @@
+.body-with-sidebar app-sidebar {
+    display: block;
+  }
+  
+  .body-without-sidebar app-sidebar {
+    display: none;
+  }

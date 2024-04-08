@@ -4,27 +4,25 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">SUBIR EXCEL</h4>
+                        <h4 class="card-title">SUBIR ARCHIVO</h4>
                     </div>
                     <div class="card-body">
-                        <!-- <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">-->
                         <form>
                             <div class="row">
-                                <div class="form-group col-md-6 " id="form">
-                                    <div class=" excel example-full-width">
-                                        <input class="form-control" placeholder="Identificacion(deshabilitado)"
-                                            disabled>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-6" id="form" >
-                                    <div class="example-full-width-input">
-                                        <input class="idexcel" placeholder="Suba Aqui" type="file" name="excel"
-                                            accept=".xls,.xlsx" multiple (change)="cargarExcel($event)">
+                                <div class="form-group col-md-12" id="form">
+                                    <div class="example-full-width-input" (click)="fileInput.click()">
+                                        <input #fileInput class="idexcel" type="file" name="archivo"
+                                            (change)="onArchivoSeleccionado($event)" hidden>
+                                        <div class="drop-zone" (dragover)="onDragOver($event)"
+                                            (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+                                            <span class="subir" *ngIf="!archivoSeleccionado">Arrastre y suelte un archivo aquí</span>
+                                            <span class="subir" *ngIf="archivoSeleccionado">Archivo seleccionado: {{ nombreArchivo }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right btn-round">REGISTRAR</button>
+                            <button mat-raised-button type="button" class="btn btn-danger pull-right btn-round"
+                                (click)="subirArchivo()">REGISTRAR</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>

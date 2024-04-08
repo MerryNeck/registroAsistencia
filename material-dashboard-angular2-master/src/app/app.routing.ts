@@ -11,7 +11,6 @@ import { AsistenciaComponent } from './components/asistencia/asistencia.componen
 import { AnticipoComponent } from './components/anticipo/anticipo.component';
 import { PagoComponent } from './components/pago/pago.component';
 import { BoletaComponent } from './components/boleta/boleta.component';
-import { RolComponent } from './components/rol/rol.component';
 
 const routes: Routes =[
   {
@@ -23,12 +22,12 @@ const routes: Routes =[
     //redirectTo: 'login',
     //pathMatch: 'full',
   }, {
-   path: 'registro',component: RegistroComponent,
+   path: 'regisusuario',component: RegistroComponent,
     /*redirectTo: '',
     pathMatch: 'full',*/
   },
   {
-    path: 'area',component: AreaComponent,
+    path: 'areaRol',component: AreaComponent,
      /*redirectTo: '',
      pathMatch: 'full',*/
    },{
@@ -50,6 +49,18 @@ const routes: Routes =[
    },
    {
     path: 'boleta',component: BoletaComponent,
+     /*redirectTo: '',
+     pathMatch: 'full',*/
+   },{
+    path: 'perfil',component: PerfilComponent,
+     /*redirectTo: '',
+     pathMatch: 'full',*/
+   },{
+    path: 'permiso',component: PermisoComponent,
+     /*redirectTo: '',
+     pathMatch: 'full',*/
+   },{
+    path: 'sin',component: SidebarComponent,
      /*redirectTo: '',
      pathMatch: 'full',*/
    },

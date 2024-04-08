@@ -2,20 +2,21 @@ import { Component, OnInit } from '@angular/core';
 
 declare const $: any;
 declare interface RouteInfo {
-    path: string;
-    title: string;
-    icon: string;
-    class: string;
+  path: string;
+  title: string;
+  icon: string;
+  class: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-    { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
-    { path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
-    { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
-    { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
-    { path: '/maps', title: 'Maps',  icon:'location_on', class: '' },
-    { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
-    { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
+  { path: '/excel', title: 'SUBIR EXCEL', icon: 'person', class: '' },
+  { path: '/regisusuario', title: 'REGISTRO DE USUARIO', icon: 'person', class: '' },
+  { path: '/area', title: 'AREA', icon: 'library_books', class: '' },
+  { path: '/rol', title: 'ROL', icon: 'library_books', class: '' },
+  { path: '/pago', title: 'PAGO', icon: 'dashboard', class: '' },
+  { path: '/asistencia', title: 'ASISTENCIA', icon: 'content_paste', class: '' },
+  { path: '/anticipo', title: 'ANTICIPO', icon: 'library_books', class: '' },
+  { path: '/perfil', title: 'REGISTRO DE AUTENTIFICACION', icon: 'bubble_chart', class: '' },
+  { path: '/permiso', title: 'PERMISO', icon: 'person', class: '' },
 ];
 
 @Component({
@@ -25,16 +26,16 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
-
+  sidebarVisible = true;
   constructor() { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
+  toggleSidebar() { // Función para alternar la visibilidad del sidebar
+    this.sidebarVisible = !this.sidebarVisible;
+  }
   isMobileMenu() {
-      if ($(window).width() > 991) {
-          return false;
-      }
-      return true;
-  };
+    return window.innerWidth <= 991;
+  }
 }

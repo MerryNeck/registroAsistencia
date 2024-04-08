@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { LoginService } from 'services/login.service';
 import { Login } from 'models/login.model';
 import { Router } from '@angular/router';
@@ -24,6 +23,7 @@ export class LoginComponent implements OnInit {
     ) {
       this.usuario= new Usuario(0,'','','','','','','',0,0)
       this.tokens = _authService.getIdentity()
+      this.usuario= new Login(0,'','','','','',0)
   }
   
   ngOnInit(): void {
@@ -43,16 +43,21 @@ export class LoginComponent implements OnInit {
     
     console.log("ël boton funciona");
     
+    
     this.loginService.login( 
       this.usuario.email,
       this.usuario.password
     ).subscribe((response:any )=> {
+      const [tocken, rol ]=response
+
       console.log('Ingreso Exitoso: ', response);
       localStorage.setItem('token', response.token);
       localStorage.setItem('rol',response.rol)
+      //localStorage.setItem('token', response.token);
       this._router.navigate(['excel'])
     }, error => {
       console.error('Ingreso Fallido: ', error);
+      
     });
   }
 }

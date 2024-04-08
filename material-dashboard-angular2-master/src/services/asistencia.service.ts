@@ -42,4 +42,23 @@ export class AsistenciaService {
   cambiarEstadoAsistencia(id: number, estado: string): Observable<any> {
     return this.http.patch(`${this.apiUrl}/cambiarEstado/${id}`, { estado }, { headers: this.getHeaders() });
   }
+
+  //busqueda
+  buscarPorCiOFecha(ci?: string, fecha?: string): Observable<Asistencia[]> {
+    let queryParams = '';
+
+    if (ci) {
+      queryParams += `ci=${ci}`;
+    }
+
+    if (fecha) {
+      if (queryParams.length) {
+        queryParams += '&';
+      }
+      queryParams += `fecha=${fecha}`;
+    }
+
+    return this.http.get<Asistencia[]>(`${this.apiUrl}?${queryParams}`);
+  }
 }
+

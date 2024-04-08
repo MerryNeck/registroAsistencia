@@ -1,152 +1,232 @@
+.card-body {
+  margin-top: -5%;
+}
 
-.card-body{
-    margin-top: -5%;
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1f399a;
 }
-h1{
-    font-size: 24px;
-    font-weight: bold;
-    color: #1f399a;
+
+.empre {
+  text-align: left;
+  margin-left: 5.5%;
+  font-size: 8px;
 }
-.empre{
-    text-align: left;
-    margin-left: 5.5%;
-    font-size: 8px;
+
+.nro {
+  text-align: center;
+  margin-left: 4%;
+  font-size: 10px;
+  margin-top: -1%;
+  margin-right: 84%;
+  border: 1px solid #1f399a;
 }
-.nro{
-    text-align: center;
-    margin-left: 4%;
-    font-size: 10px;
-    margin-top: -1%;
-    margin-right: 84%;
-    border:1px solid #1f399a ;
-}
+
 .btn.btn-blue.btn-round {
-margin-top: -2%;
-margin-left: 66%;
-background-color: #E67E22;
+  margin-top: 2%;
+  margin-left: 66%;
+  background-color: #E67E22;
 }
-.contener{
-    margin-top: 5%;
+
+.contener {
+  margin-top: 5%;
 }
-.btn.btn-white.btn-round{
-margin-top: 1%;
-margin-left: 66%;
-} 
+
+.btn.btn-white.btn-round {
+  margin-top: -9%;
+  margin-left: 56%;
+  left: -55%;
+  margin-bottom: 7.2%;
+}
+.btn.btn-blue.btn-round.bacun{
+  background-color: #1f399a;
+}
+
 .receipt-container {
-    position: absolute;
-    padding: 2.5%;
-    border: 1px solid #ccc;
-    margin-bottom: 10%;
-    margin: -2% 0 0 22%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-image: url('../../../assets/img/bispace.PNG');
-    background-repeat: no-repeat;
-    background-position: 13%;
-    background-size: cover;
-    filter: opacity(80%);
-    font-family: Arial, sans-serif;
-    display: block;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .title {
-    align-items: center;
-    align-content: center;
-    text-align: center;
-  }
-  
-  table {
-    display: block;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    
-  }
-  
-  .header {
-    text-align: center;
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  
-  .company-info {
-    margin-top: 10px;
-    margin-left: 23px;
-    width: 100%;
-    text-align: left;
-    font-size: 12px;
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #1f399a;
-  }
-  .label{
-    font-size: 12px;
-    color: black;
-    margin-left: 10px;
-  }
-  .labell{
-    font-size: 20px;
-    color: black;
-    margin-left: 10px;
-  }
-  
-  .receipt-details {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 18px;
-    width: 100%;
-  }
-  
-  .left-column,
-  .right-column {
-    flex-basis: 45%;
-  }
-  
-  th,
-  td {
-    padding: 8px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-    font-size: 11px;
-    border: 1px solid #1f399a ;
-  }
-  
-  th {
-    background-color: #1f399a ;
-    border: 1px solid #8e9dd4 ;
-    font-size: 1px;
-    text-align: center;
-    color: #ffffff;
-  }
-  .table thead tr th {
-    font-size: 12px;
-    border: 1px solid #8e9dd4 ;
+  position: relative;
+  padding: 2.5%;
+  border: 1px solid #ccc;
+  margin-bottom: 10%;
+  margin-top: 1%;
+  margin: -2% 0 0 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-image: url('../../../assets/img/bispace.PNG');
+  background-repeat: no-repeat;
+  background-position: 21%;
+  background-size: cover;
+  filter: opacity(80%);
+  font-family: Arial, sans-serif;
+  display: block;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-  
-  .total {
-    text-align: left;
-    font-weight: bold;
-    margin-bottom: 20px;
-    margin-left: 5%;
-    margin-top: -3%;
-    width: 100%;
-    font-size: 13px;
+a{
+  color: white;
+}
+.title {
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+.row {
+  justify-content: center;
+  margin-top: 8%;
+}
+
+table {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+  margin-top: 2%;
+}
+
+.company-info {
+  margin-top: 10px;
+  margin-left: 23px;
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #1f399a;
+}
+
+.label {
+  font-size: 12px;
+  color: black;
+  margin-left: 10px;
+}
+
+.labell {
+  font-size: 12px;
+  color: rgb(0, 0, 0);
+  margin-left: 10px;
+}
+
+.receipt-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.left-column,
+.right-column {
+  flex-basis: 45%;
+}
+
+th,
+td {
+  padding: 5px;
+  text-align: center;
+  font-size: 11px;
+  border: 1px solid #ffffff;
+}
+
+th {
+  background-color: #0d2169;
+  border: 1px solid #8e9dd4;
+  font-size: 1px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.table thead tr th {
+  font-size: 12px;
+  border: 1px solid #8e9dd4;
+}
+
+.total {
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-left: 5%;
+  margin-top: -3%;
+  width: 100%;
+  font-size: 13px;
+}
+
+.signature {
+  text-align: center;
+  width: 30%;
+  margin-top: 40px;
+  margin-left: 35%;
+  font-size: 10px;
+}
+
+.signature-line {
+  border-bottom: 1px solid #000;
+  margin-top: 5px;
+  margin-left: 14%;
+}
+
+.main-content {
+  display: flex;
+  left: 10%;
+  background-color: rgb(225, 229, 249);
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-header1 {
+  margin-bottom: 5.4%;
+  background-color: #fff;
+  background-color: rgb(225, 229, 249);
+}
+
+table tr:first-child {
+  background-color: #000000; 
+  color: white; 
+}
+
+/* Estilo para las filas impares */
+table tr:nth-child(odd) {
+  background-color: #0A2779; 
+  color: #ffff;
+  border: 1px solid #fff ;
+}
+
+/* Estilo para las filas pares */
+table tr:nth-child(even) {
+  background-color: #7A9AE3; 
+  color: black;
+  border: 1px solid #fff ;
+}
+td{
+  background-color: #7A9AE3; 
+  color: black;
+  border: 1px solid #fff ;
+}
+
+@media print {
+  .contener {
+    width: 100%; 
+    margin: 0 auto; 
+    margin-top: 30%;
+    margin-left: 20%;
+    
+
   }
-  
-  .signature {
-    text-align: center;
-    width: 30%;
-    margin-top: 40px;
-    margin-left: 35%;
-    font-size: 10px;
+
+  .receipt-container {
+    width: 100%; 
+    margin-top: 30%;
+    margin-left: 20%;
   }
-  
-  .signature-line {
-    border-bottom: 1px solid #000;
-    margin-top: 5px;
-    margin-left: 14%;
-  }
+
+  /* Ajusta otros estilos según sea necesario para la impresión */
+}

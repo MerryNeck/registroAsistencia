@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Area }from "models/area.model";
-import { Rol } from 'models/rol.model';
-import {FormGroup, FormsModule,FormControl, Validators} from "@angular/forms"
+import { Usuario } from 'models/usuario.model';
+import { NgForm} from "@angular/forms"
 import {  RegistroService } from 'services/registro.service';
 
 @Component({
@@ -11,75 +10,118 @@ import {  RegistroService } from 'services/registro.service';
   
 })
 export class RegistroComponent implements OnInit{
-
-  area=[{
-    id_area: 1,
-    tipo_area: 'admin',
+  ciBusqueda: string = '';
+  usuarios:Usuario[] =[];
+ nuevoUsuario: Usuario = new Usuario(0, '', '', '', '','','','',0,0);
+ editandoUsuario: Usuario | null = null;
+ areas: any[] = []; 
+ roles: any[] =[];
+ usuarios1=[{
+  id_usuario : 1,
+  ci:'13276634',
+  nombre: 'miriam',
+  apellido_paterno: 'justo',
+  apellido_materno : 'mamani',
+  fecha_creacion: '20240301' ,
+  fecha_modificacion: '',
+  estado:'s',
+  
 },{
-  id_area: 2,
-  tipo_area: 'admin',
+  id_usuario : 2,
+  ci:'13276634',
+  nombre: 'miriam',
+  apellido_paterno: 'justo',
+  apellido_materno : 'mamani',
+  fecha_creacion: '20240301' ,
+  fecha_modificacion: '',
+  estado:'s',
 },{
-  id_area: 3,
-  tipo_area: 'administracion',
+  id_usuario : 3,
+  ci:'13276634',
+  nombre: 'miriam',
+  apellido_paterno: 'justo',
+  apellido_materno : 'mamani',
+  fecha_creacion: '20240301' ,
+  fecha_modificacion: '',
+  estado:'s',
 }]
-rol=[{
-  id_rol: 1,
-  tipo: 'admin',
-},{
-id_rol: 2,
-tipo: 'tec',
-},{
-id_area: 3,
-tipo: 'user',
-}]
+constructor(private usuarioService: RegistroService) { }
 
-  usuarioForm: FormGroup;
-  areas: Area[] = [];
-  roles: Rol[] = [];
-  error: string;
-  selectedArea: Area; 
-  selectedRol: Rol;
-  constructor(private usuarioService: RegistroService) {}
+  ngOnInit(): void {
+    this.obtenerUsuarios();
 
- ngOnInit() {
-    this.usuarioForm = new FormGroup({
-      nombre: new FormControl('',Validators.required),
-      apellido_paterno: new FormControl('',Validators.required),
-      apellido_materno: new FormControl('',Validators.required),
-      ci: new FormControl('',Validators.required),
-      idArea: new FormControl('',Validators.required),
-      idRol: new FormControl('',Validators.required)
-    })
-
-    this.usuarioService.getAreas().subscribe({
-      next: (areas) => {
-        this.areas = areas;
-      },
-      error: (error) => {
-        console.error('Error al cargar las áreas', error);
-        
-      }
-    });
-    this.usuarioService.getRoles().subscribe({
-      next: (roles) => {
-        this.roles = roles;
-      },
-      error: (error) => {
-        console.error('Error al cargar los roles', error);
-
+  }
+  obtenerUsuarios(): void {
+    this.usuarioService.obtenerUsuario()
+      .subscribe(usuarios => this.usuarios = this.usuarios);
+  }
+  registrarNuevoUsuario(form:NgForm): void {
+    if (form.valid) {
+      const { ci,nombre, apellido_materno,apellido_paterno,estado } = form.value;
+      this.nuevoUsuario.ci = ci;
+      this.nuevoUsuario.nombre = nombre;
+      this.nuevoUsuario.apellido_paterno = apellido_paterno;
+      this.nuevoUsuario.apellido_materno = apellido_materno;
+      this.nuevoUsuario.estado = estado;
+      this.usuarioService.getAreas().subscribe({
+        next: (areas) => {
+          this.areas = areas;
+        },
+        error: (error) => {
+          console.error('Error al cargar las áreas', error);
+          // Aquí podrías mostrar un mensaje al usuario o intentar la solicitud nuevamente.
         }
-       
-    });
+      });
+      
+      this.usuarioService.getRoles().subscribe({
+        next: (roles) => {
+          this.roles = roles;
+        },
+        error: (error) => {
+          console.error('Error al cargar los roles', error);
+          // Manejo de errores similar al anterior.
+        }
+      });
+      
+      this.usuarioService.registrarUsuario(this.nuevoUsuario)
+        .subscribe(usuario => {
+          this.usuarios.push(usuario);
+          this.nuevoUsuario = new Usuario(0, '', '', '', '','','','',0,0);
+          form.reset();
+        });
+    }
+  }
+  editarUsuario(usuario: Usuario): void {
+    this.editandoUsuario = { ...usuario };
   }
 
-  insertarUsuario() {
-    const usuario = this.usuarioForm.value;
-    this.usuarioService.insertUsuario(usuario).subscribe(() => {
-      // Usuario registrado correctamente
-      this.usuarioForm.reset();
-      this.error = null;
-    }, error => {
-      this.error = error.message;
-    });
+  actualizarAnticipo(): void {
+    if (this.editandoUsuario) {
+      this.usuarioService.actualizarUsuario(this.editandoUsuario)
+        .subscribe(usuario => {
+          const index = this.usuarios.findIndex(a => a.id_usuario === usuario.id_usuario);
+          this.usuarios[index] = usuario;
+          this.editandoUsuario = null;
+        });
+    }
   }
+
+  cambiarEstadoAnticipo(idUsuario: number, estado: string): void {
+    this.usuarioService.cambiarEstadoUsuario(idUsuario, estado)
+      .subscribe(() => {
+        this.usuarios = this.usuarios.filter(a => a.id_usuario !== idUsuario);
+      });
+  }
+  buscarUsuarioPorCi(ci: string): void {
+    this.usuarioService.buscarPorCi(ci)
+      .subscribe({
+        next: (usuarios) => {
+          this.usuarios = usuarios; 
+        },
+        error: (error) => {
+          console.error('Error al buscar boletas por CI', error);
+        }
+      });
+  }
+
 }

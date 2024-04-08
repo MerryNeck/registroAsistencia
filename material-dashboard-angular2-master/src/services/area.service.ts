@@ -41,4 +41,6 @@ export class AreaService {
   cambiarEstadoArea(idArea: number, estado: string): Observable<any> {
     return this.http.patch(`${this.url}/cambiarEstado/${idArea}`, { estado }, { headers: this.getHeaders() });
   }
+
+  
 }

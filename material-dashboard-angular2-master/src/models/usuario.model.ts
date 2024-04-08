@@ -8,8 +8,8 @@ export class Usuario{
         public fecha_creacion: string,
         public fecha_modificacion: string,
         public estado: string,
-        public id_area:number,
-        public id_rol: number
+        public id_rol: number,
+        public id_area: number,
     ){
 
     }

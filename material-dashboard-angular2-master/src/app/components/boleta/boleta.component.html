@@ -1,67 +1,76 @@
-<div class="contener">
-<div class="receipt-container">
-  <div class="header">
-    <div class="empre">Bispace SRL</div>
-    <div class="nro">#001</div>
-    <h1>BOLETA DE PAGO</h1>
-    
-    <div class="company-info">
-      <div class="bis">Nombre: <label for="nombre" class="label" ngModel>Miriam Sonia Justo Mamani</label> </div>
-      <div class="bis">Ocupacion: <label for="ocupacion" class="label" ngModel> Pasante</label> </div>
-      <div class="bis">Dias Trabajados: <label for="dias" class="label" ngModel> 10 </label></div>
-      <div class="bis">Periodo de Pago: <label for="mes" class="label" ngModel> 30</label></div>
-      <div class="bis">Fecha de Pago: <label for="fecha" class="label" ngModel> 01/04/2024</label></div>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <button mat-raised-button type="submit" class="btn btn-blue btn-round bacun"
+         ><a href="/asistencia">VOLVER</a></button>
+      <div class="card-header1 card-header-danger">
+        <div class="contener" id="capturar">
+          <div class="receipt-container">
+            <div class="header">
+              <div class="empre">Bispace SRL</div>
+              <div class="nro">#001</div>
+              <h1>BOLETA DE PAGO</h1>
+
+              <div class="company-info" *ngFor="let persona of info">
+                <div class="bis">NOMBRE: <span class="label">{{persona.nombre}}</span></div>
+                <div class="bis">OCUPACION: <span class="label">{{persona.ocupacion}}</span></div>
+                <div class="bis">DIAS LABORALES: <span class="label">{{persona.dias_laborales}}</span></div>
+                <div class="bis">MES DE PAGO: <span class="label">{{persona.mes}}</span></div>
+                <div class="bis">FECHA DE PAGO: <span class="label">{{persona.fecha}}</span></div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+
+                    <tr>
+                      <th rowspan="2">PAGO</th>
+                      <th colspan="5">DESCUENTO</th>
+                    </tr>
+                    <tr>
+                      <th>AFP'S</th>
+                      <th>ATRASOS</th>
+                      <th>FALTAS</th>
+                      <th>MIN. NO TRABAJADOS</th>
+                      <th>DESCUENTO </th>
+                    </tr>
+
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of boleta">
+                      <td>{{ item.pago }}</td>
+                      <td>{{ item.afps }}</td>
+                      <td>{{ item.atrasos }}</td>
+                      <td>{{ item.faltas }}</td>
+                      <td>{{ item.mnr }}</td>
+                      <td>{{ item.descuentos }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+
+            <div class="total" *ngFor="let persona of info">
+              <p>LIQUIDO PAGABLE Bs.-  <span class="label1">{{persona.pagos}}</span></p>
+              </div>
+            <div class="signature">
+              <div class="signature-line row col-md-9"></div>
+              <p>Firma de Conformidad:</p>
+
+
+            </div>
+
+          </div>
+
+        </div>
+        <button mat-raised-button type="submit" class="btn btn-blue btn-round "
+          (click)="actualizarBoleta()">Modificar</button>
+        <button mat-raised-button type="submit" class="btn btn-white btn-round  " (click)="imprimirPantalla()">Imprimir</button>
+      </div>
+
     </div>
+
   </div>
-  <div class="card-body">
-    <div class="table-responsive">
-      <table class="table">
-        <thead class=" text-primary">
-
-          <tr>
-            <th rowspan="2">PAGO</th>
-            <th colspan="4">DESCUENTO</th>
-          </tr>
-          <tr>
-            <!-- PAGO no tiene subtítulos, así que se deja vacío debajo de él -->
-
-            <th>DESCUENTO AFP'S</th>
-            <th>ATRASOS</th>
-            <th>FALTAS</th>
-            <th>MINUTOS NO TRABAJADOS</th>
-
-          </tr>
-
-        </thead>
-        <tbody>
-          <tr>
-
-            <td>$1000</td> <!-- PAGO -->
-            <td>2</td> <!-- ATRASOS -->
-            <td>1</td> <!-- FALTAS -->
-            <td>30</td> <!-- MINUTOS NO TRABAJADOS -->
-            <td>$200</td> <!-- DESCUENTO (calculado basado en atrasos, faltas, etc.) -->
-          </tr>
-          <!-- Más filas según sea necesario -->
-        </tbody>
-      </table>
-
-    </div>
-  </div>
-
-  <div class="total">
-    <p>LIQUIDO PAGABLE Bs.-  <label for="" class="labell"> 30</label></p>
-  </div>
-  <div class="signature">
-    <div class="signature-line row col-md-9"></div>
-    <p>Firma de Conformidad:</p>
-    
-    
-  </div>
-  
-</div>
-<button mat-raised-button type="submit" class="btn btn-blue btn-round "
-  onclick="actualizarBoleta(1)">Modificar</button>
-<button mat-raised-button type="submit" class="btn btn-white btn-round  "
-  (click)="imprimir()">Imprimir</button>
 </div>

@@ -36,8 +36,10 @@ export class PagoService {
   }
 
   // Método para eliminar un descuento (cambiar estado a inactivo)
-  //  estado de un área 
   cambiarEstadoPago(idPago: number, estado: string): Observable<any> {
     return this.http.patch(`${this.baseUrl}/cambiarEstado/${idPago}`, { estado }, { headers: this.getHeaders() });
+  }
+  buscarPorCi(ci: string): Observable<Pago[]> {
+    return this.http.get<Pago[]>(`${this.baseUrl}/buscar?ci=${ci}`);
   }
 }

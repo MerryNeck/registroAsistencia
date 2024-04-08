@@ -9,9 +9,43 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./pago.component.css']
 })
 export class PagoComponent implements OnInit {
+  ciBusqueda: string = '';
+  fechaBusqueda: string = '';
   nuevoPago: Pago = new Pago(0, '', '', '', 0, 0, 0, 0, 0);
   pagos: Pago[] = [];
   editandoPago: Pago | null = null; 
+
+  info=[{
+    id_sueldo : '1',
+    ci:'132776634',
+    dias_trabajo: '30',
+    retencion: '0',
+    sueldo:'0',
+    sueldo_bruto: '0',
+    estado : 's',
+    fecha_creacion: '20240301' ,
+    fecha_nodificacion: '' ,
+  },{
+    id_sueldo : '2',
+    ci:'132776634',
+    dias_trabajo: '30',
+    retencion: '0',
+    sueldo:'0',
+    sueldo_bruto: '0',
+    estado : 's',
+    fecha_creacion: '20240301' ,
+    fecha_nodificacion: '' ,
+  },{
+    id_sueldo : '3',
+    ci:'132776634',
+    dias_trabajo: '30',
+    retencion: '0',
+    sueldo:'0',
+    sueldo_bruto: '0',
+    estado : 's',
+    fecha_creacion: '20240301' ,
+    fecha_nodificacion: '' ,
+  }]
 
   constructor(private pagoService: PagoService) { }
 
@@ -60,11 +94,22 @@ export class PagoComponent implements OnInit {
     }
   }
 
-  cambiarEstadoAnticipo(idPago: number, estado: string): void {
+  cambiarEstadoPago(idPago: number, estado: string): void {
     this.pagoService.cambiarEstadoPago(idPago, estado)
       .subscribe(() => {
         this.pagos = this.pagos.filter(a => a.id_sueldo !== idPago);
       });
   }
 
+  buscarAnticipoPorCi(ci: string): void {
+    this.pagoService.buscarPorCi(ci)
+      .subscribe({
+        next: (pagos) => {
+          this.pagos = pagos; 
+        },
+        error: (error) => {
+          console.error('Error al buscar boletas por CI', error);
+        }
+      });
+  }
 }

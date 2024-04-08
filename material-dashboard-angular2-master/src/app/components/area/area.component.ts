@@ -13,7 +13,26 @@ export class AreaComponent implements OnInit {
   areas: Area[] = [];
   editandoArea: Area | null = null; 
 
-  
+
+  info=[{
+    id_area : 1,
+    tipo_area: 'rrhh',
+    estado : 's',
+    fecha_creacion:'20240301',
+    fecha_modificacion: '',
+},{
+  id_area : 2,
+  tipo_area: 'administracion',
+  estado : 's',
+  fecha_creacion:'20240301',
+  fecha_modificacion: '',
+},{
+  id_area : 3,
+  tipo_area: 'desarrollo',
+  estado : 's',
+  fecha_creacion:'20240301',
+  fecha_modificacion: '',
+}]
 
   constructor(private areaService: AreaService,  private authService:AuthService) { }
 
@@ -72,7 +91,6 @@ export class AreaComponent implements OnInit {
     );
   }
 
-  
 }
 
 

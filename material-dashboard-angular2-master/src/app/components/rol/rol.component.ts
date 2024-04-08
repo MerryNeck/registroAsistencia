@@ -13,9 +13,30 @@ export class RolComponent implements OnInit {
 
   nuevoRol: Rol = new Rol(0, '', '', '', '');
   roles: Rol[] = [];
-  editandoRol: Rol | null = null;
+  editandoRol: Rol | null =null;
 
-  constructor(private rolService: RolService, private authService: AuthService) { }
+
+  rol=[{
+    id_rol : 1,
+    tipo: 'rrhh',
+    fecha_creacion:'20240301',
+    estado : 's',
+    fecha_modificacion: ''
+},{
+  id_rol : 2,
+  tipo: 'administracion',
+  fecha_creacion:'20240301',
+  estado : 's',
+  fecha_modificacion: ''
+},{
+  id_rol : 3,
+  tipo: 'desarrollo',
+  fecha_creacion:'20240301',
+  estado : 's',
+  fecha_modificacion: ''
+}]
+
+  constructor(private rolService: RolService, private authService:AuthService) { }
 
   ngOnInit(): void {
     this.listarRoles();
@@ -28,13 +49,13 @@ export class RolComponent implements OnInit {
     );
   }
 
-  registrarNuevoRol(form: NgForm): void {
+  registrarNuevoRol(form:NgForm): void {
     if (form.valid) {
       const { tipo, estado } = form.value;
       this.nuevoRol.tipo = tipo;
       this.nuevoRol.estado = estado;
       this.rolService.registrarRol(this.nuevoRol)
-        .subscribe(rol => {
+        .subscribe(rol=> {
           this.roles.push(rol);
           this.nuevoRol = new Rol(0, '', '', '', '');
           form.reset();
@@ -71,4 +92,5 @@ export class RolComponent implements OnInit {
         console.error('Error al cambiar estado del rol:', error)
     );
   }
+
 }
