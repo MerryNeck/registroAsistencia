@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       const [tocken, rol ]=response
 
       console.log('Ingreso Exitoso: ', response);
-      //localStorage.setItem('token', response.token);
+      localStorage.setItem('token', response.token);
       this._router.navigate(['excel'])
     }, error => {
       console.error('Ingreso Fallido: ', error);

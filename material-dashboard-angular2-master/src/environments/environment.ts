@@ -8,7 +8,11 @@ export const environment = {
    backend: {
     api: 'http://localhost:5052/api',
     login: '/api/login',
-    areaRol: '/api/areaRol'
+    area: '/api/area',
+    rol: '/api/rol',
+    anticipo: '/api/anticipo',
+    
+
   }
   
 };

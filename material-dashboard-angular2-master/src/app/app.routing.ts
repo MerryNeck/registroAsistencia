@@ -8,13 +8,14 @@ import { AppComponent } from './app.component';
 import { AreaComponent } from './components/area/area.component';
 import { RutaexcelComponent } from './components/rutaexcel/rutaexcel.component';
 import { AsistenciaComponent } from './components/asistencia/asistencia.component';
-import { AnticipoComponent } from './components/anticipo/anticipo.component';
+import { AnticipoComponent } from './components/anticipos/anticipo/anticipo.component';
 import { PagoComponent } from './components/pago/pago.component';
 import { BoletaComponent } from './components/boleta/boleta.component';
 import { RolComponent } from './components/rol/rol.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { PermisoComponent } from './components/permiso/permiso.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { AnticipoEditComponent } from './components/anticipos/anticipo-edit/anticipo-edit.component';
 
 
 const routes: Routes =[
@@ -49,8 +50,7 @@ const routes: Routes =[
      pathMatch: 'full',*/
    },{
     path: 'anticipo',component: AnticipoComponent,
-     /*redirectTo: '',
-     pathMatch: 'full',*/
+     
    }, {
     path: 'pago',component: PagoComponent,
      /*redirectTo: '',
@@ -72,6 +72,9 @@ const routes: Routes =[
     path: 'sin',component: SidebarComponent,
      /*redirectTo: '',
      pathMatch: 'full',*/
+   },{
+    path: 'editar-anticipo/:id',component: AnticipoEditComponent,
+     
    },
     {
     //path: 'dashboard',component:DashboardComponent,

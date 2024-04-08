@@ -86,15 +86,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let anticipos of info">
-                                                <td>{{ anticipos.id_usuario }}</td>
-                                                <td>{{ anticipos.anticipo}}</td>
-                                                <td>{{ anticipos.estado }}</td>
-                                                <td>{{ anticipos.fecha_creacion}}</td>
-                                                <td>{{ anticipos.fecha_modificacion}}</td>
+                                            <tr *ngFor="let anticipo of info">
+                                                <td>{{ anticipo.id_usuario }}</td>
+                                                <td>{{ anticipo.anticipo}}</td>
+                                                <td>{{ anticipo.estado }}</td>
+                                                <td>{{ anticipo.fecha_creacion}}</td>
+                                                <td>{{ anticipo.fecha_modificacion}}</td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue btn-round "
-                                                        (click)="actualizarAnticipo()">Modificar</button></td>
+                                                        (click)="editarAnticipo(anticipo)">Modificar</button></td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-white btn-round"
                                                         (click)="cambiarEstadoAnticipo(1,'n')">Eliminar</button></td>

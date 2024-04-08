@@ -16,10 +16,11 @@ import { AsistenciaComponent } from './asistencia/asistencia.component';
 import { PagoComponent } from './pago/pago.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BoletaComponent } from './boleta/boleta.component';
-import { AnticipoComponent } from './anticipo/anticipo.component';
+import { AnticipoComponent } from './anticipos/anticipo/anticipo.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RolComponent } from './rol/rol.component';
 import { PermisoComponent } from './permiso/permiso.component';
+import { AnticipoEditComponent } from './anticipos/anticipo-edit/anticipo-edit.component';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { PermisoComponent } from './permiso/permiso.component';
     PerfilComponent,
     RolComponent,
     PermisoComponent,
+    AnticipoEditComponent,
   ],
   exports: [
     FooterComponent,
