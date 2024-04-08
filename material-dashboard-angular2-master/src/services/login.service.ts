@@ -25,9 +25,13 @@ export class LoginService {
       'Authorization': `Bearer ${token}`
     });
   }
-login(email:string, password:string): Observable<LoginResponse>{
+login(email:string, password:string,token:string){
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  });
     const body = { email, password }; 
-    return this._http.post<LoginResponse>(this.url, body)
+    return this._http.post<any>(this.url, { email, password },{headers})
     .pipe(
         catchError(this.handleError) 
       );

@@ -35,7 +35,7 @@ export class PagoService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.post<any>(this.baseUrl, pago,{ headers });
+    return this.http.post<any>(`${this.baseUrl}/registrar`, pago,{ headers });
   }
 
   // Método para actualizar un pago

@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,7 +31,7 @@ export class AreaService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.post(this.url, area, { headers});
+    return this.http.post(`${this.url}/registrar`, area, { headers});
   }
 
   // listar todas las áreas

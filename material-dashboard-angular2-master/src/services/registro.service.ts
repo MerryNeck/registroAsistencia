@@ -51,7 +51,7 @@ interface RegistroResponse {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this._http.post<any>(this.url, usuario,{ headers});
+    return this._http.post<any>(`${this.url}/registrar`, usuario,{ headers});
   }
 
    

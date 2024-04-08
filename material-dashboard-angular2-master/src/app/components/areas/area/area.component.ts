@@ -47,7 +47,7 @@ export class AreaComponent implements OnInit {
   listarAreas() {
     this.areaService.listarAreas().subscribe(
       areas => this.areas = areas,
-      error => Swal.fire('Error', 'No se pudieron obtener los area', 'error')
+      error => Swal.fire('Error', 'No se pudieron obtener los datos del area', 'error')
     );
   }
 
