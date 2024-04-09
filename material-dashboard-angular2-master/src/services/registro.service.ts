@@ -68,7 +68,7 @@ interface RegistroResponse {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       });
-      return this._http.put<void>(`${this.url}/anticipos/${usuario.id_usuario}`, usuario, { headers })
+      return this._http.put<void>(`${this.url}/actualizar/${usuario.id_usuario}`, usuario, { headers })
         .pipe(
           catchError(error => {
             console.error('Error al actualizar el anticipo:', error);
