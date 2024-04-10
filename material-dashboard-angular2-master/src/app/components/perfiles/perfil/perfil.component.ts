@@ -69,7 +69,32 @@ export class PerfilComponent implements OnInit {
         });
     }
   }
-  
+  cambiarEstadoPerfiles(idPerfil: number, nuevoEstado: string) {
+    this.loginService.cambiarEstadoPerfil(idPerfil, nuevoEstado, this.token).subscribe({
+      next: () => {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Estado del perfil actualizado correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }).then((result) => {
+          if (result.value) {
+            this.obtenerPerfiles();
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error al cambiar el estado:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo cambiar el estado del perfil',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    });
+
+  }
   buscarPerfilPorCi(ci: string): void {
     this.loginService.buscarPorCi(ci,this.token)
       .subscribe({

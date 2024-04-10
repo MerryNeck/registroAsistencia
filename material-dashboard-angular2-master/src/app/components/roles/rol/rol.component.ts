@@ -46,7 +46,7 @@ export class RolComponent implements OnInit {
   listarRoles(): void {
     this.rolService.listarRol().subscribe(
       (roles) => (this.roles = roles),
-      error => Swal.fire('Error', 'No se pudieron obtener los anticipos', 'error')
+      error => Swal.fire('Error', 'No se pudieron obtener los rol', 'error')
       
     );
   }
@@ -69,6 +69,31 @@ export class RolComponent implements OnInit {
     this.editandoRol = { ...rol };
   }
 
- 
+  cambiarEstadoRol(idRol: number, nuevoEstado: string) {
+    this.rolService.cambiarEstadoRol(idRol, nuevoEstado, this.token).subscribe({
+      next: () => {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Estado del rol actualizado correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }).then((result) => {
+          if (result.value) {
+            this.listarRoles();
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error al cambiar el estado:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo cambiar el estado del rol.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    });
+
+  }
 
 }

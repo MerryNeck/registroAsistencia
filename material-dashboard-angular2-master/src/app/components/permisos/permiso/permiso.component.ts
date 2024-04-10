@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Permiso } from 'models/permiso.modelo';
 import { PermisoService } from 'services/permiso.service';
-import { AuthService } from 'services/auth.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 

@@ -1,1 +1,79 @@
-<p>asistencia-edit works!</p>
+<div class="main-content">
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title"> EDITAR ASISTENCIA</h4>
+                    </div>
+                    <div class="card-body">
+                        <form #editForm="ngForm" (ngSubmit)="actualizarAsistencia(editForm)">
+                            <div class="row">
+                                <div class="form-group col-md-4" id="form">
+                                    <div class="example-full-width">
+                                        <label for="fecha">Fecha:</label>
+                                        <input type="text" class="form-control" id="fecha" name="fecha"
+                                            [(ngModel)]="editandoAsistencia.fecha" required>
+                                    </div> 
+                                </div>
+
+                                <div class="form-group col-md-4" id="form">
+                                    <div class="example-full-width">
+                                        <label for="ingreso1">Primer Ingreso:</label>
+                                        <input type="text" class="form-control" id="ingreso1" name="ingreso1"
+                                            [(ngModel)]="editandoAsistencia.tprano_ingreso" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4" id="form">
+                                    <div class="example-full-width">
+                                        <label for="salida1">Primera Salida:</label>
+                                        <input type="text" class="form-control" id="tprano_salida" name="tprano_salida"
+                                            [(ngModel)]="editandoAsistencia.tprano_salida" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="ingreso2">Segundo Ingreso:</label>
+                                        <input type="text" class="form-control" id="ingreso2" name="ingreso2"
+                                            [(ngModel)]="editandoAsistencia.tde_ingreso" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="salida2">Segunda Salida:</label>
+                                        <input type="text" class="form-control" id="salida2" name="tde_salida"
+                                            [(ngModel)]="editandoAsistencia.tde_salida" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="ingreso1"> Faltas:</label>
+                                        <input type="text" class="form-control" id="faltas" name="faltas"
+                                            [(ngModel)]="editandoAsistencia.faltas" required>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="min_extra">Minutos Extra:</label>
+                                        <input type="text" class="form-control" id="min_extra" name="min_extra"
+                                            [(ngModel)]="editandoAsistencia.min_extra" required>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button type="submit" class="btn btn-primary">GUARDAR</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

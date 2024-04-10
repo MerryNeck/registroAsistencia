@@ -53,7 +53,7 @@ export class PermisoService {
       })
     );
 }
-obtenerAnticipoPorId(id: number, token: string): Observable<Permiso> {
+obtenerPermisoPorId(id: number, token: string): Observable<Permiso> {
   const headers = new HttpHeaders({
     'Authorization': `Bearer ${token}`
   });

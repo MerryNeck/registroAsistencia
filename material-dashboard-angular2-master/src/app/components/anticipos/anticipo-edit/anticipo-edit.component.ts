@@ -59,5 +59,5 @@ export class AnticipoEditComponent {
       Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
     }
   }
-
+   
 }

@@ -27,6 +27,7 @@ import { PerfilEditComponent } from './perfiles/perfil-edit/perfil-edit.componen
 import { PermisoEditComponent } from './permisos/permiso-edit/permiso-edit.component';
 import { RegistroEditComponent } from './registros/registro-edit/registro-edit.component';
 import { RolEditComponent } from './roles/rol-edit/rol-edit.component';
+import { AsistenciaEditComponent } from './asistencias/asistencia-edit/asistencia-edit.component';
 
 @NgModule({
   imports: [
@@ -64,6 +65,7 @@ import { RolEditComponent } from './roles/rol-edit/rol-edit.component';
     PermisoEditComponent,
     RegistroEditComponent,
     RolEditComponent,
+    AsistenciaEditComponent,
   ],
   exports: [
     FooterComponent,

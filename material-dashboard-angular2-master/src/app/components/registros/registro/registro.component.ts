@@ -118,5 +118,32 @@ constructor(private usuarioService: RegistroService) { }
         }
       });
   }
+ 
+  cambiarEstadoRegistro(idUsuario: number, nuevoEstado: string) {
+    this.usuarioService.cambiarEstadoUsuario(idUsuario, nuevoEstado, this.token).subscribe({
+      next: () => {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Estado del usuario actualizado correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }).then((result) => {
+          if (result.value) {
+            this.obtenerUsuarios();
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error al cambiar el estado:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo cambiar el estado del usuario.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    });
+
+  }
 
 }

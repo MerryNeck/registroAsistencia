@@ -1,1 +1,41 @@
-<p>permiso-edit works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title"> EDITAR ANTICIPOS</h4>
+                    </div>
+                    <div class="card-body">
+                        <form #editForm="ngForm" (ngSubmit)="actualizarPermiso(editForm)">
+                            <div class="row">
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="fecha">Fecha:</label>
+                                        <input type="text" class="form-control"  name="fecha" [(ngModel)]="editandoPermiso.fecha" required>
+                                      </div>
+                                </div>
+
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="min">Tiempo del Permiso (Minutos):</label>
+                                        <input type="text" class="form-control" id="min" name="min_permiso"
+                                            [(ngModel)]="editandoPermiso.min_permiso" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="detalle">Detalle del Permiso:</label>
+                                        <input type="text" class="form-control"  name="detalle" [(ngModel)]="editandoPermiso.detalle" required>
+                                      </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">GUARDAR</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

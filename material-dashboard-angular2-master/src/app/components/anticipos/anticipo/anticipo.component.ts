@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 import { Anticipo } from 'models/anticipo.model';
 import { AnticipoService } from 'services/anticipo.service';
 import Swal from 'sweetalert2';
@@ -19,31 +19,31 @@ export class AnticipoComponent implements OnInit {
   editandoAnticipo: Anticipo | null = null;
   token: string = '';
 
- info=[{
-      id_anticipo : 1,
-      id_usuario: 2,
-      anticipos: 100,
-      estado : 's',
-      fecha_creacion: '20240301' ,
-      fecha_modificacion: '' ,
- },{
-  id_anticipo : 2,
-  id_usuario: 2,
-  anticipos: 100,
-  estado : 's',
-  fecha_creacion: '20240301' ,
-  fecha_modificacion: '',
-},{
-  id_anticipo : 3,
-  id_usuario: 2,
-  anticipos: 100,
-  estado : 's',
-  fecha_creacion: '20240301' ,
-  fecha_modificacion: '',
-}]
+  info = [{
+    id_anticipo: 1,
+    id_usuario: 2,
+    anticipos: 100,
+    estado: 's',
+    fecha_creacion: '20240301',
+    fecha_modificacion: '',
+  }, {
+    id_anticipo: 2,
+    id_usuario: 2,
+    anticipos: 100,
+    estado: 's',
+    fecha_creacion: '20240301',
+    fecha_modificacion: '',
+  }, {
+    id_anticipo: 3,
+    id_usuario: 2,
+    anticipos: 100,
+    estado: 's',
+    fecha_creacion: '20240301',
+    fecha_modificacion: '',
+  }]
 
 
- constructor(private anticipoService: AnticipoService, private router:Router) { }
+  constructor(private anticipoService: AnticipoService, private router: Router) { }
 
   ngOnInit(): void {
     this.obtenerAnticipos();
@@ -79,8 +79,9 @@ export class AnticipoComponent implements OnInit {
     }
   }
 
-   /* this.router.(['/editar-anticipo/:id', anticipo.id_anticipo]);
-  }*/
+  editaAnticipo(anticipo: Anticipo): void {
+    this.editandoAnticipo = { ...anticipo };
+  }
 
   buscarAnticipoPorCi(ci: string): void {
     this.anticipoService.buscarPorCi(ci, this.token)
@@ -95,4 +96,30 @@ export class AnticipoComponent implements OnInit {
       });
   }
 
+  cambiarEstadoAnticipo(idAnticipo: number, nuevoEstado: string) {
+    this.anticipoService.cambiarEstadoAnticipo(idAnticipo, nuevoEstado, this.token).subscribe({
+      next: () => {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Estado del anticipo actualizado correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }).then((result) => {
+          if (result.value) {
+            this.obtenerAnticipos();
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error al cambiar el estado:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo cambiar el estado del anticipo.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    });
+
+  }
 }

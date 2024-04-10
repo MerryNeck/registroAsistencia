@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Asistencia } from 'models/asistencia.model';
+import { AsistenciaService } from 'services/asistencia.service';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-asistencia-edit',
@@ -7,9 +13,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsistenciaEditComponent implements OnInit {
 
-  constructor() { }
+  editandoAsistencia: Asistencia | null = null;
+  token: string = '';
+
+  constructor(
+    private asistenciaService: AsistenciaService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('token') || '';
+    this.route.params.subscribe(params => {
+      const idAsistencia = +params['id'];
+      this.obtenerAsistencia(idAsistencia);
+    });
+  }
+
+  obtenerAsistencia(idAsistencia: number): void {
+    this.asistenciaService.obtenerAsistenciaPorId(idAsistencia, this.token)
+      .subscribe(
+        asistencia => {
+          this.editandoAsistencia = asistencia;
+        },
+        error => {
+          console.error('Error al obtener el asistencia:', error);
+          Swal.fire('Error', 'No se pudo obtener el asistencia', 'error');
+        }
+      );
+  }
+
+  actualizarAsistencia(form: NgForm): void {
+    if (form.valid && this.editandoAsistencia) {
+      this.asistenciaService.actualizarAsistencia(this.editandoAsistencia, this.token)
+        .subscribe(
+          () => {
+            Swal.fire('Éxito', 'La asistencia se actualizó correctamente', 'success');
+            this.router.navigate(['/asistencia']);
+          },
+          error => {
+            console.error('Error al actualizar la asistencia:', error);
+            Swal.fire('Error', 'No se pudo actualizar el asistencia', 'error');
+          }
+        );
+    } else {
+      Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
+    }
   }
 
 }

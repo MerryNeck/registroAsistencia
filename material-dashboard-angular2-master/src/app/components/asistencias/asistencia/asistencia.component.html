@@ -33,6 +33,7 @@
                   <thead class="text-primary">
                     <tr class="table-row">
                       <th class="table-header">FECHA</th>
+                      <th class="table-header">CEDULA DE IDENTIDAD</th>
                       <th class="table-header">NOMBRE</th>
                       <th class="table-header">APELLIDO</th>
                       <th class="table-header">PRIMERA ENTRADA</th>
@@ -50,13 +51,13 @@
                       <th class="table-header">FECHA CREACION</th>
                       <th class="table-header">FECHA MODIFICACION</th>
                       <th class="table-header">MODIFICAR</th>
-                      <th class="table-header">ELIMINAR</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let asistencia of info">
                       <td>{{ asistencia.fecha }}</td>
-                      <td>{{ asistencia.id_usuario }}</td>
+                      <td>{{ asistencia.ci }}</td>
+                      <td>{{ asistencia.nombre }}</td>
                       <td>{{ asistencia.apellido }}</td>
                       <td>{{ asistencia.tprano_ingreso}}</td>
                       <td>{{ asistencia.tprano_salida }}</td>
@@ -73,13 +74,7 @@
                       <td>{{ asistencia.fecha_creacion}}</td>
                       <td>{{ asistencia.fecha_modificacion}}</td>
                       <td><button mat-raised-button class="btn btn-warning btn-round"
-                          (click)="actualizarAsistencia()">MODIFICAR</button></td>
-                      <td>
-                        <button mat-raised-button class="btn btn-danger btn-round"
-                          (click)="cambiarEstadoAsistencia(1,'n')">ELIMINAR</button>
-                      </td>
-
-
+                          (click)="seleccionarAsistencia()">MODIFICAR</button></td>
                     </tr>
                   </tbody>
                 </table>

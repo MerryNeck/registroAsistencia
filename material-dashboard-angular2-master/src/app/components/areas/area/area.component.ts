@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Area } from 'models/area.model';
 import { AreaService } from 'services/area.service';
 import { NgForm } from '@angular/forms';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -69,7 +69,35 @@ export class AreaComponent implements OnInit {
     Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
   }
   }
+  cambiarEstadoArea(idArea: number, nuevoEstado: string) {
+    this.areaService.cambiarEstadoArea(idArea, nuevoEstado, this.token).subscribe({
+      next: () => {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Estado del area actualizado correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }).then((result) => {
+          if (result.value) {
+            this.listarAreas();
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error al cambiar el estado:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo cambiar el estado del area.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    });
 
+  }
+  editarArea(area: Area): void {
+    this.editandoArea = { ...area };
+  }
 }
 
 

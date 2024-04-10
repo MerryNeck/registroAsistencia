@@ -3,7 +3,7 @@ import { Pago } from 'models/pago.model';
 import { PagoService } from 'services/pago.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { Router } from 'express';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pago',
@@ -61,7 +61,7 @@ export class PagoComponent implements OnInit {
   obtenerPago(): void {
     this.pagoService.obtenerPago(this.token)
       .subscribe(pagos => this.pagos = pagos,
-        error => Swal.fire('Error', 'No se pudieron obtener los anticipos', 'error')
+        error => Swal.fire('Error', 'No se pudieron obtener los pagos', 'error')
       );
   }
 
@@ -98,5 +98,34 @@ export class PagoComponent implements OnInit {
           Swal.fire('Error', 'No se pudieron buscar los anticipos', 'error');
         }
       });
+  }
+  editarPago(pagos: Pago): void {
+    this.editandoPago = { ...pagos };
+  }
+  cambiarEstadoPago(idPago: number, nuevoEstado: string) {
+    this.pagoService.cambiarEstadoPago(idPago, nuevoEstado, this.token).subscribe({
+      next: () => {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Estado del pago actualizado correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        }).then((result) => {
+          if (result.value) {
+            this.obtenerPago();
+          }
+        });
+      },
+      error: (error) => {
+        console.error('Error al cambiar el estado:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'No se pudo cambiar el estado del pago.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      }
+    });
+
   }
 }

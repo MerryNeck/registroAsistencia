@@ -14,7 +14,8 @@ export const environment = {
     pago: '/api/pago',
     perfil: '/api/perfil',
     permiso: '/api/permiso',
-    usuario: 'api/regisusuario'
+    usuario: 'api/regisusuario',
+    asistencia: '/api/asistencia',
 
   }
   

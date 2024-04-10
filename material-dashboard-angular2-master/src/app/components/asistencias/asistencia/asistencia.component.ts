@@ -3,6 +3,8 @@ import { Asistencia } from 'models/asistencia.model';
 import { AsistenciaService } from 'services/asistencia.service';
 import { HttpClient } from '@angular/common/http';
 import * as printJS from 'print-js';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-asistencia',
   templateUrl: './asistencia.component.html',
@@ -14,6 +16,7 @@ export class AsistenciaComponent implements OnInit {
   asistencias: Asistencia[] = [];
   asistenciaSeleccionada: Asistencia | null = null;
   isSidebarActive: boolean = false;
+  token:string='';
 
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;
@@ -23,6 +26,7 @@ export class AsistenciaComponent implements OnInit {
  info=[{
   id_asistencia : 1,
   fecha :'20240301',
+  ci:'13276634',
   id_excel: 100,
   tprano_ingreso:'8:30',
   tde_ingreso: '12:30',
@@ -32,7 +36,7 @@ export class AsistenciaComponent implements OnInit {
   total_horas : '480',
   tprano_salida :'12:00',
   tde_salida: '16:30',
-  id_usuario:'miriam',
+  nombre:'miriam',
   apellido:'justo',
   min_extra: '100',
   id_permiso:null,
@@ -70,22 +74,14 @@ export class AsistenciaComponent implements OnInit {
   }
 
   listarAsistencias(): void {
-    this.asistenciaService.getAsistencias()
-      .subscribe(asistencias => this.asistencias = asistencias);
+    this.asistenciaService.getAsistencias(this.token)
+      .subscribe(asistencias => this.asistencias = asistencias),
+      error => Swal.fire('Error', 'No se pudieron obtener los datos de asistencia', 'error')
+      ;
   }
 
   seleccionarAsistencia(asistencia: Asistencia): void {
-    this.asistenciaSeleccionada = asistencia;
-  }
-  actualizarAsistencia(): void {
-    if (this.asistenciaSeleccionada) {
-      this.asistenciaService.updateAsistencia(this.asistenciaSeleccionada)
-        .subscribe(asistencia => {
-          const index = this.asistencias.findIndex(a => a.id_asistencia === asistencia.id_asistencia);
-          this.asistencias[index] = asistencia;
-          this.asistenciaSeleccionada = null;
-        });
-    }
+    this.asistenciaSeleccionada = { ...asistencia };
   }
   imprimirAsistencia(): void {
     const filasHTML: string[] = [];
@@ -164,7 +160,7 @@ export class AsistenciaComponent implements OnInit {
 
   // Método para cambiar el estado de una asistencia
   cambiarEstadoAsistencia(id: number, estado: string) {
-    this.asistenciaService.cambiarEstadoAsistencia(id, estado).subscribe(
+    this.asistenciaService.cambiarEstadoAsistencia(id, estado, this.token).subscribe(
       () => {
         console.log('Estado de la asistencia cambiado correctamente.');
         this.listarAsistencias(); // Recargar la lista de asistencias después de cambiar el estado
@@ -173,7 +169,7 @@ export class AsistenciaComponent implements OnInit {
     );
   }
   buscarAsistencia(): void {
-    this.asistenciaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda)
+    this.asistenciaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda,this.token)
       .subscribe(asistencias => {
         this.asistencias = asistencias;
       }, error => {

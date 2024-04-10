@@ -82,6 +82,8 @@ export class AnticipoService {
           return throwError('No se pudo obtener el anticipo');
         })
       );
+
+      
   }
 
   

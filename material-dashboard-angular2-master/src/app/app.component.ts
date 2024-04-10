@@ -17,7 +17,11 @@ export class AppComponent {
         || event.url === '/area' || event.url === '/rol'
         || event.url === '/excel' || event.url === '/asistencia'
         || event.url === '/anticipo' || event.url === '/pago'
-        || event.url === '/perfil' || event.url === '/permiso');
+        || event.url === '/perfil' || event.url === '/permiso'
+        || event.url === '/editar-area/:id' || event.url === '/editar-rol/:id'
+        || event.url === '/editar-asistencia/:id' || event.url === '/editar-registro/:id' 
+        || event.url === '/editar-anticipo/:id' || event.url === '/editar-pago/:id'
+        || event.url === '/editar-perfil/:id' || event.url === '/editar-permiso/:id');
       }
       
     });
