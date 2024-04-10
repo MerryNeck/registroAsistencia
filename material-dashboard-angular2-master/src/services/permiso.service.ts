@@ -44,7 +44,7 @@ export class PermisoService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    const url = `${this.baseUrl}/permiso${permiso.id_permiso}`;
+    const url = `${this.baseUrl}/actualizar/${permiso.id_permiso}`;
     return this.http.put<any>(url, permiso,{ headers })
     .pipe(
       catchError(error => {
@@ -57,7 +57,7 @@ obtenerPermisoPorId(id: number, token: string): Observable<Permiso> {
   const headers = new HttpHeaders({
     'Authorization': `Bearer ${token}`
   });
-  return this.http.get<Permiso>(`${this.baseUrl}/permiso/${id}`, { headers })
+  return this.http.get<Permiso>(`${this.baseUrl}/editar/${id}`, { headers })
     .pipe(
       catchError(error => {
         console.error('Error al obtener el permiso:', error);

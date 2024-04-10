@@ -96,7 +96,7 @@ export class AreaComponent implements OnInit {
 
   }
   editarArea(area: Area): void {
-    this.editandoArea = { ...area };
+    this.router.navigate(['/editar-area', area.id_area]);
   }
 }
 

@@ -4,6 +4,7 @@ import { AsistenciaService } from 'services/asistencia.service';
 import { HttpClient } from '@angular/common/http';
 import * as printJS from 'print-js';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-asistencia',
@@ -67,7 +68,7 @@ export class AsistenciaComponent implements OnInit {
   fecha_modificacion: '' ,
 }]
 
-  constructor(private asistenciaService: AsistenciaService, private http: HttpClient) { }
+  constructor(private asistenciaService: AsistenciaService, private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.listarAsistencias();
@@ -81,7 +82,7 @@ export class AsistenciaComponent implements OnInit {
   }
 
   seleccionarAsistencia(asistencia: Asistencia): void {
-    this.asistenciaSeleccionada = { ...asistencia };
+    this.router.navigate(['/editar-asistencia', asistencia.id_asistencia]);
   }
   imprimirAsistencia(): void {
     const filasHTML: string[] = [];

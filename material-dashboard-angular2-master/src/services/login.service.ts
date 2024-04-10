@@ -86,7 +86,7 @@ actualizarPerfil(perfil: Login, token: string): Observable<void> {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
   });
-  return this._http.put<void>(`${this.url}/perfil/${perfil.id_usuario}`, perfil, { headers })
+  return this._http.put<void>(`${this.url}/actualizar/${perfil.id_usuario}`, perfil, { headers })
     .pipe(
       catchError(error => {
         console.error('Error al actualizar el usuario:', error);
@@ -98,7 +98,7 @@ obtenerPerfilPorId(id: number, token: string): Observable<Login> {
   const headers = new HttpHeaders({
     'Authorization': `Bearer ${token}`
   });
-  return this._http.get<Login>(`${this.url}/perfil/${id}`, { headers })
+  return this._http.get<Login>(`${this.url}/editar/${id}`, { headers })
     .pipe(
       catchError(error => {
         console.error('Error al obtener el usuario:', error);

@@ -8,7 +8,6 @@
           <div class="receipt-container">
             <div class="header">
               <div class="empre">Bispace SRL</div>
-              <div class="nro">#001</div>
               <h1>BOLETA DE PAGO</h1>
 
               <div class="company-info" *ngFor="let persona of info">
@@ -65,8 +64,6 @@
           </div>
 
         </div>
-        <button mat-raised-button type="submit" class="btn btn-blue btn-round "
-          (click)="actualizarBoleta()">Modificar</button>
         <button mat-raised-button type="submit" class="btn btn-white btn-round  " (click)="imprimirPantalla()">Imprimir</button>
       </div>
 

@@ -79,8 +79,8 @@ export class AnticipoComponent implements OnInit {
     }
   }
 
-  editaAnticipo(anticipo: Anticipo): void {
-    this.editandoAnticipo = { ...anticipo };
+  editarAnticipo(anticipo: Anticipo): void {
+    this.router.navigate(['/editar-anticipo', anticipo.id_anticipo]);
   }
 
   buscarAnticipoPorCi(ci: string): void {

@@ -16,7 +16,8 @@ export const environment = {
     permiso: '/api/permiso',
     usuario: 'api/regisusuario',
     asistencia: '/api/asistencia',
-
+    boleta: 'api/boleta',
+    excel: 'api/excel'
   }
   
 };

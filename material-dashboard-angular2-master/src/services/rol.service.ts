@@ -50,23 +50,23 @@ export class RolService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.put<void>(`${this.url}/rol/${rol.id_rol}`, rol, { headers })
+    return this.http.put<void>(`${this.url}/actualizar/${rol.id_rol}`, rol, { headers })
       .pipe(
         catchError(error => {
-          console.error('Error al actualizar el anticipo:', error);
-          return throwError('No se pudo actualizar el anticipo');
+          console.error('Error al actualizar el rol:', error);
+          return throwError('No se pudo actualizar el rol');
         })
       );
   }
-  obtenerAnticipoPorId(id: number, token: string): Observable<Rol> {
+  obtenerRolPorId(id: number, token: string): Observable<Rol> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Rol>(`${this.url}/rol/${id}`, { headers })
+    return this.http.get<Rol>(`${this.url}/editar/${id}`, { headers })
       .pipe(
         catchError(error => {
-          console.error('Error al obtener el anticipo:', error);
-          return throwError('No se pudo obtener el anticipo');
+          console.error('Error al obtener el rol:', error);
+          return throwError('No se pudo obtener el rol');
         })
       );
   }

@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     if (!this.email || !this.password || !this.token) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
+        title: 'Lo Siento',
         text: 'Por favor, completa todos los campos!',
       });
       return;
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         console.log('Ingreso Exitoso: ', response);
         localStorage.setItem('token', response.token);
-        this._router.navigate(['asistencia']);
+        this._router.navigate(['/asistencia']);
       },
       (error) => {
         console.error('Ingreso Fallido: ', error);

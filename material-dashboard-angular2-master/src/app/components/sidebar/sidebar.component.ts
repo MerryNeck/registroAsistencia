@@ -17,6 +17,8 @@ export const ROUTES: RouteInfo[] = [
   { path: '/anticipo', title: 'ANTICIPO', icon: 'library_books', class: '' },
   { path: '/perfil', title: 'REGISTRO DE AUTENTIFICACION', icon: 'bubble_chart', class: '' },
   { path: '/permiso', title: 'PERMISO', icon: 'person', class: '' },
+
+  
 ];
 
 @Component({

@@ -80,7 +80,7 @@ export class PagoComponent implements OnInit {
           form.reset();
           Swal.fire('Éxito', 'El anticipo fue registrado correctamente', 'success');
         },
-        error => Swal.fire('Error', 'No se pudo registrar el anticipo', 'error')
+        error => Swal.fire('Error', 'No se pudo registrar el pago', 'error')
       );
   } else {
     Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
@@ -95,12 +95,12 @@ export class PagoComponent implements OnInit {
         },
         error: (error) => {
           console.error('Error al buscar boletas por CI', error);
-          Swal.fire('Error', 'No se pudieron buscar los anticipos', 'error');
+          Swal.fire('Error', 'No se pudieron buscar los pagos', 'error');
         }
       });
   }
   editarPago(pagos: Pago): void {
-    this.editandoPago = { ...pagos };
+    this.router.navigate(['/editar-pago', pagos.id_sueldo]);
   }
   cambiarEstadoPago(idPago: number, nuevoEstado: string) {
     this.pagoService.cambiarEstadoPago(idPago, nuevoEstado, this.token).subscribe({

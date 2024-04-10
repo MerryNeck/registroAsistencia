@@ -9,12 +9,11 @@ import { environment } from 'environments/environment';
   providedIn: 'root'
 })
 export class PagoService {
-  private baseUrl = environment.backend.pago; // Reemplaza 'api/descuentos' con la ruta correcta de tu backend
-
+  private baseUrl = environment.backend.pago; 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getHeaders() {
-    const token = this.authService.getToken(); // Obtener el token JWT
+    const token = this.authService.getToken(); 
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -44,7 +43,7 @@ export class PagoService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.put<void>(`${this.baseUrl}/pago/${pago.id_sueldo}`, pago, { headers })
+    return this.http.put<void>(`${this.baseUrl}/actualizar/${pago.id_sueldo}`, pago, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al actualizar el pago:', error);
@@ -56,7 +55,7 @@ export class PagoService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Pago>(`${this.baseUrl}/pago/${id}`, { headers })
+    return this.http.get<Pago>(`${this.baseUrl}/editar/${id}`, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al obtener el pago:', error);

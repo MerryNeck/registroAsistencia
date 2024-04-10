@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AsistenciaEditComponent implements OnInit {
 
-  editandoAsistencia: Asistencia | null = null;
+  editandoAsistencia: Asistencia = {id_asistencia:0, fecha: '', id_excel:0,tprano_ingreso: '',tprano_salida:'',tde_ingreso:'',tde_salida:'',min_retardos:'',min_adelantado:'',faltas:'',total_horas:'',id_usuario:0,id_permiso:0,hrs_no_recuperadas:'',descuento:'', fecha_creacion: '', fecha_modificacion: '',estado:'' ,min_extra:''};
   token: string = '';
 
   constructor(

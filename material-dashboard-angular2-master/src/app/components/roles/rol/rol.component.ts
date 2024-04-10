@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Rol } from 'models/rol.model';
 import { RolService } from 'services/rol.service';
 import { AuthService } from 'services/auth.service';
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 
@@ -37,7 +38,7 @@ export class RolComponent implements OnInit {
   fecha_modificacion: ''
 }]
 
-  constructor(private rolService: RolService, private authService:AuthService) { }
+  constructor(private rolService: RolService, private router:Router) { }
 
   ngOnInit(): void {
     this.listarRoles();
@@ -61,12 +62,19 @@ export class RolComponent implements OnInit {
           this.roles.push(rol);
           this.nuevoRol = new Rol(0, '', '', '', '');
           form.reset();
-        });
-    }
+          Swal.fire('Éxito', 'El rol fue registrado correctamente', 'success');
+        },
+        error => Swal.fire('Error', 'No se pudo registrar el rol', 'error')
+      );
+  } else {
+    Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
+  }
   }
 
   editarRol(rol: Rol): void {
-    this.editandoRol = { ...rol };
+    this.router.navigate(['/editar-rol', rol.id_rol]);
+    console.log(this.editandoRol);
+    
   }
 
   cambiarEstadoRol(idRol: number, nuevoEstado: string) {

@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Boleta } from 'models/boleta.model';
 import { AuthService } from './auth.service';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoletaService {
-  private apiUrl = 'http://localhost:3000/api/boletas'; // Reemplaza con la URL de tu backend
+  private apiUrl = environment.backend.boleta; 
 
   constructor(private http: HttpClient, private authService:AuthService) { }
 

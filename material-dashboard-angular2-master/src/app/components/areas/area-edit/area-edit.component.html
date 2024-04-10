@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title"> EDITAR AREA</h4>
@@ -13,11 +13,12 @@
                                     <div class="example-full-width">
                                         <label for="area">Area:</label>
                                         <input type="text" class="form-control" id="area" name="area"
-                                            [(ngModel)]="editandoArea.tipo_area" #area="ngModel" ngModel required>
+                                            [(ngModel)]="editandoArea.tipo_area" #area="ngModel" pattern="[a-zA-Z]+"
+                                            oninvalid="this.setCustomValidity('Solo se permiten letras')" ngModel required>
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">GUARDAR</button>
+                            <button type="submit" class="btn btn btn-danger pull-right">GUARDAR</button>
 
                         </form>
                     </div>

@@ -3,6 +3,7 @@ import { Usuario } from 'models/usuario.model';
 import { NgForm} from "@angular/forms"
 import {  RegistroService } from 'services/registro.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -47,7 +48,7 @@ export class RegistroComponent implements OnInit{
   fecha_modificacion: '',
   estado:'s',
 }]
-constructor(private usuarioService: RegistroService) { }
+constructor(private usuarioService: RegistroService, private router:Router) { }
 
   ngOnInit(): void {
     this.obtenerUsuarios();
@@ -101,7 +102,9 @@ constructor(private usuarioService: RegistroService) { }
   }
 }
   editarUsuario(usuario: Usuario): void {
-    this.editandoUsuario = { ...usuario };
+    
+      this.router.navigate(['/editar-registro', usuario.id_usuario]);
+    
   }
 
   
@@ -112,8 +115,8 @@ constructor(private usuarioService: RegistroService) { }
           this.usuarios = usuarios; 
         },
         error: (error) => {
-          console.error('Error al buscar boletas por CI', error),
-          Swal.fire('Error', 'No se pudo buscar el usuario', 'error');
+          console.error('Error al buscar registro de usuario por CI', error),
+          Swal.fire('Error', 'Ingrese de nuevo los datos', 'error');
 
         }
       });

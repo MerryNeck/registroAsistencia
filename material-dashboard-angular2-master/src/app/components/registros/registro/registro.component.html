@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">REGISTRO USUARIO</h4>
@@ -16,14 +16,14 @@
                                     <mat-form-field class="example-full-width">
 
                                         <input class="form-control" placeholder="Cedula de Identidad" type="text"
-                                            name="ci" #ci="ngModel" [(ngModel)]="nuevoUsuario.ci" >
+                                            name="ci" #ci="ngModel" [(ngModel)]="nuevoUsuario.ci" maxlength="8" pattern="[0-9]+">
                                     </mat-form-field>
                                 </div>
                                 <div class="form-group col-md-8" id="form">
                                     <mat-form-field class="example-full-width">
 
                                         <input class="form-control" placeholder="Nombre" type="text" name="nombre" 
-                                        #nombre="ngModel" [(ngModel)]="nuevoUsuario.nombre" >
+                                        #nombre="ngModel" [(ngModel)]="nuevoUsuario.nombre" pattern="[a-zA-Z]+" >
                                     </mat-form-field>
                                 </div>
 
@@ -34,13 +34,13 @@
                                     <mat-form-field class="example-full-width">
 
                                         <input class="form-control" placeholder="Apellido Pateno" type="text"
-                                            name="apellido_paterno" #apellido_paterno="ngModel" [(ngModel)]="nuevoUsuario.apellido_paterno" >
+                                            name="apellido_paterno" #apellido_paterno="ngModel" [(ngModel)]="nuevoUsuario.apellido_paterno" pattern="[a-zA-Z]+" >
                                     </mat-form-field>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <mat-form-field class="example-full-width">
                                         <input class="form-control" placeholder="Apellido Materno" type="text"
-                                            name="apellido_materno" #apellido_materno="ngModel" [(ngModel)]="nuevoUsuario.apellido_materno" >
+                                            name="apellido_materno" #apellido_materno="ngModel" [(ngModel)]="nuevoUsuario.apellido_materno" pattern="[a-zA-Z]+">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
                                                             (click)="editarUsuario(user)">Modificar</button></td>
                                                     <td><button mat-raised-button type="submit"
                                                             class="btn btn-white btn-round"
-                                                            (click)="cambiarEstadoAnticipo(1,'n')">Eliminar</button></td>
+                                                            (click)="cambiarEstadoRegistro(1,'n')">Eliminar</button></td>
                                                 </tr>
 
                                             </tbody>

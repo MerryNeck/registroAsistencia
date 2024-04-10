@@ -15,7 +15,7 @@
                                         <div class="example-full-width">
                                             <input class="form-control" placeholder="ci" type="text" name="ci"
                                                 #ci="ngModel" [(ngModel)]="nuevoAnticipo.id_usuario "
-                                                placeholder="Cedula de Identidad" ngModel>
+                                                placeholder="Cedula de Identidad" pattern="[0-9]+" maxlength="8" ngModel>
                                         </div>
                                     </div>
 
@@ -23,7 +23,7 @@
                                         <div class="example-full-width">
                                             <input class="form-control" placeholder="Anticipo" type="text"
                                                 name="anticipo" #anticipo="ngModel"
-                                                [(ngModel)]="nuevoAnticipo.anticipos" ngModel="">
+                                                [(ngModel)]="nuevoAnticipo.anticipos" pattern="[0-9]+" ngModel="">
                                         </div>
                                     </div>
                                 </div>

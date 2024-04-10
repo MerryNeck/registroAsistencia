@@ -14,7 +14,7 @@
                                 <div class="form-group col-md-6" id="form">
                                     <mat-form-field class="example-full-width">
                                         <input class="form-control" type="text" name="ci" #ci="ngModel"
-                                            [(ngModel)]="nuevoPerfil.id_usuario" placeholder="Cedula de Identidad">
+                                            [(ngModel)]="nuevoPerfil.id_usuario" placeholder="Cedula de Identidad" maxlength="8" pattern="[0-9]+">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -23,7 +23,7 @@
                                     <mat-form-field class="example-full-width">
 
                                         <input class="form-control" placeholder="Correo Corporativo" type="email"
-                                            name="email" #email="ngModel" [(ngModel)]="nuevoPerfil.correo_corp">
+                                            name="email" #email="ngModel" [(ngModel)]="nuevoPerfil.correo_corp" >
                                     </mat-form-field>
                                 </div>
 
@@ -109,7 +109,7 @@
                                                 <td>{{ perfiles.fecha_modificacion}}</td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue  btn-round"
-                                                        (click)="editarPerfiles(perfiles)">Modificar</button></td>
+                                                        (click)="editarPerfil(perfiles)">Modificar</button></td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-white btn-round"
                                                         (click)="cambiarEstadoPerfil(1,'n')">Eliminar</button></td>

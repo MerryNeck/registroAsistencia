@@ -63,7 +63,7 @@ export class AnticipoService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.put<void>(`${this.baseUrl}/anticipo/${anticipo.id_anticipo}`, anticipo, { headers })
+    return this.http.put<void>(`${this.baseUrl}/actualizar/${anticipo.id_anticipo}`, anticipo, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al actualizar el anticipo:', error);
@@ -75,7 +75,7 @@ export class AnticipoService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Anticipo>(`${this.baseUrl}/anticipo/${id}`, { headers })
+    return this.http.get<Anticipo>(`${this.baseUrl}/editar/${id}`, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al obtener el anticipo:', error);

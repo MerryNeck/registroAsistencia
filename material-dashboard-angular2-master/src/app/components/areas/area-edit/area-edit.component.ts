@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 export class AreaEditComponent implements OnInit {
 
   
-  editandoArea: Area | null = null;
+  editandoArea: Area  = {id_area:0, tipo_area: '', estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
 
   constructor(

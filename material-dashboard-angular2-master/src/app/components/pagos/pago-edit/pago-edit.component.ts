@@ -12,7 +12,7 @@ import { PagoService } from 'services/pago.service';
 })
 export class PagoEditComponent implements OnInit {
 
-  editandoPago: Pago | null = null;
+  editandoPago:  Pago = {id_sueldo:0, dias_trabajo: 0, retencion:0,sueldo:0,sueldo_bruto:0,id_usuario:0,estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
 
   constructor(
@@ -52,7 +52,7 @@ export class PagoEditComponent implements OnInit {
           },
           error => {
             console.error('Error al actualizar el pago:', error);
-            Swal.fire('Error', 'No se pudo actualizar el oago', 'error');
+            Swal.fire('Error', 'No se pudo actualizar el pago', 'error');
           }
         );
     } else {

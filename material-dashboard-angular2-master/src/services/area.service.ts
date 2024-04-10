@@ -45,11 +45,11 @@ export class AreaService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.put<void>(`${this.url}/area/${area.id_area}`, area, { headers })
+    return this.http.put<void>(`${this.url}/actualizar/${area.id_area}`, area, { headers })
       .pipe(
         catchError(error => {
-          console.error('Error al actualizar el anticipo:', error);
-          return throwError('No se pudo actualizar el anticipo');
+          console.error('Error al actualizar el area:', error);
+          return throwError('No se pudo actualizar el area');
         })
       );
   }
@@ -57,11 +57,11 @@ export class AreaService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Area>(`${this.url}/area/${id}`, { headers })
+    return this.http.get<Area>(`${this.url}/editar/${id}`, { headers })
       .pipe(
         catchError(error => {
-          console.error('Error al obtener el anticipo:', error);
-          return throwError('No se pudo obtener el anticipo');
+          console.error('Error al obtener el area:', error);
+          return throwError('No se pudo obtener el area');
         })
       );
   }

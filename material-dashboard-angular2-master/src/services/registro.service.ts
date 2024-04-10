@@ -15,7 +15,7 @@ interface RegistroResponse {
 @Injectable({
     providedIn: 'root'
 }) export class RegistroService {
-    private url = environment.backend.anticipo; 
+    private url = environment.backend.usuario; 
 
     constructor(private _http: HttpClient, private authService:AuthService) { }
 
@@ -72,7 +72,7 @@ interface RegistroResponse {
         .pipe(
           catchError(error => {
             console.error('Error al actualizar el anticipo:', error);
-            return throwError('No se pudo actualizar el anticipo');
+            return throwError('No se pudo actualizar el registro');
           })
         );
     }
@@ -80,7 +80,7 @@ interface RegistroResponse {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
       });
-      return this._http.get<Usuario>(`${this.url}/regisusuario/${id}`, { headers })
+      return this._http.get<Usuario>(`${this.url}/editar/${id}`, { headers })
         .pipe(
           catchError(error => {
             console.error('Error al obtener el usuario:', error);

@@ -12,7 +12,8 @@ import { NgForm } from '@angular/forms';
 })
 export class RolEditComponent implements OnInit {
 
-  editandoRol: Rol | null = null;
+  //editandoRol: Rol | null = null;
+  editandoRol: Rol = {id_rol:0, tipo: '', estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
 
   constructor(
@@ -24,13 +25,13 @@ export class RolEditComponent implements OnInit {
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
     this.route.params.subscribe(params => {
-      const idRol = +params['id'];
+      const idRol = +params['id_rol'];
       this.obtenerRol(idRol);
     });
   }
 
   obtenerRol(idRol: number): void {
-    this.rolService.obtenerAnticipoPorId(idRol, this.token)
+    this.rolService.obtenerRolPorId(idRol, this.token)
       .subscribe(
         rol => {
           this.editandoRol = rol;

@@ -13,7 +13,7 @@ import { Rol } from 'models/rol.model';
 })
 export class RegistroEditComponent implements OnInit {
 
-  editandoUsuario: Usuario | null = null;
+  editandoUsuario: Usuario = {id_usuario:0,id_area:0,id_rol:0, nombre: '', apellido_materno:'',apellido_paterno:'',ci:'',estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
   areas: Area[] = [];
   roles: Rol[] = [];
@@ -81,7 +81,7 @@ export class RegistroEditComponent implements OnInit {
           },
           error => {
             console.error('Error al actualizar el usuario:', error);
-            Swal.fire('Error', 'No se pudo actualizar el isuario', 'error');
+            Swal.fire('Error', 'No se pudo actualizar el usuario', 'error');
           }
         );
     } else {

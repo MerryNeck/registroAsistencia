@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class PerfilEditComponent implements OnInit {
 
-  editandoperfil: Login | null = null;
+  editandoperfil: Login = {id:0, correo_corp: '', password: '', id_usuario:0,estado:'',fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
 
   constructor(

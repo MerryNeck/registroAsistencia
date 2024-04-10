@@ -3,6 +3,7 @@ import { LoginService } from 'services/login.service';
 import { Login } from 'models/login.model';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -43,7 +44,7 @@ export class PerfilComponent implements OnInit {
   fecha_creacion: '20240301' ,
   fecha_nodificacion: '20240301' ,
 }]
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router:Router) { }
 
   ngOnInit(): void {
     this.obtenerPerfiles();
@@ -51,7 +52,7 @@ export class PerfilComponent implements OnInit {
   obtenerPerfiles(): void {
     this.loginService.obtenerPerfil(this.token)
       .subscribe(perfiles => this.perfiles = perfiles,
-        error => Swal.fire('Error', 'No se pudieron obtener los anticipos', 'error')
+        error => Swal.fire('Error', 'No se pudieron obtener la autentificacion', 'error')
         );
   }
   registrarNuevoPerfil(form:NgForm): void {
@@ -66,15 +67,20 @@ export class PerfilComponent implements OnInit {
           this.perfiles.push(perfil);
           this.nuevoPerfil = new Login(0, '', '', '','', '', 0);
           form.reset();
-        });
-    }
+          Swal.fire('Éxito', 'La autentificacion a sido registrado correctamente', 'success');
+        },
+        error => Swal.fire('Error', 'No se pudo registrar ', 'error')
+      );
+  } else {
+    Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
   }
-  cambiarEstadoPerfiles(idPerfil: number, nuevoEstado: string) {
+  }
+  cambiarEstadoPerfil(idPerfil: number, nuevoEstado: string) {
     this.loginService.cambiarEstadoPerfil(idPerfil, nuevoEstado, this.token).subscribe({
       next: () => {
         Swal.fire({
           title: '¡Éxito!',
-          text: 'Estado del perfil actualizado correctamente.',
+          text: 'Estado del usuario actualizado correctamente.',
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
@@ -95,6 +101,9 @@ export class PerfilComponent implements OnInit {
     });
 
   }
+  editarPerfil(perfil:Login): void {
+    this.router.navigate(['/editar-perfil', perfil.id]);
+  }
   buscarPerfilPorCi(ci: string): void {
     this.loginService.buscarPorCi(ci,this.token)
       .subscribe({
@@ -103,6 +112,7 @@ export class PerfilComponent implements OnInit {
         },
         error: (error) => {
           console.error('Error al buscar boletas por CI', error);
+          Swal.fire('Error', 'Ingrese de nuevo los datos', 'error');
         }
       });
   }

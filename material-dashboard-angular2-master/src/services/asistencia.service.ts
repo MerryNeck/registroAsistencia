@@ -11,7 +11,7 @@ import { environment } from 'environments/environment';
   providedIn: 'root'
 })
 export class AsistenciaService {
-  private apiUrl = environment.backend.asistencia; // Cambiar la URL según tu configuración
+  private apiUrl = environment.backend.asistencia; 
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -22,20 +22,20 @@ export class AsistenciaService {
 
   getAsistencia(id: number, token: string): Observable<Asistencia> {
     const headers = this.getHeaders(token);
-    const url = `${this.apiUrl}/asistencia${id}`;
+    const url = `${this.apiUrl}/${id}`;
     return this.http.get<Asistencia>(url, { headers });
   }
 
   actualizarAsistencia(asistencia: Asistencia, token: string): Observable<any> {
     const headers = this.getHeaders(token);
-    const url = `${this.apiUrl}/actulizar${asistencia.id_asistencia}`;
+    const url = `${this.apiUrl}/actualizar/${asistencia.id_asistencia}`;
     return this.http.put<Asistencia>(url, asistencia, { headers });
   }
   obtenerAsistenciaPorId(id: number, token: string): Observable<Asistencia> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Asistencia>(`${this.apiUrl}/asistencia/${id}`, { headers })
+    return this.http.get<Asistencia>(`${this.apiUrl}/editar/${id}`, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al obtener el asistencia:', error);
