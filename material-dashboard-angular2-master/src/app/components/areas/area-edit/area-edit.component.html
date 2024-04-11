@@ -1,0 +1,27 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title"> EDITAR AREA</h4>
+                    </div>
+                    <div class="card-body">
+                        <form #editForm="ngForm" (ngSubmit)="actualizarArea(editForm)">
+                            <div class="row">
+                                <div class="form-group col-md-12" id="form">
+                                    <div class="example-full-width">
+                                        <label for="area">Area:</label>
+                                        <input type="text" class="form-control" id="area" name="area"
+                                            [(ngModel)]="editandoArea.tipo_area" #area="ngModel" pattern="[a-zA-Z]+"
+                                            oninvalid="this.setCustomValidity('Solo se permiten letras')" ngModel required>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn btn-danger pull-right">GUARDAR</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

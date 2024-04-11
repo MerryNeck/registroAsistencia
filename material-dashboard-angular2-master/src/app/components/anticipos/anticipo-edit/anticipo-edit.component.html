@@ -1,0 +1,34 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title"> EDITAR ANTICIPOS</h4>
+                    </div>
+                    <div class="card-body">
+                        <form #editForm="ngForm" (ngSubmit)="actualizarAnticipo(editForm)">
+                            <div class="row">
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="anticipos">Cedula de Identidad:</label>
+                                        <input class="form-control" placeholder="ci" type="text" name="ci"
+                                            #ci="ngModel" [(ngModel)]="editandoAnticipo.id_usuario "
+                                            placeholder="Cedula de Identidad" pattern="[0-9]+" maxlength="8" ngModel>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <label for="anticipos">Anticipo:</label>
+                                        <input type="text" class="form-control" id="anticipos" name="anticipos"
+                                            [(ngModel)]="editandoAnticipo.anticipos" pattern="[0-9]+" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn btn-danger pull-right">GUARDAR</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

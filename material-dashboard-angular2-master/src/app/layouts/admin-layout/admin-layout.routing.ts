@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
-import { RegistroComponent } from 'app/components/registro/registro.component';
+import { RegistroComponent } from 'app/components/registros/registro/registro.component';
 
 export const AdminLayoutRoutes: Routes = [
 

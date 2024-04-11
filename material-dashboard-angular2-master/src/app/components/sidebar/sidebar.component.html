@@ -1,4 +1,4 @@
-<div class="sidebar" [ngClass]="{'active': isMobileMenu()}">
+<div class="sidebar" [ngClass]="{ 'active': sidebarVisible && isMobile && showSidebar}">
     <br>
     <br>
     <br>
@@ -18,5 +18,6 @@
         </li>
     </ul>
 
-
+    <div class="overlay" *ngIf="sidebarVisible && isMobile && showSidebar" (click)="closeSidebar()"></div>
+    
 </div>

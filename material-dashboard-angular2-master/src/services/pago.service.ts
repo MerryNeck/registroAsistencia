@@ -1,45 +1,82 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { AuthService } from './auth.service'; 
-import { Pago } from 'models/pago.model';  // Reemplaza 'ruta/del/modelo/descuento' con la ruta correcta
-
+import { Pago } from 'models/pago.model'; 
+ import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class PagoService {
-  private baseUrl = 'api/pago'; // Reemplaza 'api/descuentos' con la ruta correcta de tu backend
-
+  private baseUrl = environment.backend.pago; 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getHeaders() {
-    const token = this.authService.getToken(); // Obtener el token JWT
+    const token = this.authService.getToken(); 
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
   }
   // Método para obtener todos los pago
-  obtenerPago(): Observable<Pago[]> {
-    return this.http.get<Pago[]>(this.baseUrl,{ headers: this.getHeaders() });
+  obtenerPago(token:string): Observable<Pago[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Pago[]>(this.baseUrl,{ headers});
   }
 
   // Método para registrar un pago
-  registrarPago(pago: Pago): Observable<any> {
-    return this.http.post<any>(this.baseUrl, pago,{ headers: this.getHeaders() });
+  registrarPago(pago: Pago , token:string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post<any>(`${this.baseUrl}/registrar`, pago,{ headers });
   }
 
   // Método para actualizar un pago
-  actualizarPago(pago: Pago): Observable<any> {
-    const url = `${this.baseUrl}/${pago.id_sueldo}`;
-    return this.http.put<any>(url, pago,{ headers: this.getHeaders() });
+  actualizarPago(pago: Pago,token:string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.put<void>(`${this.baseUrl}/actualizar/${pago.id_sueldo}`, pago, { headers })
+      .pipe(
+        catchError(error => {
+          console.error('Error al actualizar el pago:', error);
+          return throwError('No se pudo actualizar el pago');
+        })
+      );
+  }
+  obtenerPagoPorId(id: number, token: string): Observable<Pago> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Pago>(`${this.baseUrl}/editar/${id}`, { headers })
+      .pipe(
+        catchError(error => {
+          console.error('Error al obtener el pago:', error);
+          return throwError('No se pudo obtener el pago');
+        })
+      );
   }
 
   // Método para eliminar un descuento (cambiar estado a inactivo)
-  cambiarEstadoPago(idPago: number, estado: string): Observable<any> {
-    return this.http.patch(`${this.baseUrl}/cambiarEstado/${idPago}`, { estado }, { headers: this.getHeaders() });
+  cambiarEstadoPago(idPago: number, estado: string, token:string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.patch(`${this.baseUrl}/cambiarEstado/${idPago}`, { estado }, { headers});
   }
-  buscarPorCi(ci: string): Observable<Pago[]> {
-    return this.http.get<Pago[]>(`${this.baseUrl}/buscar?ci=${ci}`);
+  buscarPorCi(ci: string,token:string): Observable<Pago[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Pago[]>(`${this.baseUrl}/buscar?ci=${ci}`,{headers});
   }
 }

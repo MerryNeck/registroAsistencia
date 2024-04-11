@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Area } from 'models/area.model';  
 import { AuthService } from './auth.service';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AreaService {
-  private url = 'http://ejemplo.com/api/area'; // Reemplazar con la URL real de tu API
+  private url = environment.backend.area;
 
   constructor(private http: HttpClient, private authService:AuthService) { }
 
@@ -23,8 +26,12 @@ export class AreaService {
   }
 
   // registrar  área
-  registrarArea(area: Area): Observable<any> {
-    return this.http.post(`${this.url}/registrar`, area, { headers: this.getHeaders() });
+  registrarArea(area: Area, token:string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post(`${this.url}/registrar`, area, { headers});
   }
 
   // listar todas las áreas
@@ -33,13 +40,39 @@ export class AreaService {
   }
 
 //actualizar un área
-  actualizarArea(area: Area): Observable<any> {
-    return this.http.put(`${this.url}/actualizar/${area.id_area}`, area, { headers: this.getHeaders() });
+  actualizarArea(area: Area, token: string): Observable<void> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.put<void>(`${this.url}/actualizar/${area.id_area}`, area, { headers })
+      .pipe(
+        catchError(error => {
+          console.error('Error al actualizar el area:', error);
+          return throwError('No se pudo actualizar el area');
+        })
+      );
+  }
+  obtenerAreaPorId(id: number, token: string): Observable<Area> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Area>(`${this.url}/editar/${id}`, { headers })
+      .pipe(
+        catchError(error => {
+          console.error('Error al obtener el area:', error);
+          return throwError('No se pudo obtener el area');
+        })
+      );
   }
 
   //  estado de un área 
-  cambiarEstadoArea(idArea: number, estado: string): Observable<any> {
-    return this.http.patch(`${this.url}/cambiarEstado/${idArea}`, { estado }, { headers: this.getHeaders() });
+  cambiarEstadoArea(idArea: number, estado: string ,token:string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.patch(`${this.url}/cambiarEstado/${idArea}`, { estado }, { headers });
   }
 
   

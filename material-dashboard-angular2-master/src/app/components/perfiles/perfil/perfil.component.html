@@ -1,0 +1,130 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <label>AUTENTIFICACION</label>
+                        <img class="img" src="./assets/img/faces/LOGO.jpg" />
+
+                    </div>
+                    <form #perfilForm="ngForm" (ngSubmit)="registrarNuevoPerfil(perfilForm)">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="form-group col-md-6" id="form">
+                                    <mat-form-field class="example-full-width">
+                                        <input class="form-control" type="text" name="ci" #ci="ngModel"
+                                            [(ngModel)]="nuevoPerfil.id_usuario" placeholder="Cedula de Identidad" maxlength="8" pattern="[0-9]+">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-8" id="form">
+                                    <mat-form-field class="example-full-width">
+
+                                        <input class="form-control" placeholder="Correo Corporativo" type="email"
+                                            name="email" #email="ngModel" [(ngModel)]="nuevoPerfil.correo_corp" >
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="form-group col-md-4" id="form">
+                                    <mat-form-field class="example-full-width">
+                                        <input class="form-control" placeholder="Password" type="password"
+                                             #password="ngModel" [(ngModel)]="nuevoPerfil.password">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <button mat-raised-button type="submit" class="btn btn-danger pull-right "
+                            [disabled]="!perfilForm.form.valid">REGISTRAR</button>
+                        <div class="clearfix"></div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title "> REGISTRO AUTENTIFICACION</h4>
+                                <form class="col-md-5">
+                                    <p class="card-category">Busque el registro de autentificacion</p>
+                                    <div class="input-group no-border">
+                                        <div class="col-md-10">
+                                            <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
+                                                placeholder="Buscar por cedula de identidad...">
+                                            <div class="ripple-container"></div>
+                                        </div>
+                                    </div>
+                                    <button mat-raised-button type="button" class="btn btn-white btn-round "
+                                        (click)="buscarPerfilPorCi(ciBusqueda)">Buscar</button>
+                                </form>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <tr>
+                                                
+                                                <th>
+                                                    NOMBRE
+                                                </th>
+                                                <th>
+                                                    APELLIDO PATERNO
+                                                </th>
+                                                <th>
+                                                    CORREO CORPORATIVO
+                                                </th>
+                                                <th>
+                                                    PASWORD
+                                                </th>
+                                                <th>
+                                                    ESTADO
+                                                </th>
+                                                <th>
+                                                    FECHA CREACION
+                                                </th>
+                                                <th>
+                                                    FECHA MODIFICACION
+                                                </th>
+                                                <th>
+                                                    MODIFICAR
+                                                </th>
+                                                <th>
+                                                    ELIMINAR
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let perfiles of perfil">
+                                                <td>{{ perfiles.nombre }}</td>
+                                                <td>{{ perfiles.apellido}}</td>
+                                                <td>{{ perfiles.correo_corp }}</td>
+                                                <td>{{ perfiles.password}}</td>
+                                                <td>{{ perfiles.estado}}</td>
+                                                <td>{{ perfiles.fecha_creacion}}</td>
+                                                <td>{{ perfiles.fecha_modificacion}}</td>
+                                                <td><button mat-raised-button type="submit"
+                                                        class="btn btn-blue  btn-round"
+                                                        (click)="editarPerfil(perfiles)">Modificar</button></td>
+                                                <td><button mat-raised-button type="submit"
+                                                    class="btn btn-round"
+                                                    [ngClass]="{'activo': perfiles.estado === 's', 'inactivo': perfiles.estado === 'n'}"
+                                                    (click)="cambiarEstadoPerfil(1, estado === 's' ? 'n' : 's')">{{ perfil.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

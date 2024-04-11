@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'services/login.service';
 import { Login } from 'models/login.model';
 import { Router } from '@angular/router';
-import { Usuario } from 'models/usuario.model';
-import { AuthService } from 'services/auth.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,51 +12,46 @@ export class LoginComponent implements OnInit {
 
   email = '';
   password = '';
+  token:string='';
+
   public usuario : any
-  public tokens : any
-
-
-  constructor(private loginService: LoginService,
-    private _router : Router,
-    private _authService : AuthService
-    ) {
-      this.usuario= new Usuario(0,'','','','','','','',0,0)
-      this.tokens = _authService.getIdentity()
-      this.usuario= new Login(0,'','','','','',0)
+  public url
+  constructor(private loginService: LoginService,private _router : Router)
+  {
+    this.usuario =  new Login( 0,'','','','','',0)
   }
   
-  ngOnInit(): void {
-    console.log(this.tokens);
-    
-    if(this.tokens){
-        this._router.navigate(['excel']);
-
-    }
-    
-  }
+  ngOnInit(
+    token = localStorage.getItem('token') || ''): void {}
    
-  login(loginForm:any) {
+  login(loginForm): void {
+    this.token = '12345678'
     console.log(this.usuario);
-    console.log(this.email);
-    
-    
-    console.log("ël boton funciona");
-    
-    
-    this.loginService.login( 
-      this.usuario.email,
-      this.usuario.password
-    ).subscribe((response:any )=> {
-      const [tocken, rol ]=response
-
-      console.log('Ingreso Exitoso: ', response);
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('rol',response.rol)
-      //localStorage.setItem('token', response.token);
-      this._router.navigate(['excel'])
-    }, error => {
-      console.error('Ingreso Fallido: ', error);
+    if (!this.usuario.email || !this.usuario.password || !this.token) {
       
-    });
+      
+      Swal.fire({
+        icon: 'error',
+        title: 'Lo Siento',
+        text: 'Por favor, completa todos los campos!',
+      });
+      return;
+    }
+
+   this.loginService.login(this.usuario.email, this.usuario.password, this.token).subscribe(
+      (response: any) => {
+        console.log('Ingreso Exitoso: ', response);
+        localStorage.setItem('token', response.token);
+        this._router.navigate(['/asistencia']);
+      },
+      (error) => {
+        console.error('Ingreso Fallido: ', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Credenciales inválidas. Por favor, inténtalo de nuevo.',
+        });
+      }
+    );
   }
 }

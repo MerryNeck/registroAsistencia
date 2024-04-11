@@ -1,0 +1,42 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title"> EDITAR PERFIL</h4>
+                    </div>
+                    <div class="card-body">
+                        <form #editForm="ngForm" (ngSubmit)="actualizarPerfiles(editForm)">
+                            <div class="row">
+                                <div class="form-group col-md-6" id="form">
+                                    <mat-form-field class="example-full-width">
+                                        <label for="anticipos">Cedula de Identidad:</label>
+                                        <input class="form-control" type="text" name="ci" #ci="ngModel"
+                                            [(ngModel)]="editandoperfil.id_usuario" placeholder="Cedula de Identidad" maxlength="8" pattern="[0-9]+">
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group col-md-6" id="form">
+                                    <div class="example-full-width">
+                                        <mat-form-field class="example-full-width">
+                                        <label for="anticipos">Correo Corporativo:</label>
+                                        <input class="form-control"  type="email"
+                                        name="email" #email="ngModel" [(ngModel)]="editandoperfil.correo_corp" required>
+                                    </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4" id="form">
+                                    <mat-form-field class="example-full-width">
+                                        <label for="anticipos">Contraseña:</label>
+                                        <input class="form-control" type="password"
+                                             #password="ngModel" [(ngModel)]="editandoperfil.password">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-danger pull-right">GUARDAR</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

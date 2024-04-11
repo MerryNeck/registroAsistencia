@@ -8,8 +8,6 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { RutaexcelComponent } from './components/rutaexcel/rutaexcel.component';
-import { RolComponent } from './components/rol/rol.component';
 
 @NgModule({
   imports: [
@@ -27,7 +25,13 @@ import { RolComponent } from './components/rol/rol.component';
     //LoginComponent,
     AppComponent,
     AdminLayoutComponent,
-    //RolComponent,
+    /*PagoEditComponent,
+    PerfilEditComponent,
+    PermisoEditComponent,
+    RegistroEditComponent,
+    RolEditComponent,
+    AsistenciaEditComponent,*/
+   // AreaEditComponent,
    // RutaexcelComponent,
     //AsistenciaComponent,
     //RegistroExcelComponent,

@@ -5,8 +5,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";//
 import { Area } from "models/area.model";
 import { Rol } from 'models/rol.model';
 import { Usuario } from 'models/usuario.model';
+import { environment } from 'environments/environment';
 import { AuthService } from './auth.service';
-//import { GLOBAL } from './GLOBAL';
+
 interface RegistroResponse {
     token: string;
 }
@@ -14,7 +15,7 @@ interface RegistroResponse {
 @Injectable({
     providedIn: 'root'
 }) export class RegistroService {
-    private url: any; // Reemplace con la URL de su API
+    private url = environment.backend.api+environment.backend.usuario; 
 
     constructor(private _http: HttpClient, private authService:AuthService) { }
 
@@ -36,13 +37,21 @@ interface RegistroResponse {
       }
 
        // Método para obtener todos los anticipos
-  obtenerUsuario(): Observable<Usuario[]> {
-    return this._http.get<Usuario[]>(this.url,{ headers: this.getHeaders() });
+  obtenerUsuario(token:string): Observable<Usuario[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this._http.get<Usuario[]>(this.url,{ headers });
   }
 
     // Método para registrar un Usuario
-  registrarUsuario(usuario: Usuario): Observable<any> {
-    return this._http.post<any>(this.url, usuario,{ headers: this.getHeaders() });
+  registrarUsuario(usuario: Usuario,token:string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this._http.post<any>(`${this.url}/registrar`, usuario,{ headers});
   }
 
    
@@ -54,18 +63,46 @@ interface RegistroResponse {
     }
 
      // Método para actualizar un registro de usuario
-  actualizarUsuario(usuario: Usuario): Observable<any> {
-    const url = `${this.url}/${usuario.id_usuario}`;
-    return this._http.put<any>(url, usuario,{ headers: this.getHeaders() });
-  }
-
+     actualizarUsuario(usuario: Usuario, token: string): Observable<void> {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      });
+      return this._http.put<void>(`${this.url}/actualizar/${usuario.id_usuario}`, usuario, { headers })
+        .pipe(
+          catchError(error => {
+            console.error('Error al actualizar el anticipo:', error);
+            return throwError('No se pudo actualizar el registro');
+          })
+        );
+    }
+    obtenerUsuarioPorId(id: number, token: string): Observable<Usuario> {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      return this._http.get<Usuario>(`${this.url}${id}`, { headers })
+        .pipe(
+          catchError(error => {
+            console.error('Error al obtener el usuario:', error);
+            return throwError('No se pudo obtener el usuario');
+          })
+        );
+    }
 
  // Eliminar (desactivar y activar)
- cambiarEstadoUsuario(idUsuario: number, estado: string): Observable<any> {
-    return this._http.patch(`${this.url}/cambiarEstado/${idUsuario}`, { estado }, { headers: this.getHeaders() });
+ cambiarEstadoUsuario(idUsuario: number, estado: string,token:string): Observable<any> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  });
+    return this._http.patch(`${this.url}/cambiarEstado/${idUsuario}`, { estado }, { headers });
   }
 
-  buscarPorCi(ci: string): Observable<Usuario[]> {
-    return this._http.get<Usuario[]>(`${this.url}/buscar?ci=${ci}`);
+  buscarPorCi(ci: string,token): Observable<Usuario[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this._http.get<Usuario[]>(`${this.url}/buscar?ci=${ci}`,{headers});
   }
 }
