@@ -16,6 +16,8 @@ export class RegistroComponent implements OnInit{
   usuarios:Usuario[] =[];
  nuevoUsuario: Usuario = new Usuario(0, '', '', '', '','','','',0,0);
  editandoUsuario: Usuario | null = null;
+  estado:string;
+
  areas: any[] = []; 
  roles: any[] =[];
  token:string = '';
@@ -123,11 +125,14 @@ constructor(private usuarioService: RegistroService, private router:Router) { }
   }
  
   cambiarEstadoRegistro(idUsuario: number, nuevoEstado: string) {
+    const estadoAnterior = this.estado;
+    this.estado = nuevoEstado;
+
     this.usuarioService.cambiarEstadoUsuario(idUsuario, nuevoEstado, this.token).subscribe({
       next: () => {
         Swal.fire({
           title: '¡Éxito!',
-          text: 'Estado del usuario actualizado correctamente.',
+          text: `Estado del usuario actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
@@ -138,6 +143,7 @@ constructor(private usuarioService: RegistroService, private router:Router) { }
       },
       error: (error) => {
         console.error('Error al cambiar el estado:', error);
+        this.estado = estadoAnterior;
         Swal.fire({
           title: 'Error',
           text: 'No se pudo cambiar el estado del usuario.',

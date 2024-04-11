@@ -15,6 +15,7 @@ export class AreaComponent implements OnInit {
   areas: Area[] = [];
   editandoArea: Area | null = null; 
   token: string = '';
+  estado: string;
 
   info=[{
     id_area : 1,
@@ -70,11 +71,13 @@ export class AreaComponent implements OnInit {
   }
   }
   cambiarEstadoArea(idArea: number, nuevoEstado: string) {
+    const estadoAnterior = this.estado;
+    this.estado = nuevoEstado;
     this.areaService.cambiarEstadoArea(idArea, nuevoEstado, this.token).subscribe({
       next: () => {
         Swal.fire({
           title: '¡Éxito!',
-          text: 'Estado del area actualizado correctamente.',
+          text: `Estado del area actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
@@ -85,6 +88,7 @@ export class AreaComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cambiar el estado:', error);
+        this.estado =estadoAnterior;
         Swal.fire({
           title: 'Error',
           text: 'No se pudo cambiar el estado del area.',

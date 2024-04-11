@@ -17,6 +17,7 @@ export class RolComponent implements OnInit {
   roles: Rol[] = [];
   editandoRol: Rol | null =null;
   token: string = '';
+  estado: string;
 
   rol=[{
     id_rol : 1,
@@ -78,11 +79,13 @@ export class RolComponent implements OnInit {
   }
 
   cambiarEstadoRol(idRol: number, nuevoEstado: string) {
+    const estadoAnterior = this.estado;
+    this.estado = nuevoEstado;
     this.rolService.cambiarEstadoRol(idRol, nuevoEstado, this.token).subscribe({
       next: () => {
         Swal.fire({
           title: '¡Éxito!',
-          text: 'Estado del rol actualizado correctamente.',
+          text: `Estado del rol actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
@@ -93,6 +96,7 @@ export class RolComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cambiar el estado:', error);
+        this.estado=estadoAnterior;
         Swal.fire({
           title: 'Error',
           text: 'No se pudo cambiar el estado del rol.',

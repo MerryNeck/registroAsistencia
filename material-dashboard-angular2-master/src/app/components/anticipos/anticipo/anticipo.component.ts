@@ -18,7 +18,7 @@ export class AnticipoComponent implements OnInit {
   nuevoAnticipo: Anticipo = new Anticipo(0, '', '', '', 0, 0);
   editandoAnticipo: Anticipo | null = null;
   token: string = '';
-
+  estado:string;
   info = [{
     id_anticipo: 1,
     id_usuario: 2,
@@ -30,7 +30,7 @@ export class AnticipoComponent implements OnInit {
     id_anticipo: 2,
     id_usuario: 2,
     anticipos: 100,
-    estado: 's',
+    estado: 'n',
     fecha_creacion: '20240301',
     fecha_modificacion: '',
   }, {
@@ -97,11 +97,13 @@ export class AnticipoComponent implements OnInit {
   }
 
   cambiarEstadoAnticipo(idAnticipo: number, nuevoEstado: string) {
+    const estadoAnterior = this.estado;
+    this.estado =nuevoEstado;
     this.anticipoService.cambiarEstadoAnticipo(idAnticipo, nuevoEstado, this.token).subscribe({
       next: () => {
         Swal.fire({
           title: '¡Éxito!',
-          text: 'Estado del anticipo actualizado correctamente.',
+          text: `Estado del anticipo actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
@@ -112,6 +114,7 @@ export class AnticipoComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cambiar el estado:', error);
+        this.estado = estadoAnterior;
         Swal.fire({
           title: 'Error',
           text: 'No se pudo cambiar el estado del anticipo.',

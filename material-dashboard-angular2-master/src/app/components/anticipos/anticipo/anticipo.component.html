@@ -96,8 +96,9 @@
                                                         class="btn btn-blue btn-round "
                                                         (click)="editarAnticipo(anticipo)">Modificar</button></td>
                                                 <td><button mat-raised-button type="submit"
-                                                        class="btn btn-white btn-round"
-                                                        (click)="cambiarEstadoAnticipo(1,'n')">Eliminar</button></td>
+                                                    class="btn btn-round"
+                                                    [ngClass]="{'activo': anticipo.estado === 's', 'inactivo': anticipo.estado === 'n'}"
+                                                    (click)="cambiarEstadoAnticipo(1, estado === 's' ? 'n' : 's')">{{ anticipo.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
                                             </tr>
 
 

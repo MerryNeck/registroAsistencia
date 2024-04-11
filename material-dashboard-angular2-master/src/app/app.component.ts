@@ -8,10 +8,10 @@ import { Router,NavigationEnd } from '@angular/router';
 })
 export class AppComponent {
 
-  showSidebar: boolean = true;
+  showSidebar: boolean = false;
 
   constructor(private router: Router) {
-    this.router.events.subscribe(event => {
+   /* this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.showSidebar = (event.url === '/regisusuario' 
         || event.url === '/area' || event.url === '/rol'
@@ -23,7 +23,18 @@ export class AppComponent {
         || event.url === '/editar-anticipo/:id' || event.url === '/editar-pago/:id'
         || event.url === '/editar-perfil/:id' || event.url === '/editar-permiso/:id');
       }
-      
-    });
+      });}*/
+
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          // Define una expresión regular que coincide con tus rutas dinámicas
+          const dynamicRoutesRegex = /^(\/regisusuario|\/area|\/rol|\/excel|\/asistencia|\/anticipo|\/pago|\/perfil|\/permiso|\/editar-area\/\d+|\/editar-rol\/\d+|\/editar-asistencia\/\d+|\/editar-registro\/\d+|\/editar-anticipo\/\d+|\/editar-pago\/\d+|\/editar-perfil\/\d+|\/editar-permiso\/\d+)$/;
+          
+          // Comprueba si la URL actual coincide con la expresión regular
+          this.showSidebar = dynamicRoutesRegex.test(event.url);
+        }
+      });
+    }
+
   }
-}
+

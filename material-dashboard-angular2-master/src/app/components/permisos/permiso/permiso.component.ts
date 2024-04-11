@@ -108,7 +108,7 @@ export class PermisoComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cambiar el estado:', error);
-        this.estado = estadoAnterior
+        this.estado = estadoAnterior;
         Swal.fire({
           title: 'Error',
           text: 'No se pudo cambiar el estado del permiso',

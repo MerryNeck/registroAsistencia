@@ -81,3 +81,19 @@ tr{
   padding: 5%;
   margin-left: 10%;
 }
+.btn-round {
+  border-radius: 20px; /* Define el radio de las esquinas para que el botón sea redondeado */
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.activo {
+  background-color: green; /* Color verde para estado activo */
+  color: white;
+}
+
+.inactivo {
+  background-color: red; /* Color rojo para estado inactivo */
+  color: white;
+}

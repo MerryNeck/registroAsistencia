@@ -17,6 +17,7 @@ export class PagoComponent implements OnInit {
   pagos: Pago[] = [];
   editandoPago: Pago | null = null; 
   token:string='';
+  estado:string;
 
   info=[{
     id_sueldo : '1',
@@ -103,11 +104,13 @@ export class PagoComponent implements OnInit {
     this.router.navigate(['/editar-pago', pagos.id_sueldo]);
   }
   cambiarEstadoPago(idPago: number, nuevoEstado: string) {
+    const estadoAnterior = this.estado;
+    this.estado = nuevoEstado;
     this.pagoService.cambiarEstadoPago(idPago, nuevoEstado, this.token).subscribe({
       next: () => {
         Swal.fire({
           title: '¡Éxito!',
-          text: 'Estado del pago actualizado correctamente.',
+          text: `Estado del pago actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
@@ -118,6 +121,7 @@ export class PagoComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al cambiar el estado:', error);
+        this.estado = estadoAnterior;
         Swal.fire({
           title: 'Error',
           text: 'No se pudo cambiar el estado del pago.',

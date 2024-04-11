@@ -146,8 +146,9 @@
                                                             class="btn btn-blue  btn-round"
                                                             (click)="editarUsuario(user)">Modificar</button></td>
                                                     <td><button mat-raised-button type="submit"
-                                                            class="btn btn-white btn-round"
-                                                            (click)="cambiarEstadoRegistro(1,'n')">Eliminar</button></td>
+                                                        class="btn btn-round"
+                                                        [ngClass]="{'activo': user.estado === 's', 'inactivo': user.estado === 'n'}"
+                                                        (click)="cambiarEstadoRegistro(1, estado === 's' ? 'n' : 's')">{{ user.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
                                                 </tr>
 
                                             </tbody>

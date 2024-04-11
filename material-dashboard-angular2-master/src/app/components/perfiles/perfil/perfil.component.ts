@@ -15,6 +15,7 @@ export class PerfilComponent implements OnInit {
  nuevoPerfil: Login = new Login(0, '', '', '','', '', 0);
  editandoPerfil: Login | null = null;
  token:string ='';
+ estado:string;
 
  perfil=[{
   id : 1,
@@ -76,11 +77,14 @@ export class PerfilComponent implements OnInit {
   }
   }
   cambiarEstadoPerfil(idPerfil: number, nuevoEstado: string) {
+    const estadoAnterior = this.estado;
+    this.estado = nuevoEstado;
+
     this.loginService.cambiarEstadoPerfil(idPerfil, nuevoEstado, this.token).subscribe({
       next: () => {
         Swal.fire({
           title: '¡Éxito!',
-          text: 'Estado del usuario actualizado correctamente.',
+          text: `Estado de la autentificacion actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
@@ -93,7 +97,7 @@ export class PerfilComponent implements OnInit {
         console.error('Error al cambiar el estado:', error);
         Swal.fire({
           title: 'Error',
-          text: 'No se pudo cambiar el estado del perfil',
+          text: 'No se pudo cambiar el estado de la autentificacion',
           icon: 'error',
           confirmButtonText: 'Aceptar'
         });
