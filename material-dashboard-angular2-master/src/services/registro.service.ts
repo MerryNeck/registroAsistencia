@@ -15,7 +15,7 @@ interface RegistroResponse {
 @Injectable({
     providedIn: 'root'
 }) export class RegistroService {
-    private url = environment.backend.usuario; 
+    private url = environment.backend.api+'/api/user/login'; 
 
     constructor(private _http: HttpClient, private authService:AuthService) { }
 
@@ -42,7 +42,7 @@ interface RegistroResponse {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this._http.get<Usuario[]>(this.url,{ headers });
+    return this._http.get<Usuario[]>(`${this.url}/listar`,{ headers });
   }
 
     // Método para registrar un Usuario
@@ -80,7 +80,7 @@ interface RegistroResponse {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
       });
-      return this._http.get<Usuario>(`${this.url}/editar/${id}`, { headers })
+      return this._http.get<Usuario>(`${this.url}${id}`, { headers })
         .pipe(
           catchError(error => {
             console.error('Error al obtener el usuario:', error);

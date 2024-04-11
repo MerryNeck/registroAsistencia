@@ -2,7 +2,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">ANTICIPOS</h4>
@@ -67,15 +67,7 @@
                                                 <th>
                                                     ANTICIPO
                                                 </th>
-                                                <th>
-                                                    ESTADO
-                                                </th>
-                                                <th>
-                                                    FECHA CREACION
-                                                </th>
-                                                <th>
-                                                    FECHA MODIFICACION
-                                                </th>
+                                                
                                                 <th>
                                                     MODIFICAR
                                                 </th>
@@ -86,12 +78,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let anticipo of info">
+                                            <tr *ngFor="let anticipo of anticipos">
                                                 <td>{{ anticipo.id_usuario }}</td>
                                                 <td>{{ anticipo.anticipo}}</td>
-                                                <td>{{ anticipo.estado }}</td>
-                                                <td>{{ anticipo.fecha_creacion}}</td>
-                                                <td>{{ anticipo.fecha_modificacion}}</td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue btn-round "
                                                         (click)="editarAnticipo(anticipo)">Modificar</button></td>

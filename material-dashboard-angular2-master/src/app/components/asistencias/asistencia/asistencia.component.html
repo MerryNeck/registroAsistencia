@@ -1,6 +1,3 @@
-<br>
-<br>
-<div class="container">
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
@@ -47,14 +44,11 @@
                       <th class="table-header">MINUTOS DE PERMISO</th>
                       <th class="table-header">HORAS NO RECUPERADAS</th>
                       <th class="table-header">DESCUENTO</th>
-                      <th class="table-header">ESTADO</th>
-                      <th class="table-header">FECHA CREACION</th>
-                      <th class="table-header">FECHA MODIFICACION</th>
                       <th class="table-header">MODIFICAR</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let asistencia of info">
+                    <tr *ngFor="let asistencia of asistencias">
                       <td>{{ asistencia.fecha }}</td>
                       <td>{{ asistencia.ci }}</td>
                       <td>{{ asistencia.nombre }}</td>
@@ -70,9 +64,6 @@
                       <td>{{ asistencia.id_permiso}}</td>
                       <td>{{ asistencia.hrs_no_recuperadas}}</td>
                       <td>{{ asistencia.descuento}}</td>
-                      <td>{{ asistencia.estado}}</td>
-                      <td>{{ asistencia.fecha_creacion}}</td>
-                      <td>{{ asistencia.fecha_modificacion}}</td>
                       <td><button mat-raised-button class="btn btn-warning btn-round"
                           (click)="seleccionarAsistencia(asistencia)">MODIFICAR</button></td>
                     </tr>
@@ -81,23 +72,24 @@
               </div>
             </div>
           </div>
-          <div class="card-body" style="margin-top: 10% ; display:none;" >
+          <div class="card-body" style="margin-top: 10% ; display:none;">
             <div class="table-responsive">
               <div class="div-table">
-                
+
                 <div id="table">
-                  <div class="company-info"  >
+                  <div class="company-info">
                     <h1>PLANILLA DE ASISTENCIA</h1>
                     <div class="bis">
-                      NOMBRE: <span class="label">{{info[0]?.id_usuario}} {{info[0]?.apellido}}</span>
+                      NOMBRE: <span class="label">{{asistencias[0]?.id_usuario.nombre}}
+                        {{asistencias[0]?.id_usuario.apellido}}</span>
                     </div>
                     <div class="bis">
-                      FECHA: <span class="label">{{info[0]?.fecha}}</span>
+                      FECHA: <span class="label">{{asistencias[0]?.fecha}}</span>
                     </div>
                   </div>
-                  <table class="tabla" >
+                  <table class="tabla">
                     <thead class="text-primary">
-                      
+
                       <tr class="table-row">
                         <th class="table-header">PRIMERA ENTRADA</th>
                         <th class="table-header">PRIMERA SALIDA</th>
@@ -112,7 +104,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let asistencia of info">
+                      <tr *ngFor="let asistencia of asistencias">
                         <td>{{ asistencia.tprano_ingreso}}</td>
                         <td>{{ asistencia.tprano_salida }}</td>
                         <td>{{ asistencia.tde_ingreso}}</td>
@@ -134,5 +126,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>

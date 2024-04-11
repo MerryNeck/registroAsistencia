@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">PERMISOS</h4>
@@ -84,15 +84,7 @@
                                                 <th>
                                                     DETALLE
                                                 </th>
-                                                <th>
-                                                    ESTADO
-                                                </th>
-                                                <th>
-                                                    FECHA CREACION
-                                                </th>
-                                                <th>
-                                                    FECHA MODIFICACION
-                                                </th>
+                                               
                                                 <th>
                                                     MODIFICAR
                                                 </th>
@@ -103,14 +95,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let per of info">
+                                            <tr *ngFor="let per of permisos">
                                                 <td>{{ per.id_usuario }}</td>
                                                 <td>{{ per.fecha}}</td>
                                                 <td>{{ per.min_permiso}}</td>
                                                 <td>{{ per.detalle}}</td>
-                                                <td>{{ per.estado }}</td>
-                                                <td>{{ per.fecha_creacion}}</td>
-                                                <td>{{ per.fecha_modificacion}}</td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue btn-round "
                                                         (click)="editarPermiso(per)">Modificar</button></td>

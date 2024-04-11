@@ -36,7 +36,7 @@ export class AnticipoService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.post<any>(`${this.baseUrl}/registrar`, anticipo, { headers });
+    return this.http.post<any>(`${this.baseUrl}/`, anticipo, { headers });
   }
 
   

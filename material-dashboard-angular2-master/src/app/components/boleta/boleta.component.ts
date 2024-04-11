@@ -13,8 +13,11 @@ export class BoletaComponent implements OnInit {
 
   boletas: Boleta[] = [];
   boletaSeleccionada: Boleta | null = null;
+  
+  public res: any;
+  public users : any;
 
-  info=[{
+  /*info=[{
     nombre: 'miriam sonia justo mamani',
     ocupacion: 'pasante',
     dias_laborales: '30',
@@ -29,7 +32,7 @@ export class BoletaComponent implements OnInit {
   faltas: '1',
   mnr: '480',
   descuentos:'200',
-}]
+}]*/
   constructor(private boletaService: BoletaService, private http: HttpClient) { }
 
   ngOnInit(): void {

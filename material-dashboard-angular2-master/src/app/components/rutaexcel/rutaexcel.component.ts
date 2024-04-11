@@ -43,13 +43,13 @@ export class RutaexcelComponent {
     
     this.excelService.subirArchivo(this.archivoSeleccionado)
       .subscribe(
-        respuesta => {
+        (response: any) => {
           Swal.fire({
             icon: 'success',
             title: 'Archivo subido',
             text: 'El archivo se ha subido exitosamente.',
           });
-          console.log('Archivo subido exitosamente', respuesta);
+          console.log('Archivo subido exitosamente', response);
         },
         error => {
           Swal.fire({

@@ -1,27 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'models/usuario.model';
-import { NgForm} from "@angular/forms"
-import {  RegistroService } from 'services/registro.service';
-import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Usuario } from "models/usuario.model";
+import { NgForm } from "@angular/forms";
+import { RegistroService } from "services/registro.service";
+import Swal from "sweetalert2";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-registro',
-  templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css'],
-  
+  selector: "app-registro",
+  templateUrl: "./registro.component.html",
+  styleUrls: ["./registro.component.css"],
 })
-export class RegistroComponent implements OnInit{
-  ciBusqueda: string = '';
-  usuarios:Usuario[] =[];
- nuevoUsuario: Usuario = new Usuario(0, '', '', '', '','','','',0,0);
- editandoUsuario: Usuario | null = null;
-  estado:string;
-
- areas: any[] = []; 
- roles: any[] =[];
- token:string = '';
- usuarios1=[{
+export class RegistroComponent implements OnInit {
+  ciBusqueda: string = "";
+  usuarios: Usuario[] = [];
+  public nuevoUsuario: Usuario = new Usuario(
+    0,
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    0,
+    0
+  );
+  editandoUsuario: Usuario | null = null;
+  estado: string;
+  public res: any;
+  areas: any[] = [];
+  roles: any[] = [];
+  token: string = "";
+  public users : any;
+  /*usuarios1=[{
   id_usuario : 1,
   ci:'13276634',
   nombre: 'miriam',
@@ -49,22 +60,32 @@ export class RegistroComponent implements OnInit{
   fecha_creacion: '20240301' ,
   fecha_modificacion: '',
   estado:'s',
-}]
-constructor(private usuarioService: RegistroService, private router:Router) { }
+}]*/
+  constructor(
+    private usuarioService: RegistroService,
+    private router: Router
+
+  ) {}
 
   ngOnInit(): void {
     this.obtenerUsuarios();
-
   }
   obtenerUsuarios(): void {
-    this.usuarioService.obtenerUsuario(this.token)
-      .subscribe(usuarios => this.usuarios = this.usuarios,
-        error => Swal.fire('Error', 'No se pudieron obtener los usuarios', 'error')
-      );
+    this.usuarioService.obtenerUsuario(this.token).subscribe((response) => {
+      //console.log(response);
+      this.res = response
+      if (this.res.ok) {
+        this.users = this.res.data;
+        console.log(this.users);
+      } else {
+      }
+      //error => Swal.fire('Error', 'No se pudieron obtener los usuarios', 'error')
+    });
   }
-  registrarNuevoUsuario(form:NgForm): void {
+  registrarNuevoUsuario(form: NgForm): void {
     if (form.valid) {
-      const { ci,nombre, apellido_materno,apellido_paterno,estado } = form.value;
+      const { ci, nombre, apellido_materno, apellido_paterno, estado } =
+        form.value;
       this.nuevoUsuario.ci = ci;
       this.nuevoUsuario.nombre = nombre;
       this.nuevoUsuario.apellido_paterno = apellido_paterno;
@@ -75,84 +96,105 @@ constructor(private usuarioService: RegistroService, private router:Router) { }
           this.areas = areas;
         },
         error: (error) => {
-          console.error('Error al cargar las áreas', error);
-          error => Swal.fire('Error', 'No se pudo registrar el area', 'error')
-          }
+          console.error("Error al cargar las áreas", error);
+          (error) =>
+            Swal.fire("Error", "No se pudo registrar el area", "error");
+        },
       });
-      
+
       this.usuarioService.getRoles().subscribe({
         next: (roles) => {
           this.roles = roles;
         },
         error: (error) => {
-          console.error('Error al cargar los roles', error);
-          error => Swal.fire('Error', 'No se pudo registrar el area', 'error')
-        }
-      });
-      
-      this.usuarioService.registrarUsuario(this.nuevoUsuario,this.token)
-        .subscribe(usuario => {
-          this.usuarios.push(usuario);
-          this.nuevoUsuario = new Usuario(0, '', '', '', '','','','',0,0);
-          form.reset();
-          Swal.fire('Éxito', 'El usuario fue registrado correctamente', 'success');
+          console.error("Error al cargar los roles", error);
+          (error) =>
+            Swal.fire("Error", "No se pudo registrar el area", "error");
         },
-        error => Swal.fire('Error', 'No se pudo registrar el usuario', 'error')
+      });
+
+      this.usuarioService
+        .registrarUsuario(this.nuevoUsuario, this.token)
+        .subscribe(
+          (usuario) => {
+            this.usuarios.push(usuario);
+            this.nuevoUsuario = new Usuario(
+              0,
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              0,
+              0
+            );
+            form.reset();
+            Swal.fire(
+              "Éxito",
+              "El usuario fue registrado correctamente",
+              "success"
+            );
+          },
+          (error) =>
+            Swal.fire("Error", "No se pudo registrar el usuario", "error")
+        );
+    } else {
+      Swal.fire(
+        "Advertencia",
+        "Por favor, complete todos los campos",
+        "warning"
       );
-  } else {
-    Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
+    }
   }
-}
   editarUsuario(usuario: Usuario): void {
-    
-      this.router.navigate(['/editar-registro', usuario.id_usuario]);
-    
+    this.router.navigate(["/editar-registro", usuario.id_usuario]);
   }
 
-  
   buscarUsuarioPorCi(ci: string): void {
-    this.usuarioService.buscarPorCi(ci,this.token)
-      .subscribe({
-        next: (usuarios) => {
-          this.usuarios = usuarios; 
-        },
-        error: (error) => {
-          console.error('Error al buscar registro de usuario por CI', error),
-          Swal.fire('Error', 'Ingrese de nuevo los datos', 'error');
-
-        }
-      });
+    this.usuarioService.buscarPorCi(ci, this.token).subscribe({
+      next: (usuarios) => {
+        this.usuarios = usuarios;
+      },
+      error: (error) => {
+        console.error("Error al buscar registro de usuario por CI", error),
+          Swal.fire("Error", "Ingrese de nuevo los datos", "error");
+      },
+    });
   }
- 
+
   cambiarEstadoRegistro(idUsuario: number, nuevoEstado: string) {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
 
-    this.usuarioService.cambiarEstadoUsuario(idUsuario, nuevoEstado, this.token).subscribe({
-      next: () => {
-        Swal.fire({
-          title: '¡Éxito!',
-          text: `Estado del usuario actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
-          icon: 'success',
-          confirmButtonText: 'Aceptar'
-        }).then((result) => {
-          if (result.value) {
-            this.obtenerUsuarios();
-          }
-        });
-      },
-      error: (error) => {
-        console.error('Error al cambiar el estado:', error);
-        this.estado = estadoAnterior;
-        Swal.fire({
-          title: 'Error',
-          text: 'No se pudo cambiar el estado del usuario.',
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
-      }
-    });
-
+    this.usuarioService
+      .cambiarEstadoUsuario(idUsuario, nuevoEstado, this.token)
+      .subscribe({
+        next: () => {
+          Swal.fire({
+            title: "¡Éxito!",
+            text: `Estado del usuario actualizado correctamente a ${
+              nuevoEstado === "s" ? "activado" : "desactivado"
+            }.`,
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          }).then((result) => {
+            if (result.value) {
+              this.obtenerUsuarios();
+            }
+          });
+        },
+        error: (error) => {
+          console.error("Error al cambiar el estado:", error);
+          this.estado = estadoAnterior;
+          Swal.fire({
+            title: "Error",
+            text: "No se pudo cambiar el estado del usuario.",
+            icon: "error",
+            confirmButtonText: "Aceptar",
+          });
+        },
+      });
   }
-
 }

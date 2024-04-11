@@ -16,13 +16,17 @@ export class LoginComponent implements OnInit {
 
   public usuario : any
   public url
-  constructor(private loginService: LoginService,private _router : Router) {}
+  constructor(private loginService: LoginService,private _router : Router)
+  {
+    this.usuario =  new Login( 0,'','','','','',0)
+  }
   
   ngOnInit(
     token = localStorage.getItem('token') || ''): void {}
    
   login(loginForm): void {
-    if (!this.usuario.email || !this.usuario.password || !this.token) {
+    console.log(this.usuario);
+    if (!this.usuario.email || !this.usuario.password ) {
       Swal.fire({
         icon: 'error',
         title: 'Lo Siento',
@@ -31,7 +35,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-   this.loginService.login(this.usuario.email, this.usuario.password, this.token).subscribe(
+   this.loginService.login(this.usuario.email, this.usuario.password).subscribe(
       (response: any) => {
         console.log('Ingreso Exitoso: ', response);
         localStorage.setItem('token', response.token);

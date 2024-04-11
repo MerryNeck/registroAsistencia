@@ -17,6 +17,7 @@ export class RegistroEditComponent implements OnInit {
   token: string = '';
   areas: Area[] = [];
   roles: Rol[] = [];
+  public res : any;
   constructor(
     private registroService: RegistroService,
     private route: ActivatedRoute,
@@ -30,8 +31,8 @@ export class RegistroEditComponent implements OnInit {
       this.obtenerUsuario(idUsuario);
     });
 
-    this.obtenerAreas();
-    this.obtenerRoles();
+    //this.obtenerAreas();
+    //this.obtenerRoles();
   }
   obtenerAreas(): void {
     this.registroService.getAreas()
@@ -62,7 +63,10 @@ export class RegistroEditComponent implements OnInit {
     this.registroService.obtenerUsuarioPorId(idUsuario, this.token)
       .subscribe(
         usuario => {
-          this.editandoUsuario = usuario;
+          this.res= usuario
+          this.editandoUsuario = this.res.usuario[0];
+          console.log(this.editandoUsuario);
+          
         },
         error => {
           console.error('Error al obtener el usuario:', error);

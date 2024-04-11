@@ -14,13 +14,7 @@ export class RolService {
 
   constructor(private http: HttpClient) { }
 
-  // tocken
-  getHeaders() {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    });
-  }
+ 
 
   // registrar rol
   registrarRol(rol: Rol,token:string): Observable<any> {
@@ -32,8 +26,12 @@ export class RolService {
   }
 
   // listar todas las roles
-  listarRol(): Observable<Rol[]> {
-    return this.http.get<Rol[]>(`${this.url}/listar`, { headers: this.getHeaders() });
+  listarRol(token:string): Observable<Rol[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Rol[]>(`${this.url}/listar`, { headers});
   }
 
   //  estado de un rol

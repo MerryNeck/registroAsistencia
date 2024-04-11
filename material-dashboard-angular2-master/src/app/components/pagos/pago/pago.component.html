@@ -74,9 +74,6 @@
                                                 <th>DIAS TRABAJADOS</th>
                                                 <th>RETENCION</th>
                                                 <th>SUELDO BRUTO</th>
-                                                <th>FECHA CREACION</th>
-                                                <th>FECHA MODIFICACION</th>
-                                                <th>ESTADO</th>
                                                 <th>MODIFICAR</th>
                                                 <th>ELIMINAR</th>
                                             </tr>
@@ -84,15 +81,12 @@
                                         <tbody>
 
                                             <tr>
-                                            <tr *ngFor="let pagos of info">
+                                            <tr *ngFor="let pagos of pagos">
                                                 <td>{{ pagos.ci}}</td>
                                                 <td>{{ pagos.sueldo }}</td>
                                                 <td>{{ pagos.dias_trabajo }}</td>
                                                 <td>{{ pagos.retencion }}</td>
                                                 <td>{{ pagos.sueldo_bruto }}</td>
-                                                <td>{{ pagos.estado }}</td>
-                                                <td>{{ pagos.fecha_creacion}}</td>
-                                                <td>{{ pagos.fecha_modificacion}}</td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue btn-round "
                                                         (click)="editarPago(pagos)">Modificar</button></td>

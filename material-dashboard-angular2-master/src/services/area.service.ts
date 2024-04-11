@@ -12,7 +12,7 @@ import { environment } from 'environments/environment';
 })
 
 export class AreaService {
-  private url = environment.backend.area;
+  private url = environment.backend.api+'/api/area/area';
 
   constructor(private http: HttpClient, private authService:AuthService) { }
 
@@ -35,8 +35,12 @@ export class AreaService {
   }
 
   // listar todas las áreas
-  listarAreas(): Observable<Area[]> {
-    return this.http.get<Area[]>(`${this.url}/listar`, { headers: this.getHeaders() });
+  listarAreas(token:string): Observable<Area[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<Area[]>(`${this.url}/listar`, { headers});
   }
 
 //actualizar un área

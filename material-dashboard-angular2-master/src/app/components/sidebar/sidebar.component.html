@@ -1,4 +1,7 @@
-<div class="sidebar" [ngClass]="{ 'active': sidebarVisible && isMobile && showSidebar}">
+<div class="sidebar" [ngClass]="{ 'active': sidebarOpen}">
+    <div class="toggle-sidebar-btn" (click)="toggleSidebar()">
+        <i class="material-icons">menu</i>
+      </div>
     <br>
     <br>
     <br>
@@ -10,14 +13,13 @@
     <br>
 
     <ul class="sidebar-items">
-        <li *ngFor="let menuItem of menuItems" [routerLinkActive]="['active']" class="{{menuItem.class}}">
-            <a [routerLink]="menuItem.path">
+        <li class="nav-item" *ngFor="let menuItem of menuItems" routerLinkActive="active" [routerLink]="menuItem.path" class="{{menuItem.class}}">
+            <a >
                 <i class="material-icons">{{menuItem.icon}}</i>
-                <span>{{menuItem.title}}</span>
+                <span class="nav-link-text">{{menuItem.title}}</span>
             </a>
         </li>
     </ul>
 
-    <div class="overlay" *ngIf="sidebarVisible && isMobile && showSidebar" (click)="closeSidebar()"></div>
     
 </div>

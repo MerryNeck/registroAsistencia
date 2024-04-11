@@ -1,5 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { Router,NavigationEnd } from '@angular/router';
+import anime from 'animejs';
 declare const $: any;
 declare interface RouteInfo {
   path: string;
@@ -27,12 +28,14 @@ export const ROUTES: RouteInfo[] = [
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  menuItems: any[] = ROUTES;
-  sidebarVisible:boolean = true;
-  isMobile : boolean =false;
-  showSidebar: boolean = true;
+  menuItems: RouteInfo[] = ROUTES;
+  sidebarOpen: boolean = true;
 
-   constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    private elRef: ElementRef
+  ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.closeSidebar();
@@ -41,24 +44,49 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
-    this.isMobile = this.isMobileMenu();
-  }
-  toggleSidebar() { 
-      this.sidebarVisible = !this.sidebarVisible;
-      this.showSidebar = !this.showSidebar;
-  }
-  closeSidebar() {
-    if (this.isMobile) {
-      this.sidebarVisible = false;
-    }
-  }
-  isMobileMenu() {
-    return window.innerWidth <= 991;
+    anime({
+      targets: '.sidebar',
+      translateX: this.sidebarOpen ? 0 : '-300px',
+      duration: 300,
+      easing: 'easeInOutCubic'
+    });
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    this.isMobile = this.isMobileMenu();
+    this.adjustSidebarWidth();
+  }
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+    const elementoBarraLateral = this.elRef.nativeElement.querySelector('.sidebar');
+
+    if (elementoBarraLateral) {
+      anime({
+        targets: elementoBarraLateral,
+        translateX: this.sidebarOpen ? 0 : '-300px',
+        duration: 300,
+        easing: 'easeInOutCubic'
+      });
+    }
+  }
+
+  closeSidebar() {
+    this.sidebarOpen = false;
+    const elementoBarraLateral = this.elRef.nativeElement.querySelector('.sidebar');
+
+    if (elementoBarraLateral) {
+      anime({
+        targets: elementoBarraLateral,
+        translateX: '-280px',
+        duration: 300,
+        easing: 'easeInOutCubic'
+      });
+    }
+  }
+
+  adjustSidebarWidth() {
+    const ancho = window.innerWidth <= 768 ? '200px' : '300px';
+    this.renderer.setStyle(this.elRef.nativeElement.querySelector('.sidebar'), 'width', ancho);
   }
 }

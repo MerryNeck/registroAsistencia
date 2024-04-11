@@ -81,15 +81,7 @@
                                                 <th>
                                                     PASWORD
                                                 </th>
-                                                <th>
-                                                    ESTADO
-                                                </th>
-                                                <th>
-                                                    FECHA CREACION
-                                                </th>
-                                                <th>
-                                                    FECHA MODIFICACION
-                                                </th>
+                                                
                                                 <th>
                                                     MODIFICAR
                                                 </th>
@@ -99,21 +91,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let perfiles of perfil">
+                                            <tr *ngFor="let perfiles of perfiles">
                                                 <td>{{ perfiles.nombre }}</td>
                                                 <td>{{ perfiles.apellido}}</td>
                                                 <td>{{ perfiles.correo_corp }}</td>
                                                 <td>{{ perfiles.password}}</td>
-                                                <td>{{ perfiles.estado}}</td>
-                                                <td>{{ perfiles.fecha_creacion}}</td>
-                                                <td>{{ perfiles.fecha_modificacion}}</td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue  btn-round"
                                                         (click)="editarPerfil(perfiles)">Modificar</button></td>
                                                 <td><button mat-raised-button type="submit"
                                                     class="btn btn-round"
                                                     [ngClass]="{'activo': perfiles.estado === 's', 'inactivo': perfiles.estado === 'n'}"
-                                                    (click)="cambiarEstadoPerfil(1, estado === 's' ? 'n' : 's')">{{ perfil.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
+                                                    (click)="cambiarEstadoPerfil(1, estado === 's' ? 'n' : 's')">{{ perfiles.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
                                             </tr>
 
                                         </tbody>

@@ -18,13 +18,15 @@ export class AsistenciaComponent implements OnInit {
   asistenciaSeleccionada: Asistencia | null = null;
   isSidebarActive: boolean = false;
   token:string='';
+  public res: any;
+  public users : any;
 
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;
   }
 
   
- info=[{
+ /*info=[{
   id_asistencia : 1,
   fecha :'20240301',
   ci:'13276634',
@@ -66,7 +68,7 @@ export class AsistenciaComponent implements OnInit {
   estado : 's',
   fecha_creacion: '20240301' ,
   fecha_modificacion: '' ,
-}]
+}]*/
 
   constructor(private asistenciaService: AsistenciaService, private http: HttpClient, private router: Router) { }
 
@@ -75,10 +77,16 @@ export class AsistenciaComponent implements OnInit {
   }
 
   listarAsistencias(): void {
-    this.asistenciaService.getAsistencias(this.token)
-      .subscribe(asistencias => this.asistencias = asistencias),
+    this.asistenciaService.getAsistencias(this.token).subscribe((response) => {
+      //console.log(response);
+      this.res = response
+      if (this.res.ok) {
+        this.users = this.res.data;
+        console.log(this.users);
+      } else {
+      }
       error => Swal.fire('Error', 'No se pudieron obtener los datos de asistencia', 'error')
-      ;
+      });
   }
 
   seleccionarAsistencia(asistencia: Asistencia): void {
@@ -87,7 +95,7 @@ export class AsistenciaComponent implements OnInit {
   imprimirAsistencia(): void {
     const filasHTML: string[] = [];
 
-    this.info.forEach(asistencia => {
+    this.asistencias.forEach(asistencia => {
       let filaHTML = '<tr>';
 
       // Índices de las columnas que deseas imprimir

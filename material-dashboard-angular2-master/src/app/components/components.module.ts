@@ -51,7 +51,7 @@ import { AsistenciaEditComponent } from './asistencias/asistencia-edit/asistenci
     AreaComponent,
     RutaexcelComponent,
     AsistenciaComponent,
-   PerfilComponent,
+   
     PagoComponent,
     BoletaComponent,
     AnticipoComponent,
