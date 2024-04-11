@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     token = localStorage.getItem('token') || ''): void {}
    
   login(loginForm): void {
-    if (!this.email || !this.password || !this.token) {
+    if (!this.usuario.email || !this.usuario.password || !this.token) {
       Swal.fire({
         icon: 'error',
         title: 'Lo Siento',
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-   this.loginService.login(this.email, this.password, this.token).subscribe(
+   this.loginService.login(this.usuario.email, this.usuario.password, this.token).subscribe(
       (response: any) => {
         console.log('Ingreso Exitoso: ', response);
         localStorage.setItem('token', response.token);
