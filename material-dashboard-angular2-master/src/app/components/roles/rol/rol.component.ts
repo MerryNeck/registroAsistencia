@@ -18,8 +18,13 @@ export class RolComponent implements OnInit {
   editandoRol: Rol | null =null;
   token: string = '';
   estado: string;
+  
+  public res: any;
+  public users : any;
 
-  rol=[{
+
+
+ /* rol=[{
     id_rol : 1,
     tipo: 'rrhh',
     fecha_creacion:'20240301',
@@ -37,7 +42,7 @@ export class RolComponent implements OnInit {
   fecha_creacion:'20240301',
   estado : 's',
   fecha_modificacion: ''
-}]
+}]*/
 
   constructor(private rolService: RolService, private router:Router) { }
 
@@ -46,11 +51,16 @@ export class RolComponent implements OnInit {
     this.token = localStorage.getItem('token') || ''
   }
   listarRoles(): void {
-    this.rolService.listarRol().subscribe(
-      (roles) => (this.roles = roles),
+    this.rolService.listarRol(this.token).subscribe ((response) =>{
+      this.res = response
+   if (this.res.ok) {
+     this.users = this.res.data;
+     console.log(this.users);
+   } else {
+   }
       error => Swal.fire('Error', 'No se pudieron obtener los rol', 'error')
       
-    );
+    });
   }
 
   registrarNuevoRol(form:NgForm): void {

@@ -18,20 +18,11 @@ export class LoginService {
   public url:string = environment.backend.api+environment.backend.login;
   constructor(private _http: HttpClient , private authService: AuthService) { }
 
-  getHeaders() {
-    const token = this.authService.getToken(); // Obtener el token JWT
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
-  }
-login(email:string, password:string,token:string){
-  const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
-  });
+  
+login(email:string, password:string){
+  
     const body = { email, password }; 
-    return this._http.post<any>(this.url, { email, password },{headers})
+    return this._http.post<any>(this.url, { email, password })
     .pipe(
         catchError(this.handleError) 
       );

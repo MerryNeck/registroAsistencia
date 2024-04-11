@@ -13,34 +13,37 @@ import Swal from 'sweetalert2';
 export class AnticipoComponent implements OnInit {
 
   ciBusqueda: string = '';
+
   fechaBusqueda: string = '';
   anticipos: Anticipo[] = [];
   nuevoAnticipo: Anticipo = new Anticipo(0, '', '', '', 0, 0);
-  editandoAnticipo: Anticipo | null = null;
   token: string = '';
-  estado:string;
-  info = [{
-    id_anticipo: 1,
-    id_usuario: 2,
-    anticipos: 100,
-    estado: 's',
-    fecha_creacion: '20240301',
-    fecha_modificacion: '',
-  }, {
-    id_anticipo: 2,
-    id_usuario: 2,
-    anticipos: 100,
-    estado: 'n',
-    fecha_creacion: '20240301',
-    fecha_modificacion: '',
-  }, {
-    id_anticipo: 3,
-    id_usuario: 2,
-    anticipos: 100,
-    estado: 's',
-    fecha_creacion: '20240301',
-    fecha_modificacion: '',
-  }]
+  estado: string;
+  public res: any;
+  public users: any;
+
+  /* info = [{
+     id_anticipo: 1,
+     id_usuario: 2,
+     anticipos: 100,
+     estado: 's',
+     fecha_creacion: '20240301',
+     fecha_modificacion: '',
+   }, {
+     id_anticipo: 2,
+     id_usuario: 2,
+     anticipos: 100,
+     estado: 'n',
+     fecha_creacion: '20240301',
+     fecha_modificacion: '',
+   }, {
+     id_anticipo: 3,
+     id_usuario: 2,
+     anticipos: 100,
+     estado: 's',
+     fecha_creacion: '20240301',
+     fecha_modificacion: '',
+   }]*/
 
 
   constructor(private anticipoService: AnticipoService, private router: Router) { }
@@ -53,10 +56,15 @@ export class AnticipoComponent implements OnInit {
 
   obtenerAnticipos(): void {
     this.anticipoService.obtenerAnticipo(this.token)
-      .subscribe(
-        anticipos => this.anticipos = anticipos,
+      .subscribe((response) => {
+        this.res = response
+        if (this.res.ok) {
+          this.users = this.res.data;
+          console.log(this.users);
+        } else {
+        }
         error => Swal.fire('Error', 'No se pudieron obtener los anticipos', 'error')
-      );
+      });
   }
 
   registrarNuevoAnticipo(form: NgForm): void {
@@ -66,7 +74,7 @@ export class AnticipoComponent implements OnInit {
       this.nuevoAnticipo.anticipos = anticipo;
       this.anticipoService.registrarAnticipo(this.nuevoAnticipo, this.token)
         .subscribe(
-          anticipo => {
+          (anticipo) => {
             this.anticipos.push(anticipo);
             this.nuevoAnticipo = new Anticipo(0, '', '', '', 0, 0);
             form.reset();
@@ -85,22 +93,22 @@ export class AnticipoComponent implements OnInit {
 
   buscarAnticipoPorCi(ci: string): void {
     this.anticipoService.buscarPorCi(ci, this.token)
-      .subscribe({
-        next: (anticipos) => {
+      .subscribe(
+        (anticipos) => {
           this.anticipos = anticipos;
         },
-        error: (error) => {
+        (error) => {
           console.error('Error al buscar boletas por CI', error);
           Swal.fire('Error', 'No se pudieron buscar los anticipos', 'error');
         }
-      });
+      );
   }
 
   cambiarEstadoAnticipo(idAnticipo: number, nuevoEstado: string) {
     const estadoAnterior = this.estado;
-    this.estado =nuevoEstado;
-    this.anticipoService.cambiarEstadoAnticipo(idAnticipo, nuevoEstado, this.token).subscribe({
-      next: () => {
+    this.estado = nuevoEstado;
+    this.anticipoService.cambiarEstadoAnticipo(idAnticipo, nuevoEstado, this.token).subscribe(
+       () => {
         Swal.fire({
           title: '¡Éxito!',
           text: `Estado del anticipo actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
@@ -112,17 +120,14 @@ export class AnticipoComponent implements OnInit {
           }
         });
       },
-      error: (error) => {
+      (error) => {
         console.error('Error al cambiar el estado:', error);
         this.estado = estadoAnterior;
-        Swal.fire({
-          title: 'Error',
-          text: 'No se pudo cambiar el estado del anticipo.',
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
-      }
-    });
+        Swal.fire('Error', 'No se pudo cambiar el estado del anticipo', 'error');
 
+
+      }
+    );
   }
+
 }

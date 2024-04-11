@@ -15,7 +15,7 @@ export class RolEditComponent implements OnInit {
   //editandoRol: Rol | null = null;
   editandoRol: Rol = {id_rol:0, tipo: '', estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
-
+  public res:any;
   constructor(
     private rolService: RolService,
     private route: ActivatedRoute,
@@ -34,7 +34,8 @@ export class RolEditComponent implements OnInit {
     this.rolService.obtenerRolPorId(idRol, this.token)
       .subscribe(
         rol => {
-          this.editandoRol = rol;
+          this.res = rol
+          this.editandoRol = this.res.rol;
         },
         error => {
           console.error('Error al obtener el rol:', error);

@@ -15,7 +15,8 @@ export class AreaEditComponent implements OnInit {
   
   editandoArea: Area  = {id_area:0, tipo_area: '', estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
-
+  public res:any;
+  
   constructor(
     private areaService: AreaService,
     private route: ActivatedRoute,
@@ -34,7 +35,8 @@ export class AreaEditComponent implements OnInit {
     this.areaService.obtenerAreaPorId(idArea, this.token)
       .subscribe(
         area => {
-          this.editandoArea = area;
+          this.res = area;
+          this.editandoArea = this.res.area[0]
         },
         error => {
           console.error('Error al obtener el area:', error);

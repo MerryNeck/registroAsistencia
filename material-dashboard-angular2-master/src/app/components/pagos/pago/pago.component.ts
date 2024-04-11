@@ -18,8 +18,11 @@ export class PagoComponent implements OnInit {
   editandoPago: Pago | null = null; 
   token:string='';
   estado:string;
+  
+  public res: any;
+  public users : any;
 
-  info=[{
+  /*info=[{
     id_sueldo : '1',
     ci:'132776634',
     dias_trabajo: '30',
@@ -49,7 +52,7 @@ export class PagoComponent implements OnInit {
     estado : 's',
     fecha_creacion: '20240301' ,
     fecha_nodificacion: '' ,
-  }]
+  }]*/
 
   constructor(private pagoService: PagoService ,private router:Router) { }
 
@@ -61,9 +64,16 @@ export class PagoComponent implements OnInit {
   // listar area
   obtenerPago(): void {
     this.pagoService.obtenerPago(this.token)
-      .subscribe(pagos => this.pagos = pagos,
-        error => Swal.fire('Error', 'No se pudieron obtener los pagos', 'error')
-      );
+    .subscribe ((response) =>{
+      this.res = response
+   if (this.res.ok) {
+     this.users = this.res.data;
+     console.log(this.users);
+   } else {
+    error => Swal.fire('Error', 'No se pudieron obtener los pagos', 'error')
+   }
+        
+      });
   }
 
   registrarNuevoPago(form:NgForm): void {

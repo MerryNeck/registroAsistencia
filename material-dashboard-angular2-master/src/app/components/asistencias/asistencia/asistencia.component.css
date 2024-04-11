@@ -83,17 +83,7 @@
   overflow-x: auto;
 }
 
-.card1 {
 
-  .card .card-header-danger .card-icon,
-  .card .card-header-danger .card-text,
-  .card .card-header-danger:not(.card-header-icon):not(.card-header-text),
-  .card.bg-danger,
-  .card.card-rotate.bg-danger .front,
-  .card.card-rotate.bg-danger .back {
-    background: linear-gradient(60deg, #173b9f, #357ee5);
-  }
-}
 
 
 table tr:first-child {
@@ -231,79 +221,9 @@ a{
   }
 }
 
-
-
-.sidebar {
-  width: 250px; 
-  transition: transform 0.3s ease; 
+.main-content{
+  padding: 5%;
+  display: flex;
+  background-color: rgb(225, 229, 249);
+  margin-right: 15%;
 }
-
-
-
-.sidebar.active {
-  transform: translateX(0); }
-
-
-  .sidebar {
-    width: 250px;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 30%;
-    background-color: #ffffff;
-    box-shadow: 4px 0 5px rgba(81, 119, 215, 0.729);
-    transition: transform 0.3s ease;
-  }
-  
-  .sidebar.active {
-    transform: translateX(-250px);
-    color: white;
-  }
-  
-  @media (max-width: 991px) {
-    
-    .sidebar {
-      transform: translateX(-250px);
-      width: 250px;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      background-color: #ffffff;
-      box-shadow: 4px 0 5px rgba(81, 119, 215, 0.729);
-      transition: transform 0.3s ease;
-    }
-    .sidebar.active {
-      transform: translateX(0);
-    }
-  }
-  
-  .sidebar-items {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar-items li {
-    padding: 10px 15px;
-  }
-  
-  .sidebar-items li.active,
-  .sidebar-items li:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .sidebar-items li a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #E67E22;
-  }
-  
-  .sidebar-items li a i.material-icons {
-    margin-right: 10px;
-  }
-  
-  .sidebar-items li a span {
-    font-weight: 500;
-  }

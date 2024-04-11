@@ -99,7 +99,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let perfiles of perfil">
+                                            <tr *ngFor="let perfiles of perfiles">
                                                 <td>{{ perfiles.nombre }}</td>
                                                 <td>{{ perfiles.apellido}}</td>
                                                 <td>{{ perfiles.correo_corp }}</td>
@@ -113,7 +113,7 @@
                                                 <td><button mat-raised-button type="submit"
                                                     class="btn btn-round"
                                                     [ngClass]="{'activo': perfiles.estado === 's', 'inactivo': perfiles.estado === 'n'}"
-                                                    (click)="cambiarEstadoPerfil(1, estado === 's' ? 'n' : 's')">{{ perfil.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
+                                                    (click)="cambiarEstadoPerfil(1, estado === 's' ? 'n' : 's')">{{ perfiles.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
                                             </tr>
 
                                         </tbody>

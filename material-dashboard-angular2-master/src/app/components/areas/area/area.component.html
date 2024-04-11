@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">AREA</h4>
@@ -47,15 +47,7 @@
                                                     <th>
                                                         TIPO AREA
                                                     </th>
-                                                    <th>
-                                                        ESTADO
-                                                    </th>
-                                                    <th>
-                                                        FECHA CREACION
-                                                    </th>
-                                                    <th>
-                                                        FECHA MODIFICACION
-                                                    </th>
+                                                    
                                                     <th>
                                                         MODIFICAR
                                                     </th>
@@ -65,11 +57,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let itemareas of info">
+                                                <tr *ngFor="let itemareas of areas">
                                                     <td>{{ itemareas.tipo_area }}</td>
-                                                    <td>{{ itemareas.estado }}</td>
-                                                    <td>{{ itemareas.fecha_creacion }}</td>
-                                                    <td>{{ itemareas.fecha_modificacion }}</td>
                                                     <td><button mat-raised-button type="submit"
                                                             class="btn btn-blue  btn-round"
                                                             (click)="editarArea(itemareas)">Modificar</button></td>

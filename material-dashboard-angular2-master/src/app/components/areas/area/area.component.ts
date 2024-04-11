@@ -4,6 +4,7 @@ import { AreaService } from 'services/area.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { response } from 'express';
 
 @Component({
   selector: 'app-area',
@@ -16,8 +17,9 @@ export class AreaComponent implements OnInit {
   editandoArea: Area | null = null; 
   token: string = '';
   estado: string;
-
-  info=[{
+  public res: any;
+  public area : any;
+  /*info=[{
     id_area : 1,
     tipo_area: 'rrhh',
     estado : 's',
@@ -35,7 +37,7 @@ export class AreaComponent implements OnInit {
   estado : 's',
   fecha_creacion:'20240301',
   fecha_modificacion: '',
-}]
+}]*/
 
   constructor(private areaService: AreaService,  private router:Router) { }
 
@@ -46,10 +48,16 @@ export class AreaComponent implements OnInit {
 
   // listar area
   listarAreas() {
-    this.areaService.listarAreas().subscribe(
-      areas => this.areas = areas,
-      error => Swal.fire('Error', 'No se pudieron obtener los datos del area', 'error')
-    );
+    this.areaService.listarAreas(this.token).subscribe((response) => {
+      this.res = response
+      if(this.res.ok){
+        this.area = this.res.data;
+
+      }else{
+        error => Swal.fire('Error', 'No se pudieron obtener los datos del area', 'error')
+      
+      }
+      });
   }
 
   registrarNuevaArea(form:NgForm): void {

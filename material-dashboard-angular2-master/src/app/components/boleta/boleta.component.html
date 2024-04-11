@@ -10,8 +10,8 @@
               <div class="empre">Bispace SRL</div>
               <h1>BOLETA DE PAGO</h1>
 
-              <div class="company-info" *ngFor="let persona of info">
-                <div class="bis">NOMBRE: <span class="label">{{persona.nombre}}</span></div>
+              <div class="company-info" *ngFor="let persona of boletas">
+                <div class="bis">NOMBRE: <span class="label">{{persona.id_usuario.nombre}}</span></div>
                 <div class="bis">OCUPACION: <span class="label">{{persona.ocupacion}}</span></div>
                 <div class="bis">DIAS LABORALES: <span class="label">{{persona.dias_laborales}}</span></div>
                 <div class="bis">MES DE PAGO: <span class="label">{{persona.mes}}</span></div>
@@ -37,7 +37,7 @@
 
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of boleta">
+                    <tr *ngFor="let item of boletas">
                       <td>{{ item.pago }}</td>
                       <td>{{ item.afps }}</td>
                       <td>{{ item.atrasos }}</td>
@@ -51,7 +51,7 @@
               </div>
             </div>
 
-            <div class="total" *ngFor="let persona of info">
+            <div class="total" *ngFor="let persona of boletas">
               <p>LIQUIDO PAGABLE Bs.-  <span class="label1">{{persona.pagos}}</span></p>
               </div>
             <div class="signature">

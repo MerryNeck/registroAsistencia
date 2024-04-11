@@ -64,7 +64,6 @@ export class RegistroEditComponent implements OnInit {
       .subscribe(
         usuario => {
           this.res= usuario
-          
           this.editandoUsuario = this.res.usuario[0];
           console.log(this.editandoUsuario);
           
