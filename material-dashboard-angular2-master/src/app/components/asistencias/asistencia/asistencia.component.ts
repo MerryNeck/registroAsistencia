@@ -45,8 +45,8 @@ export class AsistenciaComponent implements OnInit {
     this.router.navigate(['/editar-asistencia', asistencia.id_asistencia]);
   }
   imprimirAsistencia(): void {
-    const filasHTML: string[] = [];
-
+    if (this.asistenciasUser && this.asistenciasUser.length > 0){
+      const filasHTML: string[] = [];
     this.asistencias.forEach(asistenciasUser => {
       let filaHTML = '<tr>';
 
@@ -115,6 +115,9 @@ export class AsistenciaComponent implements OnInit {
   `,  
       targetStyles: ['border', 'padding', 'color', 'font-size'] 
     });
+  }else{
+    Swal.fire('Error', 'No hay datos para imprimir el reporte.', 'error');
+  }
 }
 
   buscarAsistencia(): void {
@@ -126,7 +129,18 @@ export class AsistenciaComponent implements OnInit {
         
       }, error => {
         console.error('Error al buscar asistencias:', error);
+        Swal.fire('Error', 'Ingrese los Datos Correctos', 'error');
+      
       });
+  }
+
+  verBoleta():void{
+    if (this.asistenciasUser && this.asistenciasUser.length > 0){
+      this.router.navigate(['/boleta']);
+    }else {
+      console.error('No hay datos para mostrar:');
+      Swal.fire('Error', 'No hay datos para mostrar. Ingrese los Datos', 'error');
+    }
   }
   
 }
