@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { Router,NavigationEnd } from '@angular/router';
-import anime from 'animejs';
+import anime from 'animejs'
 declare const $: any;
 declare interface RouteInfo {
   path: string;

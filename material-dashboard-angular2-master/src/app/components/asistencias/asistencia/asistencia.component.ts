@@ -19,7 +19,7 @@ export class AsistenciaComponent implements OnInit {
   isSidebarActive: boolean = false;
   token:string='';
   public res: any;
-  public users : any;
+  public asistenciasUser : any;
 
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;
@@ -81,8 +81,8 @@ export class AsistenciaComponent implements OnInit {
       //console.log(response);
       this.res = response
       if (this.res.ok) {
-        this.users = this.res.data;
-        console.log(this.users);
+        this.asistenciasUser = this.res.data;
+        console.log(this.asistenciasUser);
       } else {
       }
       error => Swal.fire('Error', 'No se pudieron obtener los datos de asistencia', 'error')
@@ -95,7 +95,7 @@ export class AsistenciaComponent implements OnInit {
   imprimirAsistencia(): void {
     const filasHTML: string[] = [];
 
-    this.asistencias.forEach(asistencia => {
+    this.asistencias.forEach(asistenciasUser => {
       let filaHTML = '<tr>';
 
       // Índices de las columnas que deseas imprimir
@@ -104,7 +104,7 @@ export class AsistenciaComponent implements OnInit {
       ]; 
 
       columnasImprimir.forEach(columna => {
-        filaHTML += `<td>${asistencia[columna]}</td>`;
+        filaHTML += `<td>${asistenciasUser[columna]}</td>`;
       });
 
       filaHTML += '</tr>';
@@ -179,8 +179,11 @@ export class AsistenciaComponent implements OnInit {
   }
   buscarAsistencia(): void {
     this.asistenciaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda,this.token)
-      .subscribe(asistencias => {
-        this.asistencias = asistencias;
+      .subscribe((response) => {
+        this.res= response
+        this.asistenciasUser = this.res.data;
+        console.log(this.asistenciasUser);
+        
       }, error => {
         console.error('Error al buscar asistencias:', error);
       });

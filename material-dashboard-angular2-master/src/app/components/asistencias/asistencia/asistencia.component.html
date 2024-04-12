@@ -48,11 +48,11 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let asistencia of asistencias">
+                    <tr *ngFor="let asistencia of asistenciasUser">
                       <td>{{ asistencia.fecha }}</td>
-                      <td>{{ asistencia.ci }}</td>
-                      <td>{{ asistencia.nombre }}</td>
-                      <td>{{ asistencia.apellido }}</td>
+                      <td>{{ asistencia.usuario.ci }}</td>
+                      <td>{{ asistencia.usuario.nombre }}</td>
+                      <td>{{ asistencia.usuario.apellido_paterno }}  {{ asistencia.usuario.apellido_materno }}</td>
                       <td>{{ asistencia.tprano_ingreso}}</td>
                       <td>{{ asistencia.tprano_salida }}</td>
                       <td>{{ asistencia.tde_ingreso}}</td>

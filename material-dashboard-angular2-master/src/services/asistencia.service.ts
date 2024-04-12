@@ -11,13 +11,13 @@ import { environment } from 'environments/environment';
   providedIn: 'root'
 })
 export class AsistenciaService {
-  private apiUrl = environment.backend.asistencia; 
+  private apiUrl = environment.backend.api; 
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getAsistencias(token: string): Observable<Asistencia[]> {
     const headers = this.getHeaders(token);
-    return this.http.get<Asistencia[]>(this.apiUrl, { headers });
+    return this.http.get<Asistencia[]>(this.apiUrl+'/api/asistencia', { headers });
   }
 
   getAsistencia(id: number, token: string): Observable<Asistencia> {
@@ -27,15 +27,18 @@ export class AsistenciaService {
   }
 
   actualizarAsistencia(asistencia: Asistencia, token: string): Observable<any> {
-    const headers = this.getHeaders(token);
-    const url = `${this.apiUrl}/actualizar/${asistencia.id_asistencia}`;
+    const headers = new HttpHeaders({
+      'x-token': `${token}`
+    });
+
+    const url = `${this.apiUrl}/api/asistencia/actualizar/${asistencia.id_asistencia}`;
     return this.http.put<Asistencia>(url, asistencia, { headers });
   }
   obtenerAsistenciaPorId(id: number, token: string): Observable<Asistencia> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
-    return this.http.get<Asistencia>(`${this.apiUrl}/editar/${id}`, { headers })
+    return this.http.get<Asistencia>(`${this.apiUrl}/api/asistencia/${id}`, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al obtener el asistencia:', error);
@@ -52,15 +55,9 @@ export class AsistenciaService {
 
   buscarPorCiOFecha(ci: string, fecha: string, token: string): Observable<Asistencia[]> {
     const headers = this.getHeaders(token);
-    let queryParams = new HttpParams();
-    if (ci) {
-      queryParams = queryParams.append('ci', ci);
-    }
-    if (fecha) {
-      queryParams = queryParams.append('fecha', fecha);
-    }
+    const body = { ci, fecha }; // Objeto con los datos a enviar en el cuerpo de la solicitud
 
-    return this.http.get<Asistencia[]>(`${this.apiUrl}`, { params: queryParams, headers });
+    return this.http.post<Asistencia[]>(`${this.apiUrl}/api/asistencia/buscar`, body, { headers });
   }
 
   // Utiliza esta función para crear los headers con el token

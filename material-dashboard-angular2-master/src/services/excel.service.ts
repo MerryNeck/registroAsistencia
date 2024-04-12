@@ -8,16 +8,16 @@ import { environment } from 'environments/environment';
   providedIn: 'root'
 })
 export class ExcelService {
-  private apiUrl = environment.backend.excel; 
+  private apiUrl = environment.backend.api+'/api/excel'; 
   constructor(private http: HttpClient) { }
-  subirArchivo(archivo: File): Observable<any> {
+  subirArchivo(archivo: any): Observable<any> {
     const token = localStorage.getItem('token');
-
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
     const formData = new FormData();
     formData.append('archivo', archivo);
+    console.log(formData);
     
     return this.http.post(this.apiUrl, formData, {headers});
   }
