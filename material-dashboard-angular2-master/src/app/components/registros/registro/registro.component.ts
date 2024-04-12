@@ -32,35 +32,7 @@ export class RegistroComponent implements OnInit {
   roles: any[] = [];
   token: string = "";
   public users : any;
-  /*usuarios1=[{
-  id_usuario : 1,
-  ci:'13276634',
-  nombre: 'miriam',
-  apellido_paterno: 'justo',
-  apellido_materno : 'mamani',
-  fecha_creacion: '20240301' ,
-  fecha_modificacion: '',
-  estado:'s',
-  
-},{
-  id_usuario : 2,
-  ci:'13276634',
-  nombre: 'miriam',
-  apellido_paterno: 'justo',
-  apellido_materno : 'mamani',
-  fecha_creacion: '20240301' ,
-  fecha_modificacion: '',
-  estado:'s',
-},{
-  id_usuario : 3,
-  ci:'13276634',
-  nombre: 'miriam',
-  apellido_paterno: 'justo',
-  apellido_materno : 'mamani',
-  fecha_creacion: '20240301' ,
-  fecha_modificacion: '',
-  estado:'s',
-}]*/
+ 
   constructor(
     private usuarioService: RegistroService,
     private router: Router
@@ -91,7 +63,7 @@ export class RegistroComponent implements OnInit {
       this.nuevoUsuario.apellido_paterno = apellido_paterno;
       this.nuevoUsuario.apellido_materno = apellido_materno;
       this.nuevoUsuario.estado = estado;
-      this.usuarioService.getAreas().subscribe({
+      this.usuarioService.getAreas(this.token).subscribe({
         next: (areas) => {
           this.areas = areas;
         },
@@ -102,7 +74,7 @@ export class RegistroComponent implements OnInit {
         },
       });
 
-      this.usuarioService.getRoles().subscribe({
+      this.usuarioService.getRoles(this.token).subscribe({
         next: (roles) => {
           this.roles = roles;
         },
@@ -153,16 +125,16 @@ export class RegistroComponent implements OnInit {
   }
 
   buscarUsuarioPorCi(ci: string): void {
-    this.usuarioService.buscarPorCi(ci, this.token).subscribe({
-      next: (usuarios) => {
-        this.usuarios = usuarios;
-      },
-      error: (error) => {
+    this.usuarioService.buscarPorCi(ci, this.token).subscribe(
+       (response) => {
+        this.res = response;
+        this.users=this.res.data;
+      },(error) => {
         console.error("Error al buscar registro de usuario por CI", error),
           Swal.fire("Error", "Ingrese de nuevo los datos", "error");
-      },
-    });
-  }
+      });
+    }
+  
 
   cambiarEstadoRegistro(idUsuario: number, nuevoEstado: string) {
     const estadoAnterior = this.estado;
@@ -170,12 +142,13 @@ export class RegistroComponent implements OnInit {
 
     this.usuarioService
       .cambiarEstadoUsuario(idUsuario, nuevoEstado, this.token)
-      .subscribe({
-        next: () => {
+      .subscribe((response) => {
+        this.res=response;
+        this.estado =this.res.data
           Swal.fire({
             title: "¡Éxito!",
             text: `Estado del usuario actualizado correctamente a ${
-              nuevoEstado === "s" ? "activado" : "desactivado"
+              this.estado=== "s" ? "activado" : "desactivado"
             }.`,
             icon: "success",
             confirmButtonText: "Aceptar",
@@ -184,8 +157,9 @@ export class RegistroComponent implements OnInit {
               this.obtenerUsuarios();
             }
           });
-        },
-        error: (error) => {
+        });
+      
+      (error) => {
           console.error("Error al cambiar el estado:", error);
           this.estado = estadoAnterior;
           Swal.fire({
@@ -194,7 +168,7 @@ export class RegistroComponent implements OnInit {
             icon: "error",
             confirmButtonText: "Aceptar",
           });
-        },
-      });
+        }
+      
   }
 }

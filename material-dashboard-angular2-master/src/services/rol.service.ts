@@ -10,17 +10,12 @@ import { environment } from 'environments/environment';
 })
 
 export class RolService {
-  private url = environment.backend.rol; // Reemplazar con la URL real de tu API
-
+  private url = environment.backend.api + '/api/rol'; 
   constructor(private http: HttpClient) { }
-
- 
-
   // registrar rol
   registrarRol(rol: Rol,token:string): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
     return this.http.post(`${this.url}/registrar`, rol, { headers });
   }
@@ -28,25 +23,22 @@ export class RolService {
   // listar todas las roles
   listarRol(token:string): Observable<Rol[]> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
-    return this.http.get<Rol[]>(`${this.url}/listar`, { headers});
+    return this.http.get<Rol[]>(`${this.url}`, { headers});
   }
 
   //  estado de un rol
   cambiarEstadoRol(idRol: number, estado: string,token:string): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
     return this.http.patch(`${this.url}/cambiarEstado/${idRol}`, { estado }, { headers });
   }
   // Método para actualizar un anticipo
   actualizarRol(rol: Rol, token: string): Observable<void> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      'x-token': `${token}`
     });
     return this.http.put<void>(`${this.url}/actualizar/${rol.id_rol}`, rol, { headers })
       .pipe(
@@ -58,9 +50,9 @@ export class RolService {
   }
   obtenerRolPorId(id: number, token: string): Observable<Rol> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-    return this.http.get<Rol>(`${this.url}/editar/${id}`, { headers })
+      'x-token': `${token}`
+    });;
+    return this.http.get<Rol>(`${this.url}/${id}`, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al obtener el rol:', error);

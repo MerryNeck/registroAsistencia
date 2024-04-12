@@ -22,7 +22,7 @@ export class LoginService {
 login(email:string, password:string){
   
     const body = { email, password }; 
-    return this._http.post<any>(this.url+'login', { email, password })
+    return this._http.post<any>(this.url+'/api/user/login', { email, password })
     .pipe(
         catchError(this.handleError) 
       );
@@ -45,7 +45,7 @@ private handleError(error: any):Observable<never> {
     'Content-Type': 'application/json',
     'x-token': `${token}`
   });
-  return this._http.get<Login[]>(this.url+'',{ headers});
+  return this._http.get<Login[]>(this.url+'/api/user/',{ headers});
 }
 
 // Método para registrar un perfil

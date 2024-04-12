@@ -4,8 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from 'app/app.routing'; 
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registros/registro/registro.component';
@@ -43,8 +41,6 @@ import { AsistenciaEditComponent } from './asistencias/asistencia-edit/asistenci
     AppRoutingModule,
   ],
   declarations: [
-    FooterComponent,
-    NavbarComponent,
     SidebarComponent,
     LoginComponent,
     RegistroComponent,
@@ -68,8 +64,6 @@ import { AsistenciaEditComponent } from './asistencias/asistencia-edit/asistenci
     AsistenciaEditComponent,
   ],
   exports: [
-    FooterComponent,
-    NavbarComponent,
     SidebarComponent
   ]
 })

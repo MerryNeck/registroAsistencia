@@ -21,54 +21,6 @@ export class AsistenciaComponent implements OnInit {
   public res: any;
   public asistenciasUser : any;
 
-  toggleSidebar() {
-    this.isSidebarActive = !this.isSidebarActive;
-  }
-
-  
- /*info=[{
-  id_asistencia : 1,
-  fecha :'20240301',
-  ci:'13276634',
-  id_excel: 100,
-  tprano_ingreso:'8:30',
-  tde_ingreso: '12:30',
-  min_retardos :'0',
-  min_adelantado:'10',
-  faltas:'',
-  total_horas : '480',
-  tprano_salida :'12:00',
-  tde_salida: '16:30',
-  nombre:'miriam',
-  apellido:'justo',
-  min_extra: '100',
-  id_permiso:null,
-  hrs_no_recuperadas:1,
-  descuento:'',
-  estado : 's',
-  fecha_creacion: '20240301' ,
-  fecha_modificacion: '' ,
-},{
-  id_asistencia : 2,
-  fecha :'20240301',
-  id_excel: 100,
-  tprano_ingreso:'8:30',
-  tde_ingreso: '12:30',
-  min_retardos :'0',
-  min_adelantado:'10',
-  faltas:'',
-  total_horas : '480',
-  tprano_salida :'12:00',
-  tde_salida: '16:30',
-  id_usuario:'1',
-  min_extra: '100',
-  id_permiso:null,
-  hrs_no_recuperadas:1,
-  descuento:'',
-  estado : 's',
-  fecha_creacion: '20240301' ,
-  fecha_modificacion: '' ,
-}]*/
 
   constructor(private asistenciaService: AsistenciaService, private http: HttpClient, private router: Router) { }
 
@@ -93,8 +45,8 @@ export class AsistenciaComponent implements OnInit {
     this.router.navigate(['/editar-asistencia', asistencia.id_asistencia]);
   }
   imprimirAsistencia(): void {
-    const filasHTML: string[] = [];
-
+    if (this.asistenciasUser && this.asistenciasUser.length > 0){
+      const filasHTML: string[] = [];
     this.asistencias.forEach(asistenciasUser => {
       let filaHTML = '<tr>';
 
@@ -163,20 +115,11 @@ export class AsistenciaComponent implements OnInit {
   `,  
       targetStyles: ['border', 'padding', 'color', 'font-size'] 
     });
+  }else{
+    Swal.fire('Error', 'No hay datos para imprimir el reporte.', 'error');
+  }
 }
 
-
-
-  // Método para cambiar el estado de una asistencia
-  cambiarEstadoAsistencia(id: number, estado: string) {
-    this.asistenciaService.cambiarEstadoAsistencia(id, estado, this.token).subscribe(
-      () => {
-        console.log('Estado de la asistencia cambiado correctamente.');
-        this.listarAsistencias(); // Recargar la lista de asistencias después de cambiar el estado
-      },
-      error => console.error('Error al cambiar estado de la asistencia:', error)
-    );
-  }
   buscarAsistencia(): void {
     this.asistenciaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda,this.token)
       .subscribe((response) => {
@@ -186,7 +129,18 @@ export class AsistenciaComponent implements OnInit {
         
       }, error => {
         console.error('Error al buscar asistencias:', error);
+        Swal.fire('Error', 'Ingrese los Datos Correctos', 'error');
+      
       });
+  }
+
+  verBoleta():void{
+    if (this.asistenciasUser && this.asistenciasUser.length > 0){
+      this.router.navigate(['/boleta']);
+    }else {
+      console.error('No hay datos para mostrar:');
+      Swal.fire('Error', 'No hay datos para mostrar. Ingrese los Datos', 'error');
+    }
   }
   
 }

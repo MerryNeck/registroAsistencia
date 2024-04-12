@@ -14,7 +14,7 @@ export class PagoEditComponent implements OnInit {
 
   editandoPago:  Pago = {id_sueldo:0, dias_trabajo: 0, retencion:0,sueldo:0,sueldo_bruto:0,id_usuario:0,estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
-
+  public res: any;
   constructor(
     private pagoService: PagoService,
     private route: ActivatedRoute,
@@ -33,7 +33,8 @@ export class PagoEditComponent implements OnInit {
     this.pagoService.obtenerPagoPorId(idPago, this.token)
       .subscribe(
         pago => {
-          this.editandoPago = pago;
+          this.res = pago;
+          this.editandoPago =this.res.data;
         },
         error => {
           console.error('Error al obtener el pago:', error);

@@ -22,24 +22,6 @@ export class PermisoComponent implements OnInit {
   public res: any;
   public users: any;
 
-  /*info=[{
-       id_permiso : 1,
-       id_usuario: 2,
-       fecha: 100,
-       min_permiso: 480,
-       estado : 's',
-       fecha_creacion: '20240301' ,
-       fecha_modificacion: '' ,
-  },{
-   id_permiso :2,
-       id_usuario: 2,
-       fecha: 100,
-       min_permiso: 480,
-       estado : 'n',
-       fecha_creacion: '20240301' ,
-       fecha_modificacion: '' ,
- }]*/
-
   constructor(private permisoService: PermisoService, private router: Router) { }
 
   ngOnInit(): void {
@@ -106,7 +88,7 @@ export class PermisoComponent implements OnInit {
       next: () => {
         Swal.fire({
           title: '¡Éxito!',
-          text: `Estado del permiso actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
+          text: `Estado del permiso actualizado correctamente a ${this.estado === 's' ? 'activado' : 'desactivado'}.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {

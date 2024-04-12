@@ -20,39 +20,7 @@ export class PagoComponent implements OnInit {
   estado:string;
   
   public res: any;
-  public users : any;
-
-  /*info=[{
-    id_sueldo : '1',
-    ci:'132776634',
-    dias_trabajo: '30',
-    retencion: '0',
-    sueldo:'0',
-    sueldo_bruto: '0',
-    estado : 's',
-    fecha_creacion: '20240301' ,
-    fecha_nodificacion: '' ,
-  },{
-    id_sueldo : '2',
-    ci:'132776634',
-    dias_trabajo: '30',
-    retencion: '0',
-    sueldo:'0',
-    sueldo_bruto: '0',
-    estado : 's',
-    fecha_creacion: '20240301' ,
-    fecha_nodificacion: '' ,
-  },{
-    id_sueldo : '3',
-    ci:'132776634',
-    dias_trabajo: '30',
-    retencion: '0',
-    sueldo:'0',
-    sueldo_bruto: '0',
-    estado : 's',
-    fecha_creacion: '20240301' ,
-    fecha_nodificacion: '' ,
-  }]*/
+  public pagoUser : any;
 
   constructor(private pagoService: PagoService ,private router:Router) { }
 
@@ -67,8 +35,8 @@ export class PagoComponent implements OnInit {
     .subscribe ((response) =>{
       this.res = response
    if (this.res.ok) {
-     this.users = this.res.data;
-     console.log(this.users);
+     this.pagoUser = this.res.data;
+     console.log(this.pagoUser);
    } else {
     error => Swal.fire('Error', 'No se pudieron obtener los pagos', 'error')
    }
@@ -100,27 +68,28 @@ export class PagoComponent implements OnInit {
  
   buscarAnticipoPorCi(ci: string): void {
     this.pagoService.buscarPorCi(ci,this.token)
-      .subscribe({
-        next: (pagos) => {
-          this.pagos = pagos; 
-        },
-        error: (error) => {
+      .subscribe( (reponse) => {
+        this.res = reponse
+          this.pagoUser = this.res.data; 
+        }, (error) => {
           console.error('Error al buscar boletas por CI', error);
           Swal.fire('Error', 'No se pudieron buscar los pagos', 'error');
-        }
-      });
-  }
+        });
+        
+      }
+  
   editarPago(pagos: Pago): void {
     this.router.navigate(['/editar-pago', pagos.id_sueldo]);
   }
   cambiarEstadoPago(idPago: number, nuevoEstado: string) {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
-    this.pagoService.cambiarEstadoPago(idPago, nuevoEstado, this.token).subscribe({
-      next: () => {
-        Swal.fire({
+    this.pagoService.cambiarEstadoPago(idPago, nuevoEstado, this.token).subscribe((response) => {
+      this.res =response;
+      this.estado = this.res.data  
+      Swal.fire({
           title: '¡Éxito!',
-          text: `Estado del pago actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
+          text: `Estado del pago actualizado correctamente a ${this.estado === 's' ? 'activado' : 'desactivado'}.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
@@ -128,8 +97,7 @@ export class PagoComponent implements OnInit {
             this.obtenerPago();
           }
         });
-      },
-      error: (error) => {
+      }, (error) => {
         console.error('Error al cambiar el estado:', error);
         this.estado = estadoAnterior;
         Swal.fire({
@@ -138,8 +106,6 @@ export class PagoComponent implements OnInit {
           icon: 'error',
           confirmButtonText: 'Aceptar'
         });
-      }
-    });
-
-  }
+      });
+    }
 }

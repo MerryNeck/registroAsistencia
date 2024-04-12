@@ -13,6 +13,7 @@ export class PerfilEditComponent implements OnInit {
 
   editandoperfil: Login = {id:0, correo_corp: '', password: '', id_usuario:0,estado:'',fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
+  public res: any;
 
   constructor(
     private loginService: LoginService,
@@ -32,7 +33,8 @@ export class PerfilEditComponent implements OnInit {
     this.loginService.obtenerPerfilPorId(idPerfil, this.token)
       .subscribe(
         perfil => {
-          this.editandoperfil = perfil;
+          this.res = perfil
+          this.editandoperfil = this.res.data;
         },
         error => {
           console.error('Error al obtener el usuario o contraseña:', error);

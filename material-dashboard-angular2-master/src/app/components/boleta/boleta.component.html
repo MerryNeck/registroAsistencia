@@ -10,7 +10,7 @@
               <div class="empre">Bispace SRL</div>
               <h1>BOLETA DE PAGO</h1>
 
-              <div class="company-info" *ngFor="let persona of boletas">
+              <div class="company-info" *ngFor="let persona of boletaUser">
                 <div class="bis">NOMBRE: <span class="label">{{persona.id_usuario.nombre}}</span></div>
                 <div class="bis">OCUPACION: <span class="label">{{persona.ocupacion}}</span></div>
                 <div class="bis">DIAS LABORALES: <span class="label">{{persona.dias_laborales}}</span></div>
@@ -37,7 +37,7 @@
 
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of boletas">
+                    <tr *ngFor="let item of boletaUser">
                       <td>{{ item.pago }}</td>
                       <td>{{ item.afps }}</td>
                       <td>{{ item.atrasos }}</td>
