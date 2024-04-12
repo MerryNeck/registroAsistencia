@@ -15,7 +15,7 @@ interface RegistroResponse {
 @Injectable({
     providedIn: 'root'
 }) export class RegistroService {
-    private url = environment.backend.api+'/api/user/login'; 
+    private url = environment.backend.api+'/api/user/'; 
 
     constructor(private _http: HttpClient, private authService:AuthService) { }
 
@@ -42,7 +42,9 @@ interface RegistroResponse {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this._http.get<Usuario[]>(`${this.url}/listar`,{ headers });
+    console.log(this.url);
+    
+    return this._http.get<Usuario[]>(`${this.url}`,{ headers });
   }
 
     // Método para registrar un Usuario

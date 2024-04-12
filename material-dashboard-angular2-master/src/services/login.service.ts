@@ -15,14 +15,14 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class LoginService {
-  public url:string = environment.backend.api+environment.backend.login;
+  public url:string = environment.backend.api+'/api/user/';
   constructor(private _http: HttpClient , private authService: AuthService) { }
 
   
 login(email:string, password:string){
   
     const body = { email, password }; 
-    return this._http.post<any>(this.url, { email, password })
+    return this._http.post<any>(this.url+'login', { email, password })
     .pipe(
         catchError(this.handleError) 
       );
@@ -43,9 +43,9 @@ private handleError(error: any):Observable<never> {
  obtenerPerfil(token:string): Observable<Login[]> {
   const headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
+    'x-token': `${token}`
   });
-  return this._http.get<Login[]>(this.url,{ headers});
+  return this._http.get<Login[]>(this.url+'',{ headers});
 }
 
 // Método para registrar un perfil
