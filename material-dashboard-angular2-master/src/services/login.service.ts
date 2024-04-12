@@ -4,7 +4,6 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient,HttpHeaders } from "@angular/common/http";//
 //import { GLOBAL } from './GLOBAL';
 import { environment } from '../environments/environment';
-import { AuthService } from './auth.service';
 import { Login } from 'models/login.model';
 
 interface LoginResponse {
@@ -15,8 +14,8 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class LoginService {
-  public url:string = environment.backend.api+environment.backend.login;
-  constructor(private _http: HttpClient , private authService: AuthService) { }
+  public url:string = environment.backend.api+'/api/user/login';
+  constructor(private _http: HttpClient ) { }
 
   
 login(email:string, password:string){
@@ -54,7 +53,7 @@ registrarPerfil(usuario: Login,token:string): Observable<any> {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`
   });
-  return this._http.post<any>(this.url, usuario,{ headers});
+  return this._http.post<any>(this.url+'/registrar', usuario,{ headers});
 }
 
 cambiarEstadoPerfil(id: number, estado: string,token:string): Observable<any> {
@@ -69,7 +68,7 @@ buscarPorCi(ci: string,token:string): Observable<Login[]> {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`
   });
-  return this._http.get<Login[]>(`${this.url}/buscar?ci=${ci}`,{headers});
+  return this._http.get<Login[]>(`${this.url}/buscar/${ci}`,{headers});
 }
 // Método para actualizar un anticipo
 actualizarPerfil(perfil: Login, token: string): Observable<void> {
@@ -89,7 +88,7 @@ obtenerPerfilPorId(id: number, token: string): Observable<Login> {
   const headers = new HttpHeaders({
     'Authorization': `Bearer ${token}`
   });
-  return this._http.get<Login>(`${this.url}/editar/${id}`, { headers })
+  return this._http.get<Login>(`${this.url}/${id}`, { headers })
     .pipe(
       catchError(error => {
         console.error('Error al obtener el usuario:', error);

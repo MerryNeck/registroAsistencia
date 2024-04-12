@@ -7,17 +7,6 @@ export const environment = {
   production: false,
    backend: {
     api: 'http://localhost:5052',
-    login: '/api/user/login',
-    area: '/api/area',
-    rol: '/api/rol',
-    anticipo: '/api/anticipo',
-    pago: '/api/pago',
-    perfil: '/api/perfil',
-    permiso: '/api/permiso',
-    usuario: '/api/usuarios/',
-    asistencia: '/api/asistencia',
-    boleta: '/api/boleta',
-    excel: '/api/excel'
   }
   
 };

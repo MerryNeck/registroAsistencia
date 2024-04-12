@@ -35,7 +35,7 @@ export class RegistroEditComponent implements OnInit {
     //this.obtenerRoles();
   }
   obtenerAreas(): void {
-    this.registroService.getAreas()
+    this.registroService.getAreas(this.token)
       .subscribe(
         areas => {
           this.areas = areas;
@@ -48,7 +48,7 @@ export class RegistroEditComponent implements OnInit {
   }
 
   obtenerRoles(): void {
-    this.registroService.getRoles()
+    this.registroService.getRoles(this.token)
       .subscribe(
         roles => {
           this.roles = roles;

@@ -2,41 +2,28 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Boleta } from 'models/boleta.model';
-import { AuthService } from './auth.service';
 import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoletaService {
-  private apiUrl = environment.backend.boleta; 
+  private apiUrl = environment.backend.api+'/api/boleta'; 
 
-  constructor(private http: HttpClient, private authService:AuthService) { }
+  constructor(private http: HttpClient) { }
 
-  getBoletas(): Observable<Boleta[]> {
-    const headers = this.getHeaders();
+  getBoletas(token:string): Observable<Boleta[]> {
+    const headers = new HttpHeaders({
+      'x-token': `${token}`
+    });
     return this.http.get<Boleta[]>(this.apiUrl, { headers });
   }
 
-  getBoleta(id: number): Observable<Boleta> {
-    const headers = this.getHeaders();
+  getBoleta(id: number,token:string): Observable<Boleta> {
+    const headers = new HttpHeaders({
+      'x-token': `${token}`
+    });
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Boleta>(url, { headers });
-  }
-
-  updateBoleta(boleta: Boleta): Observable<Boleta> {
-    const headers = this.getHeaders();
-    const url = `${this.apiUrl}/${boleta.id}`;
-    return this.http.put<Boleta>(url, boleta, { headers });
-  }
-
-  
- // token
- getHeaders() {
-    const token = this.authService.getToken();
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
   }
 }

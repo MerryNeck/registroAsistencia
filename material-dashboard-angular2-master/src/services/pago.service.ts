@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from './auth.service'; 
 import { Pago } from 'models/pago.model'; 
  import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -9,21 +8,18 @@ import { environment } from 'environments/environment';
   providedIn: 'root'
 })
 export class PagoService {
-  private baseUrl = environment.backend.pago; 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  private baseUrl = environment.backend.api+ '/api/pago'; 
+  constructor(private http: HttpClient) { }
 
-  getHeaders() {
-    const token = this.authService.getToken(); 
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+  getHeaders(token:string) {
+    const headers = new HttpHeaders({
+      'x-token': `${token}`
     });
   }
   // Método para obtener todos los pago
   obtenerPago(token:string): Observable<Pago[]> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
     return this.http.get<Pago[]>(this.baseUrl,{ headers});
   }
@@ -31,8 +27,7 @@ export class PagoService {
   // Método para registrar un pago
   registrarPago(pago: Pago , token:string): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
     return this.http.post<any>(`${this.baseUrl}/registrar`, pago,{ headers });
   }
@@ -40,8 +35,7 @@ export class PagoService {
   // Método para actualizar un pago
   actualizarPago(pago: Pago,token:string): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      'x-token': `${token}`
     });
     return this.http.put<void>(`${this.baseUrl}/actualizar/${pago.id_sueldo}`, pago, { headers })
       .pipe(
@@ -55,7 +49,7 @@ export class PagoService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Pago>(`${this.baseUrl}/editar/${id}`, { headers })
+    return this.http.get<Pago>(`${this.baseUrl}/${id}`, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al obtener el pago:', error);
@@ -67,8 +61,7 @@ export class PagoService {
   // Método para eliminar un descuento (cambiar estado a inactivo)
   cambiarEstadoPago(idPago: number, estado: string, token:string): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
     return this.http.patch(`${this.baseUrl}/cambiarEstado/${idPago}`, { estado }, { headers});
   }

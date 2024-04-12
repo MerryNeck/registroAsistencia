@@ -17,36 +17,9 @@ export class PerfilComponent implements OnInit {
   token: string = '';
   estado: string;
   public res: any;
-  public users: any;
+  public perfilUser: any;
 
-  /*perfil=[{
-   id : 1,
-   nombre: 'miriam',
-   apellido: 'justo',
-   correo_corp: 'liliansonia77@gmail.com',
-   password: '12345',
-   estado : 's',
-   fecha_creacion: '20240301' ,
-   fecha_nodificacion: '20240301' ,
- },{
-   id : 2,
-   nombre: 'miriam',
-   apellido: 'justo',
-   correo_corp: 'liliansonia77@gmail.com',
-   password: '123456',
-   estado : 'n',
-   fecha_creacion: '20240301' ,
-   fecha_nodificacion: '20240301' ,
- },{
-   id : 3,
-   nombre: 'miriam',
-   apellido: 'justo',
-   correo_corp: 'liliansonia77@gmail.com',
-   password: '123457',
-   estado : 's',
-   fecha_creacion: '20240301' ,
-   fecha_nodificacion: '20240301' ,
- }]*/
+ 
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
@@ -57,8 +30,7 @@ export class PerfilComponent implements OnInit {
       .subscribe((response) => {
         this.res = response
         if (this.res.ok) {
-          this.users = this.res.data;
-          console.log(this.users);
+          this.perfilUser = this.res.data;
         } else {
           error => Swal.fire('Error', 'No se pudieron obtener la autentificacion', 'error')
         }
@@ -89,11 +61,13 @@ export class PerfilComponent implements OnInit {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
 
-    this.loginService.cambiarEstadoPerfil(idPerfil, nuevoEstado, this.token).subscribe({
-      next: () => {
+    this.loginService.cambiarEstadoPerfil(idPerfil, nuevoEstado, this.token).subscribe(
+       (response) => {
+        this.res = response;
+        this.estado = this.res.data;
         Swal.fire({
           title: '¡Éxito!',
-          text: `Estado de la autentificacion actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
+          text: `Estado de la autentificacion actualizado correctamente a ${this.estado === 's' ? 'activado' : 'desactivado'}.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
@@ -101,8 +75,7 @@ export class PerfilComponent implements OnInit {
             this.obtenerPerfiles();
           }
         });
-      },
-      error: (error) => {
+      },(error) => {
         console.error('Error al cambiar el estado:', error);
         Swal.fire({
           title: 'Error',
@@ -111,7 +84,7 @@ export class PerfilComponent implements OnInit {
           confirmButtonText: 'Aceptar'
         });
       }
-    });
+    );
 
   }
   editarPerfil(perfil: Login): void {
@@ -120,8 +93,9 @@ export class PerfilComponent implements OnInit {
   buscarPerfilPorCi(ci: string): void {
     this.loginService.buscarPorCi(ci, this.token)
       .subscribe({
-        next: (perfiles) => {
-          this.perfiles = perfiles;
+        next: (response) => {
+          this.res = response;
+          this.perfilUser = this.res.data
         },
         error: (error) => {
           console.error('Error al buscar boletas por CI', error);

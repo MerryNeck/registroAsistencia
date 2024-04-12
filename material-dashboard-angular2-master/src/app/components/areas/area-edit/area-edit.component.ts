@@ -36,32 +36,30 @@ export class AreaEditComponent implements OnInit {
       .subscribe(
         area => {
           this.res = area;
-          this.editandoArea = this.res.area[0]
+          this.editandoArea = this.res.area;
         },
         error => {
-          console.error('Error al obtener el area:', error);
-          Swal.fire('Error', 'No se pudo obtener el area', 'error');
+          console.error('Error al obtener el área:', error);
+          Swal.fire('Error', 'No se pudo obtener el área', 'error');
         }
       );
   }
 
   actualizarArea(form: NgForm): void {
-    if (form.valid && this.editandoArea) {
+    if (this.editandoArea !== null) {
       this.areaService.actualizarArea(this.editandoArea, this.token)
         .subscribe(
           () => {
-            Swal.fire('Éxito', 'El area se actualizó correctamente', 'success');
+            Swal.fire('Éxito', 'El área se actualizó correctamente', 'success');
             this.router.navigate(['/area']);
           },
           error => {
-            console.error('Error al actualizar el area:', error);
-            Swal.fire('Error', 'No se pudo actualizar el area', 'error');
+            console.error('Error al actualizar el área:', error);
+            Swal.fire('Error', 'No se pudo actualizar el área', 'error');
           }
         );
     } else {
       Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
     }
   }
-
-
 }

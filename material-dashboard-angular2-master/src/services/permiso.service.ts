@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from './auth.service'; 
 import { Permiso } from 'models/permiso.modelo';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -10,21 +9,14 @@ import { environment } from 'environments/environment';
   providedIn: 'root'
 })
 export class PermisoService {
-  private baseUrl = environment.backend.permiso ; 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  private baseUrl = environment.backend.api+'/api/permiso' ; 
+  constructor(private http: HttpClient) { }
 
-  getHeaders() {
-    const token = this.authService.getToken(); // Obtener el token JWT
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    });
-  }
+  
   // Método para obtener todos los permisos
   obtenerPermiso(token:string): Observable<Permiso[]> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
     return this.http.get<Permiso[]>(this.baseUrl,{ headers});
   }
@@ -32,8 +24,7 @@ export class PermisoService {
   // Método para registrar un anticipos
   registrarPermiso(permiso: Permiso, token:string): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
     return this.http.post<any>(`${this.baseUrl}/registrar`, permiso,{ headers });
   }
@@ -41,8 +32,7 @@ export class PermisoService {
   // Método para actualizar un anticipo
   actualizarPermiso(permiso: Permiso,token:string): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      'x-token': `${token}`
     });
     const url = `${this.baseUrl}/actualizar/${permiso.id_permiso}`;
     return this.http.put<any>(url, permiso,{ headers })
@@ -55,9 +45,9 @@ export class PermisoService {
 }
 obtenerPermisoPorId(id: number, token: string): Observable<Permiso> {
   const headers = new HttpHeaders({
-    'Authorization': `Bearer ${token}`
+    'x-token': `${token}`
   });
-  return this.http.get<Permiso>(`${this.baseUrl}/editar/${id}`, { headers })
+  return this.http.get<Permiso>(`${this.baseUrl}/${id}`, { headers })
     .pipe(
       catchError(error => {
         console.error('Error al obtener el permiso:', error);
@@ -80,7 +70,7 @@ obtenerPermisoPorId(id: number, token: string): Observable<Permiso> {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this.http.get<Permiso[]>(`${this.baseUrl}/buscar?ci=${ci}`,{headers});
+    return this.http.get<Permiso[]>(`${this.baseUrl}/buscar/${ci}`,{headers});
   }
   
 }

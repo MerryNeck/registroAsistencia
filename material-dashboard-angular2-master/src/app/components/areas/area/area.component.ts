@@ -18,26 +18,8 @@ export class AreaComponent implements OnInit {
   token: string = '';
   estado: string;
   public res: any;
-  public area : any;
-  /*info=[{
-    id_area : 1,
-    tipo_area: 'rrhh',
-    estado : 's',
-    fecha_creacion:'20240301',
-    fecha_modificacion: '',
-},{
-  id_area : 2,
-  tipo_area: 'administracion',
-  estado : 's',
-  fecha_creacion:'20240301',
-  fecha_modificacion: '',
-},{
-  id_area : 3,
-  tipo_area: 'desarrollo',
-  estado : 's',
-  fecha_creacion:'20240301',
-  fecha_modificacion: '',
-}]*/
+  public areasUser : any;
+  
 
   constructor(private areaService: AreaService,  private router:Router) { }
 
@@ -51,7 +33,7 @@ export class AreaComponent implements OnInit {
     this.areaService.listarAreas(this.token).subscribe((response) => {
       this.res = response
       if(this.res.ok){
-        this.area = this.res.data;
+        this.areasUser = this.res.data;
 
       }else{
         error => Swal.fire('Error', 'No se pudieron obtener los datos del area', 'error')
@@ -81,11 +63,13 @@ export class AreaComponent implements OnInit {
   cambiarEstadoArea(idArea: number, nuevoEstado: string) {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
-    this.areaService.cambiarEstadoArea(idArea, nuevoEstado, this.token).subscribe({
-      next: () => {
+    this.areaService.cambiarEstadoArea(idArea, nuevoEstado, this.token).subscribe(
+       (response) => {
+        this.res = response;
+        this.estado = this.res.data
         Swal.fire({
           title: '¡Éxito!',
-          text: `Estado del area actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
+          text: `Estado del area actualizado correctamente a ${this.estado === 's' ? 'activado' : 'desactivado'}.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
@@ -93,8 +77,7 @@ export class AreaComponent implements OnInit {
             this.listarAreas();
           }
         });
-      },
-      error: (error) => {
+      },(error) => {
         console.error('Error al cambiar el estado:', error);
         this.estado =estadoAnterior;
         Swal.fire({
@@ -103,10 +86,9 @@ export class AreaComponent implements OnInit {
           icon: 'error',
           confirmButtonText: 'Aceptar'
         });
-      }
-    });
-
-  }
+      });
+    
+    }
   editarArea(area: Area): void {
     this.router.navigate(['/editar-area', area.id_area]);
   }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Rol } from 'models/rol.model';
 import { RolService } from 'services/rol.service';
-import { AuthService } from 'services/auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -20,29 +19,7 @@ export class RolComponent implements OnInit {
   estado: string;
   
   public res: any;
-  public users : any;
-
-
-
- /* rol=[{
-    id_rol : 1,
-    tipo: 'rrhh',
-    fecha_creacion:'20240301',
-    estado : 's',
-    fecha_modificacion: ''
-},{
-  id_rol : 2,
-  tipo: 'administracion',
-  fecha_creacion:'20240301',
-  estado : 's',
-  fecha_modificacion: ''
-},{
-  id_rol : 3,
-  tipo: 'desarrollo',
-  fecha_creacion:'20240301',
-  estado : 's',
-  fecha_modificacion: ''
-}]*/
+  public rolUser : any;
 
   constructor(private rolService: RolService, private router:Router) { }
 
@@ -54,8 +31,8 @@ export class RolComponent implements OnInit {
     this.rolService.listarRol(this.token).subscribe ((response) =>{
       this.res = response
    if (this.res.ok) {
-     this.users = this.res.data;
-     console.log(this.users);
+     this.rolUser = this.res.data;
+     console.log(this.rolUser);
    } else {
    }
       error => Swal.fire('Error', 'No se pudieron obtener los rol', 'error')
@@ -91,11 +68,13 @@ export class RolComponent implements OnInit {
   cambiarEstadoRol(idRol: number, nuevoEstado: string) {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
-    this.rolService.cambiarEstadoRol(idRol, nuevoEstado, this.token).subscribe({
-      next: () => {
+    this.rolService.cambiarEstadoRol(idRol, nuevoEstado, this.token).subscribe(
+      (response) => {
+        this.res =response;
+        this.estado = this.res.data;
         Swal.fire({
           title: '¡Éxito!',
-          text: `Estado del rol actualizado correctamente a ${nuevoEstado === 's' ? 'activado' : 'desactivado'}.`,
+          text: `Estado del rol actualizado correctamente a ${this.estado === 's' ? 'activado' : 'desactivado'}.`,
           icon: 'success',
           confirmButtonText: 'Aceptar'
         }).then((result) => {
@@ -103,8 +82,7 @@ export class RolComponent implements OnInit {
             this.listarRoles();
           }
         });
-      },
-      error: (error) => {
+      }),(error) => {
         console.error('Error al cambiar el estado:', error);
         this.estado=estadoAnterior;
         Swal.fire({
@@ -114,8 +92,6 @@ export class RolComponent implements OnInit {
           confirmButtonText: 'Aceptar'
         });
       }
-    });
-
   }
 
 }

@@ -45,7 +45,7 @@ export class RolEditComponent implements OnInit {
   }
 
   actualizarRol(form: NgForm): void {
-    if (form.valid && this.editandoRol) {
+    if ( this.editandoRol) {
       this.rolService.actualizarRol(this.editandoRol, this.token)
         .subscribe(
           () => {

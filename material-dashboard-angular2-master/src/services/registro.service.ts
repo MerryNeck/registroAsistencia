@@ -6,7 +6,6 @@ import { Area } from "models/area.model";
 import { Rol } from 'models/rol.model';
 import { Usuario } from 'models/usuario.model';
 import { environment } from 'environments/environment';
-import { AuthService } from './auth.service';
 
 interface RegistroResponse {
     token: string;
@@ -17,39 +16,35 @@ interface RegistroResponse {
 }) export class RegistroService {
     private url = environment.backend.api+'/api/user/login'; 
 
-    constructor(private _http: HttpClient, private authService:AuthService) { }
+    constructor(private _http: HttpClient) { }
 
-    getAreas(): Observable<Area[]> {
-        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    getAreas(token:string): Observable<Area[]> {
+      const headers = new HttpHeaders({
+        'x-token': `${token}`
+      });
         return this._http.get<Area[]>(this.url + '/area/', { headers });
     }
 
-    getRoles(): Observable<Rol[]> {
-        const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    getRoles(token:string): Observable<Rol[]> {
+      const headers = new HttpHeaders({
+        'x-token': `${token}`
+      });
         return this._http.get<Rol[]>(this.url + '/rol/', { headers });
     }
-    getHeaders() {
-        const token = this.authService.getToken(); // Obtener el token JWT
-        return new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        });
-      }
+    
 
        // Método para obtener todos los anticipos
   obtenerUsuario(token:string): Observable<Usuario[]> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
-    return this._http.get<Usuario[]>(`${this.url}/listar`,{ headers });
+    return this._http.get<Usuario[]>(`${this.url}`,{ headers });
   }
 
     // Método para registrar un Usuario
   registrarUsuario(usuario: Usuario,token:string): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
     return this._http.post<any>(`${this.url}/registrar`, usuario,{ headers});
   }
@@ -80,7 +75,7 @@ interface RegistroResponse {
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
       });
-      return this._http.get<Usuario>(`${this.url}${id}`, { headers })
+      return this._http.get<Usuario>(`${this.url}/${id}`, { headers })
         .pipe(
           catchError(error => {
             console.error('Error al obtener el usuario:', error);
@@ -103,6 +98,6 @@ interface RegistroResponse {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     });
-    return this._http.get<Usuario[]>(`${this.url}/buscar?ci=${ci}`,{headers});
+    return this._http.get<Usuario[]>(`${this.url}/buscar/${ci}`,{headers});
   }
 }
