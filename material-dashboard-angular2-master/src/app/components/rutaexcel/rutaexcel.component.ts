@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Excel } from 'models/excel.model';
 import { ExcelService } from 'services/excel.service';
 import Swal from 'sweetalert2';
@@ -12,7 +13,7 @@ export class RutaexcelComponent {
   archivoSeleccionado: File | null = null;
   nombreArchivo: string = '';
 
-  constructor(private excelService: ExcelService) { }
+  constructor(private excelService: ExcelService,private _router : Router) { }
   onArchivoSeleccionado(event: any) {
     const archivo = event.target.files[0];
     if (archivo) {
@@ -32,6 +33,8 @@ export class RutaexcelComponent {
   }
 
   subirArchivo() {
+    //console.log(this.archivoSeleccionado);
+    
     if (!this.archivoSeleccionado) {
       Swal.fire({
         icon: 'error',
@@ -50,6 +53,8 @@ export class RutaexcelComponent {
             text: 'El archivo se ha subido exitosamente.',
           });
           console.log('Archivo subido exitosamente', response);
+          this._router.navigate(['/asistencia']);
+          
         },
         error => {
           Swal.fire({

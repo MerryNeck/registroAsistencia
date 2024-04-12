@@ -36,7 +36,9 @@ export class AsistenciaEditComponent implements OnInit {
       .subscribe(
         asistencia => {
           this.res = asistencia
-          this.editandoAsistencia =this.res.asistencia;
+          this.editandoAsistencia =this.res.data;
+          console.log(this.editandoAsistencia);
+          
         },
         error => {
           console.error('Error al obtener el asistencia:', error);
@@ -46,7 +48,7 @@ export class AsistenciaEditComponent implements OnInit {
   }
 
   actualizarAsistencia(form: NgForm): void {
-    if (form.valid && this.editandoAsistencia) {
+    if (this.editandoAsistencia) {
       this.asistenciaService.actualizarAsistencia(this.editandoAsistencia, this.token)
         .subscribe(
           () => {

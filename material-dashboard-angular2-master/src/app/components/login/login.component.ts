@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
 
    this.loginService.login(this.usuario.email, this.usuario.password).subscribe(
       (response: any) => {
-        console.log('Ingreso Exitoso: ', response);
+        console.log('Ingreso Exitoso: ', response.token);
         localStorage.setItem('token', response.token);
         this._router.navigate(['/asistencia']);
       },
