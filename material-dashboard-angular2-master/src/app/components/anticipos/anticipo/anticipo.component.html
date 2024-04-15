@@ -13,7 +13,8 @@
                                 <div class="row">
                                     <div class="form-group col-md-6" id="form">
                                         <div class="example-full-width">
-                                            <input class="form-control" placeholder="ci" type="text" name="ci"
+                                            <label for="anticipos">Cedula de Identidad:</label>
+                                            <input class="form-control"  type="text" name="ci"
                                                 #ci="ngModel" [(ngModel)]="nuevoAnticipo.id_usuario "
                                                 placeholder="Cedula de Identidad" pattern="[0-9]+" maxlength="8" ngModel>
                                         </div>
@@ -21,7 +22,8 @@
 
                                     <div class="form-group col-md-6" id="form">
                                         <div class="example-full-width">
-                                            <input class="form-control" placeholder="Anticipo" type="text"
+                                            <label for="anticipos">Anticipo:</label>
+                                            <input class="form-control"  type="text"
                                                 name="anticipo" #anticipo="ngModel"
                                                 [(ngModel)]="nuevoAnticipo.anticipos" pattern="[0-9]+" ngModel="">
                                         </div>
@@ -87,7 +89,7 @@
                                                 <td><button mat-raised-button type="submit"
                                                     class="btn btn-round"
                                                     [ngClass]="{'activo': anticipo.estado === 's', 'inactivo': anticipo.estado === 'n'}"
-                                                    (click)="cambiarEstadoAnticipo(1, estado === 's' ? 'n' : 's')">{{ anticipo.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
+                                                    (click)="cambiarEstadoAnticipo(anticipo.id_anticipo, estado === 's' ? 'n' : 's')">{{ anticipo.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
                                             </tr>
 
 

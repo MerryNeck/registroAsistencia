@@ -1,3 +1,4 @@
+
 import { Component, ElementRef, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { Router,NavigationEnd } from '@angular/router';
 import anime from 'animejs'
@@ -21,7 +22,7 @@ export const ROUTES: RouteInfo[] = [
 
   
 ];
-
+ 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -31,6 +32,7 @@ export class SidebarComponent implements OnInit {
   menuItems: RouteInfo[] = ROUTES;
   sidebarOpen: boolean = true;
 
+  token :string ='';
   constructor(
     private router: Router,
     private renderer: Renderer2,
@@ -88,5 +90,11 @@ export class SidebarComponent implements OnInit {
   adjustSidebarWidth() {
     const ancho = window.innerWidth <= 768 ? '200px' : '300px';
     this.renderer.setStyle(this.elRef.nativeElement.querySelector('.sidebar'), 'width', ancho);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

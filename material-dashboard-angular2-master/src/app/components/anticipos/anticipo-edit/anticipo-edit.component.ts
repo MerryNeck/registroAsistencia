@@ -33,9 +33,9 @@ export class AnticipoEditComponent {
   obtenerAnticipo(idAnticipo: number): void {
     this.anticipoService.obtenerAnticipoPorId(idAnticipo, this.token)
       .subscribe(
-        anticipo => {
-          this.res =anticipo
-          this.editandoAnticipo = this.res.data;
+        (response:any)=> {
+        
+          this.editandoAnticipo = response.data;
         },
         error => {
           console.error('Error al obtener el anticipo:', error);
@@ -45,7 +45,7 @@ export class AnticipoEditComponent {
   }
 
   actualizarAnticipo(form: NgForm): void {
-    if ( this.editandoAnticipo) {
+    if ( this.editandoAnticipo != null) {
       this.anticipoService.actualizarAnticipo(this.editandoAnticipo, this.token)
         .subscribe(
           () => {

@@ -22,7 +22,7 @@ export class AnticipoComponent implements OnInit {
   estado: string;
   public res: any;
   public anticiposUser: any;
-
+  public anticipodata:any;
   
   constructor(private anticipoService: AnticipoService, private router: Router) { }
 
@@ -48,13 +48,14 @@ export class AnticipoComponent implements OnInit {
   registrarNuevoAnticipo(form: NgForm): void {
     if (form.valid) {
       const { ci, anticipo } = form.value;
+
       this.nuevoAnticipo.id_usuario = ci;
       this.nuevoAnticipo.anticipos = anticipo;
       this.anticipoService.registrarAnticipo(this.nuevoAnticipo, this.token)
         .subscribe(
-          (anticipo) => {
-            
-            this.anticipos.push(anticipo);
+          (response: any) => {
+            this.anticipodata =response.data
+            this.anticipos.push(this.anticipodata);
             this.nuevoAnticipo = new Anticipo(0, '', '', '', 0, 0);
             form.reset();
             Swal.fire('Éxito', 'El anticipo fue registrado correctamente', 'success');

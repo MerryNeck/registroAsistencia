@@ -1,12 +1,13 @@
 <div class="sidebar" [ngClass]="{ 'active': sidebarOpen}">
     <div class="toggle-sidebar-btn" (click)="toggleSidebar()">
+       
         <i class="material-icons">menu</i>
-      </div>
-    <br>
+        </div>
     <br>
     <br>
     
     <div class="card-avatar">
+        <button class="btn btn-danger pull-right" (click)="logout()">Salir</button>
         <img class="img" src="./assets/img/user.jpeg" />
 
     </div>

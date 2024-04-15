@@ -4,6 +4,7 @@ import { PermisoService } from 'services/permiso.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { response } from 'express';
 
 @Component({
   selector: 'app-permiso',
@@ -21,7 +22,7 @@ export class PermisoComponent implements OnInit {
   estado: string;
   public res: any;
   public users: any;
-
+  public userdata:any;
   constructor(private permisoService: PermisoService, private router: Router) { }
 
   ngOnInit(): void {
@@ -50,8 +51,9 @@ export class PermisoComponent implements OnInit {
       this.nuevoPermiso.min_permiso = min_permiso;
       this.nuevoPermiso.detalle = detalle;
       this.permisoService.registrarPermiso(this.nuevoPermiso, this.token)
-        .subscribe(permiso => {
-          this.permisos.push(permiso);
+        .subscribe((response :any) => {
+          this.userdata = response.data
+          this.permisos.push(this.userdata);
           this.nuevoPermiso = new Permiso(0, '', '', '', 0, '', '', '');
           form.reset();
           Swal.fire('Éxito', 'El permiso fue registrado correctamente', 'success');

@@ -18,12 +18,14 @@ export class PerfilComponent implements OnInit {
   estado: string;
   public res: any;
   public perfilUser: any;
+  public perfildata:any;
 
  
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
     this.obtenerPerfiles();
+    this.token = localStorage.getItem('token') || ''
   }
   obtenerPerfiles(): void {
     this.loginService.obtenerPerfil(this.token)
@@ -38,14 +40,14 @@ export class PerfilComponent implements OnInit {
   }
   registrarNuevoPerfil(form: NgForm): void {
     if (form.valid) {
-      const { correo, password, fecha_creacion, estado } = form.value;
+      const { correo, password, ci } = form.value;
+      this.nuevoPerfil.id_usuario = ci;
       this.nuevoPerfil.correo_corp = correo;
       this.nuevoPerfil.password = password;
-      this.nuevoPerfil.fecha_creacion = fecha_creacion;
-      this.nuevoPerfil.estado = estado;
       this.loginService.registrarPerfil(this.nuevoPerfil, this.token)
-        .subscribe(perfil => {
-          this.perfiles.push(perfil);
+        .subscribe((response:any) => {
+          this.perfildata = response.data
+          this.perfiles.push(this.perfildata);
           this.nuevoPerfil = new Login(0, '', '', '', '', '', 0);
           form.reset();
           Swal.fire('Éxito', 'La autentificacion a sido registrado correctamente', 'success');

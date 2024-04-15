@@ -26,7 +26,7 @@ export class PermisoService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this.http.post<any>(`${this.baseUrl}/registrar`, permiso,{ headers });
+    return this.http.post<any>(`${this.baseUrl}`, permiso,{ headers });
   }
 
   // Método para actualizar un anticipo
@@ -34,7 +34,7 @@ export class PermisoService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    const url = `${this.baseUrl}/actualizar/${permiso.id_permiso}`;
+    const url = `${this.baseUrl}/${permiso.id_permiso}`;
     return this.http.put<any>(url, permiso,{ headers })
     .pipe(
       catchError(error => {
@@ -47,7 +47,7 @@ obtenerPermisoPorId(id: number, token: string): Observable<Permiso> {
   const headers = new HttpHeaders({
     'x-token': `${token}`
   });
-  return this.http.get<Permiso>(`${this.baseUrl}/${id}`, { headers })
+  return this.http.get<Permiso>(`${this.baseUrl}${id}`, { headers })
     .pipe(
       catchError(error => {
         console.error('Error al obtener el permiso:', error);
@@ -59,16 +59,14 @@ obtenerPermisoPorId(id: number, token: string): Observable<Permiso> {
   // Método para eliminar un descuento (cambiar estado a inactivo)
   cambiarEstadoPermiso(idPermiso: number, estado: string, token:string): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
-    return this.http.patch(`${this.baseUrl}/cambiarEstado/${idPermiso}`, { estado }, { headers });
+    return this.http.delete(`${this.baseUrl}${idPermiso}`, { headers });
   }
 
   buscarPorCi(ci: string,token:string): Observable<Permiso[]> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`
     });
     return this.http.get<Permiso[]>(`${this.baseUrl}/buscar/${ci}`,{headers});
   }

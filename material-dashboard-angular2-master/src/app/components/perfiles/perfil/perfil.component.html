@@ -102,7 +102,7 @@
                                                 <td><button mat-raised-button type="submit"
                                                     class="btn btn-round"
                                                     [ngClass]="{'activo': perfiles.estado === 's', 'inactivo': perfiles.estado === 'n'}"
-                                                    (click)="cambiarEstadoPerfil(1, estado === 's' ? 'n' : 's')">{{ perfiles.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
+                                                    (click)="cambiarEstadoPerfil(perfiles.id, estado === 's' ? 'n' : 's')">{{ perfiles.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
                                             </tr>
 
                                         </tbody>

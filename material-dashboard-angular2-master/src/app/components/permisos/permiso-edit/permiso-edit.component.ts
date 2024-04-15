@@ -32,8 +32,8 @@ export class PermisoEditComponent implements OnInit {
   obtenerPermiso(idPermiso: number): void {
     this.permisoService.obtenerPermisoPorId(idPermiso, this.token)
       .subscribe(
-        permiso => {
-          this.editandoPermiso = permiso;
+        (response:any) => {
+          this.editandoPermiso = response.data;
         },
         error => {
           console.error('Error al obtener el permiso:', error);
@@ -43,7 +43,7 @@ export class PermisoEditComponent implements OnInit {
   }
 
   actualizarPermiso(form: NgForm): void {
-    if (form.valid && this.editandoPermiso) {
+    if ( this.editandoPermiso !== null) {
       this.permisoService.actualizarPermiso(this.editandoPermiso, this.token)
         .subscribe(
           () => {

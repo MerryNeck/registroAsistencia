@@ -26,7 +26,7 @@ export class AnticipoService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this.http.post<any>(`${this.baseUrl}/registrar`, anticipo, { headers });
+    return this.http.post(`${this.baseUrl}`, anticipo, { headers });
   }
 
   
@@ -36,7 +36,7 @@ export class AnticipoService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this.http.patch(`${this.baseUrl}/cambiarEstado/${idAnticipo}`, { estado }, { headers });
+    return this.http.delete(`${this.baseUrl}${idAnticipo}`, { headers });
   }
 
   buscarPorCi(ci: string, token: string): Observable<Anticipo[]> {
@@ -50,7 +50,7 @@ export class AnticipoService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this.http.put<void>(`${this.baseUrl}/actualizar/${anticipo.id_anticipo}`, anticipo, { headers })
+    return this.http.put<void>(`${this.baseUrl}/${anticipo.id_anticipo}`, anticipo, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al actualizar el anticipo:', error);
@@ -62,15 +62,13 @@ export class AnticipoService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this.http.get<Anticipo>(`${this.baseUrl}/${id}`, { headers })
+    return this.http.get<Anticipo>(`${this.baseUrl}${id}`, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al obtener el anticipo:', error);
           return throwError('No se pudo obtener el anticipo');
         })
       );
-
-      
   }
 
   
