@@ -28,10 +28,9 @@ export class RolComponent implements OnInit {
     this.token = localStorage.getItem('token') || ''
   }
   listarRoles(): void {
-    this.rolService.listarRol(this.token).subscribe ((response) =>{
-      this.res = response
-   if (this.res.ok) {
-     this.rolUser = this.res.data;
+    this.rolService.listarRol(this.token).subscribe ((response :any) =>{
+   if (response.ok) {
+     this.rolUser = response.data;
      console.log(this.rolUser);
    } else {
    }
@@ -42,9 +41,12 @@ export class RolComponent implements OnInit {
 
   registrarNuevoRol(form:NgForm): void {
     if (form.valid) {
-      const { tipo, estado } = form.value;
-      this.nuevoRol.tipo = tipo;
-      this.nuevoRol.estado = estado;
+      console.log(form.value);
+      
+      const { rol } = form.value;
+      
+      this.nuevoRol.tipo = rol;
+      this.nuevoRol.estado = 's';
       this.rolService.registrarRol(this.nuevoRol,this.token)
         .subscribe(rol=> {
           this.roles.push(rol);

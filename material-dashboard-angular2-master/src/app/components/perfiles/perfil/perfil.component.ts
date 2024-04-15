@@ -27,10 +27,9 @@ export class PerfilComponent implements OnInit {
   }
   obtenerPerfiles(): void {
     this.loginService.obtenerPerfil(this.token)
-      .subscribe((response) => {
-        this.res = response
-        if (this.res.ok) {
-          this.perfilUser = this.res.data;
+      .subscribe((response : any) => {
+        if (response.ok) {
+          this.perfilUser = response.data;
         } else {
           error => Swal.fire('Error', 'No se pudieron obtener la autentificacion', 'error')
         }

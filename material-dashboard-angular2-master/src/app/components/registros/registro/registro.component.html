@@ -1,20 +1,16 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" *ngIf=" usuarios &&usuarios.length > 0 &&roles && roles.length > 0 && areas && areas.length > 0 ">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">REGISTRO USUARIO</h4>
-
                     </div>
-                    <div class="card-body">
-                        <form #usForm="ngForm" (ngSubmit)="registrarNuevoUsuario(usForm.value)">
-
+                    <div class="card-body" >
+                        <form #usForm="ngForm" (ngSubmit)="registrarNuevoUsuario(usForm)">
                             <div class="row">
-
                                 <div class="form-group col-md-4" id="form">
                                     <mat-form-field class="example-full-width">
-
                                         <input class="form-control" placeholder="Cedula de Identidad" type="text"
                                             name="ci" #ci="ngModel" [(ngModel)]="nuevoUsuario.ci" maxlength="8"
                                             pattern="[0-9]+">
@@ -22,19 +18,15 @@
                                 </div>
                                 <div class="form-group col-md-8" id="form">
                                     <mat-form-field class="example-full-width">
-
                                         <input class="form-control" placeholder="Nombre" type="text" name="nombre"
                                             #nombre="ngModel" [(ngModel)]="nuevoUsuario.nombre" pattern="[a-zA-Z]+">
                                     </mat-form-field>
                                 </div>
-
                             </div>
                             <div class="row">
-
                                 <div class="form-group col-md-6" id="form">
                                     <mat-form-field class="example-full-width">
-
-                                        <input class="form-control" placeholder="Apellido Pateno" type="text"
+                                        <input class="form-control" placeholder="Apellido Paterno" type="text"
                                             name="apellido_paterno" #apellido_paterno="ngModel"
                                             [(ngModel)]="nuevoUsuario.apellido_paterno" pattern="[a-zA-Z]+">
                                     </mat-form-field>
@@ -48,29 +40,22 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-6 " id="form">
+                                <div class="form-group col-md-6" id="form">
                                     <mat-form-field class="example-full-width">
                                         <select name="idArea" #id_area="ngModel" [(ngModel)]="nuevoUsuario.id_area">
                                             <option value="">SELECCIONE AREA</option>
-                                            <ng-container>
-                                                <option *ngFor="let area of areas" [value]="area.id_area">{{
-                                                    area.tipo_area }}</option>
-                                            </ng-container>
+                                            <option *ngFor="let area of areas" [value]="area.id_area">{{ area.tipo_area }}</option>
                                         </select>
                                     </mat-form-field>
                                 </div>
-                                <div class="form-group col-md-6" id="form">
+                                <div class="form-group col-md-6" id="form" >
                                     <mat-form-field class="example-full-width">
                                         <select name="idRol" #id_rol="ngModel" [(ngModel)]="nuevoUsuario.id_rol">
                                             <option value="">SELECCIONE ROL</option>
-                                            <ng-container>
-                                                <option *ngFor="let rol of roles" [value]="rol.id_rol">{{ rol.tipo }}
-                                                </option>
-                                            </ng-container>
+                                            <option *ngFor="let rol of roles" [value]="rol.id_rol">{{ rol.tipo }}</option>
                                         </select>
                                     </mat-form-field>
                                 </div>
-
                             </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
                             <div class="clearfix"></div>
@@ -78,78 +63,58 @@
                     </div>
                 </div>
             </div>
-            <div class="main-content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header card-header-danger">
-                                    <h4 class="card-title "> REGISTRO USUARIO</h4>
-                                    <form class="col-md-5">
-                                        <p class="card-category">Busque el registro de usuario</p>
-                                        <div class="input-group no-border">
-                                            <div class="col-md-10">
-                                                <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
-                                                    placeholder="Buscar por cedula de identidad...">
-                                                <div class="ripple-container"></div>
-                                            </div>
-                                        </div>
-                                        <button mat-raised-button type="button" class="btn btn-white btn-round "
-                                            (click)="buscarUsuarioPorCi(ciBusqueda)">Buscar</button>
-                                    </form>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class=" text-primary">
-                                                <tr>
-                                                    <th>
-                                                        CI
-                                                    </th>
-                                                    <th>
-                                                        NOMBRE
-                                                    </th>
-                                                    <th>
-                                                        APELLIDO PATERNO
-                                                    </th>
-                                                    <th>
-                                                        APELLIDO MATERNO
-                                                    </th>
-                                                    <th>
-                                                        AREA
-                                                    </th>
-                                                    <th>
-                                                        ROL
-                                                    </th>
-                                                    
-                                                    <th>
-                                                        MODIFICAR
-                                                    </th>
-                                                    <th>
-                                                        ELIMINAR
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody *ngFor="let user of usuarios">
-
-                                                <td>1</td>
-                                                <td>{{ user.ci }}</td>
-                                                <td>{{ user.nombre }}</td>
-                                                <td>{{ user.apellido_paterno }}</td>
-                                                <td>{{ user.apellido_materno}}</td>
-
-                                                <td><button mat-raised-button type="submit"
-                                                        class="btn btn-blue  btn-round"
-                                                        (click)="editarUsuario(user)">Modificar</button></td>
-                                                <td><button mat-raised-button type="submit" class="btn btn-round"
-                                                        [ngClass]="{'activo': user.estado === 's', 'inactivo': user.estado === 'n'}"
-                                                        (click)="cambiarEstadoRegistro(1, estado === 's' ? 'n' : 's')">{{
-                                                        user.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
-                                            </tbody>
-                                        </table>
-                                    </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">REGISTRO USUARIO</h4>
+                        <form class="col-md-5">
+                            <p class="card-category">Busque el registro de usuario</p>
+                            <div class="input-group no-border">
+                                <div class="col-md-10">
+                                    <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
+                                        placeholder="Buscar por cedula de identidad...">
+                                    <div class="ripple-container"></div>
                                 </div>
                             </div>
+                            <button mat-raised-button type="button" class="btn btn-white btn-round"
+                                (click)="buscarUsuarioPorCi(ciBusqueda)">Buscar</button>
+                        </form>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" >
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <tr>
+                                        <th>CI</th>
+                                        <th>NOMBRE</th>
+                                        <th>APELLIDO PATERNO</th>
+                                        <th>APELLIDO MATERNO</th>
+                                        <th>AREA</th>
+                                        <th>ROL</th>
+                                        <th>MODIFICAR</th>
+                                        <th>ELIMINAR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of usuarios">
+                                        <td>{{ user.ci }}</td>
+                                        <td>{{ user.nombre }}</td>
+                                        <td>{{ user.apellido_paterno }}</td>
+                                        <td>{{ user.apellido_materno }}</td>
+                                        <td>{{ user.Area?.tipo_area }}</td>
+                                        <td>{{ user.rol?.tipo }}</td>
+                                        <td><button mat-raised-button type="button" class="btn btn-blue btn-round"
+                                                (click)="editarUsuario(user)">Modificar</button></td>
+                                        <td>
+                                            <button mat-raised-button type="button" class="btn btn-round"
+                                                [ngClass]="{'activo': user.estado === 's', 'inactivo': user.estado === 'n'}"
+                                                (click)="cambiarEstadoRegistro(user.id_usuario, user.estado === 's' ? 'n' : 's')">
+                                                {{ user.estado === 's' ? 'Activo' : 'Inactivo' }}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -25,7 +25,7 @@ export class RolEditComponent implements OnInit {
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
     this.route.params.subscribe(params => {
-      const idRol = +params['id_rol'];
+      const idRol = +params['id'];
       this.obtenerRol(idRol);
     });
   }
@@ -33,9 +33,10 @@ export class RolEditComponent implements OnInit {
   obtenerRol(idRol: number): void {
     this.rolService.obtenerRolPorId(idRol, this.token)
       .subscribe(
-        rol => {
-          this.res = rol
-          this.editandoRol = this.res.rol;
+        (response  :any) => {
+          this.editandoRol = response.data;
+          console.log(this.editandoRol);
+          
         },
         error => {
           console.error('Error al obtener el rol:', error);

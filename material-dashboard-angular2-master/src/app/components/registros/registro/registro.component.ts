@@ -3,7 +3,8 @@ import { Usuario } from "models/usuario.model";
 import { NgForm } from "@angular/forms";
 import { RegistroService } from "services/registro.service";
 import Swal from "sweetalert2";
-import { Router } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
+import { LoginService } from "services/login.service";
 
 @Component({
   selector: "app-registro",
@@ -12,49 +13,69 @@ import { Router } from "@angular/router";
 })
 export class RegistroComponent implements OnInit {
   ciBusqueda: string = "";
-  usuarios: Usuario[] = [];
-  public nuevoUsuario: Usuario = new Usuario(
-    0,
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    0,
-    0
-  );
-  editandoUsuario: Usuario | null = null;
-  estado: string;
+  public usuarios: any[] = [];
+  public nuevoUsuario: Usuario = new Usuario(0,"","","","","","","",0,0);
+  public editandoUsuario: Usuario | null = null;
+  public estado: string;
   public res: any;
-  areas: any[] = [];
-  roles: any[] = [];
-  token: string = "";
+  public areas: any[] = [];
+  public roles: any[] = [];
+  public token: string = "";
   public users : any;
  
   constructor(
     private usuarioService: RegistroService,
     private router: Router
 
-  ) {}
+  ) {
+    this.token= localStorage.getItem('token')
+  }
 
   ngOnInit(): void {
+    this.usuarioService.getAreas(this.token).subscribe(
+      (response : any) => {
+        this.areas = response.data;
+        console.log(this.areas);
+        
+      },
+      (error) => {
+        console.error("Error al cargar las áreas", error);
+        (error) =>
+          Swal.fire("Error", "No se pudo registrar el area", "error");
+      },
+    );
+    this.usuarioService.getRoles(this.token).subscribe(
+      (response : any) => {
+        this.roles = response.data;
+        console.log(this.roles);
+        
+      },
+       (error) => {
+        console.error("Error al cargar los roles", error);
+        (error) =>
+          Swal.fire("Error", "No se pudo registrar el area", "error");
+      },
+    );
+
     this.obtenerUsuarios();
+
   }
   obtenerUsuarios(): void {
-    this.usuarioService.obtenerUsuario(this.token).subscribe((response) => {
+    this.usuarioService.obtenerUsuario(this.token).subscribe((response: any) => {
       //console.log(response);
-      this.res = response
-      if (this.res.ok) {
-        this.users = this.res.data;
-        console.log(this.users);
+      if (response.ok) {
+        this.usuarios = response.data;
+        console.log(this.usuarios);
+        console.log(this.token);
+        
       } else {
       }
       //error => Swal.fire('Error', 'No se pudieron obtener los usuarios', 'error')
     });
   }
   registrarNuevoUsuario(form: NgForm): void {
+    console.log(form.value);
+    
     if (form.valid) {
       const { ci, nombre, apellido_materno, apellido_paterno, estado } =
         form.value;
@@ -63,28 +84,6 @@ export class RegistroComponent implements OnInit {
       this.nuevoUsuario.apellido_paterno = apellido_paterno;
       this.nuevoUsuario.apellido_materno = apellido_materno;
       this.nuevoUsuario.estado = estado;
-      this.usuarioService.getAreas(this.token).subscribe({
-        next: (areas) => {
-          this.areas = areas;
-        },
-        error: (error) => {
-          console.error("Error al cargar las áreas", error);
-          (error) =>
-            Swal.fire("Error", "No se pudo registrar el area", "error");
-        },
-      });
-
-      this.usuarioService.getRoles(this.token).subscribe({
-        next: (roles) => {
-          this.roles = roles;
-        },
-        error: (error) => {
-          console.error("Error al cargar los roles", error);
-          (error) =>
-            Swal.fire("Error", "No se pudo registrar el area", "error");
-        },
-      });
-
       this.usuarioService
         .registrarUsuario(this.nuevoUsuario, this.token)
         .subscribe(
@@ -103,11 +102,13 @@ export class RegistroComponent implements OnInit {
               0
             );
             form.reset();
+            this.router.navigate(["/registro"]);
             Swal.fire(
               "Éxito",
               "El usuario fue registrado correctamente",
               "success"
             );
+            
           },
           (error) =>
             Swal.fire("Error", "No se pudo registrar el usuario", "error")

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card" >
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">Registro Rol</h4>
                     </div>
@@ -66,8 +66,8 @@
                                                         (click)="editarRol(roles)">Modificar</button></td>
                                                 <td><button mat-raised-button type="submit"
                                                     class="btn btn-round"
-                                                    [ngClass]="{'activo': roles.estado === 's', 'inactivo': rol.estado === 'n'}"
-                                                    (click)="cambiarEstadoRol(1, estado === 's' ? 'n' : 's')">{{ roles.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
+                                                    [ngClass]="{'activo': roles.estado === 's', 'inactivo': roles.estado === 'n'}"
+                                                    (click)="cambiarEstadoRol(roles.id_rol, roles.estado === 's' ? 'n' : 's')">{{ roles.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
                                             </tr>
 
                                         </tbody>

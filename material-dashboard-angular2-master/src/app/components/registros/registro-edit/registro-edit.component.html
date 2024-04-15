@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card" *ngIf=" editandoUsuario  && roles && roles.length > 0 && areas && areas.length " >
                     <div class="card-header card-header-danger">
                         <h4 class="card-title"> EDITAR USUARIO</h4>
                     </div>
@@ -12,8 +12,8 @@
                                 <div class="form-group col-md-4" id="form">
                                     <div class="example-full-width">
                                         
-                                        <label for="id_usuario">Cedula de Identidad:</label>
-                                        <input type="text" class="form-control" id="id_usuario" value=`${editandoUsuario.id_usuario}` name="id_usuario" [(ngModel)]="editandoUsuario.id_usuario" pattern="[0-9]+" required>
+                                        <label for="ci">Cedula de Identidad:</label>
+                                        <input type="text" class="form-control" id="ci" value=`${editandoUsuario.ci}` name="ci" [(ngModel)]="editandoUsuario.ci" pattern="[0-9]+" required>
                                       </div>
                                 </div>
 
@@ -21,7 +21,7 @@
                                     <div class="example-full-width">
                                         <label for="nombre">Nombre:</label>
                                         <input class="form-control"  type="text" name="nombre" 
-                                        #nombre="ngModel" [(ngModel)]="editandoUsuario.nombre" pattern="[a-zA-Z]" required>
+                                        #nombre="ngModel" [(ngModel)]="editandoUsuario.nombre" pattern="[a-zA-Z]+" required>
                                     
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                                     <div class="example-full-width">
                                         <label for="id_usuario">Apellido Paterno:</label>
                                         <input class="form-control"  type="text"
-                                        name="apellido_paterno" #apellido_paterno="ngModel" [(ngModel)]="editandoUsuario.apellido_paterno" pattern="[a-zA-Z]" required>
+                                        name="apellido_paterno" #apellido_paterno="ngModel" [(ngModel)]="editandoUsuario.apellido_paterno" pattern="[a-zA-Z]+" required>
                                 </div>
                                 </div>
 
@@ -39,7 +39,7 @@
                                     <div class="example-full-width">
                                         <label for="nombre">Apellido Materno:</label>
                                         <input class="form-control"  type="text"
-                                            name="apellido_materno" #apellido_materno="ngModel" [(ngModel)]="editandoUsuario.apellido_materno" pattern="[a-zA-Z]" required >
+                                            name="apellido_materno" #apellido_materno="ngModel" [(ngModel)]="editandoUsuario.apellido_materno" pattern="[a-zA-Z]+" required >
                                     
                                     </div>
                                 </div>

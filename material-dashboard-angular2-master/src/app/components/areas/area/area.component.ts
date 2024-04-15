@@ -19,6 +19,7 @@ export class AreaComponent implements OnInit {
   estado: string;
   public res: any;
   public areasUser : any;
+  public areadata : any
   
 
   constructor(private areaService: AreaService,  private router:Router) { }
@@ -34,7 +35,8 @@ export class AreaComponent implements OnInit {
       this.res = response
       if(this.res.ok){
         this.areasUser = this.res.data;
-
+        console.log(this.areasUser);
+        
       }else{
         error => Swal.fire('Error', 'No se pudieron obtener los datos del area', 'error')
       
@@ -44,14 +46,20 @@ export class AreaComponent implements OnInit {
 
   registrarNuevaArea(form:NgForm): void {
     if (form.valid) {
-      const { tipo, estado } = form.value;
-      this.nuevaArea.tipo_area = tipo;
-      this.nuevaArea.estado = estado;
+      console.log(form.value);
+      
+      const { area } = form.value;
+      this.nuevaArea.tipo_area = area;
+      console.log(this.nuevaArea);
+      
       this.areaService.registrarArea(this.nuevaArea,this.token)
-        .subscribe(area=> {
-          this.areas.push(area);
+        .subscribe((response  :any)=> {
+          this.areadata =  response.data
+          this.areas.push(this.areadata);
           this.nuevaArea = new Area(0, '', '', '', '');
           form.reset();
+          console.log(this.areas);
+          
           Swal.fire('Éxito', 'El area fue registrado correctamente', 'success');
         },
         error => Swal.fire('Error', 'No se pudo registrar el area', 'error')

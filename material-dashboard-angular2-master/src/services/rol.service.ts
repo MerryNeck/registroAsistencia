@@ -17,7 +17,7 @@ export class RolService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this.http.post(`${this.url}/registrar`, rol, { headers });
+    return this.http.post(`${this.url}`, rol, { headers });
   }
 
   // listar todas las roles
@@ -33,14 +33,14 @@ export class RolService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this.http.patch(`${this.url}/cambiarEstado/${idRol}`, { estado }, { headers });
+    return this.http.delete(`${this.url}/${idRol}`,  { headers });
   }
   // Método para actualizar un anticipo
   actualizarRol(rol: Rol, token: string): Observable<void> {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this.http.put<void>(`${this.url}/actualizar/${rol.id_rol}`, rol, { headers })
+    return this.http.put<void>(`${this.url}/${rol.id_rol}`, rol, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al actualizar el rol:', error);

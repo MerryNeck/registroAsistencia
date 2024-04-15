@@ -11,7 +11,7 @@ import { environment } from 'environments/environment';
 })
 
 export class AreaService {
-  private url = environment.backend.api+'/api/area/area';
+  private url = environment.backend.api+'/api/area/';
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class AreaService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     })
-    return this.http.post(`${this.url}/registrar`, area, { headers});
+    return this.http.post(`${this.url}`, area, { headers});
   }
 
   // listar todas las áreas
@@ -36,7 +36,7 @@ export class AreaService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     })
-    return this.http.put<void>(`${this.url}/actualizar/${area.id_area}`, area, { headers })
+    return this.http.put<void>(`${this.url}/${area.id_area}`, area, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al actualizar el area:', error);
@@ -48,7 +48,7 @@ export class AreaService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     })
-    return this.http.get<Area>(`${this.url}/${id}`, { headers })
+    return this.http.get<Area>(`${this.url}${id}`, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al obtener el area:', error);
@@ -62,7 +62,7 @@ export class AreaService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     })
-    return this.http.patch(`${this.url}/cambiarEstado/${idArea}`, { estado }, { headers });
+    return this.http.delete(`${this.url}${idArea}`, { headers });
   }
 
   

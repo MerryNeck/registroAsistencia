@@ -4,7 +4,6 @@ import { catchError } from 'rxjs/operators';
 import { HttpClient,HttpHeaders } from "@angular/common/http";//
 //import { GLOBAL } from './GLOBAL';
 import { environment } from '../environments/environment';
-import { AuthService } from './auth.service';
 import { Login } from 'models/login.model';
 
 interface LoginResponse {
@@ -15,8 +14,8 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class LoginService {
-  public url:string = environment.backend.api+'/api/user/';
-  constructor(private _http: HttpClient , private authService: AuthService) { }
+  public url:string = environment.backend.api;
+  constructor(private _http: HttpClient ) { }
 
   
 login(email:string, password:string){

@@ -13,7 +13,8 @@ import { Rol } from 'models/rol.model';
 })
 export class RegistroEditComponent implements OnInit {
 
-  editandoUsuario: Usuario = {id_usuario:0,id_area:0,id_rol:0, nombre: '', apellido_materno:'',apellido_paterno:'',ci:'',estado: '', fecha_creacion: '', fecha_modificacion: '' };
+  //editandoUsuario: Usuario = {id_usuario:0,id_area:0,id_rol:0, nombre: '', apellido_materno:'',apellido_paterno:'',ci:'',estado: '', fecha_creacion: '', fecha_modificacion: '' };
+  public editandoUsuario : any
   token: string = '';
   areas: Area[] = [];
   roles: Rol[] = [];
@@ -28,6 +29,8 @@ export class RegistroEditComponent implements OnInit {
     this.token = localStorage.getItem('token') || '';
     this.route.params.subscribe(params => {
       const idUsuario = +params['id'];
+      this.obtenerAreas()
+      this.obtenerRoles()
       this.obtenerUsuario(idUsuario);
     });
 
@@ -37,8 +40,10 @@ export class RegistroEditComponent implements OnInit {
   obtenerAreas(): void {
     this.registroService.getAreas(this.token)
       .subscribe(
-        areas => {
-          this.areas = areas;
+        (response : any) => {
+          this.areas = response.data;
+          console.log(this.areas);
+          
         },
         error => {
           console.error('Error al obtener las áreas:', error);
@@ -50,8 +55,10 @@ export class RegistroEditComponent implements OnInit {
   obtenerRoles(): void {
     this.registroService.getRoles(this.token)
       .subscribe(
-        roles => {
-          this.roles = roles;
+        (response  :any) => {
+          this.roles = response.data;
+          console.log(this.roles);
+          
         },
         error => {
           console.error('Error al obtener los roles:', error);
@@ -62,9 +69,11 @@ export class RegistroEditComponent implements OnInit {
   obtenerUsuario(idUsuario: number): void {
     this.registroService.obtenerUsuarioPorId(idUsuario, this.token)
       .subscribe(
-        usuario => {
-          this.res= usuario
-          this.editandoUsuario = this.res.usuario[0];
+        (response : any)=> {
+          //console.log(response);
+          
+          this.editandoUsuario= response.usuario[0]
+          //this.editandoUsuario = this.res.usuario[0];
           console.log(this.editandoUsuario);
           
         },
@@ -76,6 +85,10 @@ export class RegistroEditComponent implements OnInit {
   }
 
   actualizarUsuario(form: NgForm): void {
+    console.log(form.value);
+    console.log(this.editandoUsuario);
+    
+    
     if (form.valid && this.editandoUsuario) {
       this.registroService.actualizarUsuario(this.editandoUsuario, this.token)
         .subscribe(

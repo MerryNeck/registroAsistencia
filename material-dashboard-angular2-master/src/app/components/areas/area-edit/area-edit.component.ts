@@ -34,9 +34,10 @@ export class AreaEditComponent implements OnInit {
   obtenerArea(idArea: number): void {
     this.areaService.obtenerAreaPorId(idArea, this.token)
       .subscribe(
-        area => {
-          this.res = area;
-          this.editandoArea = this.res.area;
+       (response : any) => {
+          this.editandoArea = response.data
+          console.log(this.editandoArea);
+          
         },
         error => {
           console.error('Error al obtener el área:', error);

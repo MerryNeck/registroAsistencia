@@ -14,7 +14,7 @@ interface RegistroResponse {
 @Injectable({
     providedIn: 'root'
 }) export class RegistroService {
-    private url = environment.backend.api+'/api/user/'; 
+    private url = environment.backend.api+'/api'; 
 
     constructor(private _http: HttpClient) { }
 
@@ -40,7 +40,7 @@ interface RegistroResponse {
     });
     console.log(this.url);
     
-    return this._http.get<Usuario[]>(`${this.url}`,{ headers });
+    return this._http.get<Usuario[]>(`${this.url}/usuarios`,{ headers });
   }
 
     // Método para registrar un Usuario
@@ -48,7 +48,7 @@ interface RegistroResponse {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this._http.post<any>(`${this.url}/registrar`, usuario,{ headers});
+    return this._http.post<any>(`${this.url}/usuarios`, usuario,{ headers});
   }
 
    
@@ -62,10 +62,10 @@ interface RegistroResponse {
      // Método para actualizar un registro de usuario
      actualizarUsuario(usuario: Usuario, token: string): Observable<void> {
       const headers = new HttpHeaders({
-        'Authorization': `Bearer ${token}`,
+        'x-token': `${token}`,
         'Content-Type': 'application/json'
       });
-      return this._http.put<void>(`${this.url}/actualizar/${usuario.id_usuario}`, usuario, { headers })
+      return this._http.put<void>(`${this.url}/usuarios/${usuario.id_usuario}`, usuario, { headers })
         .pipe(
           catchError(error => {
             console.error('Error al actualizar el anticipo:', error);
@@ -75,9 +75,9 @@ interface RegistroResponse {
     }
     obtenerUsuarioPorId(id: number, token: string): Observable<Usuario> {
       const headers = new HttpHeaders({
-        'Authorization': `Bearer ${token}`
+        'x-token': `${token}`
       });
-      return this._http.get<Usuario>(`${this.url}/${id}`, { headers })
+      return this._http.get<Usuario>(`${this.url}/usuarios/${id}`, { headers })
         .pipe(
           catchError(error => {
             console.error('Error al obtener el usuario:', error);
@@ -90,9 +90,9 @@ interface RegistroResponse {
  cambiarEstadoUsuario(idUsuario: number, estado: string,token:string): Observable<any> {
   const headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
+    'x-token': `${token}`
   });
-    return this._http.patch(`${this.url}/cambiarEstado/${idUsuario}`, { estado }, { headers });
+    return this._http.delete(`${this.url}/usuarios/${idUsuario}`,  { headers });
   }
 
   buscarPorCi(ci: string,token): Observable<Usuario[]> {
