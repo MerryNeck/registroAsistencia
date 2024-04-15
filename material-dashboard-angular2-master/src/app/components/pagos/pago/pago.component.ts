@@ -18,6 +18,7 @@ export class PagoComponent implements OnInit {
   editandoPago: Pago | null = null; 
   token:string='';
   estado:string;
+  public ci  :any;
   
   public res: any;
   public pagoUser : any;
@@ -45,14 +46,16 @@ export class PagoComponent implements OnInit {
   }
 
   registrarNuevoPago(form:NgForm): void {
+    console.log(form.value);
+    
     if (form.valid) {
-      const { ci, sueldo, dias_trabajo,retencion, sueldo_bruto } = form.value;
-      this.nuevoPago.id_usuario = ci;
+      const { ci, sueldo, trabajo,retencion, sueldo_bruto } = form.value;
+      this.ci = ci;
       this.nuevoPago.sueldo = sueldo;
-      this.nuevoPago.dias_trabajo = dias_trabajo;
+      this.nuevoPago.dias_trabajado = trabajo;
       this.nuevoPago.retencion = retencion;
       this.nuevoPago.sueldo_bruto =sueldo_bruto
-      this.pagoService.registrarPago(this.nuevoPago,this.token)
+      this.pagoService.registrarPago(this.nuevoPago,this.ci, this.token)
         .subscribe(pago=> {
           this.pagos.push(pago);
           this.nuevoPago = new Pago(0, '', '', '', 0, 0, 0, 0, 0);

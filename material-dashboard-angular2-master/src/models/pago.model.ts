@@ -4,7 +4,7 @@ export class Pago {
       public fecha_creacion: string,
       public fecha_modificacion: string,
       public estado: string,
-      public dias_trabajo: number,
+      public dias_trabajado: number,
       public retencion: number,
       public sueldo: number,
       public sueldo_bruto: number,

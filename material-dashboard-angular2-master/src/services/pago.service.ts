@@ -25,11 +25,18 @@ export class PagoService {
   }
 
   // Método para registrar un pago
-  registrarPago(pago: Pago , token:string): Observable<any> {
+  registrarPago(pago: Pago ,ci : any , token:string): Observable<any> {
+    console.log(pago);
+    
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this.http.post<any>(`${this.baseUrl}/registrar`, pago,{ headers });
+    const data = {
+      ci : ci ,
+      dias_trabajo : pago.dias_trabajado,
+      sueldo  : pago.sueldo
+    }
+    return this.http.post<any>(`${this.baseUrl}/`, data,{ headers });
   }
 
   // Método para actualizar un pago
@@ -37,7 +44,7 @@ export class PagoService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this.http.put<void>(`${this.baseUrl}/actualizar/${pago.id_sueldo}`, pago, { headers })
+    return this.http.put<void>(`${this.baseUrl}/${pago.id_sueldo}`, pago, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al actualizar el pago:', error);
@@ -63,7 +70,7 @@ export class PagoService {
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });
-    return this.http.patch(`${this.baseUrl}/cambiarEstado/${idPago}`, { estado }, { headers});
+    return this.http.delete(`${this.baseUrl}/${idPago}`, { headers});
   }
   buscarPorCi(ci: string,token:string): Observable<Pago[]> {
     const headers = new HttpHeaders({

@@ -25,7 +25,7 @@
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
                                         <input matInput class="form-control" placeholder="DiasTrabajo" type="text" name="trabajo"
-                                            #trabajo="ngModel" [(ngModel)]="nuevoPago.dias_trabajo" pattern="[0-9]+">
+                                            #trabajo="ngModel" [(ngModel)]="nuevoPago.dias_trabajado" pattern="[0-9]+">
                                     </div>
                                 </div>
                                 
@@ -82,9 +82,9 @@
 
                                             <tr>
                                             <tr *ngFor="let pagos of pagoUser">
-                                                <td>{{ pagos.ci}}</td>
+                                                <td>{{ pagos.id_usuario}}</td>
                                                 <td>{{ pagos.sueldo }}</td>
-                                                <td>{{ pagos.dias_trabajo }}</td>
+                                                <td>{{ pagos.dias_trabajado }}</td>
                                                 <td>{{ pagos.retencion }}</td>
                                                 <td>{{ pagos.sueldo_bruto }}</td>
                                                 <td><button mat-raised-button type="submit"
