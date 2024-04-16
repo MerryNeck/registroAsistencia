@@ -77,8 +77,7 @@
                                                 <th>DIAS TRABAJADOS</th>
                                                 <th>RETENCION</th>
                                                 <th>SUELDO BRUTO</th>
-                                                <th>MODIFICAR</th>
-                                                <th>ELIMINAR</th>
+                                                <th> </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -92,14 +91,11 @@
                                                 <td>{{ pagos.sueldo_bruto }}</td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue btn-round "
-                                                        (click)="editarPago(pagos)">Modificar</button></td>
-                                                <td><button mat-raised-button type="submit"
-                                                    class="btn btn-round"
-                                                    [ngClass]="{'activo': pagos.estado === 's', 'inactivo': pagos.estado === 'n'}"
-                                                    (click)="cambiarEstadoPago(1, estado === 's' ? 'n' : 's')">{{ pagos.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
+                                                        (click)="editarPago(pagos)">Modificar</button>
+                                                        <button mat-raised-button type="submit"
+                                                    class="btn btn-round elim" mat-icon-button type="button"
+                                                    (click)="cambiarEstadoPago(pagos.id_sueldo, pagos.estado)"><img src="../../../../assets/img/icons8-cancelar-48.png" alt=""></button></td>
                                             </tr>
-
-
                                         </tbody>
                                     </table>
                                 </div>

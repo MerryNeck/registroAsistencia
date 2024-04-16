@@ -17,6 +17,7 @@ export class Asistencia{
         public id_usuario:number,
         public min_extra:string,
         public hrs_no_recuperadas:string,
+        public usuario_id :number,
     ){
 
     }

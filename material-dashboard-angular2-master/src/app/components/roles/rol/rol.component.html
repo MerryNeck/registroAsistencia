@@ -2,19 +2,20 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
-                <div class="card" >
+                <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">Registro Rol</h4>
                     </div>
                     <div class="card-body">
                         <form #rolForm="ngForm" (ngSubmit)="registrarNuevoRol(rolForm)">
-                            
+
                             <div class="row">
 
                                 <div class="form-group col-md-12" id="form">
                                     <div class="example-full-width">
 
-                                        <input class="form-control" placeholder="Rol" type="text" name="rol" ngModel pattern="[a-zA-Z+">
+                                        <input class="form-control" placeholder="Rol" type="text" name="rol" ngModel
+                                            pattern="[a-zA-Z+">
                                     </div>
                                 </div>
 
@@ -32,7 +33,7 @@
             <div class="container-fluid">
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
 
                         <div class="card">
                             <div class="card-header card-header-danger">
@@ -43,16 +44,13 @@
                                     <table class="table">
                                         <thead class=" text-primary">
                                             <tr>
-                                                
+
                                                 <th>
                                                     TIPO ROL
                                                 </th>
-                                            
+
                                                 <th>
-                                                    MODIFICAR
-                                                </th>
-                                                <th>
-                                                    ELIMINAR
+
                                                 </th>
                                             </tr>
                                         </thead>
@@ -63,11 +61,12 @@
                                                 <td>{{ roles.tipo}}</td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue btn-round "
-                                                        (click)="editarRol(roles)">Modificar</button></td>
-                                                <td><button mat-raised-button type="submit"
-                                                    class="btn btn-round"
-                                                    [ngClass]="{'activo': roles.estado === 's', 'inactivo': roles.estado === 'n'}"
-                                                    (click)="cambiarEstadoRol(roles.id_rol, roles.estado === 's' ? 'n' : 's')">{{ roles.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
+                                                        (click)="editarRol(roles)">Modificar</button>
+                                                    <button mat-raised-button type="submit" class="btn btn-round elim"
+                                                        (click)="cambiarEstadoRol(roles.id_rol, roles.estado)"><img
+                                                            src="../../../../assets/img/icons8-cancelar-48.png"
+                                                            alt=""></button>
+                                                </td>
                                             </tr>
 
                                         </tbody>

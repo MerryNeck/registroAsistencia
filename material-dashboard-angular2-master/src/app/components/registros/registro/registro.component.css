@@ -10,6 +10,9 @@
   .row{
     justify-content: center;
   }
+  .elim{
+    background-color: #7A9AE3;
+  }
   .btn.btn-danger.pull-right{
     background-color: #e67e22;
   }

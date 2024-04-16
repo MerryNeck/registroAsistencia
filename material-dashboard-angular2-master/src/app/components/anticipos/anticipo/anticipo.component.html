@@ -40,7 +40,7 @@
         <div class="main-content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="card-header card-header-danger">
                                 <h4 class="card-title "> REGISTRO ANTICIPOS</h4>
@@ -71,25 +71,23 @@
                                                 </th>
                                                 
                                                 <th>
-                                                    MODIFICAR
+                                                    
                                                 </th>
-                                                <th>
-                                                    ELIMINAR
-                                                </th>
+                                                
 
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <tr></tr>
                                             <tr *ngFor="let anticipo of anticiposUser">
                                                 <td>{{ anticipo.id_usuario }}</td>
                                                 <td>{{ anticipo.anticipo}}</td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue btn-round "
-                                                        (click)="editarAnticipo(anticipo)">Modificar</button></td>
-                                                <td><button mat-raised-button type="submit"
-                                                    class="btn btn-round"
-                                                    [ngClass]="{'activo': anticipo.estado === 's', 'inactivo': anticipo.estado === 'n'}"
-                                                    (click)="cambiarEstadoAnticipo(anticipo.id_anticipo, estado === 's' ? 'n' : 's')">{{ anticipo.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
+                                                        (click)="editarAnticipo(anticipo)">Modificar</button>
+                                                        <button mat-raised-button type="submit"
+                                                    class="btn btn-round elim" mat-icon-button type="button"
+                                                    (click)="cambiarEstadoAnticipo(anticipo.id_anticipo, estado )"><img src="../../../../assets/img/icons8-cancelar-48.png" alt=""></button></td>
                                             </tr>
 
 

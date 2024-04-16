@@ -91,11 +91,11 @@
                                         <th>APELLIDO MATERNO</th>
                                         <th>AREA</th>
                                         <th>ROL</th>
-                                        <th>MODIFICAR</th>
-                                        <th>ELIMINAR</th>
+                                        <th> </th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr></tr>
                                     <tr *ngFor="let user of usuarios">
                                         <td>{{ user.ci }}</td>
                                         <td>{{ user.nombre }}</td>
@@ -104,12 +104,10 @@
                                         <td>{{ user.Area?.tipo_area }}</td>
                                         <td>{{ user.rol?.tipo }}</td>
                                         <td><button mat-raised-button type="button" class="btn btn-blue btn-round"
-                                                (click)="editarUsuario(user)">Modificar</button></td>
-                                        <td>
-                                            <button mat-raised-button type="button" class="btn btn-round"
-                                                [ngClass]="{'activo': user.estado === 's', 'inactivo': user.estado === 'n'}"
-                                                (click)="cambiarEstadoRegistro(user.id_usuario, user.estado === 's' ? 'n' : 's')">
-                                                {{ user.estado === 's' ? 'Activo' : 'Inactivo' }}
+                                                (click)="editarUsuario(user)">Modificar</button>
+                                            <button mat-raised-button type="button" class="btn btn-round elim"
+                                                (click)="cambiarEstadoRegistro(user.id_usuario, user.estado )">
+                                                <img src="../../../../assets/img/icons8-cancelar-48.png" alt="">
                                             </button>
                                         </td>
                                     </tr>

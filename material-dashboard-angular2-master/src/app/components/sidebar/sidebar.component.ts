@@ -80,7 +80,7 @@ export class SidebarComponent implements OnInit {
     if (elementoBarraLateral) {
       anime({
         targets: elementoBarraLateral,
-        translateX: '-280px',
+        translateX: '-250px',
         duration: 300,
         easing: 'easeInOutCubic'
       });
@@ -88,7 +88,7 @@ export class SidebarComponent implements OnInit {
   }
 
   adjustSidebarWidth() {
-    const ancho = window.innerWidth <= 768 ? '200px' : '300px';
+    const ancho = window.innerWidth <= 768 ? '200px' : '250px';
     this.renderer.setStyle(this.elRef.nativeElement.querySelector('.sidebar'), 'width', ancho);
   }
 

@@ -86,15 +86,13 @@
                                                 </th>
                                                
                                                 <th>
-                                                    MODIFICAR
-                                                </th>
-                                                <th>
-                                                    ELIMINAR
+
                                                 </th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <tr></tr>
                                             <tr *ngFor="let per of permisos">
                                                 <td>{{ per.id_usuario }}</td>
                                                 <td>{{ per.fecha}}</td>
@@ -102,14 +100,11 @@
                                                 <td>{{ per.detalle}}</td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue btn-round "
-                                                        (click)="editarPermiso(per)">Modificar</button></td>
-                                                <td><button mat-raised-button type="submit"
-                                                    class="btn btn-round"
-                                                    [ngClass]="{'activo': per.estado === 's', 'inactivo': per.estado === 'n'}"
-                                                    (click)="cambiarEstadoPermiso(per.id_permiso, estado === 's' ? 'n' : 's')">{{ per.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
+                                                        (click)="editarPermiso(per)">Modificar</button>
+                                                    <button mat-raised-button type="submit"
+                                                    class="btn btn-round elim" mat-icon-button type="button"
+                                                    (click)="cambiarEstadoPermiso(per.id_permiso, per.estado)" ></button> <img src="../../../../assets/img/icons8-cancelar-48.png" alt=""></td>
                                             </tr>
-
-
                                         </tbody>
                                     </table>
                                 </div>

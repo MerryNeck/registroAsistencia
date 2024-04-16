@@ -1,5 +1,5 @@
 .sidebar {
-  width: 240px;
+  width: 239px;
   position: fixed;
   top: 0;
   bottom: 0;
@@ -86,7 +86,7 @@ body {
   z-index: 999;
 }
 .btn.btn-danger.pull-right{
-  margin-top: -18%;
+  margin-top: -15%;
   margin-left: 2%;
   background-color: #e67e22;
 }
@@ -96,8 +96,8 @@ body {
 
   .img {
     display: inline-block;
-    margin-top: -24%;
-    width: 180px;
+    margin-top: 4%;
+    width: 150px;
     border-radius: 20%;
     justify-content: center;
     margin-left: 30px;
@@ -118,7 +118,7 @@ body {
   position: absolute;
   top: -10%;
   transform: translateY(0%);
-  left: 0px;
+  left: -10px;
   cursor: pointer;
   background-color: transparent;
 }
