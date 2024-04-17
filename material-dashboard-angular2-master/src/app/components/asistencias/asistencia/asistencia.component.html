@@ -72,16 +72,15 @@
               </div>
             </div>
           </div>
-          <div class="card-body" style="margin-top: 10% ; display:none;">
+          <div class="card-body" style="margin-top: 10% ; display: none ;">
             <div class="table-responsive">
               <div class="div-table">
 
                 <div id="table">
                   <div class="company-info">
                     <h1>PLANILLA DE ASISTENCIA</h1>
-                    <div class="bis">
-                      NOMBRE: <span class="label">{{asistencias[0]?.id_usuario.nombre}}
-                        {{asistencias[0]?.id_usuario.apellido}}</span>
+                    <div class="bis" >
+                      NOMBRE: <span class="label" *ngFor="let asistencia of asistenciasUser">{{ asistencia.usuario.nombre }}  {{ asistencia.usuario.apellido_paterno }}  {{ asistencia.usuario.apellido_materno }}</span>
                     </div>
                     <div class="bis">
                       FECHA: <span class="label">{{asistencias[0]?.fecha}}</span>
@@ -105,7 +104,9 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <tr></tr>
                       <tr *ngFor="let asistencia of asistenciasUser">
+                        
                         <td>{{ asistencia.fecha }}</td>
                         <td>{{ asistencia.tprano_ingreso}}</td>
                         <td>{{ asistencia.tprano_salida }}</td>
