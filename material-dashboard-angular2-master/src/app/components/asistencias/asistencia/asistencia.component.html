@@ -91,6 +91,7 @@
                     <thead class="text-primary">
 
                       <tr class="table-row">
+                        <th class="table-header">FECHA</th>
                         <th class="table-header">PRIMERA ENTRADA</th>
                         <th class="table-header">PRIMERA SALIDA</th>
                         <th class="table-header">SEGUNDA ENTRADA</th>
@@ -105,6 +106,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let asistencia of asistenciasUser">
+                        <td>{{ asistencia.fecha }}</td>
                         <td>{{ asistencia.tprano_ingreso}}</td>
                         <td>{{ asistencia.tprano_salida }}</td>
                         <td>{{ asistencia.tde_ingreso}}</td>
