@@ -16,6 +16,7 @@ export class AsistenciaEditComponent implements OnInit {
   editandoAsistencia: Asistencia = {id_asistencia:0, fecha: '', id_excel:0,tprano_ingreso: '',tprano_salida:'',tde_ingreso:'',tde_salida:'',min_retardos:'',min_adelantado:'',faltas:'',total_horas:'',id_usuario:0,hrs_no_recuperadas:'', fecha_creacion: '', fecha_modificacion: '',estado:'' ,min_extra:'',usuario_id:0};
   token: string = '';
   public res: any;
+  rutarol:string='';
 
   constructor(
     private asistenciaService: AsistenciaService,
@@ -25,14 +26,23 @@ export class AsistenciaEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
-    this.route.params.subscribe(params => {
-      const idAsistencia = +params['id'];
-      this.obtenerAsistencia(idAsistencia);
-    });
+    this.rutarol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutarol === ''){
+      this.router.navigate(['/login']);
+    }else if(this.rutarol !== 'admin'){
+      this.router.navigate(['/asistencia']);
+    }
+    else{
+      this.route.params.subscribe(params => {
+        const idAsistencia = +params['id'];
+        this.obtenerAsistencia(idAsistencia);
+      });
+    }
+    
   }
 
   obtenerAsistencia(idAsistencia: number): void {
-    this.asistenciaService.obtenerAsistenciaPorId(idAsistencia, this.token)
+    this.asistenciaService.obtenerAsistenciaPorId(idAsistencia, this.token, this.rutarol)
       .subscribe(
         asistencia => {
           this.res = asistencia
@@ -49,7 +59,7 @@ export class AsistenciaEditComponent implements OnInit {
 
   actualizarAsistencia(form: NgForm): void {
     if (this.editandoAsistencia) {
-      this.asistenciaService.actualizarAsistencia(this.editandoAsistencia, this.token)
+      this.asistenciaService.actualizarAsistencia(this.editandoAsistencia, this.token, this.rutarol)
         .subscribe(
           () => {
             Swal.fire('Éxito', 'La asistencia se actualizó correctamente', 'success');

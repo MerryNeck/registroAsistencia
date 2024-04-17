@@ -14,6 +14,7 @@ export class PermisoEditComponent implements OnInit {
 
   editandoPermiso: Permiso = {id_permiso:0, fecha: '',min_permiso:'',detalle:'',id_usuario:0, estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
+  rutarol:string='';
 
   constructor(
     private permisoService: PermisoService,
@@ -23,14 +24,22 @@ export class PermisoEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
-    this.route.params.subscribe(params => {
+    this.rutarol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutarol === ''){
+      this.router.navigate(['/login']);
+    }else if(this.rutarol !== 'admin'){
+      this.router.navigate(['/asistencia']);
+    }else{
+      this.route.params.subscribe(params => {
       const idPermiso = +params['id'];
       this.obtenerPermiso(idPermiso);
     });
+    }
+    
   }
 
   obtenerPermiso(idPermiso: number): void {
-    this.permisoService.obtenerPermisoPorId(idPermiso, this.token)
+    this.permisoService.obtenerPermisoPorId(idPermiso, this.token, this.rutarol)
       .subscribe(
         (response:any) => {
           this.editandoPermiso = response.data;
@@ -44,7 +53,7 @@ export class PermisoEditComponent implements OnInit {
 
   actualizarPermiso(form: NgForm): void {
     if ( this.editandoPermiso !== null) {
-      this.permisoService.actualizarPermiso(this.editandoPermiso, this.token)
+      this.permisoService.actualizarPermiso(this.editandoPermiso, this.token,this.rutarol)
         .subscribe(
           () => {
             Swal.fire('Éxito', 'El permiso se actualizó correctamente', 'success');

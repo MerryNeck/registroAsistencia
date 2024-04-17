@@ -1,9 +1,24 @@
 <div class="main-content">
   <div class="container-fluid">
+   
     <div class="row">
+      
       <button mat-raised-button type="submit" class="btn btn-blue btn-round bacun"
          ><a href="/asistencia">VOLVER</a></button>
       <div class="card-header1 card-header-danger">
+        <form class="col-md-5">
+          <p class="card-category">Buscar Boleta</p>
+          <div class="input-group no-border">
+            <div class="col-md-10">
+              <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
+                placeholder="Buscar por cedula de identidad...">
+              <input type="text" [(ngModel)]="fechaBusqueda" class="form-control" placeholder="Buscar por fecha... ej. 04-24">
+              <div class="ripple-container"></div>
+            </div>
+          </div>
+          <button mat-raised-button type="button" class="btn btn-white btn-round "
+            (click)="buscarBoleta()">Buscar</button>
+        </form>
         <div class="contener" id="capturar">
           <div class="receipt-container">
             <div class="header">

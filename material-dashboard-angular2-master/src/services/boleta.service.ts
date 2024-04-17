@@ -12,18 +12,31 @@ export class BoletaService {
 
   constructor(private http: HttpClient) { }
 
-  getBoletas(token:string): Observable<Boleta[]> {
+  getBoletas(token:string, rutarol:string): Observable<Boleta[]> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
+      
     });
     return this.http.get<Boleta[]>(this.apiUrl, { headers });
   }
 
-  getBoleta(id: number,token:string): Observable<Boleta> {
+  getBoleta(id: number,token:string, rutarol:string): Observable<Boleta> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
+      
     });
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Boleta>(url, { headers });
+  }
+  buscarPorCiOFecha(ci: string, fecha: string, token: string, rutarol:string): Observable<Boleta[]> {
+    const headers = new HttpHeaders({
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
+    });
+    const body = { ci, fecha }; 
+
+    return this.http.post<Boleta[]>(`${this.apiUrl}/buscar`, body, { headers });
   }
 }

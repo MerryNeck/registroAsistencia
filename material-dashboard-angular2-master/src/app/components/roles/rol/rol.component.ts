@@ -17,6 +17,7 @@ export class RolComponent implements OnInit {
   editandoRol: Rol | null =null;
   token: string = '';
   estado: string;
+  rutaRol:string='';
   
   public res: any;
   public rolUser : any;
@@ -24,11 +25,20 @@ export class RolComponent implements OnInit {
   constructor(private rolService: RolService, private router:Router) { }
 
   ngOnInit(): void {
-    this.listarRoles();
-    this.token = localStorage.getItem('token') || ''
+    this.token = localStorage.getItem('token') || '';
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this.router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this.router.navigate(['/asistencia'])
+    }else{
+      this.listarRoles();
+      
+    }
+
   }
   listarRoles(): void {
-    this.rolService.listarRol(this.token).subscribe ((response :any) =>{
+    this.rolService.listarRol(this.token,this.rutaRol).subscribe ((response :any) =>{
    if (response.ok) {
      this.rolUser = response.data;
      console.log(this.rolUser);
@@ -47,7 +57,7 @@ export class RolComponent implements OnInit {
       
       this.nuevoRol.tipo = rol;
       this.nuevoRol.estado = 's';
-      this.rolService.registrarRol(this.nuevoRol,this.token)
+      this.rolService.registrarRol(this.nuevoRol,this.token,this.rutaRol)
         .subscribe(rol=> {
           this.roles.push(rol);
           this.nuevoRol = new Rol(0, '', '', '', '');
@@ -70,7 +80,7 @@ export class RolComponent implements OnInit {
   cambiarEstadoRol(idRol: number, nuevoEstado: string) {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
-    this.rolService.cambiarEstadoRol(idRol, nuevoEstado, this.token).subscribe(
+    this.rolService.cambiarEstadoRol(idRol, nuevoEstado, this.token,this.rutaRol).subscribe(
       (response) => {
         this.res =response;
         this.estado = this.res.data;

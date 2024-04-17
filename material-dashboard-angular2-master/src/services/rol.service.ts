@@ -13,32 +13,36 @@ export class RolService {
   private url = environment.backend.api + '/api/rol'; 
   constructor(private http: HttpClient) { }
   // registrar rol
-  registrarRol(rol: Rol,token:string): Observable<any> {
+  registrarRol(rol: Rol,token:string, rutarol:string): Observable<any> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     });
     return this.http.post(`${this.url}`, rol, { headers });
   }
 
   // listar todas las roles
-  listarRol(token:string): Observable<Rol[]> {
+  listarRol(token:string, rutarol:string): Observable<Rol[]> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     });
     return this.http.get<Rol[]>(`${this.url}`, { headers});
   }
 
   //  estado de un rol
-  cambiarEstadoRol(idRol: number, estado: string,token:string): Observable<any> {
+  cambiarEstadoRol(idRol: number, estado: string,token:string, rutarol:string): Observable<any> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     });
     return this.http.delete(`${this.url}/${idRol}`,  { headers });
   }
   // Método para actualizar un anticipo
-  actualizarRol(rol: Rol, token: string): Observable<void> {
+  actualizarRol(rol: Rol, token: string , rutarol: string): Observable<void> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     });
     return this.http.put<void>(`${this.url}/${rol.id_rol}`, rol, { headers })
       .pipe(
@@ -48,9 +52,10 @@ export class RolService {
         })
       );
   }
-  obtenerRolPorId(id: number, token: string): Observable<Rol> {
+  obtenerRolPorId(id: number, token: string, rutarol:string): Observable<Rol> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     });;
     return this.http.get<Rol>(`${this.url}/${id}`, { headers })
       .pipe(

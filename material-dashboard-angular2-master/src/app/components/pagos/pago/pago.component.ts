@@ -22,17 +22,26 @@ export class PagoComponent implements OnInit {
   
   public res: any;
   public pagoUser : any;
+  rutaRol:string='';
 
   constructor(private pagoService: PagoService ,private router:Router) { }
 
   ngOnInit(): void {
-    this.obtenerPago();
-    this.token = localStorage.getItem('token') || ''
+    
+    this.token = localStorage.getItem('token') || '';
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this.router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this.router.navigate(['/asistencia'])
+    }else{
+      this.obtenerPago();
+    }
   }
   
   // listar area
   obtenerPago(): void {
-    this.pagoService.obtenerPago(this.token)
+    this.pagoService.obtenerPago(this.token, this.rutaRol)
     .subscribe ((response) =>{
       this.res = response
    if (this.res.ok) {
@@ -55,7 +64,7 @@ export class PagoComponent implements OnInit {
       this.nuevoPago.dias_trabajado = trabajo;
       this.nuevoPago.retencion = retencion;
       this.nuevoPago.sueldo_bruto =sueldo_bruto
-      this.pagoService.registrarPago(this.nuevoPago,this.ci, this.token)
+      this.pagoService.registrarPago(this.nuevoPago,this.ci, this.token, this.rutaRol)
         .subscribe(pago=> {
           this.pagos.push(pago);
           this.nuevoPago = new Pago(0, '', '', '', 0, 0, 0, 0, 0);
@@ -70,7 +79,7 @@ export class PagoComponent implements OnInit {
   }
  
   buscarAnticipoPorCi(ci: string): void {
-    this.pagoService.buscarPorCi(ci,this.token)
+    this.pagoService.buscarPorCi(ci,this.token,this.rutaRol)
       .subscribe( (reponse) => {
         this.res = reponse
           this.pagoUser = this.res.data; 
@@ -87,7 +96,7 @@ export class PagoComponent implements OnInit {
   cambiarEstadoPago(idPago: number, nuevoEstado: string) {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
-    this.pagoService.cambiarEstadoPago(idPago, nuevoEstado, this.token).subscribe((response) => {
+    this.pagoService.cambiarEstadoPago(idPago, nuevoEstado, this.token,this.rutaRol).subscribe((response) => {
       this.res =response;
       this.estado = this.res.data  
       Swal.fire({

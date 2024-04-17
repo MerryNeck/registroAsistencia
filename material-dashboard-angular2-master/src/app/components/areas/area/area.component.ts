@@ -17,6 +17,7 @@ export class AreaComponent implements OnInit {
   editandoArea: Area | null = null; 
   token: string = '';
   estado: string;
+  rutaRol: string ='';
   public res: any;
   public areasUser : any;
   public areadata : any
@@ -25,13 +26,22 @@ export class AreaComponent implements OnInit {
   constructor(private areaService: AreaService,  private router:Router) { }
 
   ngOnInit(): void {
-    this.listarAreas();
-    this.token = localStorage.getItem('token') || ''
+    
+    this.token = localStorage.getItem('token') || '';
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this.router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this.router.navigate(['/asistencia'])
+    }
+    else{
+      this.listarAreas();
+    }
   }
 
   // listar area
   listarAreas() {
-    this.areaService.listarAreas(this.token).subscribe((response) => {
+    this.areaService.listarAreas(this.token, this.rutaRol).subscribe((response) => {
       this.res = response
       if(this.res.ok){
         this.areasUser = this.res.data;
@@ -52,7 +62,7 @@ export class AreaComponent implements OnInit {
       this.nuevaArea.tipo_area = area;
       console.log(this.nuevaArea);
       
-      this.areaService.registrarArea(this.nuevaArea,this.token)
+      this.areaService.registrarArea(this.nuevaArea,this.token,this.rutaRol)
         .subscribe((response  :any)=> {
           this.areadata =  response.data
           this.areas.push(this.areadata);
@@ -71,7 +81,7 @@ export class AreaComponent implements OnInit {
   cambiarEstadoArea(idArea: number, nuevoEstado: string) {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
-    this.areaService.cambiarEstadoArea(idArea, nuevoEstado, this.token).subscribe(
+    this.areaService.cambiarEstadoArea(idArea, nuevoEstado, this.token, this.rutaRol).subscribe(
        (response) => {
         this.res = response;
         this.estado = this.res.data

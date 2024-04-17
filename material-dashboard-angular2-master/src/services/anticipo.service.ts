@@ -14,17 +14,19 @@ export class AnticipoService {
 
 
   // Método para obtener todos los anticipos
-  obtenerAnticipo(token: string): Observable<Anticipo[]> {
+  obtenerAnticipo(token: string, rutarol:string): Observable<Anticipo[]> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol':`${rutarol}`
     });
     return this.http.get<Anticipo[]>(this.baseUrl, { headers });
   }
 
   // Método para registrar un anticipo
-  registrarAnticipo(anticipo: Anticipo, token: string): Observable<any> {
+  registrarAnticipo(anticipo: Anticipo, token: string, rutarol:string): Observable<any> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol':`${rutarol}`
     });
     return this.http.post(`${this.baseUrl}`, anticipo, { headers });
   }
@@ -32,23 +34,26 @@ export class AnticipoService {
   
 
   // Método para eliminar un anticipo (cambiar estado a inactivo)
-  cambiarEstadoAnticipo(idAnticipo: number, estado: string, token: string): Observable<any> {
+  cambiarEstadoAnticipo(idAnticipo: number, estado: string, token: string, rutarol:string): Observable<any> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol':`${rutarol}`
     });
     return this.http.delete(`${this.baseUrl}${idAnticipo}`, { headers });
   }
 
-  buscarPorCi(ci: string, token: string): Observable<Anticipo[]> {
+  buscarPorCi(ci: string, token: string ,rutarol:string): Observable<Anticipo[]> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol':`${rutarol}`
     });
     return this.http.get<Anticipo[]>(`${this.baseUrl}/buscar/${ci}`, { headers });
   }
   // Método para actualizar un anticipo
-  actualizarAnticipo(anticipo: Anticipo, token: string): Observable<void> {
+  actualizarAnticipo(anticipo: Anticipo, token: string, rutarol:string): Observable<void> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol':`${rutarol}`
     });
     return this.http.put<void>(`${this.baseUrl}/${anticipo.id_anticipo}`, anticipo, { headers })
       .pipe(
@@ -58,9 +63,10 @@ export class AnticipoService {
         })
       );
   }
-  obtenerAnticipoPorId(id: number, token: string): Observable<Anticipo> {
+  obtenerAnticipoPorId(id: number, token: string, rutarol:string): Observable<Anticipo> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol':`${rutarol}`
     });
     return this.http.get<Anticipo>(`${this.baseUrl}${id}`, { headers })
       .pipe(

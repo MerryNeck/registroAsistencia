@@ -7,6 +7,7 @@ import html2canvas from 'html2canvas';
 
 import Swal from 'sweetalert2';
 import { Token } from '@angular/compiler';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-boleta',
   templateUrl: './boleta.component.html',
@@ -20,15 +21,26 @@ export class BoletaComponent implements OnInit {
   public res: any;
   public boletaUser: any;
   token: string = '';
+  ciBusqueda: string = '';
+  fechaBusqueda: string = '';
+  rutaRol:string='';
 
-  constructor(private boletaService: BoletaService, private http: HttpClient) { }
+  constructor(private boletaService: BoletaService , private router: Router) { }
 
   ngOnInit(): void {
-    this.listarBoletas();
+    this.token = localStorage.getItem('token') || '';
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this.router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this.router.navigate(['/asistencia'])
+    }else{
+      this.listarBoletas();
+    }
   }
 
   listarBoletas(): void {
-    this.boletaService.getBoletas(this.token)
+    this.boletaService.getBoletas(this.token, this.rutaRol)
       .subscribe((response) => {
         this.res = response
         if (this.res.ok) {
@@ -62,4 +74,17 @@ export class BoletaComponent implements OnInit {
     });
   }
 
+buscarBoleta(): void {
+    this.boletaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda,this.token, this.rutaRol)
+      .subscribe((response) => {
+        this.res= response
+        this.boletaUser = this.res.data;
+        console.log(this.boletaUser);
+        
+      }, error => {
+        console.error('Error al buscar asistencias:', error);
+        Swal.fire('Error', 'Ingrese los Datos Correctos', 'error');
+      
+      });
+  }
 }

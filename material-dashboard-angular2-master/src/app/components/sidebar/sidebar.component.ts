@@ -8,17 +8,18 @@ declare interface RouteInfo {
   title: string;
   icon: string;
   class: string;
+  roles:string[];
 }
 export const ROUTES: RouteInfo[] = [
-  { path: '/excel', title: 'SUBIR EXCEL', icon: 'dashboard', class: '' },
-  { path: '/regisusuario', title: 'REGISTRO DE USUARIO', icon: 'person', class: '' },
-  { path: '/area', title: 'AREA', icon: 'library_books', class: '' },
-  { path: '/rol', title: 'ROL', icon: 'library_books', class: '' },
-  { path: '/pago', title: 'PAGO', icon: 'bubble_chart', class: '' },
-  { path: '/asistencia', title: 'ASISTENCIA', icon: 'content_paste', class: '' },
-  { path: '/anticipo', title: 'ANTICIPO', icon: 'library_books', class: '' },
-  { path: '/perfil', title: 'REGISTRO DE AUTENTIFICACION', icon: 'bubble_chart', class: '' },
-  { path: '/permiso', title: 'PERMISO', icon: 'content_paste', class: '' },
+  { path: '/excel', title: 'SUBIR EXCEL', icon: 'dashboard', class: '' , roles: ['admin']},
+  { path: '/registro', title: 'REGISTRO DE USUARIO', icon: 'person', class: '' , roles: ['admin']},
+  { path: '/area', title: 'AREA', icon: 'library_books', class: '', roles: ['admin'] },
+  { path: '/rol', title: 'ROL', icon: 'library_books', class: '' , roles: ['admin']},
+  { path: '/pago', title: 'PAGO', icon: 'bubble_chart', class: '', roles: ['admin'] },
+  { path: '/asistencia', title: 'ASISTENCIA', icon: 'content_paste', class: '' , roles: ['admin','']},
+  { path: '/anticipo', title: 'ANTICIPO', icon: 'library_books', class: '', roles: ['admin'] },
+  { path: '/perfil', title: 'REGISTRO DE AUTENTIFICACION', icon: 'bubble_chart', class: '', roles: ['admin'] },
+  { path: '/permiso', title: 'PERMISO', icon: 'content_paste', class: '', roles: ['admin'] },
 
   
 ];
@@ -33,18 +34,32 @@ export class SidebarComponent implements OnInit {
   sidebarOpen: boolean = true;
 
   token :string ='';
+  rol:string = '';
+
   constructor(
     private router: Router,
     private renderer: Renderer2,
     private elRef: ElementRef
   ) {
+    this.rol = localStorage.getItem('rol') || ''
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.closeSidebar();
       }
-    });
-  }
 
+    });
+ 
+    this.filtrarRoles(this.rol);
+   
+  }
+  filtrarRoles(estado: string) {
+    if (estado !== 'admin') {
+      this.menuItems = this.menuItems.filter(ruta => {
+        return ruta.path === '/asistencia';
+      });
+    }
+  }
+ 
   ngOnInit() {
     anime({
       targets: '.sidebar',

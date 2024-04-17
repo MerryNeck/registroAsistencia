@@ -12,8 +12,11 @@ export class ExcelService {
   constructor(private http: HttpClient) { }
   subirArchivo(archivo: any): Observable<any> {
     const token = localStorage.getItem('token');
+    const rutarol = localStorage.getItem('rutarol');
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
+
     });
     const formData = new FormData();
     formData.append('archivo', archivo);

@@ -15,6 +15,7 @@ export class AreaEditComponent implements OnInit {
   
   editandoArea: Area  = {id_area:0, tipo_area: '', estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
+  rutarol: string= '';
   public res:any;
   
   constructor(
@@ -25,14 +26,23 @@ export class AreaEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
-    this.route.params.subscribe(params => {
-      const idArea = +params['id'];
-      this.obtenerArea(idArea);
-    });
+    this.rutarol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutarol === ''){
+      this.router.navigate(['/login']);
+    }else if(this.rutarol !== 'admin'){
+      this.router.navigate(['/asistencia']);
+    }
+    else{
+      this.route.params.subscribe(params => {
+        const idArea = +params['id'];
+        this.obtenerArea(idArea);
+      })
+    }
+    ;
   }
 
   obtenerArea(idArea: number): void {
-    this.areaService.obtenerAreaPorId(idArea, this.token)
+    this.areaService.obtenerAreaPorId(idArea, this.token,this.rutarol )
       .subscribe(
        (response : any) => {
           this.editandoArea = response.data
@@ -48,7 +58,7 @@ export class AreaEditComponent implements OnInit {
 
   actualizarArea(form: NgForm): void {
     if (this.editandoArea !== null) {
-      this.areaService.actualizarArea(this.editandoArea, this.token)
+      this.areaService.actualizarArea(this.editandoArea, this.token, this.rutarol)
         .subscribe(
           () => {
             Swal.fire('Éxito', 'El área se actualizó correctamente', 'success');

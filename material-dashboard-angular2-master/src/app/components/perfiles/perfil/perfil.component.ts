@@ -16,6 +16,7 @@ export class PerfilComponent implements OnInit {
   editandoPerfil: Login | null = null;
   token: string = '';
   estado: string;
+  rutaRol:string='';
   public res: any;
   public perfilUser: any;
   public perfildata:any;
@@ -24,11 +25,18 @@ export class PerfilComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
-    this.obtenerPerfiles();
     this.token = localStorage.getItem('token') || ''
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this.router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this.router.navigate(['/asistencia'])
+    }else{
+      this.obtenerPerfiles();
+    }
   }
   obtenerPerfiles(): void {
-    this.loginService.obtenerPerfil(this.token)
+    this.loginService.obtenerPerfil(this.token,this.rutaRol)
       .subscribe((response : any) => {
         if (response.ok) {
           this.perfilUser = response.data;
@@ -44,7 +52,7 @@ export class PerfilComponent implements OnInit {
       this.nuevoPerfil.id_usuario = ci;
       this.nuevoPerfil.correo_corp = correo;
       this.nuevoPerfil.password = password;
-      this.loginService.registrarPerfil(this.nuevoPerfil, this.token)
+      this.loginService.registrarPerfil(this.nuevoPerfil, this.token,this.rutaRol)
         .subscribe((response:any) => {
           this.perfildata = response.data
           this.perfiles.push(this.perfildata);
@@ -62,7 +70,7 @@ export class PerfilComponent implements OnInit {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
 
-    this.loginService.cambiarEstadoPerfil(idPerfil, nuevoEstado, this.token).subscribe(
+    this.loginService.cambiarEstadoPerfil(idPerfil, nuevoEstado, this.token,this.rutaRol).subscribe(
        (response) => {
         this.res = response;
         this.estado = this.res.data;
@@ -92,7 +100,7 @@ export class PerfilComponent implements OnInit {
     this.router.navigate(['/editar-perfil', perfil.id]);
   }
   buscarPerfilPorCi(ci: string): void {
-    this.loginService.buscarPorCi(ci, this.token)
+    this.loginService.buscarPorCi(ci, this.token,this.rutaRol)
       .subscribe({
         next: (response) => {
           this.res = response;

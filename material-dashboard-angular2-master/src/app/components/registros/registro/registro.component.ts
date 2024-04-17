@@ -22,17 +22,26 @@ export class RegistroComponent implements OnInit {
   public roles: any[] = [];
   public token: string = "";
   public users : any;
+   rutaRol:string='';
  
   constructor(
     private usuarioService: RegistroService,
     private router: Router
 
   ) {
-    this.token= localStorage.getItem('token')
+    this.token= localStorage.getItem('token') || ''
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this.router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this.router.navigate(['/asistencia'])
+    }else{
+      this.obtenerUsuarios();
+    }
   }
 
   ngOnInit(): void {
-    this.usuarioService.getAreas(this.token).subscribe(
+    this.usuarioService.getAreas(this.token,this.rutaRol).subscribe(
       (response : any) => {
         this.areas = response.data;
         console.log(this.areas);
@@ -44,7 +53,7 @@ export class RegistroComponent implements OnInit {
           Swal.fire("Error", "No se pudo registrar el area", "error");
       },
     );
-    this.usuarioService.getRoles(this.token).subscribe(
+    this.usuarioService.getRoles(this.token,this.rutaRol).subscribe(
       (response : any) => {
         this.roles = response.data;
         console.log(this.roles);
@@ -57,20 +66,16 @@ export class RegistroComponent implements OnInit {
       },
     );
 
-    this.obtenerUsuarios();
-
   }
   obtenerUsuarios(): void {
-    this.usuarioService.obtenerUsuario(this.token).subscribe((response: any) => {
+    this.usuarioService.obtenerUsuario(this.token,this.rutaRol).subscribe((response: any) => {
       //console.log(response);
       if (response.ok) {
-        this.usuarios = response.data;
-        console.log(this.usuarios);
-        console.log(this.token);
+        this.users = response.data;
         
       } else {
       }
-      //error => Swal.fire('Error', 'No se pudieron obtener los usuarios', 'error')
+      error => Swal.fire('Error', 'No se pudieron obtener los usuarios', 'error')
     });
   }
   registrarNuevoUsuario(form: NgForm): void {
@@ -85,7 +90,7 @@ export class RegistroComponent implements OnInit {
       this.nuevoUsuario.apellido_materno = apellido_materno;
       this.nuevoUsuario.estado = estado;
       this.usuarioService
-        .registrarUsuario(this.nuevoUsuario, this.token)
+        .registrarUsuario(this.nuevoUsuario, this.token,this.rutaRol)
         .subscribe(
           (usuario) => {
             this.usuarios.push(usuario);
@@ -126,7 +131,7 @@ export class RegistroComponent implements OnInit {
   }
 
   buscarUsuarioPorCi(ci: string): void {
-    this.usuarioService.buscarPorCi(ci, this.token).subscribe(
+    this.usuarioService.buscarPorCi(ci, this.token,this.rutaRol).subscribe(
        (response) => {
         this.res = response;
         this.users=this.res.data;
@@ -142,7 +147,7 @@ export class RegistroComponent implements OnInit {
     this.estado = nuevoEstado;
 
     this.usuarioService
-      .cambiarEstadoUsuario(idUsuario, nuevoEstado, this.token)
+      .cambiarEstadoUsuario(idUsuario, nuevoEstado, this.token,this.rutaRol)
       .subscribe((response) => {
         this.res=response;
         this.estado =this.res.data

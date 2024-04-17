@@ -12,8 +12,23 @@ export class RutaexcelComponent {
 
   archivoSeleccionado: File | null = null;
   nombreArchivo: string = '';
+  token:string = '';
+  rutaRol:string='';
 
   constructor(private excelService: ExcelService,private _router : Router) { }
+
+  ngOnInit(): void {
+    this.token = localStorage.getItem('token') || '';
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this._router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this._router.navigate(['/asistencia'])
+    }else{
+      this._router.navigate(['/excel']);
+    }
+    
+  }
   onArchivoSeleccionado(event: any) {
     const archivo = event.target.files[0];
     if (archivo) {

@@ -18,25 +18,28 @@ interface RegistroResponse {
 
     constructor(private _http: HttpClient) { }
 
-    getAreas(token:string): Observable<Area[]> {
+    getAreas(token:string,rutarol:string): Observable<Area[]> {
       const headers = new HttpHeaders({
-        'x-token': `${token}`
+        'x-token': `${token}`,
+      'x-rol': `${rutarol}`
       });
         return this._http.get<Area[]>(this.url + '/area/', { headers });
     }
 
-    getRoles(token:string): Observable<Rol[]> {
+    getRoles(token:string, rutarol:string): Observable<Rol[]> {
       const headers = new HttpHeaders({
-        'x-token': `${token}`
+        'x-token': `${token}`,
+      'x-rol': `${rutarol}`
       });
         return this._http.get<Rol[]>(this.url + '/rol/', { headers });
     }
     
 
        // Método para obtener todos los anticipos
-  obtenerUsuario(token:string): Observable<Usuario[]> {
+  obtenerUsuario(token:string, rutarol:string): Observable<Usuario[]> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     });
     console.log(this.url);
     
@@ -44,9 +47,10 @@ interface RegistroResponse {
   }
 
     // Método para registrar un Usuario
-  registrarUsuario(usuario: Usuario,token:string): Observable<any> {
+  registrarUsuario(usuario: Usuario,token:string, rutarol:string): Observable<any> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     });
     return this._http.post<any>(`${this.url}/usuarios`, usuario,{ headers});
   }
@@ -55,15 +59,15 @@ interface RegistroResponse {
 
     getUsuario(idUsuario: any): Observable<any> {//verificar en el backen si necesita parametro
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.get(this.url + "/usuario/" + idUsuario, { headers: headers });
+        return this._http.get(this.url + "/usuarios/" + idUsuario, { headers: headers });
 
     }
 
      // Método para actualizar un registro de usuario
-     actualizarUsuario(usuario: Usuario, token: string): Observable<void> {
+     actualizarUsuario(usuario: Usuario, token: string, rutarol:string): Observable<void> {
       const headers = new HttpHeaders({
         'x-token': `${token}`,
-        'Content-Type': 'application/json'
+        'x-rol': `${rutarol}`
       });
       return this._http.put<void>(`${this.url}/usuarios/${usuario.id_usuario}`, usuario, { headers })
         .pipe(
@@ -73,9 +77,10 @@ interface RegistroResponse {
           })
         );
     }
-    obtenerUsuarioPorId(id: number, token: string): Observable<Usuario> {
+    obtenerUsuarioPorId(id: number, token: string, rutarol:string): Observable<Usuario> {
       const headers = new HttpHeaders({
-        'x-token': `${token}`
+        'x-token': `${token}`,
+      'x-rol': `${rutarol}`
       });
       return this._http.get<Usuario>(`${this.url}/usuarios/${id}`, { headers })
         .pipe(
@@ -87,18 +92,18 @@ interface RegistroResponse {
     }
 
  // Eliminar (desactivar y activar)
- cambiarEstadoUsuario(idUsuario: number, estado: string,token:string): Observable<any> {
+ cambiarEstadoUsuario(idUsuario: number, estado: string,token:string, rutarol:string): Observable<any> {
   const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'x-token': `${token}`
+    'x-token': `${token}`,
+      'x-rol': `${rutarol}`
   });
     return this._http.delete(`${this.url}/usuarios/${idUsuario}`,  { headers });
   }
 
-  buscarPorCi(ci: string,token): Observable<Usuario[]> {
+  buscarPorCi(ci: string,token:string,rutarol:string): Observable<Usuario[]> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     });
     return this._http.get<Usuario[]>(`${this.url}/buscar/${ci}`,{headers});
   }

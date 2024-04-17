@@ -15,6 +15,7 @@ export class RolEditComponent implements OnInit {
   //editandoRol: Rol | null = null;
   editandoRol: Rol = {id_rol:0, tipo: '', estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
+  rutarol:string='';
   public res:any;
   constructor(
     private rolService: RolService,
@@ -24,14 +25,22 @@ export class RolEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
-    this.route.params.subscribe(params => {
-      const idRol = +params['id'];
-      this.obtenerRol(idRol);
-    });
+    this.rutarol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutarol === ''){
+      this.router.navigate(['/login']);
+    }else if(this.rutarol !== 'admin'){
+      this.router.navigate(['/asistencia']);
+    }else{
+      this.route.params.subscribe(params => {
+        const idRol = +params['id'];
+        this.obtenerRol(idRol);
+      });
+    }
+    
   }
 
   obtenerRol(idRol: number): void {
-    this.rolService.obtenerRolPorId(idRol, this.token)
+    this.rolService.obtenerRolPorId(idRol, this.token,this.rutarol)
       .subscribe(
         (response  :any) => {
           this.editandoRol = response.data;
@@ -47,7 +56,7 @@ export class RolEditComponent implements OnInit {
 
   actualizarRol(form: NgForm): void {
     if ( this.editandoRol) {
-      this.rolService.actualizarRol(this.editandoRol, this.token)
+      this.rolService.actualizarRol(this.editandoRol, this.token,this.rutarol)
         .subscribe(
           () => {
             Swal.fire('Éxito', 'El rol se actualizó correctamente', 'success');
