@@ -68,6 +68,7 @@ export class AreaComponent implements OnInit {
           this.areas.push(this.areadata);
           this.nuevaArea = new Area(0, '', '', '', '');
           form.reset();
+          this.listarAreas()
           console.log(this.areas);
           
           Swal.fire('Éxito', 'El area fue registrado correctamente', 'success');

@@ -7,8 +7,36 @@
     background-color: rgb(255, 255, 255);
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
   }
+  .custom-select {
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('../../../../assets/img/icons8-sort-down-48.png') no-repeat right center;
+    
+    
+  }
+  
+  .custom-select option[disabled][selected] {
+    display: none;
+  }
+  
+  .custom-select::before {
+    content: "Selecciones una opción...";
+    color: #000000;
+    display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+    padding: 0.5em;
+    pointer-events: none;
+  }
+  
   .row{
     justify-content: center;
+  }
+  select option[disabled] {
+    color: #000000;
   }
   .elim{
     background-color: #7A9AE3;

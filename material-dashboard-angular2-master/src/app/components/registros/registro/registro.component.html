@@ -9,7 +9,7 @@
                         <h4 class="card-title">REGISTRO USUARIO</h4>
                     </div>
                     <div class="card-body">
-                        <form #usForm="ngForm" (ngSubmit)="registrarNuevoUsuario(usForm)">
+                        <form #usForm="ngForm" (ngSubmit)="registrarNuevoUsuario(usForm.value)">
                             <div class="row">
                                 <div class="form-group col-md-4" id="form">
                                     <mat-form-field class="example-full-width">
@@ -21,7 +21,7 @@
                                 <div class="form-group col-md-8" id="form">
                                     <mat-form-field class="example-full-width">
                                         <input class="form-control" placeholder="Nombre" type="text" name="nombre"
-                                            #nombre="ngModel" [(ngModel)]="nuevoUsuario.nombre" pattern="[a-zA-Z]+">
+                                            #nombre="ngModel" [(ngModel)]="nuevoUsuario.nombre" pattern="[a-zA-Z ]+">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -43,22 +43,19 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6" id="form">
-                                    <mat-form-field class="example-full-width">
-                                        <select name="idArea" #id_area="ngModel" [(ngModel)]="nuevoUsuario.id_area">
-                                            <option value="">SELECCIONE AREA</option>
-                                            <option *ngFor="let area of areas" [value]="area.id_area">{{ area.tipo_area
-                                                }}</option>
+                                        <label>Seleccione un Area</label>
+                                        <select  class="custom-select" name="idArea" #id_area="ngModel" [(ngModel)]="nuevoUsuario.id_area" >
+                                            
+                                            <option *ngFor="let area of areas" [value]="area.id_area" >{{area.tipo_area}}</option>
                                         </select>
-                                    </mat-form-field>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
-                                    <mat-form-field class="example-full-width">
-                                        <select name="idRol" #id_rol="ngModel" [(ngModel)]="nuevoUsuario.id_rol">
-                                            <option value="">SELECCIONE ROL</option>
-                                            <option *ngFor="let rol of roles" [value]="rol.id_rol">{{ rol.tipo }}
+                                        <label>Seleccione un Rol</label>
+                                        <select class="custom-select" name="idRol" #id_rol="ngModel" [(ngModel)]="nuevoUsuario.id_rol">
+                                            
+                                            <option *ngFor="let rol of roles" [value]="rol.id_rol">{{rol.tipo}}
                                             </option>
                                         </select>
-                                    </mat-form-field>
                                 </div>
                             </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
