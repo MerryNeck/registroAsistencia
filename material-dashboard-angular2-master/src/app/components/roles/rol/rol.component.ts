@@ -69,6 +69,7 @@ export class RolComponent implements OnInit {
   } else {
     Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
   }
+  this.listarRoles();
   }
 
   editarRol(rol: Rol): void {

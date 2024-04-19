@@ -91,19 +91,22 @@ export class RegistroComponent implements OnInit {
   }
   registrarNuevoUsuario(form: NgForm): void {
     console.log(form.value);
+    console.log("usuario",this.nuevoUsuario);
     
     if (form.valid) {
-      const { ci, nombre, apellido_materno, apellido_paterno, estado } =
-        form.value;
-      this.nuevoUsuario.ci = ci;
-      this.nuevoUsuario.nombre = nombre;
-      this.nuevoUsuario.apellido_paterno = apellido_paterno;
-      this.nuevoUsuario.apellido_materno = apellido_materno;
+      
       this.usuarioService
         .registrarUsuario(this.nuevoUsuario, this.token,this.rutaRol)
         .subscribe(
-          (usuario) => {
-            this.usuarios.push(usuario);
+          
+          (response) => {
+            
+            console.log("res",response);
+            if(response.ok){
+              this.users=response.data;
+              console.log(this.users);
+              
+             
             this.nuevoUsuario = new Usuario(
               0,
               "",
@@ -123,6 +126,9 @@ export class RegistroComponent implements OnInit {
               "El usuario fue registrado correctamente",
               "success"
             );
+          }else {
+            Swal.fire("Error", response.msg, "error")
+          }
             
           },
           (error) =>

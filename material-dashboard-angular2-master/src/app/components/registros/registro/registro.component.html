@@ -1,61 +1,63 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-        <!--<div class="row"
+            <!--<div class="row"
             *ngIf=" usuarios &&usuarios.length > 0 &&roles && roles.length > 0 && areas && areas.length > 0 ">
-        --><div class="col-md-8">
+        -->
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">REGISTRO USUARIO</h4>
                     </div>
                     <div class="card-body">
                         <form #usForm="ngForm" (ngSubmit)="registrarNuevoUsuario(usForm.value)">
+                        
                             <div class="row">
                                 <div class="form-group col-md-4" id="form">
-                                    <mat-form-field class="example-full-width">
-                                        <input class="form-control" placeholder="Cedula de Identidad" type="text"
-                                            name="ci" #ci="ngModel" [(ngModel)]="nuevoUsuario.ci" maxlength="8"
-                                            pattern="[0-9]+">
-                                    </mat-form-field>
+                                    <input class="form-control" placeholder="Cedula de Identidad" type="text" name="ci"
+                                        #ci="ngModel" [(ngModel)]="nuevoUsuario.ci" maxlength="8" pattern="[0-9]+">
                                 </div>
+                                
                                 <div class="form-group col-md-8" id="form">
-                                    <mat-form-field class="example-full-width">
-                                        <input class="form-control" placeholder="Nombre" type="text" name="nombre"
-                                            #nombre="ngModel" [(ngModel)]="nuevoUsuario.nombre" pattern="[a-zA-Z ]+">
-                                    </mat-form-field>
+                                    <input class="form-control" placeholder="Nombre" type="text" name="nombre"
+                                        #nombre="ngModel" [(ngModel)]="nuevoUsuario.nombre" pattern="[a-zA-Z ]+">
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6" id="form">
-                                    <mat-form-field class="example-full-width">
-                                        <input class="form-control" placeholder="Apellido Paterno" type="text"
-                                            name="apellido_paterno" #apellido_paterno="ngModel"
-                                            [(ngModel)]="nuevoUsuario.apellido_paterno" pattern="[a-zA-Z]+">
-                                    </mat-form-field>
+                                    <input class="form-control" placeholder="Apellido Paterno" type="text"
+                                        name="apellido_paterno" #apellido_paterno="ngModel"
+                                        [(ngModel)]="nuevoUsuario.apellido_paterno" pattern="[a-zA-Z]+">
+
                                 </div>
                                 <div class="form-group col-md-6" id="form">
-                                    <mat-form-field class="example-full-width">
-                                        <input class="form-control" placeholder="Apellido Materno" type="text"
-                                            name="apellido_materno" #apellido_materno="ngModel"
-                                            [(ngModel)]="nuevoUsuario.apellido_materno" pattern="[a-zA-Z]+">
-                                    </mat-form-field>
+                                    <input class="form-control" placeholder="Apellido Materno" type="text"
+                                        name="apellido_materno" #apellido_materno="ngModel"
+                                        [(ngModel)]="nuevoUsuario.apellido_materno" pattern="[a-zA-Z]+">
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6" id="form">
-                                        <label>Seleccione un Area</label>
-                                        <select  class="custom-select" name="idArea" #id_area="ngModel" [(ngModel)]="nuevoUsuario.id_area" >
-                                            
-                                            <option *ngFor="let area of areas" [value]="area.id_area" >{{area.tipo_area}}</option>
-                                        </select>
+                                    <label>Seleccione un Area</label>
+                                    <select class="custom-select" name="idArea" #idArea="ngModel"
+                                        [(ngModel)]="nuevoUsuario.id_area">
+                                        <option value="" disabled selected>Seleccione un área</option>
+                                        <option *ngFor="let area of areas" [value]="area.id_area">{{ area.tipo_area }}
+                                        </option>
+                                        
+                                    </select>
                                 </div>
+
                                 <div class="form-group col-md-6" id="form">
-                                        <label>Seleccione un Rol</label>
-                                        <select class="custom-select" name="idRol" #id_rol="ngModel" [(ngModel)]="nuevoUsuario.id_rol">
-                                            
-                                            <option *ngFor="let rol of roles" [value]="rol.id_rol">{{rol.tipo}}
-                                            </option>
-                                        </select>
+                                    <label>Seleccione un Rol</label>
+                                    <select class="custom-select" name="idRol" #idRol="ngModel"
+                                        [(ngModel)]="nuevoUsuario.id_rol">
+                                        <option value="" disabled selected>Seleccione un rol</option>
+                                        <option *ngFor="let rol of roles" [value]="rol.id_rol">{{ rol.tipo }}</option>
+                                        
+                                    </select>
                                 </div>
                             </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right">REGISTRAR</button>
