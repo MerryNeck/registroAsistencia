@@ -26,7 +26,7 @@
                 Asistencia</button>
               <button mat-raised-button class="btn btn-success btn-round l" (click)="verBoleta() ">Generar Boleta</button>
               <div class="div-table">
-                <table class="table" id="tabla">
+                <table class="table" id="tabla"*ngIf="asistenciasUser ||asistenciasUser.length >0 ">
                   <thead class="text-primary">
                     <tr class="table-row">
                       <th class="table-header">FECHA</th>

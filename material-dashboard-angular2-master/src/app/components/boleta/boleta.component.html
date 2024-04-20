@@ -23,19 +23,19 @@
           <div class="receipt-container">
             <div class="header">
               <div class="empre">Bispace SRL</div>
-              <h1>BOLETA DE PAGO</h1>
+              <h1 >BOLETA DE PAGO</h1>
 
-              <div class="company-info" *ngFor="let persona of boletaUser">
-                <div class="bis">NOMBRE: <span class="label">{{persona.id_usuario.nombre}}</span></div>
-                <div class="bis">OCUPACION: <span class="label">{{persona.ocupacion}}</span></div>
-                <div class="bis">DIAS LABORALES: <span class="label">{{persona.dias_laborales}}</span></div>
-                <div class="bis">MES DE PAGO: <span class="label">{{persona.mes}}</span></div>
-                <div class="bis">FECHA DE PAGO: <span class="label">{{persona.fecha}}</span></div>
+              <div class="company-info" >
+                <div class="bis">NOMBRE: <span class="label">{{boletaUser.persona.nombre}}</span></div>
+                <div class="bis">OCUPACION: <span class="label">{{boletaUser.persona.ocupacion}}</span></div>
+                <div class="bis">DIAS LABORALES: <span class="label">{{boletaUser.persona.dias_laborales}}</span></div>
+                <div class="bis">MES DE PAGO: <span class="label">{{boletaUser.persona.mes}}</span></div>
+                <div class="bis">FECHA DE PAGO: <span class="label">{{boletaUser.persona.fecha}}</span></div>
               </div>
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table">
+                <table class="table"  >
                   <thead class=" text-primary">
 
                     <tr>
@@ -52,13 +52,13 @@
 
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of boletaUser">
-                      <td>{{ item.pago }}</td>
-                      <td>{{ item.afps }}</td>
-                      <td>{{ item.atrasos }}</td>
-                      <td>{{ item.faltas }}</td>
-                      <td>{{ item.mnr }}</td>
-                      <td>{{ item.descuentos }}</td>
+                    <tr >
+                      <td>{{ boletaUser.pago.sueldo }}</td>
+                      <td>{{ boletaUser.afps }}</td>
+                      <td>{{ boletaUser.atrasos }}</td>
+                      <td>{{ boletaUser.faltas }}</td>
+                      <td>{{ boletaUser.mnr }}</td>
+                      <td>{{ boletaUser.descuentos }}</td>
                     </tr>
                   </tbody>
                 </table>

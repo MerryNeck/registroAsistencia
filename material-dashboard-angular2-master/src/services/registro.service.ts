@@ -14,7 +14,7 @@ interface RegistroResponse {
 @Injectable({
     providedIn: 'root'
 }) export class RegistroService {
-    private url = environment.backend.api+'/api/usuarios'; 
+    private url = environment.backend.api+'/api'; 
 
     constructor(private _http: HttpClient) { }
 
@@ -43,7 +43,7 @@ interface RegistroResponse {
     });
     console.log(this.url);
     
-    return this._http.get<Usuario[]>(`${this.url}/`,{ headers });
+    return this._http.get<Usuario[]>(`${this.url}/usuarios`,{ headers });
   }
 
     // Método para registrar un Usuario
@@ -52,14 +52,14 @@ interface RegistroResponse {
       'x-token': `${token}`,
       'x-rol': `${rutarol}`
     });
-    return this._http.post<any>(`${this.url}/`, usuario,{ headers});
+    return this._http.post<any>(`${this.url}/usuarios`, usuario,{ headers});
   }
 
    
 
     getUsuario(idUsuario: any): Observable<any> {//verificar en el backen si necesita parametro
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this._http.get(this.url + idUsuario, { headers: headers });
+        return this._http.get(this.url+'/usuarios' + idUsuario, { headers: headers });
 
     }
 
@@ -69,7 +69,7 @@ interface RegistroResponse {
         'x-token': `${token}`,
         'x-rol': `${rutarol}`
       });
-      return this._http.put<void>(`${this.url}/${usuario.id_usuario}`, usuario, { headers })
+      return this._http.put<void>(`${this.url}/usuarios/${usuario.id_usuario}`, usuario, { headers })
         .pipe(
           catchError(error => {
             console.error('Error al actualizar el anticipo:', error);
@@ -82,7 +82,7 @@ interface RegistroResponse {
         'x-token': `${token}`,
       'x-rol': `${rutarol}`
       });
-      return this._http.get<Usuario>(`${this.url}/${id}`, { headers })
+      return this._http.get<Usuario>(`${this.url}/usuarios/${id}`, { headers })
         .pipe(
           catchError(error => {
             console.error('Error al obtener el usuario:', error);
@@ -97,7 +97,7 @@ interface RegistroResponse {
     'x-token': `${token}`,
       'x-rol': `${rutarol}`
   });
-    return this._http.delete(`${this.url}/${idUsuario}`,  { headers });
+    return this._http.delete(`${this.url}/usuarios/${idUsuario}`,  { headers });
   }
 
   buscarPorCi(ci: string,token:string,rutarol:string): Observable<Usuario[]> {
@@ -105,6 +105,6 @@ interface RegistroResponse {
       'x-token': `${token}`,
       'x-rol': `${rutarol}`
     });
-    return this._http.get<Usuario[]>(`${this.url}/buscar/${ci}`,{headers});
+    return this._http.get<Usuario[]>(`${this.url}/usuarios/buscar/${ci}`,{headers});
   }
 }

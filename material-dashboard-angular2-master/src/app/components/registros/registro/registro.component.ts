@@ -83,6 +83,7 @@ export class RegistroComponent implements OnInit {
       //console.log(response);
       if (response.ok) {
         this.users = response.data;
+        console.log(this.users);
         
       } else {
       }
