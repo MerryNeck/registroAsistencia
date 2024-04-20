@@ -44,7 +44,7 @@
                                     <select class="custom-select" name="idArea" #idArea="ngModel"
                                         [(ngModel)]="nuevoUsuario.id_area">
                                         <option value="" disabled selected>Seleccione un área</option>
-                                        <option *ngFor="let area of areas" [value]="area.id_area">{{ area.tipo_area }}
+                                        <option *ngFor="let area of areas" [value]="area.id_area" [(ngModel)]="nuevoUsuario.id_area">{{ area.tipo_area }}
                                         </option>
                                         
                                     </select>

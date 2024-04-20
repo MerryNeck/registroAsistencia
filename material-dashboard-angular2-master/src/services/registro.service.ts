@@ -52,7 +52,7 @@ interface RegistroResponse {
       'x-token': `${token}`,
       'x-rol': `${rutarol}`
     });
-    return this._http.post<any>(`${this.url}/`, usuario,{ headers});
+    return this._http.post(`${this.url}`, usuario,{ headers});
   }
 
    
