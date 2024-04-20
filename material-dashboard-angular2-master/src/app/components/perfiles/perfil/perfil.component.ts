@@ -20,7 +20,9 @@ export class PerfilComponent implements OnInit {
   public perfilUser: any;
 
  
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(
+    private loginService: LoginService, 
+    private router: Router) { }
 
   ngOnInit(): void {
     this.obtenerPerfiles();
