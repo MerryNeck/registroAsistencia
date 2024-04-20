@@ -75,6 +75,8 @@ export class BoletaComponent implements OnInit {
   }
 
 buscarBoleta(): void {
+  console.log(this.ciBusqueda);
+  
     this.boletaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda,this.token, this.rutaRol)
       .subscribe((response) => {
         this.res= response

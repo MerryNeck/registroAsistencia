@@ -83,7 +83,8 @@ export class RegistroComponent implements OnInit {
       console.log(response);
       if (response.ok) {
         this.users = response.data;
-
+        console.log(this.users);
+        
       } else {
       }
       error => Swal.fire('Error', 'No se pudieron obtener los usuarios', 'error')

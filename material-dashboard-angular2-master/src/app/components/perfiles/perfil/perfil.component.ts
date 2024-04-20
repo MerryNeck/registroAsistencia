@@ -22,7 +22,9 @@ export class PerfilComponent implements OnInit {
   public perfildata:any;
 
  
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(
+    private loginService: LoginService, 
+    private router: Router) { }
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || ''

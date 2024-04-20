@@ -10,7 +10,7 @@
                         <h4 class="card-title">REGISTRO USUARIO</h4>
                     </div>
                     <div class="card-body">
-                        <form #usForm="ngForm" (ngSubmit)="registrarNuevoUsuario(usForm.value)">
+                        <form #usForm="ngForm" (ngSubmit)="registrarNuevoUsuario(usForm)">
                         
                             <div class="row">
                                 <div class="form-group col-md-4" id="form">
@@ -104,7 +104,7 @@
                                         <td>{{ user.nombre }}</td>
                                         <td>{{ user.apellido_paterno }}</td>
                                         <td>{{ user.apellido_materno }}</td>
-                                        <td>{{ user.area?.tipo_area }}</td>
+                                        <td>{{ user.Area?.tipo_area }}</td>
                                         <td>{{ user.rol?.tipo }}</td>
                                         <td><button mat-raised-button type="button" class="btn btn-blue btn-round"
                                                 (click)="editarUsuario(user)">Modificar</button>
