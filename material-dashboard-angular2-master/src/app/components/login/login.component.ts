@@ -22,7 +22,14 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit(
-    token = localStorage.getItem('token') || ''): void {}
+   
+  ): void {
+    
+    this.token = localStorage.getItem('token') || '';
+    if(this.token !== ''){
+      this._router.navigate(['/asistencia']);
+    }
+  }
    
   login(loginForm): void {
     console.log(this.usuario);
@@ -39,6 +46,7 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         console.log('Ingreso Exitoso: ', response.token);
         localStorage.setItem('token', response.token);
+        localStorage.setItem('rol', response.rol);
         this._router.navigate(['/asistencia']);
       },
       (error) => {

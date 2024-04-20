@@ -13,6 +13,7 @@ export class PerfilEditComponent implements OnInit {
 
   editandoperfil: Login = {id:0, correo_corp: '', password: '', id_usuario:0,estado:'',fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
+  rutarol:string='';
   public res: any;
 
   constructor(
@@ -23,18 +24,26 @@ export class PerfilEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
-    this.route.params.subscribe(params => {
-      const idPerfil = +params['id'];
-      this.obtenerPerfil(idPerfil);
-    });
+    this.rutarol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutarol === ''){
+      this.router.navigate(['/login']);
+    }else if(this.rutarol !== 'admin'){
+      this.router.navigate(['/asistencia']);
+    }else{
+      this.route.params.subscribe(params => {
+        const idPerfil = +params['id'];
+        this.obtenerPerfil(idPerfil);
+      });
+    }
+    
   }
 
   obtenerPerfil(idPerfil: number): void {
-    this.loginService.obtenerPerfilPorId(idPerfil, this.token)
+    this.loginService.obtenerPerfilPorId(idPerfil, this.token, this.rutarol)
       .subscribe(
-        perfil => {
-          this.res = perfil
-          this.editandoperfil = this.res.data;
+        (response: any) => {
+          
+          this.editandoperfil = response.data;
         },
         error => {
           console.error('Error al obtener el usuario o contraseña:', error);
@@ -44,8 +53,8 @@ export class PerfilEditComponent implements OnInit {
   }
 
   actualizarPerfiles(form: NgForm): void {
-    if (form.valid && this.editandoperfil) {
-      this.loginService.actualizarPerfil(this.editandoperfil, this.token)
+    if (this.editandoperfil !== null) {
+      this.loginService.actualizarPerfil(this.editandoperfil, this.token,this.rutarol)
         .subscribe(
           () => {
             Swal.fire('Éxito', ' se actualizó correctamente', 'success');

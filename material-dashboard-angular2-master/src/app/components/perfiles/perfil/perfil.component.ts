@@ -16,8 +16,10 @@ export class PerfilComponent implements OnInit {
   editandoPerfil: Login | null = null;
   token: string = '';
   estado: string;
+  rutaRol:string='';
   public res: any;
   public perfilUser: any;
+  public perfildata:any;
 
  
   constructor(
@@ -25,10 +27,18 @@ export class PerfilComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.obtenerPerfiles();
+    this.token = localStorage.getItem('token') || ''
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this.router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this.router.navigate(['/asistencia'])
+    }else{
+      this.obtenerPerfiles();
+    }
   }
   obtenerPerfiles(): void {
-    this.loginService.obtenerPerfil(this.token)
+    this.loginService.obtenerPerfil(this.token,this.rutaRol)
       .subscribe((response : any) => {
         if (response.ok) {
           this.perfilUser = response.data;
@@ -40,14 +50,14 @@ export class PerfilComponent implements OnInit {
   }
   registrarNuevoPerfil(form: NgForm): void {
     if (form.valid) {
-      const { correo, password, fecha_creacion, estado } = form.value;
+      const { correo, password, ci } = form.value;
+      this.nuevoPerfil.id_usuario = ci;
       this.nuevoPerfil.correo_corp = correo;
       this.nuevoPerfil.password = password;
-      this.nuevoPerfil.fecha_creacion = fecha_creacion;
-      this.nuevoPerfil.estado = estado;
-      this.loginService.registrarPerfil(this.nuevoPerfil, this.token)
-        .subscribe(perfil => {
-          this.perfiles.push(perfil);
+      this.loginService.registrarPerfil(this.nuevoPerfil, this.token,this.rutaRol)
+        .subscribe((response:any) => {
+          this.perfildata = response.data
+          this.perfiles.push(this.perfildata);
           this.nuevoPerfil = new Login(0, '', '', '', '', '', 0);
           form.reset();
           Swal.fire('Éxito', 'La autentificacion a sido registrado correctamente', 'success');
@@ -62,7 +72,7 @@ export class PerfilComponent implements OnInit {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
 
-    this.loginService.cambiarEstadoPerfil(idPerfil, nuevoEstado, this.token).subscribe(
+    this.loginService.cambiarEstadoPerfil(idPerfil, nuevoEstado, this.token,this.rutaRol).subscribe(
        (response) => {
         this.res = response;
         this.estado = this.res.data;
@@ -92,7 +102,7 @@ export class PerfilComponent implements OnInit {
     this.router.navigate(['/editar-perfil', perfil.id]);
   }
   buscarPerfilPorCi(ci: string): void {
-    this.loginService.buscarPorCi(ci, this.token)
+    this.loginService.buscarPorCi(ci, this.token,this.rutaRol)
       .subscribe({
         next: (response) => {
           this.res = response;

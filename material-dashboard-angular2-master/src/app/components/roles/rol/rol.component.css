@@ -17,6 +17,9 @@
   background-color: #ff9800;
   color: white;
 }
+.elim{
+  background-color: transparent;
+}
 .btn.btn-white{
   background-color: red;
   color: white;

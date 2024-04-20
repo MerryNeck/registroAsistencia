@@ -11,6 +11,9 @@
   justify-content: center;
   
 }
+.elim{
+  background-color: transparent;
+}
 .btn.btn-danger.pull-right{
   background-color: #e67e22;
 }

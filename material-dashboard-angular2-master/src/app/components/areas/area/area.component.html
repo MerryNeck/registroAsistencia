@@ -7,14 +7,14 @@
                         <h4 class="card-title">AREA</h4>
                     </div>
                     <div class="card-body">
-                       
+
                         <form #areaForm="ngForm" (ngSubmit)="registrarNuevaArea(areaForm)">
                             <div class="row">
                                 <div class="form-group col-md-12" id="form">
                                     <div class="example-full-width">
 
                                         <input class="form-control" placeholder="Area" type="text" name="area" ngModel
-                                            [(ngModel)]="nuevaArea.tipo_area" pattern="[a-zA-Z]+">
+                                            [(ngModel)]="nuevaArea.tipo_area" pattern="[a-zA-Z ]+">
                                     </div>
                                 </div>
 
@@ -28,57 +28,57 @@
                     </div>
                 </div>
             </div>
-            </div>
-            <div class="main-content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header card-header-danger">
-                                    <h4 class="card-title "> REGISTRO AREA</h4>
-                                    
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class=" text-primary">
-                                                <tr>
-                                                    
-                                                    <th>
-                                                        TIPO AREA
-                                                    </th>
-                                                    
-                                                    <th>
-                                                        MODIFICAR
-                                                    </th>
-                                                    <th>
-                                                        ELIMINAR
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let itemareas of areasUser">
-                                                    <td>{{ itemareas.tipo_area }}</td>
-                                                    <td><button mat-raised-button type="submit"
-                                                            class="btn btn-blue  btn-round"
-                                                            (click)="editarArea(itemareas)">Modificar</button></td>
-                                                    <td><button mat-raised-button type="submit"
-                                                        class="btn btn-round"
-                                                        [ngClass]="{'activo': itemareas.estado === 's', 'inactivo': itemareas.estado === 'n'}"
-                                                        (click)="cambiarEstadoArea(itemareas.id_area, estado === 's' ? 'n' : 's')">{{ itemareas.estado === 's' ? 'Activo' : 'Inactivo' }}</button></td>
-                                                </tr>
+        </div>
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 class="card-title "> REGISTRO AREA</h4>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <tr>
+
+                                                <th>
+                                                    TIPO AREA
+                                                </th>
+
+                                                <th>
+
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr></tr>
+                                            <tr *ngFor="let itemareas of areasUser">
+                                                <td>{{ itemareas.tipo_area }}</td>
+                                                <td><button mat-raised-button type="submit"
+                                                        class="btn btn-blue  btn-round"
+                                                        (click)="editarArea(itemareas)">Modificar</button>
+                                                    <button mat-raised-button type="submit" class="btn btn-round elim"
+                                                        mat-icon-button type="button"
+                                                        (click)="cambiarEstadoArea(itemareas.id_area, estado )"><img
+                                                            src="../../../../assets/img/icons8-cancelar-48.png"
+                                                            alt=""></button>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
-
-
         </div>
+
+
     </div>
+</div>

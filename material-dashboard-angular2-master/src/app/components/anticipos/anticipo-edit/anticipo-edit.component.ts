@@ -15,6 +15,7 @@ export class AnticipoEditComponent {
   editandoAnticipo: Anticipo = {id_anticipo:0, anticipos: 0, id_usuario:0,estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
   public res:any;
+  rutarol: string = '';
 
   constructor(
     private anticipoService: AnticipoService,
@@ -24,18 +25,27 @@ export class AnticipoEditComponent {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
-    this.route.params.subscribe(params => {
-      const idAnticipo = +params['id'];
-      this.obtenerAnticipo(idAnticipo);
-    });
+    this.rutarol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutarol === ''){
+      this.router.navigate(['/login']);
+    }else if(this.rutarol !== 'admin'){
+      this.router.navigate(['/asistencia']);
+    }
+    else{
+      this.route.params.subscribe(params => {
+        const idAnticipo = +params['id'];
+        this.obtenerAnticipo(idAnticipo);
+      });
+    }
+    
   }
 
   obtenerAnticipo(idAnticipo: number): void {
-    this.anticipoService.obtenerAnticipoPorId(idAnticipo, this.token)
+    this.anticipoService.obtenerAnticipoPorId(idAnticipo, this.token,this.rutarol)
       .subscribe(
-        anticipo => {
-          this.res =anticipo
-          this.editandoAnticipo = this.res.data;
+        (response:any)=> {
+        
+          this.editandoAnticipo = response.data;
         },
         error => {
           console.error('Error al obtener el anticipo:', error);
@@ -45,8 +55,8 @@ export class AnticipoEditComponent {
   }
 
   actualizarAnticipo(form: NgForm): void {
-    if ( this.editandoAnticipo) {
-      this.anticipoService.actualizarAnticipo(this.editandoAnticipo, this.token)
+    if ( this.editandoAnticipo != null) {
+      this.anticipoService.actualizarAnticipo(this.editandoAnticipo, this.token ,this.rutarol)
         .subscribe(
           () => {
             Swal.fire('Éxito', 'El anticipo se actualizó correctamente', 'success');

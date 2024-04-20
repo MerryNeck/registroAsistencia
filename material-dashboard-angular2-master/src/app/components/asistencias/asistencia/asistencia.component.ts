@@ -20,12 +20,22 @@ export class AsistenciaComponent implements OnInit {
   token:string='';
   public res: any;
   public asistenciasUser : any;
+  rutaRol: string='';
 
 
-  constructor(private asistenciaService: AsistenciaService, private http: HttpClient, private router: Router) { }
+  constructor(private asistenciaService: AsistenciaService, private http: HttpClient, private router: Router) {  }
 
   ngOnInit(): void {
-    this.listarAsistencias();
+    this.token = localStorage.getItem('token') || '';
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this.router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this.router.navigate(['/asistencia'])
+    }else{
+      this.listarAsistencias();
+    }
+    
   }
 
   listarAsistencias(): void {
@@ -121,7 +131,7 @@ export class AsistenciaComponent implements OnInit {
 }
 
   buscarAsistencia(): void {
-    this.asistenciaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda,this.token)
+    this.asistenciaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda,this.token, this.rutaRol)
       .subscribe((response) => {
         this.res= response
         this.asistenciasUser = this.res.data;
@@ -135,13 +145,9 @@ export class AsistenciaComponent implements OnInit {
   }
 
   verBoleta():void{
-    if (this.asistenciasUser && this.asistenciasUser.length > 0){
+   
       this.router.navigate(['/boleta']);
-    }else {
-      console.error('No hay datos para mostrar:');
-      Swal.fire('Error', 'No hay datos para mostrar. Ingrese los Datos', 'error');
-    }
-  }
+    
   
 }
-
+}

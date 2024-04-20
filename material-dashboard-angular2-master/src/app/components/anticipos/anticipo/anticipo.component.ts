@@ -22,18 +22,27 @@ export class AnticipoComponent implements OnInit {
   estado: string;
   public res: any;
   public anticiposUser: any;
-
+  public anticipodata:any;
+  rutaRol : string = '';
   
   constructor(private anticipoService: AnticipoService, private router: Router) { }
 
   ngOnInit(): void {
-    this.obtenerAnticipos();
-    this.token = localStorage.getItem('token') || ''
-
+    this.token = localStorage.getItem('token') || '';
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this.router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this.router.navigate(['/asistencia'])
+    }
+    else{
+      this.obtenerAnticipos();
+    }
+      
   }
 
   obtenerAnticipos(): void {
-    this.anticipoService.obtenerAnticipo(this.token)
+    this.anticipoService.obtenerAnticipo(this.token,this.rutaRol)
       .subscribe((response) => {
         this.res = response
         if (this.res.ok) {
@@ -48,13 +57,14 @@ export class AnticipoComponent implements OnInit {
   registrarNuevoAnticipo(form: NgForm): void {
     if (form.valid) {
       const { ci, anticipo } = form.value;
+
       this.nuevoAnticipo.id_usuario = ci;
       this.nuevoAnticipo.anticipos = anticipo;
-      this.anticipoService.registrarAnticipo(this.nuevoAnticipo, this.token)
+      this.anticipoService.registrarAnticipo(this.nuevoAnticipo, this.token ,this.rutaRol)
         .subscribe(
-          (anticipo) => {
-            
-            this.anticipos.push(anticipo);
+          (response: any) => {
+            this.anticipodata =response.data
+            this.anticipos.push(this.anticipodata);
             this.nuevoAnticipo = new Anticipo(0, '', '', '', 0, 0);
             form.reset();
             Swal.fire('Éxito', 'El anticipo fue registrado correctamente', 'success');
@@ -71,7 +81,7 @@ export class AnticipoComponent implements OnInit {
   }
 
   buscarAnticipoPorCi(ci: string): void {
-    this.anticipoService.buscarPorCi(ci, this.token)
+    this.anticipoService.buscarPorCi(ci, this.token,this.rutaRol)
       .subscribe(
         (response) => {
           this.res = response;
@@ -86,7 +96,7 @@ export class AnticipoComponent implements OnInit {
   cambiarEstadoAnticipo(idAnticipo: number, nuevoEstado: string) {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
-    this.anticipoService.cambiarEstadoAnticipo(idAnticipo, nuevoEstado, this.token)
+    this.anticipoService.cambiarEstadoAnticipo(idAnticipo, nuevoEstado, this.token,this.rutaRol)
     .subscribe(
        (response) => {
         this.res = response;

@@ -16,25 +16,28 @@ export class AreaService {
   constructor(private http: HttpClient) { }
 
   // registrar  área
-  registrarArea(area: Area, token:string): Observable<any> {
+  registrarArea(area: Area, token:string, rutarol:string): Observable<any> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     })
     return this.http.post(`${this.url}`, area, { headers});
   }
 
   // listar todas las áreas
-  listarAreas(token:string): Observable<Area[]> {
+  listarAreas(token:string , rutarol:string): Observable<Area[]> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     })
     return this.http.get<Area[]>(`${this.url}`, { headers});
   }
 
 //actualizar un área
-  actualizarArea(area: Area, token: string): Observable<void> {
+  actualizarArea(area: Area, token: string, rutarol:string): Observable<void> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     })
     return this.http.put<void>(`${this.url}/${area.id_area}`, area, { headers })
       .pipe(
@@ -44,9 +47,10 @@ export class AreaService {
         })
       );
   }
-  obtenerAreaPorId(id: number, token: string): Observable<Area> {
+  obtenerAreaPorId(id: number, token: string , rutarol:string): Observable<Area> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     })
     return this.http.get<Area>(`${this.url}${id}`, { headers })
       .pipe(
@@ -58,9 +62,10 @@ export class AreaService {
   }
 
   //  estado de un área 
-  cambiarEstadoArea(idArea: number, estado: string ,token:string): Observable<any> {
+  cambiarEstadoArea(idArea: number, estado: string ,token:string , rutarol:string): Observable<any> {
     const headers = new HttpHeaders({
-      'x-token': `${token}`
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
     })
     return this.http.delete(`${this.url}${idArea}`, { headers });
   }

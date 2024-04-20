@@ -14,14 +14,14 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class LoginService {
-  public url:string = environment.backend.api;
+  public url:string = environment.backend.api +'/api/user/login';
   constructor(private _http: HttpClient ) { }
 
   
 login(email:string, password:string){
   
     const body = { email, password }; 
-    return this._http.post<any>(this.url+'/api/user/login', { email, password })
+    return this._http.post<any>(this.url, { email, password })
     .pipe(
         catchError(this.handleError) 
       );
@@ -39,44 +39,44 @@ private handleError(error: any):Observable<never> {
     return throwError(errorMessage); 
   }
  // Método para obtener todos los perfiles
- obtenerPerfil(token:string): Observable<Login[]> {
+ obtenerPerfil(token:string, rutarol:string): Observable<Login[]> {
   const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'x-token': `${token}`
+    'x-token': `${token}`,
+    'x-rol': `${rutarol}`
   });
-  return this._http.get<Login[]>(this.url+'/api/user/',{ headers});
+  return this._http.get<Login[]>(this.url,{ headers});
 }
 
 // Método para registrar un perfil
-registrarPerfil(usuario: Login,token:string): Observable<any> {
+registrarPerfil(usuario: Login,token:string, rutarol:string): Observable<any> {
   const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
+    'x-token': `${token}`,
+    'x-rol': `${rutarol}`
   });
   return this._http.post<any>(this.url, usuario,{ headers});
 }
 
-cambiarEstadoPerfil(id: number, estado: string,token:string): Observable<any> {
+cambiarEstadoPerfil(id: number, estado: string,token:string,rutarol:string): Observable<any> {
   const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
+    'x-token': `${token}`,
+    'x-rol': `${rutarol}`
   });
-  return this._http.patch(`${this.url}/cambiarEstado/${id}`, { estado }, { headers});
+  return this._http.delete(`${this.url}${id}`, { headers});
 }
-buscarPorCi(ci: string,token:string): Observable<Login[]> {
+buscarPorCi(ci: string,token:string, rutarol:string): Observable<Login[]> {
   const headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
+    'x-token': `${token}`,
+    'x-rol': `${rutarol}`
   });
-  return this._http.get<Login[]>(`${this.url}/buscar?ci=${ci}`,{headers});
+  return this._http.get<Login[]>(`${this.url}/buscar/${ci}`,{headers});
 }
 // Método para actualizar un anticipo
-actualizarPerfil(perfil: Login, token: string): Observable<void> {
+actualizarPerfil(perfil: Login, token: string, rutarol:string): Observable<void> {
   const headers = new HttpHeaders({
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json'
+    'x-token': `${token}`,
+    'x-rol': `${rutarol}`
   });
-  return this._http.put<void>(`${this.url}/actualizar/${perfil.id_usuario}`, perfil, { headers })
+  return this._http.put<void>(`${this.url}/${perfil.id_usuario}`, perfil, { headers })
     .pipe(
       catchError(error => {
         console.error('Error al actualizar el usuario:', error);
@@ -84,11 +84,12 @@ actualizarPerfil(perfil: Login, token: string): Observable<void> {
       })
     );
 }
-obtenerPerfilPorId(id: number, token: string): Observable<Login> {
+obtenerPerfilPorId(id: number, token: string, rutarol:string): Observable<Login> {
   const headers = new HttpHeaders({
-    'Authorization': `Bearer ${token}`
+    'x-token': `${token}`,
+    'x-rol': `${rutarol}`
   });
-  return this._http.get<Login>(`${this.url}/editar/${id}`, { headers })
+  return this._http.get<Login>(`${this.url}${id}`, { headers })
     .pipe(
       catchError(error => {
         console.error('Error al obtener el usuario:', error);

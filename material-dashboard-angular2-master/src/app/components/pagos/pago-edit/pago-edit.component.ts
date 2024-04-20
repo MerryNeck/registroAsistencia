@@ -14,6 +14,7 @@ export class PagoEditComponent implements OnInit {
 
   editandoPago:  Pago = {id_sueldo:0, dias_trabajado: 0, retencion:0,sueldo:0,sueldo_bruto:0,id_usuario:0,estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
+  rutarol:string ='';
   public res: any;
   constructor(
     private pagoService: PagoService,
@@ -23,14 +24,22 @@ export class PagoEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
-    this.route.params.subscribe(params => {
-      const idPago = +params['id'];
-      this.obtenerPago(idPago);
-    });
+    this.rutarol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutarol === ''){
+      this.router.navigate(['/login']);
+    }else if(this.rutarol !== 'admin'){
+      this.router.navigate(['/asistencia']);
+    }else{
+      this.route.params.subscribe(params => {
+        const idPago = +params['id'];
+        this.obtenerPago(idPago);
+      });
+    }
+    
   }
 
   obtenerPago(idPago: number): void {
-    this.pagoService.obtenerPagoPorId(idPago, this.token)
+    this.pagoService.obtenerPagoPorId(idPago, this.token,this.rutarol)
       .subscribe(
         pago => {
           this.res = pago;
@@ -45,7 +54,7 @@ export class PagoEditComponent implements OnInit {
 
   actualizarPago(form: NgForm): void {
     if (form.valid && this.editandoPago) {
-      this.pagoService.actualizarPago(this.editandoPago, this.token)
+      this.pagoService.actualizarPago(this.editandoPago, this.token,this.rutarol)
         .subscribe(
           () => {
             Swal.fire('Éxito', 'El pago se actualizó correctamente', 'success');

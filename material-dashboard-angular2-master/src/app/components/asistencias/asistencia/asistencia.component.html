@@ -24,7 +24,7 @@
             <div class="table-responsive">
               <button mat-raised-button class="btn btn-success btn-round" (click)="imprimirAsistencia()">Imprimir
                 Asistencia</button>
-              <button mat-raised-button class="btn btn-success btn-round l" (click)="verBoleta() ">Ver Boleta</button>
+              <button mat-raised-button class="btn btn-success btn-round l" (click)="verBoleta() ">Generar Boleta</button>
               <div class="div-table">
                 <table class="table" id="tabla">
                   <thead class="text-primary">
@@ -72,16 +72,15 @@
               </div>
             </div>
           </div>
-          <div class="card-body" style="margin-top: 10% ; display:none;">
+          <div class="card-body" style="margin-top: 10% ; display: none ;">
             <div class="table-responsive">
               <div class="div-table">
 
                 <div id="table">
                   <div class="company-info">
                     <h1>PLANILLA DE ASISTENCIA</h1>
-                    <div class="bis">
-                      NOMBRE: <span class="label">{{asistencias[0]?.id_usuario.nombre}}
-                        {{asistencias[0]?.id_usuario.apellido}}</span>
+                    <div class="bis" >
+                      NOMBRE: <span class="label" *ngFor="let asistencia of asistenciasUser">{{ asistencia.usuario.nombre }}  {{ asistencia.usuario.apellido_paterno }}  {{ asistencia.usuario.apellido_materno }}</span>
                     </div>
                     <div class="bis">
                       FECHA: <span class="label">{{asistencias[0]?.fecha}}</span>
@@ -91,6 +90,7 @@
                     <thead class="text-primary">
 
                       <tr class="table-row">
+                        <th class="table-header">FECHA</th>
                         <th class="table-header">PRIMERA ENTRADA</th>
                         <th class="table-header">PRIMERA SALIDA</th>
                         <th class="table-header">SEGUNDA ENTRADA</th>
@@ -104,7 +104,10 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <tr></tr>
                       <tr *ngFor="let asistencia of asistenciasUser">
+                        
+                        <td>{{ asistencia.fecha }}</td>
                         <td>{{ asistencia.tprano_ingreso}}</td>
                         <td>{{ asistencia.tprano_salida }}</td>
                         <td>{{ asistencia.tde_ingreso}}</td>

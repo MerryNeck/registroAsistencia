@@ -19,6 +19,7 @@ export class RegistroEditComponent implements OnInit {
   areas: Area[] = [];
   roles: Rol[] = [];
   public res : any;
+  rutarol:string='';
   constructor(
     private registroService: RegistroService,
     private route: ActivatedRoute,
@@ -27,18 +28,22 @@ export class RegistroEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
-    this.route.params.subscribe(params => {
-      const idUsuario = +params['id'];
-      this.obtenerAreas()
-      this.obtenerRoles()
-      this.obtenerUsuario(idUsuario);
-    });
-
-    //this.obtenerAreas();
-    //this.obtenerRoles();
+    this.rutarol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutarol === ''){
+      this.router.navigate(['/login']);
+    }else if(this.rutarol !== 'admin'){
+      this.router.navigate(['/asistencia']);
+    }else{
+      this.route.params.subscribe(params => {
+        const idUsuario = +params['id'];
+        this.obtenerAreas()
+        this.obtenerRoles()
+        this.obtenerUsuario(idUsuario);
+      });
+    }
   }
   obtenerAreas(): void {
-    this.registroService.getAreas(this.token)
+    this.registroService.getAreas(this.token,this.rutarol)
       .subscribe(
         (response : any) => {
           this.areas = response.data;
@@ -53,7 +58,7 @@ export class RegistroEditComponent implements OnInit {
   }
 
   obtenerRoles(): void {
-    this.registroService.getRoles(this.token)
+    this.registroService.getRoles(this.token,this.rutarol)
       .subscribe(
         (response  :any) => {
           this.roles = response.data;
@@ -67,7 +72,7 @@ export class RegistroEditComponent implements OnInit {
       );
   }
   obtenerUsuario(idUsuario: number): void {
-    this.registroService.obtenerUsuarioPorId(idUsuario, this.token)
+    this.registroService.obtenerUsuarioPorId(idUsuario, this.token,this.rutarol)
       .subscribe(
         (response : any)=> {
           //console.log(response);
@@ -90,7 +95,7 @@ export class RegistroEditComponent implements OnInit {
     
     
     if (form.valid && this.editandoUsuario) {
-      this.registroService.actualizarUsuario(this.editandoUsuario, this.token)
+      this.registroService.actualizarUsuario(this.editandoUsuario, this.token,this.rutarol)
         .subscribe(
           () => {
             Swal.fire('Éxito', 'El usuario se actualizó correctamente', 'success');

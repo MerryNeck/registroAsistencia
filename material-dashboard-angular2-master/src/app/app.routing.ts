@@ -32,7 +32,7 @@ const routes: Routes = [
 
 // PARA LISTAR Y REGISTRAR
   { path: 'login', component: LoginComponent, },
-  { path: 'regisusuario', component: RegistroComponent, },
+  { path: 'registro', component: RegistroComponent, },
   { path: 'area', component: AreaComponent, },
   { path: 'rol', component: RolComponent, },
   { path: 'excel', component: RutaexcelComponent, },

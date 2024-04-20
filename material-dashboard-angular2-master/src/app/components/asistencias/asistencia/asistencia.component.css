@@ -125,11 +125,12 @@ table tr:nth-child(even) {
 
 table {
   margin-top: 20px;
-  width: 100%;
+  width: 220%;
   border-collapse: collapse;
   justify-content: center;
   top: -10px;
   border: 1px solid white;
+  text-align: center;
 
 }
 
@@ -157,6 +158,7 @@ table {
 
 td {
   border: 1px solid white;
+  font-size: 10px;
 }
 .bis{
   align-items: center;
@@ -173,51 +175,81 @@ h1{
 .tabla{
   border: 1px solid rgb(12, 12, 12);
   text-align: center;
+  margin-top: 20px;
+  width: 230%;
+  border-collapse: collapse;
+  justify-content: center;
+  top: -10px;
+  border: 1px solid white;
 }
 a{
   color: white;
 }
+.col-xl, .col-xl-auto, .col-xl-12, .col-xl-11, .col-xl-10, .col-xl-9, .col-xl-8, .col-xl-7, .col-xl-6, .col-xl-5, .col-xl-4, .col-xl-3, .col-xl-2, .col-xl-1, .col-lg, .col-lg-auto, .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1, .col-md, .col-md-auto, .col-md-12, .col-md-11, .col-md-10, .col-md-9, .col-md-8, .col-md-7, .col-md-6, .col-md-5, .col-md-4, .col-md-3, .col-md-2, .col-md-1, .col-sm, .col-sm-auto, .col-sm-12, .col-sm-11, .col-sm-10, .col-sm-9, .col-sm-8, .col-sm-7, .col-sm-6, .col-sm-5, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1, .col, .col-auto, .col-12, .col-11, .col-10, .col-9, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3, .col-2, .col-1 {
+  position: relative;
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 0px;
+}
+
 /* Estilos responsivos para la impresión */
 @media print {
   /* Estilos para la tabla */
-  .tabla {
-    margin-top: 20px !important;
-    width: 100% !important;
-    border-collapse: collapse !important;
-    justify-content: center !important;
-    top: -10px !important;
-    border: 1px solid white !important;
-  }
-
-  /* Estilos para los elementos específicos */
-  h3 {
-    text-align: center !important;
-    background-color: #000000 !important;
-  }
-
-  .btn.btn-success.btn-round {
-    background-color: #e67e22 !important;
+  .table {
+    margin-top: 20px;
+    width: 230%;
+    border-collapse: collapse;
+    justify-content: center;
+    top: -10px;
+    border: 1px solid white;
   }
   
-  .btn.btn-success.btn-round.l {
-    background-color: #2263e6 !important;
-    left: 30px !important;
-  }
+  /* Estilos para la impresión */
+  @media print {
+    /* Estilos para la tabla en la impresión */
+    .tabla {
+      margin-top: 20px;
+      width: 230%;
+      border-collapse: collapse;
+      justify-content: center;
+      top: -10px;
+      border: 1px solid white;
+      font-size: 7px;
+      text-align: center;
+    }
   
-  .table-header {
-    justify-content: center !important;
-    text-align: center !important;
-    font-size: 10px !important;
-    border: 0.2px solid rgb(255, 255, 255) !important;
-  }
+    /* Otros estilos específicos para la impresión */
+    h3 {
+      text-align: center;
+      background-color: #000000;
+    }
   
-  .table thead tr th {
-    font-size: 12px !important;
-  }
-  
-  td {
-    border: 1px solid white !important;
+    .btn.btn-success.btn-round {
+      background-color: #e67e22;
+    }
     
+    .btn.btn-success.btn-round.l {
+      background-color: #2263e6;
+      left: 30px;
+    }
+    
+    .table-header {
+      justify-content: center;
+      text-align: center;
+      font-size: 7px;
+      border: 0.2px solid rgb(255, 255, 255);
+    }
+    
+    .table thead tr th {
+      font-size: 12px ;
+    }
+    
+    td {
+      border: 1px solid white;
+      font-size: 7px;
+      text-align: center;
+      width: 10%;
+    }
   }
 }
 

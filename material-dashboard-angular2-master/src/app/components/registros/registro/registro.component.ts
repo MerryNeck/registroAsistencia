@@ -4,7 +4,8 @@ import { NgForm } from "@angular/forms";
 import { RegistroService } from "services/registro.service";
 import Swal from "sweetalert2";
 import { Router, RouterLink } from "@angular/router";
-import { LoginService } from "services/login.service";
+import { AreaService } from "services/area.service";
+import { RolService } from "services/rol.service";
 
 @Component({
   selector: "app-registro",
@@ -13,30 +14,43 @@ import { LoginService } from "services/login.service";
 })
 export class RegistroComponent implements OnInit {
   ciBusqueda: string = "";
-  public usuarios: any[] = [];
+  usuarios: any[] = [];
   public nuevoUsuario: Usuario = new Usuario(0,"","","","","","","",0,0);
-  public editandoUsuario: Usuario | null = null;
-  public estado: string;
+  editandoUsuario: Usuario | null = null;
+  estado: string;
   public res: any;
   public areas: any[] = [];
   public roles: any[] = [];
-  public token: string = "";
+  token: string = "";
   public users : any;
+   rutaRol:string="";
  
   constructor(
     private usuarioService: RegistroService,
-    private router: Router
+    private router: Router,
+    private rolService: RolService,
+    private areaService: AreaService,
 
   ) {
-    this.token= localStorage.getItem('token')
+    this.token= localStorage.getItem('token') || ''
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this.router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this.router.navigate(['/asistencia'])
+    }else{
+      this.obtenerUsuarios();
+    }
   }
 
   ngOnInit(): void {
-    this.usuarioService.getAreas(this.token).subscribe(
+    this.areaService.listarAreas(this.token,this.rutaRol).subscribe(
       (response : any) => {
+        if(response.ok){
+          console.log("Respuesta del servicio de áreas:", response); 
         this.areas = response.data;
         console.log(this.areas);
-        
+        } 
       },
       (error) => {
         console.error("Error al cargar las áreas", error);
@@ -44,10 +58,13 @@ export class RegistroComponent implements OnInit {
           Swal.fire("Error", "No se pudo registrar el area", "error");
       },
     );
-    this.usuarioService.getRoles(this.token).subscribe(
+    this.rolService.listarRol(this.token,this.rutaRol).subscribe(
       (response : any) => {
-        this.roles = response.data;
-        console.log(this.roles);
+        if(response.ok){
+          console.log("Respuesta del servicio de rol:", response); 
+          this.roles = response.data;
+          console.log(this.roles);
+        }
         
       },
        (error) => {
@@ -56,39 +73,40 @@ export class RegistroComponent implements OnInit {
           Swal.fire("Error", "No se pudo registrar el area", "error");
       },
     );
-
+    console.log(this.rolService.listarRol);
+    console.log(this.areaService.listarAreas);
+    
     this.obtenerUsuarios();
-
   }
   obtenerUsuarios(): void {
-    this.usuarioService.obtenerUsuario(this.token).subscribe((response: any) => {
+    this.usuarioService.obtenerUsuario(this.token,this.rutaRol).subscribe((response: any) => {
       //console.log(response);
       if (response.ok) {
-        this.usuarios = response.data;
-        console.log(this.usuarios);
-        console.log(this.token);
+        this.users = response.data;
         
       } else {
       }
-      //error => Swal.fire('Error', 'No se pudieron obtener los usuarios', 'error')
+      error => Swal.fire('Error', 'No se pudieron obtener los usuarios', 'error')
     });
   }
   registrarNuevoUsuario(form: NgForm): void {
     console.log(form.value);
+    console.log("usuario",this.nuevoUsuario);
     
     if (form.valid) {
-      const { ci, nombre, apellido_materno, apellido_paterno, estado } =
-        form.value;
-      this.nuevoUsuario.ci = ci;
-      this.nuevoUsuario.nombre = nombre;
-      this.nuevoUsuario.apellido_paterno = apellido_paterno;
-      this.nuevoUsuario.apellido_materno = apellido_materno;
-      this.nuevoUsuario.estado = estado;
+      
       this.usuarioService
-        .registrarUsuario(this.nuevoUsuario, this.token)
+        .registrarUsuario(this.nuevoUsuario, this.token,this.rutaRol)
         .subscribe(
-          (usuario) => {
-            this.usuarios.push(usuario);
+          
+          (response) => {
+            
+            console.log("res",response);
+            if(response.ok){
+              this.users=response.data;
+              console.log(this.users);
+              
+             
             this.nuevoUsuario = new Usuario(
               0,
               "",
@@ -108,6 +126,9 @@ export class RegistroComponent implements OnInit {
               "El usuario fue registrado correctamente",
               "success"
             );
+          }else {
+            Swal.fire("Error", response.msg, "error")
+          }
             
           },
           (error) =>
@@ -120,13 +141,14 @@ export class RegistroComponent implements OnInit {
         "warning"
       );
     }
+    this.obtenerUsuarios();
   }
   editarUsuario(usuario: Usuario): void {
     this.router.navigate(["/editar-registro", usuario.id_usuario]);
   }
 
   buscarUsuarioPorCi(ci: string): void {
-    this.usuarioService.buscarPorCi(ci, this.token).subscribe(
+    this.usuarioService.buscarPorCi(ci, this.token,this.rutaRol).subscribe(
        (response) => {
         this.res = response;
         this.users=this.res.data;
@@ -142,7 +164,7 @@ export class RegistroComponent implements OnInit {
     this.estado = nuevoEstado;
 
     this.usuarioService
-      .cambiarEstadoUsuario(idUsuario, nuevoEstado, this.token)
+      .cambiarEstadoUsuario(idUsuario, nuevoEstado, this.token,this.rutaRol)
       .subscribe((response) => {
         this.res=response;
         this.estado =this.res.data

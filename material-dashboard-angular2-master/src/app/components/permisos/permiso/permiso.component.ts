@@ -4,6 +4,7 @@ import { PermisoService } from 'services/permiso.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { response } from 'express';
 
 @Component({
   selector: 'app-permiso',
@@ -19,18 +20,27 @@ export class PermisoComponent implements OnInit {
   editandoPermiso: Permiso | null = null;
   token: string = '';
   estado: string;
+  rutaRol:string='';
   public res: any;
   public users: any;
-
+  public userdata:any;
   constructor(private permisoService: PermisoService, private router: Router) { }
 
   ngOnInit(): void {
-    this.obtenerPermisos();
+    
     this.token = localStorage.getItem('token') || ''
+    this.rutaRol = localStorage.getItem('rol') || '';
+    if(this.token === '' && this.rutaRol === ''){
+      this.router.navigate(['/login'])
+    }else if(this.rutaRol !== 'admin' ){
+      this.router.navigate(['/asistencia'])
+    }else{
+      this.obtenerPermisos();
+    }
   }
 
   obtenerPermisos(): void {
-    this.permisoService.obtenerPermiso(this.token)
+    this.permisoService.obtenerPermiso(this.token,this.rutaRol)
       .subscribe((response) => {
         this.res = response
         if (this.res.ok) {
@@ -49,9 +59,10 @@ export class PermisoComponent implements OnInit {
       this.nuevoPermiso.id_usuario = ci;
       this.nuevoPermiso.min_permiso = min_permiso;
       this.nuevoPermiso.detalle = detalle;
-      this.permisoService.registrarPermiso(this.nuevoPermiso, this.token)
-        .subscribe(permiso => {
-          this.permisos.push(permiso);
+      this.permisoService.registrarPermiso(this.nuevoPermiso, this.token, this.rutaRol)
+        .subscribe((response :any) => {
+          this.userdata = response.data
+          this.permisos.push(this.userdata);
           this.nuevoPermiso = new Permiso(0, '', '', '', 0, '', '', '');
           form.reset();
           Swal.fire('Éxito', 'El permiso fue registrado correctamente', 'success');
@@ -70,7 +81,7 @@ export class PermisoComponent implements OnInit {
 
 
   buscarAnticipoPorCi(ci: string): void {
-    this.permisoService.buscarPorCi(ci, this.token)
+    this.permisoService.buscarPorCi(ci, this.token,this.rutaRol)
       .subscribe({
         next: (permisos) => {
           this.permisos = permisos;
@@ -84,7 +95,7 @@ export class PermisoComponent implements OnInit {
   cambiarEstadoPermiso(idPermiso: number, nuevoEstado: string) {
     const estadoAnterior = this.estado;
     this.estado = nuevoEstado;
-    this.permisoService.cambiarEstadoPermiso(idPermiso, nuevoEstado, this.token).subscribe({
+    this.permisoService.cambiarEstadoPermiso(idPermiso, nuevoEstado, this.token, this.rutaRol).subscribe({
       next: () => {
         Swal.fire({
           title: '¡Éxito!',
