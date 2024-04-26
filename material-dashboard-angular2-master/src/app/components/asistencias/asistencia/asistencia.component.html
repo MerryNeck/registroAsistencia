@@ -24,9 +24,10 @@
             <div class="table-responsive">
               <button mat-raised-button class="btn btn-success btn-round" (click)="imprimirAsistencia()">Imprimir
                 Asistencia</button>
-              <button mat-raised-button class="btn btn-success btn-round l" (click)="verBoleta() ">Generar Boleta</button>
+              <button mat-raised-button class="btn btn-success btn-round l" (click)="verBoleta() ">Generar
+                Boleta</button>
               <div class="div-table">
-                <table class="table" id="tabla"*ngIf="asistenciasUser ||asistenciasUser.length >0 ">
+                <table class="table" id="tabla" *ngIf="asistenciasUser ||asistenciasUser.length >0 ">
                   <thead class="text-primary">
                     <tr class="table-row">
                       <th class="table-header">FECHA</th>
@@ -52,7 +53,7 @@
                       <td>{{ asistencia.fecha }}</td>
                       <td>{{ asistencia.usuario.ci }}</td>
                       <td>{{ asistencia.usuario.nombre }}</td>
-                      <td>{{ asistencia.usuario.apellido_paterno }}  {{ asistencia.usuario.apellido_materno }}</td>
+                      <td>{{ asistencia.usuario.apellido_paterno }} {{ asistencia.usuario.apellido_materno }}</td>
                       <td>{{ asistencia.tprano_ingreso}}</td>
                       <td>{{ asistencia.tprano_salida }}</td>
                       <td>{{ asistencia.tde_ingreso}}</td>
@@ -65,7 +66,9 @@
                       <td>{{ asistencia.hrs_no_recuperadas}}</td>
                       <td>{{ asistencia.descuento}}</td>
                       <td><button mat-raised-button class="btn btn-warning btn-round"
-                          (click)="seleccionarAsistencia(asistencia)">MODIFICAR</button></td>
+                          (click)="seleccionarAsistencia(asistencia)">MODIFICAR</button>
+                      <button  class="btn btn-blue btn-round"
+                          (click)="Permiso(asistencia)">AGREGAR PERMISO</button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -79,8 +82,10 @@
                 <div id="table">
                   <div class="company-info">
                     <h1>PLANILLA DE ASISTENCIA</h1>
-                    <div class="bis" >
-                      NOMBRE: <span class="label" *ngFor="let asistencia of asistenciasUser">{{ asistencia.usuario.nombre }}  {{ asistencia.usuario.apellido_paterno }}  {{ asistencia.usuario.apellido_materno }}</span>
+                    <div class="bis">
+                      NOMBRE: <span class="label" *ngFor="let asistencia of asistenciasUser">{{
+                        asistencia.usuario.nombre }} {{ asistencia.usuario.apellido_paterno }} {{
+                        asistencia.usuario.apellido_materno }}</span>
                     </div>
                     <div class="bis">
                       FECHA: <span class="label">{{asistencias[0]?.fecha}}</span>
@@ -106,7 +111,7 @@
                     <tbody>
                       <tr></tr>
                       <tr *ngFor="let asistencia of asistenciasUser">
-                        
+
                         <td>{{ asistencia.fecha }}</td>
                         <td>{{ asistencia.tprano_ingreso}}</td>
                         <td>{{ asistencia.tprano_salida }}</td>

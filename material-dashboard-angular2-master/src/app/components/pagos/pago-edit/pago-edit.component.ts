@@ -12,7 +12,7 @@ import { PagoService } from 'services/pago.service';
 })
 export class PagoEditComponent implements OnInit {
 
-  editandoPago:  Pago = {id_sueldo:0, dias_trabajado: 0, retencion:0,sueldo:0,sueldo_bruto:0,id_usuario:0,estado: '', fecha_creacion: '', fecha_modificacion: '' };
+  editandoPago:  Pago = {id_sueldo:0, dias_trabajado: 0, retencion:0,sueldo:0,sueldo_bruto:0,id_usuario:0,estado: '', fecha_creacion: '', fecha_modificacion: '' ,id_anticipo:0};
   token: string = '';
   rutarol:string ='';
   public res: any;

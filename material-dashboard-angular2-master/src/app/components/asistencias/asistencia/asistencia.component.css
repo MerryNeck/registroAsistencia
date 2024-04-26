@@ -133,6 +133,9 @@ table {
   text-align: center;
 
 }
+.btn.btn.btn-blue.btn-round {
+  background-color: #0da997;
+}
 
 .btn.btn-success.btn-round {
   background-color: #e67e22;

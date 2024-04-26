@@ -13,13 +13,12 @@
                                 <div class="row">
                                     <div class="form-group col-md-6" id="form">
                                         <div class="example-full-width">
-                                            <label for="anticipos">Cedula de Identidad:</label>
-                                            <input class="form-control"  type="text" name="ci"
-                                                #ci="ngModel" [(ngModel)]="nuevoAnticipo.id_usuario "
-                                                placeholder="Cedula de Identidad" pattern="[0-9]+" maxlength="8" ngModel>
+                                            <label for="anticipos">Fecha:</label>
+                                            <input class="form-control"  type="text"
+                                                name="anticipo" #anticipo="ngModel" placeholder="Fecha"
+                                                [(ngModel)]="nuevoAnticipo.fecha" pattern="[0-9 / -]+" ngModel="">
                                         </div>
                                     </div>
-
                                     <div class="form-group col-md-6" id="form">
                                         <div class="example-full-width">
                                             <label for="anticipos">Anticipo:</label>
@@ -57,14 +56,14 @@
                                         (click)="buscarAnticipoPorCi(ciBusqueda)">Buscar</button>
                                 </form>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" style="margin-top: 10% ; display: none ;" >
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table" >
                                         <thead class=" text-primary">
                                             <tr>
 
                                                 <th>
-                                                    CEDULA DE IDENTIDAD
+                                                    FECHA
                                                 </th>
                                                 <th>
                                                     ANTICIPO

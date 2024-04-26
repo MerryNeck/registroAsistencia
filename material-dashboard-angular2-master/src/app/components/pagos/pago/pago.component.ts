@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class PagoComponent implements OnInit {
   ciBusqueda: string = '';
   fechaBusqueda: string = '';
-  nuevoPago: Pago = new Pago(0, '', '', '', 0, 0, 0, 0, 0);
+  nuevoPago: Pago = new Pago(0, '', '', '', 0, 0, 0, 0, 0,0);
   pagos: Pago[] = [];
   editandoPago: Pago | null = null; 
   token:string='';
@@ -67,7 +67,7 @@ export class PagoComponent implements OnInit {
       this.pagoService.registrarPago(this.nuevoPago,this.ci, this.token, this.rutaRol)
         .subscribe(pago=> {
           this.pagos.push(pago);
-          this.nuevoPago = new Pago(0, '', '', '', 0, 0, 0, 0, 0);
+          this.nuevoPago = new Pago(0, '', '', '', 0, 0, 0, 0, 0,0);
           form.reset();
           Swal.fire('Éxito', 'El anticipo fue registrado correctamente', 'success');
         },

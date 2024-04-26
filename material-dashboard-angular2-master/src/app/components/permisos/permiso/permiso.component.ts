@@ -16,7 +16,7 @@ export class PermisoComponent implements OnInit {
   ciBusqueda: string = '';
   fechaBusqueda: string = '';
   permisos: Permiso[] = [];
-  nuevoPermiso: Permiso = new Permiso(0, '', '', '', 0, '', '', '');
+  nuevoPermiso: Permiso = new Permiso(0, '', '', '', '', '', '');
   editandoPermiso: Permiso | null = null;
   token: string = '';
   estado: string;
@@ -56,14 +56,13 @@ export class PermisoComponent implements OnInit {
   registrarNuevoPermiso(form: NgForm): void {
     if (form.valid) {
       const { ci, min_permiso, detalle } = form.value;
-      this.nuevoPermiso.id_usuario = ci;
       this.nuevoPermiso.min_permiso = min_permiso;
       this.nuevoPermiso.detalle = detalle;
       this.permisoService.registrarPermiso(this.nuevoPermiso, this.token, this.rutaRol)
         .subscribe((response :any) => {
           this.userdata = response.data
           this.permisos.push(this.userdata);
-          this.nuevoPermiso = new Permiso(0, '', '', '', 0, '', '', '');
+          this.nuevoPermiso = new Permiso(0, '', '', '', '', '', '');
           form.reset();
           Swal.fire('Éxito', 'El permiso fue registrado correctamente', 'success');
         },

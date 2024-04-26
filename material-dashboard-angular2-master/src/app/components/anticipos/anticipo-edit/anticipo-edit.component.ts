@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AnticipoEditComponent {
  
-  editandoAnticipo: Anticipo = {id_anticipo:0, anticipos: 0, id_usuario:0,estado: '', fecha_creacion: '', fecha_modificacion: '' };
+  editandoAnticipo: Anticipo = {id_anticipo:0, anticipos: 0,fecha:'',estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
   public res:any;
   rutarol: string = '';

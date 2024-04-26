@@ -19,7 +19,6 @@ export const ROUTES: RouteInfo[] = [
   { path: '/asistencia', title: 'ASISTENCIA', icon: 'content_paste', class: '' , roles: ['admin','']},
   { path: '/anticipo', title: 'ANTICIPO', icon: 'library_books', class: '', roles: ['admin'] },
   { path: '/perfil', title: 'REGISTRO DE AUTENTIFICACION', icon: 'bubble_chart', class: '', roles: ['admin'] },
-  { path: '/permiso', title: 'PERMISO', icon: 'content_paste', class: '', roles: ['admin'] },
 
   
 ];

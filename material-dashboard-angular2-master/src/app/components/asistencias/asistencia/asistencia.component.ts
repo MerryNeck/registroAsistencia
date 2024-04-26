@@ -150,4 +150,10 @@ export class AsistenciaComponent implements OnInit {
     
   
 }
+Permiso():void{
+   
+  this.router.navigate(['/permiso']);
+
+
+}
 }

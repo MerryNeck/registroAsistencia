@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class PermisoEditComponent implements OnInit {
 
-  editandoPermiso: Permiso = {id_permiso:0, fecha: '',min_permiso:'',detalle:'',id_usuario:0, estado: '', fecha_creacion: '', fecha_modificacion: '' };
+  editandoPermiso: Permiso = {id_permiso:0, fecha: '',min_permiso:'',detalle:'', estado: '', fecha_creacion: '', fecha_modificacion: '' };
   token: string = '';
   rutarol:string='';
 
