@@ -27,7 +27,6 @@
 
               <div class="company-info" >
                 <div class="bis">NOMBRE: <span class="label">{{boletaUser.persona.nombre}}</span></div>
-                <div class="bis">OCUPACION: <span class="label">{{boletaUser.persona.ocupacion}}</span></div>
                 <div class="bis">DIAS LABORALES: <span class="label">{{boletaUser.persona.dias_laborales}}</span></div>
                 <div class="bis">MES DE PAGO: <span class="label">{{boletaUser.persona.mes}}</span></div>
                 <div class="bis">FECHA DE PAGO: <span class="label">{{boletaUser.persona.fecha}}</span></div>
@@ -40,14 +39,15 @@
 
                     <tr>
                       <th rowspan="2">PAGO</th>
-                      <th colspan="5">DESCUENTO</th>
+                      <th colspan="6">DESCUENTO</th>
                     </tr>
                     <tr>
                       <th>AFP'S</th>
                       <th>ATRASOS</th>
                       <th>FALTAS</th>
                       <th>MIN. NO TRABAJADOS</th>
-                      <th>DESCUENTO </th>
+                      <th>ANTICIPO </th>
+                      <th>TOTAL DESCUENTO </th>
                     </tr>
 
                   </thead>
@@ -58,6 +58,7 @@
                       <td>{{ boletaUser.atrasos }}</td>
                       <td>{{ boletaUser.faltas }}</td>
                       <td>{{ boletaUser.mnr }}</td>
+                      <td>{{ boletaUser.anticipo}}</td>
                       <td>{{ boletaUser.descuentos }}</td>
                     </tr>
                   </tbody>
@@ -67,7 +68,7 @@
             </div>
 
             <div class="total" *ngFor="let persona of boletas">
-              <p>LIQUIDO PAGABLE Bs.-  <span class="label1">{{persona.pagos}}</span></p>
+              <p>LIQUIDO PAGABLE Bs.-  <span class="label1">{{boletaUser.pago.sueldo_bruto}}</span></p>
               </div>
             <div class="signature">
               <div class="signature-line row col-md-9"></div>

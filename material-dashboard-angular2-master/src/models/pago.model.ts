@@ -9,7 +9,6 @@ export class Pago {
       public sueldo: number,
       public sueldo_bruto: number,
       public id_usuario: number,
-      public id_anticipo:number,
     ) {
     }
   }

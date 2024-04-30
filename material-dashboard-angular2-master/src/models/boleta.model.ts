@@ -8,6 +8,7 @@ export class Boleta {
     public liquidoPagable: number,
     public fecha_creacion:string,
     public fecha_modificacion:string,
-    public estado:string
+    public estado:string,
+    public id_anticipo:number
   ) {}
 }

@@ -17,7 +17,7 @@ export class AnticipoComponent implements OnInit {
 
   fechaBusqueda: string = '';
   anticipos: Anticipo[] = [];
-  nuevoAnticipo: Anticipo = new Anticipo(0, '', '','', '', 0);
+  nuevoAnticipo: Anticipo = new Anticipo(0, '', '','', '', 0,0);
   token: string = '';
   estado: string;
   public res: any;
@@ -63,7 +63,7 @@ export class AnticipoComponent implements OnInit {
           (response: any) => {
             this.anticipodata =response.data
             this.anticipos.push(this.anticipodata);
-            this.nuevoAnticipo = new Anticipo(0, '','', '', '', 0);
+            this.nuevoAnticipo = new Anticipo(0, '','', '', '',0, 0);
             form.reset();
             Swal.fire('Éxito', 'El anticipo fue registrado correctamente', 'success');
           },

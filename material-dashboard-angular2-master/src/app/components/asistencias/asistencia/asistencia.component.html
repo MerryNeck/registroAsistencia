@@ -41,8 +41,7 @@
                       <th class="table-header">MINUTOS RETRAZADO</th>
                       <th class="table-header">MINUTOS EXTRA</th>
                       <th class="table-header">FALTAS</th>
-                      <th class="table-header">TOTAL HORAS</th>
-                      <th class="table-header">MINUTOS DE PERMISO</th>
+                      <th class="table-header">TOTAL HORAS RETRASADAS</th>
                       <th class="table-header">HORAS NO RECUPERADAS</th>
                       <th class="table-header">DESCUENTO</th>
                       <th class="table-header">MODIFICAR</th>
@@ -62,14 +61,10 @@
                       <td>{{ asistencia.min_extra }}</td>
                       <td>{{ asistencia.faltas}}</td>
                       <td>{{ asistencia.total_horas }}</td>
-                      <td>{{ asistencia.id_permiso}}</td>
                       <td>{{ asistencia.hrs_no_recuperadas}}</td>
-                      <td>{{ asistencia.descuento}}</td>
                       <td><button mat-raised-button class="btn btn-warning btn-round"
                           (click)="seleccionarAsistencia(asistencia)">MODIFICAR</button>
-                      <button  class="btn btn-blue btn-round"
-                          (click)="Permiso(asistencia)">AGREGAR PERMISO</button></td>
-                    </tr>
+                     </tr>
                   </tbody>
                 </table>
               </div>
@@ -103,8 +98,7 @@
                         <th class="table-header">MINUTOS RETRAZADO</th>
                         <th class="table-header">MINUTOS EXTRA</th>
                         <th class="table-header">FALTAS</th>
-                        <th class="table-header">TOTAL HORAS</th>
-                        <th class="table-header">MINUTOS DE PERMISO</th>
+                        <th class="table-header">TOTAL HORAS RETRASADAS</th>
                         <th class="table-header">HORAS NO RECUPERADAS</th>
                       </tr>
                     </thead>

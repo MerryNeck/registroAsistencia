@@ -59,7 +59,7 @@ export class RutaexcelComponent {
       return;
     }
     
-    this.excelService.subirArchivo(this.archivoSeleccionado)
+    this.excelService.subirArchivo(this.archivoSeleccionado,this.token,this.rutaRol)
       .subscribe(
         (response: any) => {
           Swal.fire({

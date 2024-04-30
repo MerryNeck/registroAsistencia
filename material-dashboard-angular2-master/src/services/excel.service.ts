@@ -10,9 +10,8 @@ import { environment } from 'environments/environment';
 export class ExcelService {
   private apiUrl = environment.backend.api+'/api/excel'; 
   constructor(private http: HttpClient) { }
-  subirArchivo(archivo: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    const rutarol = localStorage.getItem('rutarol');
+  subirArchivo(archivo: any, token:string, rutarol:string): Observable<any> {
+    
     const headers = new HttpHeaders({
       'x-token': `${token}`,
       'x-rol': `${rutarol}`
