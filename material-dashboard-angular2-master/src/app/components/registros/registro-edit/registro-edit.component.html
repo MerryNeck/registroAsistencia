@@ -46,7 +46,8 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6 " id="form">
-                                        <select class="custom-select" name="idArea" #id_area="ngModel" [(ngModel)]="editandoUsuario.id_area" >
+                                        <select class="custom-select" name="idArea" #id_area="ngModel" 
+                                        [(ngModel)]="editandoUsuario.id_area" >
                                             <option value="">SELECCIONE AREA</option>
                                             <ng-container *ngFor="let area of areas">
                                                 <option value="{{area.id_area}}">{{area.tipo_area}}</option>

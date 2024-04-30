@@ -15,6 +15,7 @@ export class PerfilEditComponent implements OnInit {
   token: string = '';
   rutarol:string='';
   public res: any;
+  public user:any[]=[]
 
   constructor(
     private loginService: LoginService,

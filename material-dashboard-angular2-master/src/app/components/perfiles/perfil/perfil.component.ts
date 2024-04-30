@@ -21,29 +21,12 @@ export class PerfilComponent implements OnInit {
   public res: any;
   public perfilUser: any;
   public perfildata:any;
-  public user: any[]=[];
+  public users: any[]=[];
  
   constructor(
     private loginService: LoginService, 
     private usuarioService: RegistroService,
-    private router: Router) { }
-
-  ngOnInit(): void {
-    this.usuarioService.obtenerUsuario(this.token, this.rutaRol).subscribe(
-      (response: any) => {
-        if (response.ok) {
-          console.log("Respuesta del servicio de usuarios:", response);
-          this.user = response.data;
-          console.log(this.user);
-        }
-      },
-      (error) => {
-        console.error("Error al cargar las usuarios", error);
-        (error) =>
-          Swal.fire("Error", "No se pudo registrar el usuario", "error");
-      },
-    );
-    
+    private router: Router) { 
     this.token = localStorage.getItem('token') || ''
     this.rutaRol = localStorage.getItem('rol') || '';
     if(this.token === '' && this.rutaRol === ''){
@@ -52,8 +35,25 @@ export class PerfilComponent implements OnInit {
       this.router.navigate(['/asistencia'])
     }else{
       this.obtenerPerfiles();
-    }
+    }}
 
+  ngOnInit(): void {
+    this.usuarioService.obtenerUsuario(this.token, this.rutaRol).subscribe(
+      (response: any) => {
+        if (response.ok) {
+          console.log("Respuesta del servicio de usuarios:", response);
+          this.users = response.data;
+          console.log(this.users);
+        }
+      },
+      (error) => {
+        console.error("Error al cargar las usuarios", error);
+        (error) =>
+          Swal.fire("Error", "No se pudo registrar el usuario", "error");
+      },
+    );
+    console.log("usuarios",this.usuarioService.obtenerUsuario);
+    this.obtenerPerfiles();  
     
   }
   obtenerPerfiles(): void {
@@ -71,17 +71,20 @@ export class PerfilComponent implements OnInit {
       });
   }
   registrarNuevoPerfil(form: NgForm): void {
+    
+    
     if (form.valid) {
-
-      const { correo, password, ci } = form.value;
+      console.log("nuevo",form.value);
+      const { correo_corp, password, ci } = form.value;
       this.nuevoPerfil.id_usuario = ci;
-      this.nuevoPerfil.correo_corp = correo;
+      this.nuevoPerfil.correo_corp = correo_corp;
       this.nuevoPerfil.password = password;
       this.loginService.registrarPerfil(this.nuevoPerfil, this.token,this.rutaRol)
         .subscribe((response:any) => {
           this.perfildata = response.data
           this.perfiles.push(this.perfildata);
           this.nuevoPerfil = new Login(0, '', '', '', '', '', 0);
+        this.obtenerPerfiles();
           form.reset();
           Swal.fire('Éxito', 'La autentificacion a sido registrado correctamente', 'success');
         },

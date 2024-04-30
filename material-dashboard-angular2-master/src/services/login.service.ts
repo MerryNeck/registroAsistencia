@@ -53,7 +53,7 @@ registrarPerfil(usuario: Login,token:string, rutarol:string): Observable<any> {
     'x-token': `${token}`,
     'x-rol': `${rutarol}`
   });
-  return this._http.post<any>(this.url, usuario,{ headers});
+  return this._http.post<any>(this.url+'create', usuario,{ headers});
 }
 
 cambiarEstadoPerfil(id: number, estado: string,token:string,rutarol:string): Observable<any> {

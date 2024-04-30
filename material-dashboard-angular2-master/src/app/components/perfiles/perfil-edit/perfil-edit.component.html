@@ -13,26 +13,24 @@
                                     <label>Seleccione Cedula de  Identidad</label>
                                     <select class="custom-select" name="idUsuario" #idRol="ngModel"
                                         [(ngModel)]="editandoperfil.id_usuario">
-                                        <option value="" disabled selected>Seleccione un CI</option>
-                                        <option *ngFor="let usuario of user" [value]="usuario.id_usuario"  [(ngModel)]="editandoperfil.id_usuario" required="">usuario.ci</option>
+                                        <option *ngFor="let usuario of user"
+                                         value="{{usuario.id_usuario}}" required="">{{usuario.ci}}</option>
                                         
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <mat-form-field class="example-full-width">
                                         <label for="anticipos">Correo Corporativo:</label>
                                         <input class="form-control"  type="email"
                                         name="email" #email="ngModel" [(ngModel)]="editandoperfil.correo_corp" required>
-                                    </mat-form-field>
+                                   
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4" id="form">
-                                    <mat-form-field class="example-full-width">
                                         <label for="anticipos">Contraseña:</label>
                                         <input class="form-control" type="password"
                                              #password="ngModel" [(ngModel)]="editandoperfil.password">
-                                    </mat-form-field>
+                                    
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-danger pull-right">GUARDAR</button>
