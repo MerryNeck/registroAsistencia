@@ -12,10 +12,13 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="form-group col-md-6" id="form">
-                                    <mat-form-field class="example-full-width">
-                                        <input class="form-control" type="text" name="ci" #ci="ngModel"
-                                            [(ngModel)]="nuevoPerfil.id_usuario" placeholder="Cedula de Identidad" maxlength="8" pattern="[0-9]+">
-                                    </mat-form-field>
+                                    <label>Seleccione Cedula de  Identidad</label>
+                                    <select class="custom-select" name="idUsuario" #idRol="ngModel"
+                                        [(ngModel)]="nuevoPerfil.id_usuario">
+                                        <option value="" disabled selected>Seleccione un CI</option>
+                                        <option *ngFor="let usuario of user" [value]="usuario.id_usuario"  [(ngModel)]="nuevoPerfil.id_usuario">{{ usuario.ci }}</option>
+                                        
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">

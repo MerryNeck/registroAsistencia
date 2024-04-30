@@ -104,8 +104,8 @@ export class RegistroComponent implements OnInit {
       this.nuevoUsuario.nombre = nombre;
       this.nuevoUsuario.apellido_paterno = apellido_paterno;
       this.nuevoUsuario.apellido_materno = apellido_materno;
-      this.nuevoUsuario.id_rol = parseInt(id_rol, 100);
-      this.nuevoUsuario.id_area = parseInt(id_area, 100);
+      this.nuevoUsuario.id_rol = parseInt(id_rol, 1000);
+      this.nuevoUsuario.id_area = parseInt(id_area, 1000);
 
       this.usuarioService
         .registrarUsuario(this.nuevoUsuario, this.token, this.rutaRol)

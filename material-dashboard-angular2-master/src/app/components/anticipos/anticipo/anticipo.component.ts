@@ -20,6 +20,8 @@ export class AnticipoComponent implements OnInit {
   nuevoAnticipo: Anticipo = new Anticipo(0, '', '','', '', 0,0);
   token: string = '';
   estado: string;
+
+  public ci  :any;
   public res: any;
   public anticiposUser: any;
   public anticipodata:any;
@@ -55,9 +57,13 @@ export class AnticipoComponent implements OnInit {
   }
 
   registrarNuevoAnticipo(form: NgForm): void {
+    console.log(form.valid);
+    
     if (form.valid) {
-      const { ci, anticipo } = form.value;
+      const { ci,fechas, anticipo } = form.value;
       this.nuevoAnticipo.anticipos = anticipo;
+      this.ci = ci;
+      this.nuevoAnticipo.fecha = fechas;
       this.anticipoService.registrarAnticipo(this.nuevoAnticipo, this.token ,this.rutaRol)
         .subscribe(
           (response: any) => {

@@ -4,6 +4,7 @@ import { Login } from 'models/login.model';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { RegistroService } from 'services/registro.service';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -20,13 +21,29 @@ export class PerfilComponent implements OnInit {
   public res: any;
   public perfilUser: any;
   public perfildata:any;
-
+  public user: any[]=[];
  
   constructor(
     private loginService: LoginService, 
+    private usuarioService: RegistroService,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.usuarioService.obtenerUsuario(this.token, this.rutaRol).subscribe(
+      (response: any) => {
+        if (response.ok) {
+          console.log("Respuesta del servicio de usuarios:", response);
+          this.user = response.data;
+          console.log(this.user);
+        }
+      },
+      (error) => {
+        console.error("Error al cargar las usuarios", error);
+        (error) =>
+          Swal.fire("Error", "No se pudo registrar el usuario", "error");
+      },
+    );
+    
     this.token = localStorage.getItem('token') || ''
     this.rutaRol = localStorage.getItem('rol') || '';
     if(this.token === '' && this.rutaRol === ''){
@@ -36,6 +53,8 @@ export class PerfilComponent implements OnInit {
     }else{
       this.obtenerPerfiles();
     }
+
+    
   }
   obtenerPerfiles(): void {
     this.loginService.obtenerPerfil(this.token,this.rutaRol)
@@ -50,6 +69,7 @@ export class PerfilComponent implements OnInit {
   }
   registrarNuevoPerfil(form: NgForm): void {
     if (form.valid) {
+
       const { correo, password, ci } = form.value;
       this.nuevoPerfil.id_usuario = ci;
       this.nuevoPerfil.correo_corp = correo;
