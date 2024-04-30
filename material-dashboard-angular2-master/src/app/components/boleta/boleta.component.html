@@ -46,6 +46,7 @@
                       <th>ATRASOS</th>
                       <th>FALTAS</th>
                       <th>MIN. NO TRABAJADOS</th>
+                      <th>MIN. NO TRABAJADOS BS</th>
                       <th>ANTICIPO </th>
                       <th>TOTAL DESCUENTO </th>
                     </tr>
@@ -58,6 +59,7 @@
                       <td>{{ boletaUser.atrasos }}</td>
                       <td>{{ boletaUser.faltas }}</td>
                       <td>{{ boletaUser.mnr }}</td>
+                      <td>{{ boletaUser.mnrbs }}</td>
                       <td>{{ boletaUser.anticipo}}</td>
                       <td>{{ boletaUser.descuentos }}</td>
                     </tr>
@@ -67,8 +69,8 @@
               </div>
             </div>
 
-            <div class="total" *ngFor="let persona of boletas">
-              <p>LIQUIDO PAGABLE Bs.-  <span class="label1">{{boletaUser.pago.sueldo_bruto}}</span></p>
+            <div class="total" >
+              <p>LIQUIDO PAGABLE Bs.-  <span class="label1">{{boletaUser.sueldo_bruto}}</span></p>
               </div>
             <div class="signature">
               <div class="signature-line row col-md-9"></div>

@@ -9,6 +9,14 @@
                     <div class="card-body">
                         <form #editForm="ngForm" (ngSubmit)="actualizarAnticipo(editForm)">
                             <div class="row">
+                                <div class="example-full-width">
+                                    <label>Seleccione Cedula de  Identidad</label>
+                                    <select class="custom-select" name="idUsuario" #idUsuario="ngModel"
+                                        [(ngModel)]="editandoAnticipo.id_usuario">
+                                        <option *ngFor="let usuario of user" [value]="usuario.id_usuario" [(ngModel)]="editandoAnticipo.id_usuario" >{{ usuario.ci}}</option>
+                    
+                                    </select>
+                                </div>
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
                                         <label for="anticipos">Fecha:</label>

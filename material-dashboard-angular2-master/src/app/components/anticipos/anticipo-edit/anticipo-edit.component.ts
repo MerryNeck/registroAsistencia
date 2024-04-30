@@ -16,6 +16,7 @@ export class AnticipoEditComponent {
   token: string = '';
   public res:any;
   rutarol: string = '';
+  public user:any[]=[];
 
   constructor(
     private anticipoService: AnticipoService,

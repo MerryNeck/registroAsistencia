@@ -67,8 +67,8 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-image: url('../../../assets/img/bispace.PNG');
   background-repeat: no-repeat;
-  background-position: 21%;
-  background-size: cover;
+  background-position-y: -25px;
+  background-size: 100%;
   filter: opacity(80%);
   font-family: Arial, sans-serif;
   display: block;
@@ -87,7 +87,14 @@ a{
 .row {
   justify-content: center;
 }
-
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
 table {
   display: block;
   justify-content: center;

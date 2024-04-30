@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { response } from 'express';
 import { Anticipo } from 'models/anticipo.model';
 import { AnticipoService } from 'services/anticipo.service';
+import { RegistroService } from 'services/registro.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,19 +18,18 @@ export class AnticipoComponent implements OnInit {
 
   fechaBusqueda: string = '';
   anticipos: Anticipo[] = [];
+  public users : any[]=[];
   nuevoAnticipo: Anticipo = new Anticipo(0, '', '','', '', 0,0);
   token: string = '';
   estado: string;
-
-  public ci  :any;
   public res: any;
   public anticiposUser: any;
   public anticipodata:any;
   rutaRol : string = '';
   
-  constructor(private anticipoService: AnticipoService, private router: Router) { }
-
-  ngOnInit(): void {
+  constructor(private anticipoService: AnticipoService, 
+    private router: Router,
+  private usuarioService: RegistroService) {
     this.token = localStorage.getItem('token') || '';
     this.rutaRol = localStorage.getItem('rol') || '';
     if(this.token === '' && this.rutaRol === ''){
@@ -40,8 +40,30 @@ export class AnticipoComponent implements OnInit {
     else{
       this.obtenerAnticipos();
     }
-      
+   }
+
+  ngOnInit(): void {
+    
+
+    this.usuarioService.obtenerUsuario(this.token, this.rutaRol).subscribe(
+      (response: any) => {
+        if (response.ok) {
+          console.log("Respuesta del servicio de usuarios:", response);
+          this.users = response.data;
+          console.log(this.users);
+        }
+      },
+      (error) => {
+        console.error("Error al cargar las usuarios", error);
+        (error) =>
+          Swal.fire("Error", "No se pudo registrar el usuario", "error");
+      },
+    );
+    console.log("usuarios",this.usuarioService.obtenerUsuario);
+    this.obtenerAnticipos();
   }
+
+
 
   obtenerAnticipos(): void {
     this.anticipoService.obtenerAnticipo(this.token,this.rutaRol)
@@ -57,13 +79,13 @@ export class AnticipoComponent implements OnInit {
   }
 
   registrarNuevoAnticipo(form: NgForm): void {
-    console.log(form.valid);
+    console.log(form.value);
     
     if (form.valid) {
-      const { ci,fechas, anticipo } = form.value;
+      const {ci,fecha, anticipo } = form.value;
       this.nuevoAnticipo.anticipos = anticipo;
-      this.ci = ci;
-      this.nuevoAnticipo.fecha = fechas;
+      this.nuevoAnticipo.id_usuario = ci;
+      this.nuevoAnticipo.fecha = fecha;
       this.anticipoService.registrarAnticipo(this.nuevoAnticipo, this.token ,this.rutaRol)
         .subscribe(
           (response: any) => {

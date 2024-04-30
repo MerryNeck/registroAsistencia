@@ -11,19 +11,21 @@
                         <form #anticipoForm="ngForm" (ngSubmit)="registrarNuevoAnticipo(anticipoForm)">
                             
                                 <div class="row">
-                                    <div class="form-group col-md-4" id="form">
+                                    <div class="form-group col-md-6" id="form">
                                         <div class="example-full-width">
-                                            <label for="anticipos">Cedula de Identidad:</label>
-                                            <input class="form-control"  type="text"
-                                                name="anticipo" #anticipo="ngModel" 
-                                                [(ngModel)]="nuevoAnticipo.id_usuario" pattern="[0-9 ]+" ngModel="">
+                                            <label>Seleccione Cedula de  Identidad</label>
+                                            <select class="custom-select" name="id_usuario" #idUsuario="ngModel"
+                                                [(ngModel)]="nuevoAnticipo.id_usuario">
+                                                <option *ngFor="let usuario of users" [value]="usuario.id_usuario" [(ngModel)]="nuevoAnticipo.id_usuario" >{{ usuario.ci}}</option>
+                            
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4" id="form">
                                         <div class="example-full-width">
                                             <label for="anticipos">Fecha:</label>
                                             <input class="form-control"  type="text"
-                                                name="anticipo" #anticipo="ngModel" (ngModel)]="nuevoAnticipo.fecha" ngModel="">
+                                                name="fecha" #anticipo="ngModel" [(ngModel)]="nuevoAnticipo.fecha" ngModel="">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-4" id="form">
@@ -46,14 +48,14 @@
         <div class="main-content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header card-header-danger">
                                 <h4 class="card-title "> REGISTRO ANTICIPOS</h4>
-                                <form class="col-md-5">
+                                <form class="col-md-10">
                                     <p class="card-category">Busque el registro de anticipo</p>
                                     <div class="input-group no-border">
-                                        <div class="col-md-10">
+                                        <div class="col-md-8">
                                             <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
                                                 placeholder="Buscar por cedula de identidad...">
                                             <div class="ripple-container"></div>
@@ -63,7 +65,7 @@
                                         (click)="buscarAnticipoPorCi(ciBusqueda)">Buscar</button>
                                 </form>
                             </div>
-                            <div class="card-body" style="margin-top: 10% ; " >
+                            <div class="card-body"   >
                                 <div class="table-responsive">
                                     <table class="table" >
                                         <thead class=" text-primary">
@@ -88,14 +90,12 @@
                                         <tbody>
                                             <tr></tr>
                                             <tr *ngFor="let anticipo of anticiposUser">
-<<<<<<< HEAD
                                                 <td>{{ anticipo.usuario.ci }}</td>
                                                 <td>{{ anticipo.fecha }}</td>
                                                 <td>{{ anticipo.anticipo}}</td>
-=======
                                                 <td>{{ anticipo.id_usuario }}</td>
                                                 <td>{{ anticipo.anticipos}}</td>
->>>>>>> d3b227c5eca8561124d6b2d6dcf242b13b0fecb4
+
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue btn-round "
                                                         (click)="editarAnticipo(anticipo)">Modificar</button>

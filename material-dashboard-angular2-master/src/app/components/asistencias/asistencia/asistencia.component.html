@@ -76,13 +76,13 @@
                 <div id="table">
                   <div class="company-info">
                     <h1>PLANILLA DE ASISTENCIA</h1>
-                    <div class="bis">
-                      NOMBRE: <span class="label" *ngFor="let asistencia of asistenciasUser">{{
-                        asistencia.usuario.nombre }} {{ asistencia.usuario.apellido_paterno }} {{
-                        asistencia.usuario.apellido_materno }}</span>
+                    <div class="bis" *ngIf="asistenciasUser.length > 0">
+                      NOMBRE: <span class="label">
+                        {{ asistenciasUser[0].usuario.nombre }} {{ asistenciasUser[0].usuario.apellido_paterno }} {{ asistenciasUser[0].usuario.apellido_materno }}
+                    </span>
                     </div>
                     <div class="bis">
-                      FECHA: <span class="label">{{asistencias[0]?.fecha}}</span>
+                      FECHA: <span class="label">{{asistenciasUser[0].fecha}} AL {{asistenciasUser[asistenciasUser.length - 1].fecha}}</span>
                     </div>
                   </div>
                   <table class="tabla">
@@ -98,7 +98,6 @@
                         <th class="table-header">MINUTOS EXTRA</th>
                         <th class="table-header">FALTAS</th>
                         <th class="table-header">TOTAL HORAS RETRASADAS</th>
-                        <th class="table-header">HORAS NO RECUPERADAS</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -114,11 +113,16 @@
                         <td>{{ asistencia.min_extra }}</td>
                         <td>{{ asistencia.faltas}}</td>
                         <td>{{ asistencia.total_horas }}</td>
-                        <td>{{ asistencia.id_permiso}}</td>
-                        <td>{{ asistencia.hrs_no_recuperadas}}</td>
                       </tr>
                     </tbody>
                   </table>
+                  <br>
+                  <br>
+                  <div class="bis" *ngIf="asistenciasUser.length > 0">
+                    HORAS NO RECUPERADAS: <span class="label">
+                      {{ asistenciasUser[0].hrs_no_recuperadas }} 
+                  </span>
+                  </div>
                 </div>
               </div>
             </div>

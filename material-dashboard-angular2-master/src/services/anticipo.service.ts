@@ -55,7 +55,7 @@ export class AnticipoService {
       'x-token': `${token}`,
       'x-rol':`${rutarol}`
     });
-    return this.http.put<void>(`${this.baseUrl}/${anticipo.id_anticipo}`, anticipo, { headers })
+    return this.http.put<void>(`${this.baseUrl}//${anticipo.id_anticipo}`, anticipo, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al actualizar el anticipo:', error);

@@ -42,9 +42,9 @@ export class PerfilEditComponent implements OnInit {
   obtenerPerfil(idPerfil: number): void {
     this.loginService.obtenerPerfilPorId(idPerfil, this.token, this.rutarol)
       .subscribe(
-        (response: any) => {
-          
-          this.editandoperfil = response.data;
+        perfil => {
+          this.res =perfil;
+          this.editandoperfil = this.res.data;
         },
         error => {
           console.error('Error al obtener el usuario o contraseña:', error);
@@ -54,7 +54,7 @@ export class PerfilEditComponent implements OnInit {
   }
 
   actualizarPerfiles(form: NgForm): void {
-    if (this.editandoperfil !== null) {
+    if (this.editandoperfil !== null && form.valid) {
       this.loginService.actualizarPerfil(this.editandoperfil, this.token,this.rutarol)
         .subscribe(
           () => {
