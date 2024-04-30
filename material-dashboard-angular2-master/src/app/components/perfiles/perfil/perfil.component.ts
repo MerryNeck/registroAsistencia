@@ -42,7 +42,10 @@ export class PerfilComponent implements OnInit {
       .subscribe((response : any) => {
         if (response.ok) {
           this.perfilUser = response.data;
+          console.log(this.perfilUser);
+          
         } else {
+
           error => Swal.fire('Error', 'No se pudieron obtener la autentificacion', 'error')
         }
 

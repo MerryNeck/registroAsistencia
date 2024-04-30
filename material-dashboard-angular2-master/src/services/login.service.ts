@@ -14,14 +14,14 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class LoginService {
-  public url:string = environment.backend.api +'/api/user/login';
+  public url:string = environment.backend.api +'/api/user/';
   constructor(private _http: HttpClient ) { }
 
   
 login(email:string, password:string){
   
     const body = { email, password }; 
-    return this._http.post<any>(this.url, { email, password })
+    return this._http.post<any>(this.url+'/login', { email, password })
     .pipe(
         catchError(this.handleError) 
       );
