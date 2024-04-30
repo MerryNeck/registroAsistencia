@@ -96,8 +96,8 @@
                                         <tbody>
                                             <tr></tr>
                                             <tr *ngFor="let perfiles of perfilUser">
-                                                <td>{{ perfiles.nombre }}</td>
-                                                <td>{{ perfiles.apellido}}</td>
+                                                <td>{{ perfiles.usuario.nombre }}</td>
+                                                <td>{{ perfiles.usuario.apellido_paterno}}</td>
                                                 <td>{{ perfiles.correo_corp }}</td>
                                                 <td>{{ perfiles.password}}</td>
                                                 <td><button mat-raised-button type="submit"

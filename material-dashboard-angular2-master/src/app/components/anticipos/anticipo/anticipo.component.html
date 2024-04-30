@@ -63,7 +63,7 @@
                                         (click)="buscarAnticipoPorCi(ciBusqueda)">Buscar</button>
                                 </form>
                             </div>
-                            <div class="card-body" style="margin-top: 10% ; display: none ;" >
+                            <div class="card-body" style="margin-top: 10% ; " >
                                 <div class="table-responsive">
                                     <table class="table" >
                                         <thead class=" text-primary">
@@ -88,9 +88,14 @@
                                         <tbody>
                                             <tr></tr>
                                             <tr *ngFor="let anticipo of anticiposUser">
+<<<<<<< HEAD
                                                 <td>{{ anticipo.usuario.ci }}</td>
                                                 <td>{{ anticipo.fecha }}</td>
                                                 <td>{{ anticipo.anticipo}}</td>
+=======
+                                                <td>{{ anticipo.id_usuario }}</td>
+                                                <td>{{ anticipo.anticipos}}</td>
+>>>>>>> d3b227c5eca8561124d6b2d6dcf242b13b0fecb4
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue btn-round "
                                                         (click)="editarAnticipo(anticipo)">Modificar</button>
