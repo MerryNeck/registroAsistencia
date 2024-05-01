@@ -96,7 +96,7 @@ export class RegistroComponent implements OnInit {
 
     if (form.valid) {
       
-     console.log(form.value);
+     //console.log(form.value);
       const { ci, nombre, apellido_materno, apellido_paterno, id_rol, id_area } =
         form.value;
 
@@ -104,8 +104,9 @@ export class RegistroComponent implements OnInit {
       this.nuevoUsuario.nombre = nombre;
       this.nuevoUsuario.apellido_paterno = apellido_paterno;
       this.nuevoUsuario.apellido_materno = apellido_materno;
-      this.nuevoUsuario.id_rol = parseInt(id_rol, 1000);
-      this.nuevoUsuario.id_area = parseInt(id_area, 1000);
+      this.nuevoUsuario.id_rol = id_rol;
+      this.nuevoUsuario.id_area = id_area;
+console.log(this.nuevoUsuario);
 
       this.usuarioService
         .registrarUsuario(this.nuevoUsuario, this.token, this.rutaRol)
@@ -151,6 +152,8 @@ export class RegistroComponent implements OnInit {
   }
 
   buscarUsuarioPorCi(ci: string): void {
+    console.log(ci);
+    
     this.usuarioService.buscarPorCi(ci, this.token, this.rutaRol).subscribe(
       (response) => {
         this.res = response;

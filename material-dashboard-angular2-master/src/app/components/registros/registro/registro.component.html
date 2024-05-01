@@ -41,7 +41,7 @@
                             <div class="row">
                                 <div class="form-group col-md-6" id="form">
                                     <label>Seleccione un Area</label>
-                                    <select class="custom-select" name="idArea" #idArea="ngModel"
+                                    <select class="custom-select" name="id_area" #idArea="ngModel"
                                         [(ngModel)]="nuevoUsuario.id_area">
                                         <option value="" disabled selected>Seleccione un área</option>
                                         <option *ngFor="let area of areas" [value]="area.id_area" [(ngModel)]="nuevoUsuario.id_area">{{ area.tipo_area }}
@@ -52,7 +52,7 @@
 
                                 <div class="form-group col-md-6" id="form">
                                     <label>Seleccione un Rol</label>
-                                    <select class="custom-select" name="idRol" #idRol="ngModel"
+                                    <select class="custom-select" name="id_rol" #idRol="ngModel"
                                         [(ngModel)]="nuevoUsuario.id_rol">
                                         <option value="" disabled selected>Seleccione un rol</option>
                                         <option *ngFor="let rol of roles" [value]="rol.id_rol">{{ rol.tipo }}</option>
