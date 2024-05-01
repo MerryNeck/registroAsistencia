@@ -23,18 +23,18 @@ export class BoletaComponent implements OnInit {
   token: string = '';
   ciBusqueda: string = '';
   fechaBusqueda: string = '';
-  rutaRol:string='';
+  rutaRol: string = '';
 
-  constructor(private boletaService: BoletaService , private router: Router) { }
+  constructor(private boletaService: BoletaService, private router: Router) { }
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
     this.rutaRol = localStorage.getItem('rol') || '';
-    if(this.token === '' && this.rutaRol === ''){
+    if (this.token === '' && this.rutaRol === '') {
       this.router.navigate(['/login'])
-    }else if(this.rutaRol !== 'admin' ){
+    } else if (this.rutaRol !== 'admin') {
       this.router.navigate(['/asistencia'])
-    }else{
+    } else {
       this.listarBoletas();
     }
   }
@@ -74,19 +74,22 @@ export class BoletaComponent implements OnInit {
     });
   }
 
-buscarBoleta(): void {
-  console.log(this.ciBusqueda);
-  
-    this.boletaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda,this.token, this.rutaRol)
+  buscarBoleta(): void {
+    console.log(this.ciBusqueda);
+
+    this.boletaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda, this.token, this.rutaRol)
       .subscribe((response) => {
-        this.res= response
+        this.res = response
         this.boletaUser = this.res.data;
         console.log(this.boletaUser);
-        
+
       }, error => {
         console.error('Error al buscar asistencias:', error);
         Swal.fire('Error', 'Ingrese los Datos Correctos', 'error');
-      
+
       });
+    this.ciBusqueda = '';
+    this.fechaBusqueda = '';
   }
+
 }

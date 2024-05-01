@@ -7,6 +7,15 @@
     background-color: rgb(255, 255, 255);
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
   }
+  .form-control:focus, .bmd-form-group.mat-focused .form-control {
+    background-size: 100% 100%, 100% 100%;
+    transition-duration: 0.3s;
+    color: #9fd2ac;
+}
+.form-control, label, input::placeholder {
+  line-height: 1.1;
+  color: white;
+}
   .custom-select {
     border: none;
     -webkit-appearance: none;

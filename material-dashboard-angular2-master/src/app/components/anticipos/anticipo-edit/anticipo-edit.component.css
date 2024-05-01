@@ -20,7 +20,10 @@
   .custom-select option[disabled][selected] {
     display: none;
   }
-  
+  .form-control, label, input::placeholder {
+    line-height: 1.1;
+    color: white;
+  }
   .custom-select::before {
     content: "Selecciones una opción...";
     color: #000000;

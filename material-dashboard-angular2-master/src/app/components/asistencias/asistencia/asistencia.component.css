@@ -32,7 +32,10 @@
 .nav-links li a:hover {
   color: #e67e22;
 }
-
+.form-control, label, input::placeholder {
+  line-height: 1.1;
+  color: white;
+}
 /* Estilos de la sección de asistencia */
 .assistance-section {
   padding: 20px;
@@ -41,7 +44,11 @@
   border-radius: 5px;
   margin: 20px;
 }
-
+.form-control:focus, .bmd-form-group.mat-focused .form-control {
+  background-size: 100% 100%, 100% 100%;
+  transition-duration: 0.3s;
+  color: #328284;
+}
 .search-bar {
   display: flex;
   justify-content: flex-start;

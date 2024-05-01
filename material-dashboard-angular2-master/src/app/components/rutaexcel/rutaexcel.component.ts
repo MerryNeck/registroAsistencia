@@ -72,11 +72,11 @@ export class RutaexcelComponent {
           
         },
         error => {
-          Swal.fire({
+          /*Swal.fire({
             icon: 'error',
             title: 'Error al subir el archivo',
             text: 'Hubo un problema al subir el archivo, intenta de nuevo.',
-          });
+          });*/
           console.error('Error al subir el archivo', error);
         }
       );

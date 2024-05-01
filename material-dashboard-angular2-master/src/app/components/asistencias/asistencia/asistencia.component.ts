@@ -144,6 +144,8 @@ export class AsistenciaComponent implements OnInit {
         Swal.fire('Error', 'Ingrese los Datos Correctos', 'error');
 
       });
+    this.ciBusqueda = '';
+    this.fechaBusqueda = '';
   }
 
   verBoleta(): void {
