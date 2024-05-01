@@ -106,6 +106,7 @@ export class RegistroEditComponent implements OnInit {
             Swal.fire('Error', 'No se pudo actualizar el usuario', 'error');
           }
         );
+        this.router.navigate(['/registro'])
     } else {
       Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
     }

@@ -19,7 +19,7 @@ export class AnticipoComponent implements OnInit {
   fechaBusqueda: string = '';
   anticipos: Anticipo[] = [];
   public users : any[]=[];
-  nuevoAnticipo: Anticipo = new Anticipo(0, '', '','', '', 0,0);
+  nuevoAnticipo: Anticipo = new Anticipo(0, '', '','', '', 0,0,'');
   token: string = '';
   estado: string;
   public res: any;
@@ -79,19 +79,21 @@ export class AnticipoComponent implements OnInit {
   }
 
   registrarNuevoAnticipo(form: NgForm): void {
-    console.log(form.value);
-    
+  
     if (form.valid) {
-      const {ci,fecha, anticipo } = form.value;
+      const {id_usuario,fecha, anticipo,detalle } = form.value;
       this.nuevoAnticipo.anticipos = anticipo;
-      this.nuevoAnticipo.id_usuario = ci;
+      this.nuevoAnticipo.id_usuario = id_usuario;
       this.nuevoAnticipo.fecha = fecha;
+      this.nuevoAnticipo.detalle =detalle;
+      console.log(this.nuevoAnticipo);
+      
       this.anticipoService.registrarAnticipo(this.nuevoAnticipo, this.token ,this.rutaRol)
         .subscribe(
           (response: any) => {
             this.anticipodata =response.data
             this.anticipos.push(this.anticipodata);
-            this.nuevoAnticipo = new Anticipo(0, '','', '', '',0, 0);
+            this.nuevoAnticipo = new Anticipo(0, '','', '', '',0, 0,'');
             form.reset();
             Swal.fire('Éxito', 'El anticipo fue registrado correctamente', 'success');
           },
@@ -148,5 +150,12 @@ export class AnticipoComponent implements OnInit {
       }
     
   }
+  verBoleta(): void {
+
+    this.router.navigate(['/boleta-anticipo']);
+
+
+  }
+
 
 }

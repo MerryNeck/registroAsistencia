@@ -73,6 +73,7 @@ export class PagoComponent implements OnInit {
         },
         error => Swal.fire('Error', 'No se pudo registrar el pago', 'error')
       );
+      this.obtenerPago();
   } else {
     Swal.fire('Advertencia', 'Por favor, complete todos los campos', 'warning');
   }

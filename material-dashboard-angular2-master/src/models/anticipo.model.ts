@@ -7,6 +7,7 @@ export class Anticipo{
       public estado: string,
       public anticipos: number,
       public id_usuario:number,
+      public detalle: string,
     ) {
     }
   }

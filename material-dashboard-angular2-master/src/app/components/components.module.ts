@@ -26,6 +26,7 @@ import { PermisoEditComponent } from './permisos/permiso-edit/permiso-edit.compo
 import { RegistroEditComponent } from './registros/registro-edit/registro-edit.component';
 import { RolEditComponent } from './roles/rol-edit/rol-edit.component';
 import { AsistenciaEditComponent } from './asistencias/asistencia-edit/asistencia-edit.component';
+import { BoletaAnticipoComponent } from './boleta-anticipo/boleta-anticipo.component';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import { AsistenciaEditComponent } from './asistencias/asistencia-edit/asistenci
     RegistroEditComponent,
     RolEditComponent,
     AsistenciaEditComponent,
+    BoletaAnticipoComponent,
   ],
   exports: [
     SidebarComponent

@@ -11,7 +11,7 @@
                         <form #anticipoForm="ngForm" (ngSubmit)="registrarNuevoAnticipo(anticipoForm)">
                             
                                 <div class="row">
-                                    <div class="form-group col-md-6" id="form">
+                                    <div class="form-group col-md-4" id="form">
                                         <div class="example-full-width">
                                             <label>Seleccione Cedula de  Identidad</label>
                                             <select class="custom-select" name="id_usuario" #idUsuario="ngModel"
@@ -34,6 +34,14 @@
                                             <input class="form-control"  type="text"
                                                 name="anticipo" #anticipo="ngModel"
                                                 [(ngModel)]="nuevoAnticipo.anticipos" pattern="[0-9]+" ngModel="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12" id="form">
+                                        <div class="example-full-width">
+                                            <label for="detalle">Detalle:</label>
+                                            <textarea class="form-control1"  type="text"
+                                                name="detalle" #anticipo="ngModel"
+                                                [(ngModel)]="nuevoAnticipo.detalle"  ngModel=""></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -64,9 +72,12 @@
                                     <button mat-raised-button type="button" class="btn btn-white btn-round "
                                         (click)="buscarAnticipoPorCi(ciBusqueda)">Buscar</button>
                                 </form>
+                                
                             </div>
                             <div class="card-body"   >
                                 <div class="table-responsive">
+                                    <button mat-raised-button class="btn btn-success btn-round l" (click)="verBoleta() ">Generar
+                                        Boleta</button>
                                     <table class="table" >
                                         <thead class=" text-primary">
                                             <tr>
@@ -92,9 +103,9 @@
                                             <tr *ngFor="let anticipo of anticiposUser">
                                                 <td>{{ anticipo.usuario.ci }}</td>
                                                 <td>{{ anticipo.fecha }}</td>
-                                                <td>{{ anticipo.anticipo}}</td>
-                                                <td>{{ anticipo.id_usuario }}</td>
                                                 <td>{{ anticipo.anticipos}}</td>
+                                                <td>{{ anticipo.id_usuario }}</td>
+                                                <td>{{ anticipo.detalle}}</td>
 
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue btn-round "

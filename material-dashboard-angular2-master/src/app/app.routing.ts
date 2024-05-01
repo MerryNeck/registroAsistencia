@@ -23,6 +23,7 @@ import { PerfilEditComponent } from './components/perfiles/perfil-edit/perfil-ed
 import { PermisoEditComponent } from './components/permisos/permiso-edit/permiso-edit.component';
 import { RegistroEditComponent } from './components/registros/registro-edit/registro-edit.component';
 import { RolEditComponent } from './components/roles/rol-edit/rol-edit.component';
+import { BoletaAnticipoComponent } from './components/boleta-anticipo/boleta-anticipo.component';
 
 
 const routes: Routes = [
@@ -41,7 +42,7 @@ const routes: Routes = [
   { path: 'pago', component: PagoComponent, },
   { path: 'boleta', component: BoletaComponent, },
   { path: 'perfil', component: PerfilComponent, },
-  { path: 'permiso', component: PermisoComponent, },
+  { path: 'boleta-anticipo', component: BoletaAnticipoComponent, },
   { path: 'sin', component: SidebarComponent, },
 
 // PARA EDITAR
@@ -53,6 +54,7 @@ const routes: Routes = [
    { path: 'editar-permiso/:id', component: PermisoEditComponent,},
     { path: 'editar-registro/:id', component: RegistroEditComponent,}, 
     {path: 'editar-rol/:id', component: RolEditComponent,},
+    
   {
     
   },

@@ -9,14 +9,7 @@
                     <div class="card-body">
                         <form #editForm="ngForm" (ngSubmit)="actualizarPago(editForm)">
                             <div class="row">
-                                <div class="form-group col-md-6" id="form">
-                                    <div class="example-full-width">
-                                        <label for="anticipos">Cedula de Identidad:</label>
-                                        <input matInput class="form-control" placeholder="Cedula de Identidad" type="text" name="ci" #ci="ngModel"
-                                            [(ngModel)]="editandoPago.usuario.ci" pattern="[0-9]+" maxlength="8">
-                                    </div>
-                                </div>
-
+                                
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
                                         <label for="sueldos">Sueldo:</label>
@@ -24,7 +17,6 @@
                                             [(ngModel)]="editandoPago.sueldo"  pattern="[0-9]+" required>
                                     </div>
                                 </div>
-                            
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
                                         <label for="dias_trabajo">Dias Trabajados:</label>

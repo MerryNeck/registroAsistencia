@@ -1,0 +1,62 @@
+<div class="main-content">
+    <div class="container-fluid">
+     
+      <div class="row">
+        
+       <button  type="submit" class="btn btn-blue btn-round bacun1"
+           ><a href="/anticipo">VOLVER</a></button>
+        <div class="card-header1 card-header-danger">
+          <form class="col-md-5">
+            <p class="card-category">Buscar Boleta</p>
+            <div class="input-group no-border">
+              <div class="col-md-10">
+                <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
+                  placeholder="Buscar por cedula de identidad...">
+                <input type="text" [(ngModel)]="fechaBusqueda" class="form-control" placeholder="Buscar por fecha... ej. 04-24">
+                <div class="ripple-container"></div>
+              </div>
+            </div>
+            <button mat-raised-button type="button" class="btn btn-white btn-round "
+              (click)="buscarBoleta()">Buscar</button>
+          </form>
+          <div class="contener" id="capturar">
+            <div class="receipt-container">
+              <div class="header">
+                <div class="empre">Bispace SRL</div>
+                <br>
+                <h1 >BOLETA ANTICIPO</h1>
+                
+                <div class="company-info" >
+                  <div class="bis">NOMBRE: <span class="label">{{boletaAnticipo.usuario.nombre}}</span></div>
+                  <div class="bis">FECHA DEL ANTICIPO: <span class="label">{{boletaAnticipo.fecha}}</span></div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                    <div class="bis">MONTO DEL ANTICIPO: <span class="label">{{ boletaAnticipo.anticipos }}</span></div>
+                  <div class="bis">DETALLE: <span class="form-control1">{{ boletaAnticipo.detalle }}</span></div>
+                </div>
+              </div>
+  
+             
+              <div class="signaturea">
+                <div class="signature-line row col-md-9"></div>
+                <p class="p1">Firma de Conformidad:</p>
+  
+              </div>
+              <div class="signatureb">
+                <div class="signature-lineb row col-md-9"></div>
+                <p class="p2">Firma de Administracion:</p>
+  
+              </div>
+  
+            </div>
+  
+          </div>
+          <button mat-raised-button type="submit" class="btn btn-white btn-round  " (click)="imprimirPantalla()">Imprimir</button>
+        </div>
+  
+      </div>
+  
+    </div>
+  </div>
