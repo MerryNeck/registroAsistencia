@@ -5,7 +5,7 @@ export class Asistencia{
         public id_excel: number,
         public tprano_ingreso:string,
         public tde_ingreso:string,
-        public min_retardos: string,
+        public min_retardo: string,
         public min_adelantado: string,
         public faltas: string,
         public total_horas: string,

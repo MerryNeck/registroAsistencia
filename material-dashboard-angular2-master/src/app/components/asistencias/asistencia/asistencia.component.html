@@ -10,13 +10,13 @@
               <div class="input-group no-border">
                 <div class="col-md-10">
                   <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
-                    placeholder="Buscar por cedula de identidad...">
-                  <input type="text" [(ngModel)]="fechaBusqueda" class="form-control" placeholder="Buscar por fecha...">
+                    placeholder="Buscar por cedula de identidad..." *ngIf="rutaRol === 'admin'">
+                  <input type="text" [(ngModel)]="fechaBusqueda" class="form-control"placeholder="Buscar por fecha... ej. 04-24">
                   <div class="ripple-container"></div>
                 </div>
               </div>
               <button mat-raised-button type="button" class="btn btn-white btn-round "
-                (click)="buscarAsistencia()">Buscar</button>
+                (click)="buscarAsistencia()"  >Buscar</button>
             </form>
 
           </div>
@@ -24,7 +24,7 @@
             <div class="table-responsive">
               <button mat-raised-button class="btn btn-success btn-round" (click)="imprimirAsistencia()">Imprimir
                 Asistencia</button>
-              <button mat-raised-button class="btn btn-success btn-round l" (click)="verBoleta() ">Generar
+              <button mat-raised-button class="btn btn-success btn-round l" (click)="verBoleta() " *ngIf="rutaRol === 'admin'">Generar
                 Boleta</button>
               <div class="div-table">
                 <table class="table" id="tabla" *ngIf="asistenciasUser ||asistenciasUser.length >0 ">
@@ -43,7 +43,7 @@
                       <th class="table-header">FALTAS</th>
                       <th class="table-header">TOTAL HORAS RETRASADAS</th>
                       <th class="table-header">HORAS NO RECUPERADAS</th>
-                      <th class="table-header">MODIFICAR</th>
+                      <th class="table-header" *ngIf="rutaRol === 'admin'">MODIFICAR</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -56,12 +56,12 @@
                       <td>{{ asistencia.tprano_salida }}</td>
                       <td>{{ asistencia.tde_ingreso}}</td>
                       <td>{{ asistencia.tde_salida }}</td>
-                      <td>{{ asistencia.min_retardos}}</td>
+                      <td>{{ asistencia.min_retardo}}</td>
                       <td>{{ asistencia.min_extra }}</td>
                       <td>{{ asistencia.faltas}}</td>
                       <td>{{ asistencia.total_horas }}</td>
                       <td>{{ asistencia.hrs_no_recuperadas}}</td>
-                      <td><button mat-raised-button class="btn btn-warning btn-round"
+                      <td *ngIf="rutaRol === 'admin'"><button mat-raised-button class="btn btn-warning btn-round"
                           (click)="seleccionarAsistencia(asistencia)">MODIFICAR</button>
                      </tr>
                   </tbody>
@@ -69,11 +69,10 @@
               </div>
             </div>
           </div>
-          <div class="card-body" style="margin-top: 10% ; display: none ;">
+          <div class="card-body" style=" display: none ;">
             <div class="table-responsive">
               <div class="div-table">
-
-                <div id="table">
+                <div id="table" >
                   <div class="company-info">
                     <h1>PLANILLA DE ASISTENCIA</h1>
                     <div class="bis" *ngIf="asistenciasUser.length > 0">
@@ -85,11 +84,13 @@
                       FECHA: <span class="label">{{asistenciasUser[0].fecha}} AL {{asistenciasUser[asistenciasUser.length - 1].fecha}}</span>
                     </div>
                   </div>
+                  <br>
+                  <br>
                   <table class="tabla">
                     <thead class="text-primary">
 
                       <tr class="table-row">
-                        <th class="table-header">FECHA</th>
+                        <th class="table-header">DIAS LABORALES</th>
                         <th class="table-header">PRIMERA ENTRADA</th>
                         <th class="table-header">PRIMERA SALIDA</th>
                         <th class="table-header">SEGUNDA ENTRADA</th>
@@ -97,19 +98,20 @@
                         <th class="table-header">MINUTOS RETRAZADO</th>
                         <th class="table-header">MINUTOS EXTRA</th>
                         <th class="table-header">FALTAS</th>
-                        <th class="table-header">TOTAL HORAS RETRASADAS</th>
+                        <th class="table-header">TOTAL HORAS </th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr></tr>
+                      
                       <tr *ngFor="let asistencia of asistenciasUser">
 
-                        <td>{{ asistencia.fecha }}</td>
+                        <td >{{ asistencia.fecha }}</td>
                         <td>{{ asistencia.tprano_ingreso}}</td>
                         <td>{{ asistencia.tprano_salida }}</td>
                         <td>{{ asistencia.tde_ingreso}}</td>
                         <td>{{ asistencia.tde_salida }}</td>
-                        <td>{{ asistencia.min_retardos}}</td>
+                        <td>{{ asistencia.min_retardo}}</td>
                         <td>{{ asistencia.min_extra }}</td>
                         <td>{{ asistencia.faltas}}</td>
                         <td>{{ asistencia.total_horas }}</td>
@@ -119,9 +121,11 @@
                   <br>
                   <br>
                   <div class="bis" *ngIf="asistenciasUser.length > 0">
+
                     HORAS NO RECUPERADAS: <span class="label">
                       {{ asistenciasUser[0].hrs_no_recuperadas }} 
                   </span>
+                  
                   </div>
                 </div>
               </div>

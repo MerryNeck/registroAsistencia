@@ -12,9 +12,12 @@
                                 
                                 <div class="form-group col-md-6" id="form">
                                     <div class="example-full-width">
-                                        <label for="anticipos">Cedula de Identidad:</label>
-                                        <input matInput class="form-control" type="text" name="ci" #ci="ngModel"
-                                            [(ngModel)]="nuevoPago.id_usuario" pattern="[0-9]+" maxlength="8">
+                                        <label>Seleccione Cedula de  Identidad</label>
+                                        <select class="custom-select" name="id_usuario" #idUsuario="ngModel"
+                                            [(ngModel)]="nuevoPago.id_usuario">
+                                            <option *ngFor="let usuario of users" [value]="usuario.id_usuario" [(ngModel)]="nuevoPago.id_usuario" >{{ usuario.ci}}</option>
+                        
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6" id="form">

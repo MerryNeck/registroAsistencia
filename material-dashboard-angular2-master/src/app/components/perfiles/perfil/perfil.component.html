@@ -68,6 +68,9 @@
                                     <table class="table">
                                         <thead class=" text-primary">
                                             <tr>
+                                                <th>
+                                                    CEDULA DE IDENTIDAD
+                                                </th>
                                                 
                                                 <th>
                                                     NOMBRE
@@ -78,9 +81,6 @@
                                                 <th>
                                                     CORREO CORPORATIVO
                                                 </th>
-                                                <th>
-                                                    PASWORD
-                                                </th>
                                                 
                                                 <th>
                                                     
@@ -90,10 +90,10 @@
                                         <tbody>
                                             <tr></tr>
                                             <tr *ngFor="let perfiles of perfilUser">
+                                                <td>{{perfiles.usuario.ci}}</td>
                                                 <td>{{ perfiles.usuario.nombre }}</td>
                                                 <td>{{ perfiles.usuario.apellido_paterno}}</td>
                                                 <td>{{ perfiles.correo_corp}}</td>
-                                                <td>{{ perfiles.password}}</td>
                                                 <td><button mat-raised-button type="submit"
                                                         class="btn btn-blue  btn-round"
                                                         (click)="editarPerfil(perfiles)">Modificar</button>

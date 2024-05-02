@@ -27,19 +27,14 @@ export class PagoService {
   }
 
   // Método para registrar un pago
-  registrarPago(pago: Pago ,ci : any , token:string, rutarol:string): Observable<any> {
+  registrarPago(pago: Pago , token:string, rutarol:string): Observable<any> {
     console.log(pago);
     
     const headers = new HttpHeaders({
       'x-token': `${token}`,
       'x-rol': `${rutarol}`
     });
-    const data = {
-      ci : ci ,
-      dias_trabajo : pago.dias_trabajado,
-      sueldo  : pago.sueldo
-    }
-    return this.http.post<any>(`${this.baseUrl}/`, data,{ headers });
+    return this.http.post<any>(`${this.baseUrl}/`, pago,{ headers });
   }
 
   // Método para actualizar un pago

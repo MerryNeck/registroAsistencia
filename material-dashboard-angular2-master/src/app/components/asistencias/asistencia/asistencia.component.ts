@@ -50,9 +50,17 @@ export class AsistenciaComponent implements OnInit {
   }
 
   seleccionarAsistencia(asistencia: Asistencia): void {
-    this.router.navigate(['/editar-asistencia', asistencia.id_asistencia]);
+    if(
+      this.rutaRol ==='admin'
+    ){
+      this.router.navigate(['/editar-asistencia', asistencia.id_asistencia]);
+    }
+    
   }
   imprimirAsistencia(): void {
+    if(this.rutaRol ==='admin'){
+
+    
     if (this.fechaBusqueda && this.ciBusqueda) {
       if (this.asistenciasUser && this.asistenciasUser.length > 0) {
         const filasHTML: string[] = [];
@@ -99,7 +107,83 @@ export class AsistenciaComponent implements OnInit {
       text-align: center;
     }
     .tabla {
-      margin-top: 20px;
+      margin-top: -20px;
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center; /* Alinea el contenido de la tabla al centro */
+      border: 1px solid white;
+    }
+    
+
+    .table-header {
+      text-align: center;
+      font-size: 10px;
+      border: 1px solid rgb(12, 12, 12);
+    }
+    
+    .table thead tr th {
+      font-size: 12px;
+      border: 1px solid rgb(12, 12, 12);
+    }
+    
+    td {
+      border: 1px solid rgb(12, 12, 12);
+    }
+  `,
+          targetStyles: ['border', 'padding', 'color', 'font-size']
+        });
+      } else {
+        Swal.fire('Error', 'No hay datos para imprimir el reporte.', 'error');
+      }
+    }
+  }else{
+    if (this.fechaBusqueda) {
+      if (this.asistenciasUser && this.asistenciasUser.length > 0) {
+        const filasHTML: string[] = [];
+        this.asistencias.forEach(asistenciasUser => {
+          let filaHTML = '<tr>';
+
+          // Índices de las columnas que deseas imprimir
+          const columnasImprimir = ['fecha', 'id_usuario', 'apellido', 'tprano_ingreso', 'tprano_salida',
+            'tde_ingreso', 'tde_salida', 'min_retardados', 'min_extra', 'faltas', 'total_horas', 'id_permiso', 'hrs_no_recuperadas'
+          ];
+
+          columnasImprimir.forEach(columna => {
+            filaHTML += `<td>${asistenciasUser[columna]}</td>`;
+          });
+
+          filaHTML += '</tr>';
+          filasHTML.push(filaHTML);
+        });
+
+        const tablaHTML = `<table>${filasHTML.join('')}</table>`; // Crear la tabla HTML
+
+        printJS({
+          printable: 'table', // Pasar la tabla HTML al método printJS
+          type: 'html',
+          style: `
+    @page { 
+      size: letter; 
+      margin: 50px; 
+    }
+    /* Aquí puedes agregar tus estilos personalizados */
+    .bis{
+      align-items: center;
+      color: #000000;
+      font-size: 20px;
+    }
+    h1{
+      margin-top:8%;
+      text-align: center;
+      color: #000000;
+      font-size: 40px;
+    }
+    .tabla{
+      border: 1px solid rgb(12, 12, 12);
+      text-align: center;
+    }
+    .tabla {
+      margin-top: -20px;
       width: 100%;
       border-collapse: collapse;
       text-align: center; /* Alinea el contenido de la tabla al centro */
@@ -129,6 +213,7 @@ export class AsistenciaComponent implements OnInit {
       }
     }
   }
+  }
 
   buscarAsistencia(): void {
     this.asistenciaService.buscarPorCiOFecha(this.ciBusqueda, this.fechaBusqueda, this.token, this.rutaRol)
@@ -142,15 +227,16 @@ export class AsistenciaComponent implements OnInit {
         Swal.fire('Error', 'Ingrese los Datos Correctos', 'error');
 
       });
-    this.ciBusqueda = '';
-    this.fechaBusqueda = '';
   }
 
   verBoleta(): void {
 
+    if(
+      this.rutaRol ==='admin'
+    ){
     this.router.navigate(['/boleta']);
 
-
+    }
   }
 
 }

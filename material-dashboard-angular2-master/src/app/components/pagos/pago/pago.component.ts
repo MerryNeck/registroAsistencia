@@ -4,6 +4,7 @@ import { PagoService } from 'services/pago.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { RegistroService } from 'services/registro.service';
 
 @Component({
   selector: 'app-pago',
@@ -15,6 +16,7 @@ export class PagoComponent implements OnInit {
   fechaBusqueda: string = '';
   nuevoPago: Pago = new Pago(0, '', '', '', 0, 0, 0, 0, 0);
   pagos: Pago[] = [];
+  public users: any[]=[];
   editandoPago: Pago | null = null; 
   token:string='';
   estado:string;
@@ -24,7 +26,9 @@ export class PagoComponent implements OnInit {
   public pagoUser : any;
   rutaRol:string='';
 
-  constructor(private pagoService: PagoService ,private router:Router) { }
+  constructor(private pagoService: PagoService ,
+    private router:Router,
+    private usuarioService: RegistroService) { }
 
   ngOnInit(): void {
     
@@ -37,6 +41,23 @@ export class PagoComponent implements OnInit {
     }else{
       this.obtenerPago();
     }
+
+    this.usuarioService.obtenerUsuario(this.token, this.rutaRol).subscribe(
+      (response: any) => {
+        if (response.ok) {
+          console.log("Respuesta del servicio de usuarios:", response);
+          this.users = response.data;
+          console.log(this.users);
+        }
+      },
+      (error) => {
+        console.error("Error al cargar las usuarios", error);
+        (error) =>
+          Swal.fire("Error", "No se pudo registrar el usuario", "error");
+      },
+    );
+    console.log("usuarios",this.usuarioService.obtenerUsuario);
+    this.obtenerPago();
   }
   
   // listar area
@@ -58,13 +79,13 @@ export class PagoComponent implements OnInit {
     console.log(form.value);
     
     if (form.valid) {
-      const { ci, sueldo, trabajo,retencion, sueldo_bruto } = form.value;
-      this.ci = ci;
+      const { id_usuario, sueldo, trabajo,retencion, sueldo_bruto } = form.value;
+      this.nuevoPago.id_usuario = id_usuario;
       this.nuevoPago.sueldo = sueldo;
       this.nuevoPago.dias_trabajado = trabajo;
       this.nuevoPago.retencion = retencion;
       this.nuevoPago.sueldo_bruto =sueldo_bruto
-      this.pagoService.registrarPago(this.nuevoPago,this.ci, this.token, this.rutaRol)
+      this.pagoService.registrarPago(this.nuevoPago, this.token, this.rutaRol)
         .subscribe(pago=> {
           this.pagos.push(pago);
           this.nuevoPago = new Pago(0, '', '', '', 0, 0, 0, 0, 0);
