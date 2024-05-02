@@ -21,7 +21,7 @@ export class LoginService {
 login(email:string, password:string){
   
     const body = { email, password }; 
-    return this._http.post<any>(this.url+'/login', { email, password })
+    return this._http.post<any>(this.url+'login', { email, password })
     .pipe(
         catchError(this.handleError) 
       );
@@ -68,7 +68,7 @@ buscarPorCi(ci: string,token:string, rutarol:string): Observable<Login[]> {
     'x-token': `${token}`,
     'x-rol': `${rutarol}`
   });
-  return this._http.get<Login[]>(`${this.url}/buscar/${ci}`,{headers});
+  return this._http.get<Login[]>(`${this.url}buscar/${ci}`,{headers});
 }
 // Método para actualizar un anticipo
 actualizarPerfil(perfil: Login, token: string, rutarol:string): Observable<void> {
@@ -76,7 +76,7 @@ actualizarPerfil(perfil: Login, token: string, rutarol:string): Observable<void>
     'x-token': `${token}`,
     'x-rol': `${rutarol}`
   });
-  return this._http.put<void>(`${this.url}/${perfil.id_usuario}`, perfil, { headers })
+  return this._http.put<void>(`${this.url}${perfil.id}`, perfil, { headers })
     .pipe(
       catchError(error => {
         console.error('Error al actualizar el usuario:', error);

@@ -33,7 +33,7 @@
   }
   .form-control, label, input::placeholder {
     line-height: 1.1;
-    color: white;
+    color: black;
   }
   .custom-select::before {
     content: "Selecciones una opción...";

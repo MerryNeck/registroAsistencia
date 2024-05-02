@@ -39,7 +39,7 @@ export class AnticipoService {
       'x-token': `${token}`,
       'x-rol':`${rutarol}`
     });
-    return this.http.delete(`${this.baseUrl}${idAnticipo}`, { headers });
+    return this.http.delete(`${this.baseUrl}/${idAnticipo}`, { headers });
   }
 
   buscarPorCi(ci: string, token: string ,rutarol:string): Observable<Anticipo[]> {
@@ -68,7 +68,7 @@ export class AnticipoService {
       'x-token': `${token}`,
       'x-rol':`${rutarol}`
     });
-    return this.http.get<Anticipo>(`${this.baseUrl}${id}`, { headers })
+    return this.http.get<Anticipo>(`${this.baseUrl}/${id}`, { headers })
       .pipe(
         catchError(error => {
           console.error('Error al obtener el anticipo:', error);
@@ -77,5 +77,14 @@ export class AnticipoService {
       );
   }
 
+  buscarPorCiOFecha(ci: string, fecha: string, token: string, rutarol:string): Observable<Anticipo[]> {
+    const headers = new HttpHeaders({
+      'x-token': `${token}`,
+      'x-rol': `${rutarol}`
+    });
+    const body = { ci, fecha }; 
+
+    return this.http.post<Anticipo[]>(`${this.baseUrl}/buscar`, body, { headers });
+  }
   
 }

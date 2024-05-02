@@ -6,6 +6,7 @@ import * as printJS from 'print-js';
 import html2canvas from 'html2canvas';
 
 import Swal from 'sweetalert2';
+import { AnticipoService } from 'services/anticipo.service';
 
 @Component({
   selector: 'app-boleta-anticipo',
@@ -23,7 +24,7 @@ export class BoletaAnticipoComponent implements OnInit {
   fechaBusqueda: string = '';
   rutaRol: string = '';
 
-  constructor( private anticipoService: BoletaService, private router: Router) {
+  constructor( private anticipoService: AnticipoService, private router: Router) {
     this.token = localStorage.getItem('token') || '';
     this.rutaRol = localStorage.getItem('rol') || '';
     if (this.token === '' && this.rutaRol === '') {
@@ -31,22 +32,11 @@ export class BoletaAnticipoComponent implements OnInit {
     } else if (this.rutaRol !== 'admin') {
       this.router.navigate(['/asistencia'])
     } else {
-      this.listarBoletas();
+      
     }
    }
 
   ngOnInit(): void {
-  }
-  listarBoletas(): void {
-    this.anticipoService.getBoletas(this.token, this.rutaRol)
-      .subscribe((response) => {
-        this.res = response
-        if (this.res.ok) {
-          this.boletaAnticipo = this.res.data;
-        } else {
-        }
-        error => Swal.fire('Error', 'No se pudieron obtener los datos de asistencia', 'error')
-      });
   }
 
   seleccionarBoleta(anticipo: Anticipo): void {

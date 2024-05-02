@@ -15,6 +15,8 @@ export class AsistenciaService {
   constructor(private http: HttpClient) { }
 
   getAsistencias(token: string): Observable<Asistencia[]> {
+    console.log(token);
+    
     const headers = new HttpHeaders({
       'x-token': `${token}`
     });

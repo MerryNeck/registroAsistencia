@@ -75,9 +75,9 @@ export class PerfilComponent implements OnInit {
     
     if (form.valid) {
       console.log("nuevo",form.value);
-      const { correo_corp, password, ci } = form.value;
-      this.nuevoPerfil.id_usuario = ci;
-      this.nuevoPerfil.correo_corp = correo_corp;
+      const { email, idUsuario, password } = form.value;
+      this.nuevoPerfil.id_usuario = idUsuario;
+      this.nuevoPerfil.correo_corp = email;
       this.nuevoPerfil.password = password;
       this.loginService.registrarPerfil(this.nuevoPerfil, this.token,this.rutaRol)
         .subscribe((response:any) => {

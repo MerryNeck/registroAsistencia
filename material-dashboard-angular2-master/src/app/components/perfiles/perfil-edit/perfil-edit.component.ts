@@ -54,6 +54,8 @@ export class PerfilEditComponent implements OnInit {
   }
 
   actualizarPerfiles(form: NgForm): void {
+    console.log(this.editandoperfil);
+    
     if (this.editandoperfil !== null && form.valid) {
       this.loginService.actualizarPerfil(this.editandoperfil, this.token,this.rutarol)
         .subscribe(

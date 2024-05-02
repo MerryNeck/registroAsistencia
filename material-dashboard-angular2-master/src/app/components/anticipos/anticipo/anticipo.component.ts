@@ -70,6 +70,8 @@ export class AnticipoComponent implements OnInit {
       .subscribe((response) => {
         this.res = response
         if (this.res.ok) {
+          console.log(this.res);
+          
           this.anticiposUser = this.res.data;
           console.log(this.anticiposUser);
         } else {

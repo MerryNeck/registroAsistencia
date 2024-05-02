@@ -32,8 +32,6 @@ export class BoletaComponent implements OnInit {
     this.rutaRol = localStorage.getItem('rol') || '';
     if (this.token === '' && this.rutaRol === '') {
       this.router.navigate(['/login'])
-    } else if (this.rutaRol !== 'admin') {
-      this.router.navigate(['/asistencia'])
     } else {
       this.listarBoletas();
     }

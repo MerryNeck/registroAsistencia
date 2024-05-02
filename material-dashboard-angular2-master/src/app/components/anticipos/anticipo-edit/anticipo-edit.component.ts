@@ -4,6 +4,7 @@ import { AnticipoService } from 'services/anticipo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { RegistroService } from 'services/registro.service';
 
 @Component({
   selector: 'app-anticipo-edit',
@@ -17,12 +18,16 @@ export class AnticipoEditComponent {
   public res:any;
   rutarol: string = '';
   public user:any[]=[];
-
+  rutaRol : string = '';
+  public users : any[]=[];
   constructor(
     private anticipoService: AnticipoService,
+    private usuarioService  : RegistroService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+    this.rutaRol = localStorage.getItem('rol') || '';
+   }
 
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
@@ -35,6 +40,21 @@ export class AnticipoEditComponent {
     else{
       this.route.params.subscribe(params => {
         const idAnticipo = +params['id'];
+        this.usuarioService.obtenerUsuario(this.token, this.rutaRol).subscribe(
+          (response: any) => {
+            if (response.ok) {
+              console.log("Respuesta del servicio de usuarios:", response);
+              this.users = response.data;
+              console.log(this.users);
+            }
+          },
+          (error) => {
+            console.error("Error al cargar las usuarios", error);
+            (error) =>
+              Swal.fire("Error", "No se pudo registrar el usuario", "error");
+          },
+        );
+        console.log("usuarios",this.usuarioService.obtenerUsuario);
         this.obtenerAnticipo(idAnticipo);
       });
     }
@@ -47,6 +67,8 @@ export class AnticipoEditComponent {
         (response:any)=> {
         
           this.editandoAnticipo = response.data;
+          console.log(this.editandoAnticipo);
+          
         },
         error => {
           console.error('Error al obtener el anticipo:', error);

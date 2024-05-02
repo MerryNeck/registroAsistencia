@@ -28,11 +28,9 @@ export class AsistenciaComponent implements OnInit {
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
     this.rutaRol = localStorage.getItem('rol') || '';
-    if (this.token === '' && this.rutaRol === '') {
+    if (this.token === '' ) {
       this.router.navigate(['/login'])
-    } else if (this.rutaRol !== 'admin') {
-      this.router.navigate(['/asistencia'])
-    } else {
+    }  else {
       this.listarAsistencias();
     }
 
