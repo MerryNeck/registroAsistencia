@@ -9,9 +9,9 @@
               <p class="card-category">Busque el registro de asistencia</p>
               <div class="input-group no-border">
                 <div class="col-md-10">
-                  <input type="text" [(ngModel)]="ciBusqueda" class="form-control"
+                  <input type="text" [(ngModel)]="ciBusqueda"  (input)="onInputChange()" class="form-control"
                     placeholder="Buscar por cedula de identidad..." *ngIf="rutaRol === 'admin'">
-                  <input type="text" [(ngModel)]="fechaBusqueda" class="form-control"placeholder="Buscar por fecha... ej. 04-24">
+                  <input type="text" [(ngModel)]="fechaBusqueda" (input)="onInputChange()" class="form-control"placeholder="Buscar por fecha... ej. 04-24">
                   <div class="ripple-container"></div>
                 </div>
               </div>
@@ -22,7 +22,7 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <button mat-raised-button class="btn btn-success btn-round" (click)="imprimirAsistencia()">Imprimir
+              <button mat-raised-button class="btn btn-success btn-round"  [disabled]="!imprimirHabilitado" (click)="imprimirAsistencia()">Imprimir
                 Asistencia</button>
               <button mat-raised-button class="btn btn-success btn-round l" (click)="verBoleta() " *ngIf="rutaRol === 'admin'">Generar
                 Boleta</button>

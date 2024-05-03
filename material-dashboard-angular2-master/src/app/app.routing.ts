@@ -13,14 +13,12 @@ import { PagoComponent } from './components/pagos/pago/pago.component';
 import { BoletaComponent } from './components/boleta/boleta.component';
 import { RolComponent } from './components/roles/rol/rol.component';
 import { PerfilComponent } from './components/perfiles/perfil/perfil.component';
-import { PermisoComponent } from './components/permisos/permiso/permiso.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AnticipoEditComponent } from './components/anticipos/anticipo-edit/anticipo-edit.component';
 import { AreaEditComponent } from './components/areas/area-edit/area-edit.component';
 import { AsistenciaEditComponent } from './components/asistencias/asistencia-edit/asistencia-edit.component';
 import { PagoEditComponent } from './components/pagos/pago-edit/pago-edit.component';
 import { PerfilEditComponent } from './components/perfiles/perfil-edit/perfil-edit.component';
-import { PermisoEditComponent } from './components/permisos/permiso-edit/permiso-edit.component';
 import { RegistroEditComponent } from './components/registros/registro-edit/registro-edit.component';
 import { RolEditComponent } from './components/roles/rol-edit/rol-edit.component';
 import { BoletaAnticipoComponent } from './components/boleta-anticipo/boleta-anticipo.component';
@@ -51,7 +49,6 @@ const routes: Routes = [
   { path: 'editar-asistencia/:id', component: AsistenciaEditComponent,},
    { path: 'editar-pago/:id', component: PagoEditComponent,}, 
    {path: 'editar-perfil/:id', component: PerfilEditComponent,}, 
-   { path: 'editar-permiso/:id', component: PermisoEditComponent,},
     { path: 'editar-registro/:id', component: RegistroEditComponent,}, 
     {path: 'editar-rol/:id', component: RolEditComponent,},
     

@@ -28,7 +28,7 @@ export class AppComponent {
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           // Define una expresión regular que coincide con tus rutas dinámicas
-          const dynamicRoutesRegex = /^(\/registro|\/area|\/rol|\/excel|\/asistencia|\/anticipo|\/pago|\/perfil|\/permiso|\/editar-area\/\d+|\/editar-rol\/\d+|\/editar-asistencia\/\d+|\/editar-registro\/\d+|\/editar-anticipo\/\d+|\/editar-pago\/\d+|\/editar-perfil\/\d+|\/editar-permiso\/\d+)$/;
+          const dynamicRoutesRegex = /^(\/registro|\/area|\/rol|\/excel|\/asistencia|\/anticipo|\/pago|\/perfil|\/editar-area\/\d+|\/editar-rol\/\d+|\/editar-asistencia\/\d+|\/editar-registro\/\d+|\/editar-anticipo\/\d+|\/editar-pago\/\d+|\/editar-perfil\/\d+|\/editar-permiso\/\d+)$/;
           
           // Comprueba si la URL actual coincide con la expresión regular
           this.showSidebar = dynamicRoutesRegex.test(event.url);
