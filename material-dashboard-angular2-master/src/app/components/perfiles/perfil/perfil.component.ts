@@ -56,6 +56,11 @@ export class PerfilComponent implements OnInit {
     this.obtenerPerfiles();  
     
   }
+  onInputChange(): void {
+    if (!this.ciBusqueda ) {
+      this.obtenerPerfiles();
+    } 
+  }
   obtenerPerfiles(): void {
     this.loginService.obtenerPerfil(this.token,this.rutaRol)
       .subscribe((response : any) => {

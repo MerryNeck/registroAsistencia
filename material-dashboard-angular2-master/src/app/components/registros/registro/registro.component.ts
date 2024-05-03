@@ -78,6 +78,12 @@ export class RegistroComponent implements OnInit {
 
     this.obtenerUsuarios();
   }
+
+  onInputChange(): void {
+    if (!this.ciBusqueda ) {
+      this.obtenerUsuarios();
+    } 
+  }
   obtenerUsuarios(): void {
     this.usuarioService.obtenerUsuario(this.token, this.rutaRol).subscribe((response: any) => {
       console.log(response);

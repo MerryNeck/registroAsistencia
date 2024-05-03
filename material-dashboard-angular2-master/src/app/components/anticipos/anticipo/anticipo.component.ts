@@ -63,7 +63,11 @@ export class AnticipoComponent implements OnInit {
     this.obtenerAnticipos();
   }
 
-
+  onInputChange(): void {
+    if (!this.ciBusqueda || !this.fechaBusqueda) {
+      this.obtenerAnticipos();
+    } 
+  }
 
   obtenerAnticipos(): void {
     this.anticipoService.obtenerAnticipo(this.token,this.rutaRol)
@@ -98,6 +102,7 @@ export class AnticipoComponent implements OnInit {
             this.nuevoAnticipo = new Anticipo(0, '','', '', '',0, 0,'');
             form.reset();
             Swal.fire('Éxito', 'El anticipo fue registrado correctamente', 'success');
+            this.obtenerAnticipos();
           },
           error => Swal.fire('Error', 'No se pudo registrar el anticipo', 'error')
         );
@@ -116,6 +121,8 @@ export class AnticipoComponent implements OnInit {
         (response) => {
           this.res = response;
           this.anticiposUser = this.res.data
+          console.log(this.anticiposUser);
+          
         },
         (error) => {
           console.error('Error al buscar boletas por CI', error);
